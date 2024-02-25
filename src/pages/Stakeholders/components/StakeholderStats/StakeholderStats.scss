@@ -1,0 +1,34 @@
+@import 'src/styles/variables.scss';
+
+.stakeholder-stats {
+  display: grid;
+  gap: $spacingSmall;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grid layout with minimum item width of 100px */
+  width: 100%;
+
+  .stat-wrapper {
+    width: 100%;
+    padding: $spacingSmall;
+    background-color: $cardBackgroundColor;
+    border-radius: $borderRadius;
+    margin-bottom: $spacingMedium;
+    border: $border;
+
+    strong {
+      color: $textColor;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background-color: $backgroundColor;
+      border-radius: 4px;
+      margin-bottom: $spacingSmall;
+
+      .progress {
+        height: 100%;
+        border-radius: 4px;
+        background-color: $primaryColor;
+      }
+    }
+  }
+}

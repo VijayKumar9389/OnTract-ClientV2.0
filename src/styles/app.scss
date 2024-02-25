@@ -1,0 +1,11 @@
+@import 'src/styles/variables.scss';
+
+.app-container {
+    min-height: 100vh;
+    background-color: $backgroundColor;
+
+    @media (max-width: 1024px) {
+        display: flex;
+        flex-direction: column;
+    }
+}

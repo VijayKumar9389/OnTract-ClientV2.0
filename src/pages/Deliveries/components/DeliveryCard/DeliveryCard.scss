@@ -1,0 +1,45 @@
+@import 'src/styles/variables.scss';
+
+.delivery-card {
+  background-color: $cardBackgroundColor;
+  border: $border;
+  border-radius: $borderRadius;
+  padding: $spacingMedium;
+  box-shadow: $boxShadow;
+  margin-bottom: $spacingMedium;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+
+    &:hover {
+        box-shadow: $boxShadowHover;
+    }
+
+  .details {
+    display: flex;
+    margin-bottom: $spacingMedium;
+
+    @media (max-width: $mobileBreakpoint) {
+      flex-direction: column;
+      margin-bottom: $spacingSmall;
+    }
+
+    .detail {
+      margin-right: $spacingMedium;
+
+      @media (max-width: $mobileBreakpoint) {
+        margin-right: 0;
+        margin-bottom: $spacingSmall;
+      }
+
+      .value {
+        font-weight: bold;
+        color: $textColor;
+      }
+    }
+
+    .separator {
+      margin: 0 $spacingSmall;
+    }
+  }
+}
+

@@ -1,0 +1,62 @@
+@import 'src/styles/variables.scss';
+
+.stakeholder-card {
+  background-color: $cardBackgroundColor;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+  margin-bottom: $spacingMedium;
+  padding: $spacingMedium;
+  transition: ease-in-out 0.3s;
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+
+
+  &:hover {
+    box-shadow: $boxShadowHover;
+  }
+
+  label {
+    word-wrap: break-word; /* Ensure the text breaks to a new line if needed */
+  }
+
+  .desc {
+    margin-bottom: $spacingSmall;
+  }
+
+  .detail-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grid layout with minimum item width of 100px */
+    align-items: center;
+    gap: $spacingSmall; /* Gap between grid items */
+    margin-bottom: $spacingSmall;
+
+
+
+    li {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      color: $textColorLight;
+
+      .number {
+        font-weight: bold;
+        color: $primaryColor;
+      }
+
+      span {
+        color: $textColor;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

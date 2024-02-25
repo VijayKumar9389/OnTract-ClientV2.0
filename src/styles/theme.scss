@@ -1,0 +1,136 @@
+@import 'src/styles/variables.scss';
+
+// Typography
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: $primaryColor;
+  text-align: center;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: $primaryColor;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  color: $textColor;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: $textColor;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: $textColorLight;
+}
+
+label {
+  font-size: 16px;
+  display: block;
+}
+
+.panel-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+// Buttons
+button {
+  background-color: $primaryColor;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color $transition;
+  align-items: center;
+  display: flex;
+
+  svg {
+    margin-right: $spacingSmall;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+  }
+}
+
+// Inputs
+textarea,
+input {
+  width: 100%;
+  padding: $spacingSmall;
+  border: $border;
+  border-radius: $borderRadius;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  resize: none;
+  background-color: #f9f9f9;
+
+  &:focus {
+    outline: none;
+    border-color: $primaryColor; // Highlight color on focus
+  }
+}
+
+textarea {
+  height: 80px;
+}
+
+// Header
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: $border;
+  padding: $spacingMedium $spacingSmall;
+  margin-bottom: $spacingSmall;
+
+  h3 {
+    font-weight: bold;
+  }
+}
+
+// Page Content
+.page-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacingLarge;
+
+  @media (max-width: $mobileBreakpoint) {
+    padding: $spacingMedium;
+  }
+}
+
+// Chips
+.chip {
+  border-radius: $borderRadius;
+  font-weight: bold;
+
+  &.green {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+  }
+
+  &.red {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+  }
+
+  &.yellow {
+    background-color: rgba(255, 235, 59, 0.2);
+    color: #ffeb3b;
+  }
+}

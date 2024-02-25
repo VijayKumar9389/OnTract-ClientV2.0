@@ -1,0 +1,42 @@
+.project-tbl {
+  width: 100%;
+  border-collapse: collapse;
+
+  .project-header {
+    background-color: #f5f5f5;
+    color: grey;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+
+    th {
+      flex: 1;
+      padding: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+  }
+
+  .project-row {
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    td {
+      flex: 1;
+    }
+
+    &:hover {
+      background-color: #f0f0f0; /* Choose your desired hover background color */
+    }
+  }
+}

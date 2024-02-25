@@ -1,0 +1,15 @@
+@import 'src/styles/variables.scss';
+
+.stakeholder-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+}
