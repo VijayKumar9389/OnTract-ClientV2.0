@@ -47,7 +47,7 @@ button {
   background-color: $primaryColor;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: $buttonRadius;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -70,7 +70,7 @@ input {
   width: 100%;
   padding: $spacingSmall;
   border: $border;
-  border-radius: $borderRadius;
+  border-radius: $buttonRadius;
   font-size: 1rem;
   transition: border-color 0.3s;
   resize: none;
@@ -95,8 +95,8 @@ textarea {
   padding: $spacingMedium $spacingSmall;
   margin-bottom: $spacingSmall;
 
-  h3 {
-    font-weight: bold;
+  label {
+    text-transform: uppercase;
   }
 }
 
@@ -113,6 +113,26 @@ textarea {
     padding: $spacingMedium;
   }
 }
+
+.tract-details {
+  margin-bottom: 1rem;
+  color: $textColorLight;
+
+  .list-item {
+    font-weight: bold;
+    color: $primaryColor;
+    text-transform: uppercase;
+  }
+
+  .separator {
+    margin: 0 $spacingMedium;
+  }
+
+  strong {
+    color: $primaryColor;
+  }
+}
+
 
 // Chips
 .chip {

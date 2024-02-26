@@ -1,0 +1,93 @@
+@import 'src/styles/variables.scss';
+
+// TractList.scss
+.tract-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  li {
+    margin-bottom: $spacingMedium;
+    background-color: $cardBackgroundColor;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadowHover;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+}
+
+// TractForm.scss
+.tract-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: $borderRadius;
+  border: $border ;
+  padding: $spacingSmall;
+  overflow: hidden;
+
+  .panel-label {
+    text-transform: uppercase;
+    margin-bottom: $spacingSmall;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .form-btn-container {
+    display: flex;
+    margin-top: $spacingMedium;
+
+    button {
+      margin-right: $spacingMedium;
+    }
+  }
+
+  h4 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  div {
+    margin-bottom: $spacingMedium;
+
+    label {
+      display: block;
+      margin-bottom: $spacingSmall;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: $spacingSmall;
+      box-sizing: border-box;
+      border: $border;
+      border-radius: $borderRadius;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+
+    textarea {
+      height: 100px;
+    }
+  }
+}
+
+.tract-form-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacingMedium;
+  width: 100%;
+
+  // Mobile layout
+  @media (max-width: $mobileBreakpoint) {
+    grid-template-columns: 1fr;
+  }
+}

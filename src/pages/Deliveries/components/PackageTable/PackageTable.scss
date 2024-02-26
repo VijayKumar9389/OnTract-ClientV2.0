@@ -37,7 +37,7 @@
       }
 
       .arrow-icon {
-        color: $secondaryColor; // using secondaryColor variable
+        color: $textColor; // using secondaryColor variable
         @media screen and (max-width: $mobileBreakpoint) {
           transform: rotate(90deg);
         }

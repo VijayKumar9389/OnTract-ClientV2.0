@@ -50,7 +50,7 @@ const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) =>
     return (
         <div className="stakeholder-form">
             <div className="header">
-                <h3>DETAILS</h3>
+                <label className="panel-label">Details</label>
             </div>
 
             <div className="page-content">

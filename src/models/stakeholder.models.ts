@@ -26,7 +26,6 @@ export interface Stakeholder {
     tractRecords: TractRecord[];
 }
 
-
 export interface TractRecord {
     id: number;
     tract: number;
@@ -56,3 +55,12 @@ export interface StakeholderStatsDTO {
     contactedYesCount: number;
     contactedNoCount: number;
 }
+
+export interface UpdateTrackRecordInput {
+    structure: string;
+    interest: string;
+    occupants: number;
+    worksLand: string;
+    tractComments: string;
+}
+
