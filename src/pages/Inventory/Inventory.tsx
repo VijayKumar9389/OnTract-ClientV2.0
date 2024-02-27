@@ -3,9 +3,18 @@ import {getItemsByProjectId} from "../../services/item.services.ts";
 import {useState, useEffect} from "react";
 import {Item} from "../../models/item.models.ts";
  import Heading from "../../components/Heading/Heading.tsx";
+ import ItemCard from "./components/ItemCard/ItemCard.tsx";
+ import {MdAdd} from "react-icons/md";
+ import Dialog from "../../components/Dialog/Dialog.tsx";
+ import CreateItemForm from "./components/CreateItemForm/CreateItemForm.tsx";
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const toggleModal = (): void => {
+        setIsModalOpen(!isModalOpen);
+    }
 
     useEffect((): void => {
         getItemsByProjectId(1)
@@ -20,17 +29,15 @@ const Inventory = () => {
             <Heading heading="Inventory"/>
             <div className="page-content">
                 <div className="btn-container">
-                    <button>Add Item</button>
+                    <button onClick={toggleModal}><MdAdd />Add Item</button>
                 </div>
                 <div className="inventory-list">
                     {items.map((item: Item) => (
-                        <div key={item.id}>
-                            <h3>{item.name}</h3>
-                            <p>{item.description}</p>
-                        </div>
+                        <ItemCard item={item} key={item.id}/>
                     ))}
                 </div>
             </div>
+            <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm/>} heading={"Create Item"}/>
         </div>
     );
 

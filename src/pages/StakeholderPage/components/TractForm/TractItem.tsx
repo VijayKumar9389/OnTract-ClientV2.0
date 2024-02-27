@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {getStakeholdersByTractNo} from "../../../../services/stakeholder.services.ts";
 import TractForm from "./TractForm.tsx";
+import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
 
 interface TractItemProps {
     tract: TractRecord;
@@ -10,14 +11,14 @@ interface TractItemProps {
 const TractItem: React.FC<TractItemProps> = ({tract}) => {
 
     const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
-    const project = 1;
+    const project = getProjectFromCookie()
 
     useEffect((): void => {
         if (!project) return;
-        getStakeholdersByTractNo(project, tract.tract).then((response: Stakeholder[]): void => {
+        getStakeholdersByTractNo(project.id, tract.tract).then((response: Stakeholder[]): void => {
             setStakeholders(response);
         });
-    }, [tract.tract, project]);
+    }, [tract.tract]);
 
     return (
         <li>

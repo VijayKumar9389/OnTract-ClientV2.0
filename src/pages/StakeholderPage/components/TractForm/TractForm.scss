@@ -10,7 +10,7 @@
   li {
     margin-bottom: $spacingMedium;
     background-color: $cardBackgroundColor;
-    border-radius: $borderRadius;
+    border-radius: $buttonRadius;
     box-shadow: $boxShadowHover;
 
     &:last-child {
@@ -66,7 +66,7 @@
       padding: $spacingSmall;
       box-sizing: border-box;
       border: $border;
-      border-radius: $borderRadius;
+      border-radius: $buttonRadius;
 
       &:focus {
         outline: none;
@@ -74,9 +74,6 @@
       }
     }
 
-    textarea {
-      height: 100px;
-    }
   }
 }
 

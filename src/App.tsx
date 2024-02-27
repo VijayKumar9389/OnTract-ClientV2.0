@@ -13,6 +13,7 @@ import {activateInterceptor, verifyRefreshToken} from "./services/auth.services.
 import {useDispatch} from "react-redux";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import {Route, Routes} from "react-router-dom";
+import ItemPage from "./pages/ItemPage/ItemPage.tsx";
 
 const App = () => {
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
@@ -37,7 +38,7 @@ const App = () => {
                     <Route path="/deliveries" element={<Deliveries />} />
                     <Route path="/deliveries/:id" element={<DeliveryPage />} />
                     <Route path="/inventory" element={<Inventory />} />
-
+                    <Route path="/inventory/:id" element={<ItemPage />} />
                 </Routes>
             </div>
         </div>

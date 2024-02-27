@@ -12,3 +12,14 @@ export const GetDeliveriesByProjectID = async (projectId: number): Promise<Deliv
         throw error;
     }
 }
+
+export const getDeliveryById = async (deliveryId: number): Promise<Delivery> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/getbyid/${deliveryId}`;
+        const response: AxiosResponse<Delivery> = await axios.get(endpoint);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting deliveries:', error);
+        throw error;
+    }
+}

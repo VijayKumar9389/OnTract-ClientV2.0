@@ -28,6 +28,7 @@ const ProjectTable: React.FC<{toggleMenu: () => void}>= ({toggleMenu}) => {
     const selectProject = (project: Project): void => {
         setProjectCookie(project)
         if (toggleMenu) toggleMenu();
+        window.location.reload();
     }
 
     return (

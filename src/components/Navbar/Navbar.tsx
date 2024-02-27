@@ -19,6 +19,8 @@ const Navbar = () => {
                 <Link to="/deliveries" className="sidebar-link"><FaTruck/>Deliveries</Link>
                 <Link to="/inventory" className="sidebar-link"><FaBoxes/>Inventory</Link>
                 <Link to="/packages" className="sidebar-link"><FiPackage/>Packages</Link>
+                <Link to="/packages" className="sidebar-link"><FiPackage/>Users</Link>
+                <Link to="/packages" className="sidebar-link"><FiPackage/>Projects</Link>
 
                 <button onClick={() => dispatch(setLogout())}>
                     <FaSignOutAlt/>Logout

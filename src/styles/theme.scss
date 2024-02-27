@@ -57,6 +57,7 @@ button {
 
   svg {
     margin-right: $spacingSmall;
+    font-size: 1.2rem;
   }
 
   &:hover {
@@ -112,6 +113,12 @@ textarea {
   @media (max-width: $mobileBreakpoint) {
     padding: $spacingMedium;
   }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .tract-details {

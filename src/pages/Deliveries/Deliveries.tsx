@@ -4,18 +4,22 @@ import {GetDeliveriesByProjectID} from "../../services/delivery.services.ts";
 import {Delivery} from "../../models/delivery.models.ts";
 import {useEffect, useState} from "react";
 import DeliveryCard from "./components/DeliveryCard/DeliveryCard.tsx";
+import {getProjectFromCookie} from "../../utils/project.helper.ts";
 
 const Deliveries = () => {
 
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const project = getProjectFromCookie();
 
     const fetchDeliveries = async (): Promise<void> => {
+        if (!project) {
+            return;
+        }
         try {
             setLoading(true);
-            const projectId: number = 1;
-            const fetchedDeliveries: Delivery[] = await GetDeliveriesByProjectID(projectId);
+            const fetchedDeliveries: Delivery[] = await GetDeliveriesByProjectID(project.id);
             setDeliveries(fetchedDeliveries);
         } catch (error) {
             setError('Failed to fetch deliveries');
@@ -38,7 +42,7 @@ const Deliveries = () => {
     }
 
     if (deliveries.length === 0) {
-        return <p>No stakeholders found.</p>;
+        return <p>No deliveries found.</p>;
     }
 
     return (

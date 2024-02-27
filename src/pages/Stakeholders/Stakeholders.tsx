@@ -1,33 +1,37 @@
 import './Stakeholders.scss';
-import {getStakeholdersByProjectId} from "../../services/stakeholder.services.ts";
-import {useEffect, useState} from "react";
-import {Stakeholder} from "../../models/stakeholder.models.ts";
+import { getStakeholdersByProjectId } from "../../services/stakeholder.services.ts";
+import { useEffect, useState } from "react";
+import { Stakeholder } from "../../models/stakeholder.models.ts";
 import StakeholderCard from "./components/StakeholderCard/StakeholderCard.tsx";
 import StakeholderInput from "./components/StakeholderInput/StakeholderInput.tsx";
 import StakeholderStats from "./components/StakeholderStats/StakeholderStats.tsx";
 import Heading from "../../components/Heading/Heading.tsx";
+import { getProjectFromCookie } from "../../utils/project.helper.ts";
 
 const Stakeholders = () => {
     const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const project = getProjectFromCookie();
 
     const fetchStakeholders = async (): Promise<void> => {
+        if (!project) {
+            return;
+        }
         try {
             setLoading(true);
-            const projectId: number = 1;
-            const fetchedStakeholders: Stakeholder[] = await getStakeholdersByProjectId(projectId);
+            const fetchedStakeholders: Stakeholder[] = await getStakeholdersByProjectId(project.id);
             setStakeholders(fetchedStakeholders);
         } catch (error) {
             setError('Failed to fetch stakeholders');
         } finally {
             setLoading(false);
         }
-    }
+    };
 
-    useEffect((): void => {
+    useEffect(() => {
         fetchStakeholders();
-    }, []);
+    }, []); // Add project as a dependency to trigger re-fetching when it changes
 
     // Different returns based on different conditions or states
     if (loading) {
@@ -38,7 +42,7 @@ const Stakeholders = () => {
         return <p>{error}</p>;
     }
 
-    if (stakeholders.length === 0) {
+    if (stakeholders.length === 0 || !project) {
         return <p>No stakeholders found.</p>;
     }
 
@@ -56,6 +60,6 @@ const Stakeholders = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Stakeholders;
