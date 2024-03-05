@@ -72,22 +72,39 @@ const CreateItemForm = () => {
     return (
         <div className="create-item-form">
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" value={name} onChange={handleChange} />
+                <div className="input-wrapper">
+                    <label htmlFor="name">
+                        Name
+                        <input type="text" id="name" name="name" value={name} onChange={handleChange} />
+                    </label>
+                </div>
 
-                <label htmlFor="description">Description</label>
-                <textarea id="description" name="description" value={description} onChange={handleChange}></textarea>
+                <div className="input-wrapper">
+                    <label htmlFor="description">
+                        Description
+                        <textarea id="description" name="description" value={description} onChange={handleChange}></textarea>
+                    </label>
+                </div>
 
-                <label htmlFor="image">Image</label>
-                <input type="file" id="image" name="image" onChange={handleFileChange} />
+                <div className="input-wrapper">
+                    <label htmlFor="image">
+                        Image
+                        <input type="file" id="image" name="image" onChange={handleFileChange} />
+                    </label>
+                </div>
 
-                <label htmlFor="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" value={quantity} onChange={handleChange} />
+                <div className="input-wrapper">
+                    <label htmlFor="quantity">
+                        Quantity
+                        <input type="number" id="quantity" name="quantity" value={quantity} onChange={handleChange} />
+                    </label>
+                </div>
 
                 <button type="submit">Submit</button>
             </form>
         </div>
     );
+
 }
 
 export default CreateItemForm;

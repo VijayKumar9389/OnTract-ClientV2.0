@@ -7,17 +7,20 @@ import {Item} from "../../models/item.models.ts";
  import {MdAdd} from "react-icons/md";
  import Dialog from "../../components/Dialog/Dialog.tsx";
  import CreateItemForm from "./components/CreateItemForm/CreateItemForm.tsx";
+ import {getProjectFromCookie} from "../../utils/project.helper.ts";
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const project = getProjectFromCookie();
 
     const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
     }
 
     useEffect((): void => {
-        getItemsByProjectId(1)
+        if (!project) return;
+        getItemsByProjectId(project.id)
             .then((response: Item[]): void => {
                 setItems(response);
                 console.log(response)

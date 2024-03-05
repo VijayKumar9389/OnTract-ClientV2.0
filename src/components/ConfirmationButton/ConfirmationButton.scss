@@ -1,0 +1,83 @@
+ @import "src/styles/variables.scss";
+
+ .confirmation-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000;
+
+   .confirmation-content {
+     background-color: $cardBackgroundColor;
+     padding: $spacingMedium;
+     border-radius: $borderRadius;
+     box-shadow: $boxShadow;
+     width: 80%;
+     max-width: 400px;
+
+     p {
+       margin-bottom: $spacingMedium;
+       text-align: center;
+     }
+
+     .button-container {
+       display: flex;
+       justify-content: center;
+       margin-bottom: $spacingMedium;
+
+       button {
+         margin: 0 $spacingSmall;
+         padding: $spacingSmall $spacingMedium;
+         border: none;
+         border-radius: $buttonRadius;
+         cursor: pointer;
+         transition: background-color 0.3s;
+
+         &.confirm-button {
+           background-color: $primaryColor;
+           color: white;
+
+           &:hover {
+             background-color: $secondaryColor;
+           }
+         }
+
+         &.cancel-button {
+           background-color: $cancelColor;
+           color: white;
+
+           &:hover {
+             background-color: $cancelColorHover;
+           }
+         }
+
+       }
+     }
+
+     .close-button {
+       position: absolute;
+       top: $spacingSmall;
+       right: $spacingSmall;
+       border: none;
+       background: none;
+       cursor: pointer;
+       font-size: 1.5rem;
+       color: $textColor;
+
+       &:hover {
+         color: $primaryColor;
+       }
+     }
+   }
+ }
+
+ @media screen and (max-width: $mobileBreakpoint) {
+   .confirmation-modal .confirmation-content {
+     width: 90%;
+   }
+ }

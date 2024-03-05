@@ -1,7 +1,6 @@
 import {Item, NewItemInput} from "../models/item.models.ts";
 import axios, {AxiosResponse} from "axios";
 
-
 // Get all items by project ID
 export const getItemsByProjectId = async (projectId: number): Promise<Item[]> => {
     try {
@@ -14,7 +13,19 @@ export const getItemsByProjectId = async (projectId: number): Promise<Item[]> =>
     }
 }
 
+// Get item by Id
+export const getItemById = async (itemId: number): Promise<Item> => {
+    try {
+        const endpoint: string = `http://localhost:3005/item/get/${itemId}`;
+        const response: AxiosResponse<Item> = await axios.get(endpoint);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting item:', error);
+        throw error;
+    }
+}
 
+// Create a new item
 export const createItem = async (formData: NewItemInput): Promise<Item> => {
     try {
         const endpoint: string = `http://localhost:3005/item/create`;
@@ -29,3 +40,4 @@ export const createItem = async (formData: NewItemInput): Promise<Item> => {
         throw error;
     }
 }
+

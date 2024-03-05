@@ -49,32 +49,34 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
 
     return (
         <form onSubmit={handleSubmit} className="tract-form">
-            <label className="panel-label">{stakeholder.name}</label>
-            <div>
+            <div className="card-header">
+                <h3>{stakeholder.name}</h3>
+            </div>
+            <div className="input-wrapper">
                 <label>
                     Structure:
                     <input type="text" name="structure" value={formData.structure} onChange={handleChange} />
                 </label>
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>
                     Interest:
                     <input type="text" name="interest" value={formData.interest} onChange={handleChange} />
                 </label>
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>
                     Occupants:
                     <input type="number" name="occupants" value={formData.occupants} onChange={handleChange} />
                 </label>
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>
                     Works Land:
                     <input type="text" name="worksLand" value={formData.worksLand} onChange={handleChange} />
                 </label>
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>
                     Tract Comments:
                     <textarea
@@ -84,7 +86,7 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
                     ></textarea>
                 </label>
             </div>
-            <div className="form-btn-container">
+            <div className="tract-actions">
                 <button type="submit">Submit</button>
                 <button type="button" onClick={() => selectStakeholder(stakeholder)}>View Stakeholder</button>
             </div>

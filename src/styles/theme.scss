@@ -40,6 +40,7 @@ label {
 .panel-label {
   font-size: 18px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 // Buttons
@@ -65,9 +66,16 @@ button {
   }
 }
 
+.btn-danger {
+    background-color: $cancelColor;
+    &:hover {
+        background-color: $cancelColorHover;
+    }
+}
+
 // Inputs
 textarea,
-input {
+input, select {
   width: 100%;
   padding: $spacingSmall;
   border: $border;
@@ -94,7 +102,6 @@ textarea {
   justify-content: space-between;
   border-bottom: $border;
   padding: $spacingMedium $spacingSmall;
-  margin-bottom: $spacingSmall;
 
   label {
     text-transform: uppercase;
@@ -115,17 +122,57 @@ textarea {
   }
 }
 
+.panel {
+  border: $border;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
+  margin-bottom: $spacingMedium;
+  width: 100%;
+  background-color: $cardBackgroundColor;
+
+  .panel-header {
+    padding: $spacingMedium;
+    border-bottom: $border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .panel-content {
+    padding: $spacingSmall;
+  }
+
+}
+
 .btn-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+
+  button {
+    margin-left: $spacingSmall;
+  }
 }
 
-.tract-details {
+
+.info-list {
   margin-bottom: 1rem;
   color: $textColorLight;
 
-  .list-item {
+  @media (max-width: $mobileBreakpoint) {
+    display: flex;
+    flex-direction: column;
+
+    .separator {
+      display: none;
+    }
+
+    .info-item {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .info-item {
     font-weight: bold;
     color: $primaryColor;
     text-transform: uppercase;
@@ -140,24 +187,118 @@ textarea {
   }
 }
 
+.submenu {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: $border;
+  margin-bottom: $spacingMedium;
 
-// Chips
-.chip {
-  border-radius: $borderRadius;
-  font-weight: bold;
+  .submenu-item {
+    padding: $spacingSmall;
+    cursor: pointer;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
 
-  &.green {
-    background-color: rgba(76, 175, 80, 0.2);
-    color: #4caf50;
+    &:hover {
+      color: $primaryColor;
+    }
+
+    &.selected {
+      color: $primaryColor;
+      border-bottom: 2px solid $primaryColor;
+    }
+  }
+}
+
+// Card Styles
+.card-header {
+  margin-bottom: $spacingSmall;
+
+  h3 {
+    font-size: 1.2rem;
+    color: $textColor;
+    line-break: anywhere;
   }
 
-  &.red {
-    background-color: rgba(244, 67, 54, 0.2);
-    color: #f44336;
+  p {
+    color: $textColorLight;
+  }
+}
+
+.detail-list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-items: center;
+  gap: $spacingSmall;
+  margin-bottom: $spacingSmall;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacingSmall;
+
+    span {
+      margin-right: $spacingSmall;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .chip {
+      border-radius: $buttonRadius;
+      font-weight: bold;
+      padding: 5px 10px;
+
+      &.green {
+        background-color: rgba(76, 175, 80, 0.2);
+        color: #4caf50;
+      }
+
+      &.red {
+        background-color: rgba(244, 67, 54, 0.2);
+        color: #f44336;
+      }
+
+      &.yellow {
+        background-color: rgba(255, 235, 59, 0.2);
+        color: #ffeb3b;
+      }
+
+      &.number {
+        color: #007bff;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+
+//Form Styles
+
+
+.form-row {
+  display: flex;
+  width: 100%;
+  gap: $spacingSmall;
+
+  @media (max-width: $mobileBreakpoint) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.input-wrapper {
+  flex: 1;
+  margin-bottom: $spacingSmall;
+
+
+  label {
+    display: block;
+    margin-bottom: $spacingSmall;
+    color: $textColor;
   }
 
-  &.yellow {
-    background-color: rgba(255, 235, 59, 0.2);
-    color: #ffeb3b;
-  }
+
 }

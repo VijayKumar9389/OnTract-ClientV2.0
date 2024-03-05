@@ -1,8 +1,8 @@
-import {Delivery} from "../models/delivery.models.ts";
+import {Delivery, NewDeliveryInput} from "../models/delivery.models.ts";
 import axios, {AxiosResponse} from "axios";
 
 //Get all deliveries by project ID
-export const GetDeliveriesByProjectID = async (projectId: number): Promise<Delivery[]> => {
+export const getDeliveriesByProjectID = async (projectId: number): Promise<Delivery[]> => {
     try {
         const endpoint: string = `http://localhost:3005/delivery/getbyproject/${projectId}`;
         const response: AxiosResponse<Delivery[]> = await axios.get(endpoint);
@@ -23,3 +23,39 @@ export const getDeliveryById = async (deliveryId: number): Promise<Delivery> => 
         throw error;
     }
 }
+
+// Get delivery by matching package ID
+export const getDeliveryByPackageId = async (packageId: number): Promise<Delivery> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/getbypackage/${packageId}`;
+        const response: AxiosResponse<Delivery> = await axios.get(endpoint, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting deliveries:', error);
+        throw error;
+    }
+}
+
+// Create delivery
+export const createDelivery = async (delivery: NewDeliveryInput): Promise<Delivery> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/create/delivery`;
+        const response: AxiosResponse<Delivery> = await axios.post(endpoint, delivery, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error creating delivery:', error);
+        throw error;
+    }
+}
+
+// Cancel delivery by ID
+export const cancelDeliveryById = async (deliveryId: number): Promise<void> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/cancel/${deliveryId}`;
+        await axios.delete(endpoint, { withCredentials: true });
+    } catch (error) {
+        console.error('Error canceling delivery:', error);
+        throw error;
+    }
+}
+

@@ -6,75 +6,33 @@
   padding: 0;
   margin: 0;
   width: 100%;
-
-  li {
-    margin-bottom: $spacingMedium;
-    background-color: $cardBackgroundColor;
-    border-radius: $buttonRadius;
-    box-shadow: $boxShadowHover;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-  }
+  border-radius: $borderRadius;
 }
 
 // TractForm.scss
 .tract-form {
   display: flex;
   flex-direction: column;
-  border-radius: $borderRadius;
+  border-radius: $buttonRadius;
   border: $border ;
   padding: $spacingSmall;
   overflow: hidden;
 
-  .panel-label {
-    text-transform: uppercase;
-    margin-bottom: $spacingSmall;
+  h3 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  .form-btn-container {
+  .tract-actions {
     display: flex;
-    margin-top: $spacingMedium;
+    flex-direction: column;
 
     button {
-      margin-right: $spacingMedium;
-    }
-  }
-
-  h4 {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  div {
-    margin-bottom: $spacingMedium;
-
-    label {
-      display: block;
       margin-bottom: $spacingSmall;
     }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: $spacingSmall;
-      box-sizing: border-box;
-      border: $border;
-      border-radius: $buttonRadius;
-
-      &:focus {
-        outline: none;
-        border-color: #007bff;
-      }
-    }
-
   }
+
 }
 
 .tract-form-list {

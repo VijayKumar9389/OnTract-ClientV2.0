@@ -5,9 +5,9 @@ const StakeholderInput = () => {
 
     return (
         <div className="stakeholder-input">
-            <input type="text" placeholder="Search for a stakeholder"/>
-            <button><MdFilterAlt />Filter</button>
-            <button><MdFilterAltOff/>Clear Filter</button>
+            <input type="text" placeholder="Search for a stakeholder" className="input-field"/>
+            <button className="filter-button"><MdFilterAlt/>Filter</button>
+            <button className="clear-filter-button"><MdFilterAltOff/>Clear Filter</button>
         </div>
     );
 }

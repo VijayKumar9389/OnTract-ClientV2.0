@@ -4,7 +4,7 @@ import { Project} from "../models/stakeholder.models.ts";
 export const setProjectCookie = (project: Project): void => {
     try {
         console.log('Setting project cookie:', project);
-        const jsonString = JSON.stringify(project);
+        const jsonString: string = JSON.stringify(project);
         document.cookie = `projectData=${encodeURIComponent(jsonString)}; path=/`;
     } catch (error) {
         console.error('Error setting project cookie:', error);
@@ -13,12 +13,12 @@ export const setProjectCookie = (project: Project): void => {
 
 //Get the selected project from the cookie
 export const getProjectFromCookie = (): Project | null => {
-    const cookieValue = document.cookie
+    const cookieValue: string | undefined = document.cookie
         .split('; ')
-        .find((cookie) => cookie.startsWith('projectData='));
+        .find((cookie: string) => cookie.startsWith('projectData='));
 
     if (cookieValue) {
-        const jsonString = decodeURIComponent(cookieValue.split('=')[1]);
+        const jsonString: string = decodeURIComponent(cookieValue.split('=')[1]);
         return JSON.parse(jsonString);
     }
 

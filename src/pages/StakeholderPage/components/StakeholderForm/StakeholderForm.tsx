@@ -48,12 +48,15 @@ const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) =>
     }, [stakeholder]);
 
     return (
-        <div className="stakeholder-form">
-            <div className="header">
+        <div className="panel">
+            <div className="panel-header">
                 <label className="panel-label">Details</label>
             </div>
+            <div className="panel-content">
+                <div className="btn-container">
+                    <button type="submit"><FaRegSave/> Submit</button>
+                </div>
 
-            <div className="page-content">
                 <div className="form-row">
                     <div className="input-wrapper">
                         <label>
@@ -151,9 +154,7 @@ const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) =>
                     </div>
                 </div>
 
-                <div className="btn-container">
-                    <button type="submit"><FaRegSave/> Submit</button>
-                </div>
+
             </div>
         </div>
     );

@@ -5,14 +5,18 @@
   gap: $spacingSmall;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grid layout with minimum item width of 100px */
   width: 100%;
+  margin-bottom: $spacingLarge;
 
   .stat-wrapper {
     width: 100%;
     padding: $spacingSmall;
     background-color: $cardBackgroundColor;
     border-radius: $borderRadius;
-    margin-bottom: $spacingMedium;
     border: $border;
+
+    label {
+      margin-bottom: $spacingSmall;
+    }
 
     strong {
       color: $textColor;

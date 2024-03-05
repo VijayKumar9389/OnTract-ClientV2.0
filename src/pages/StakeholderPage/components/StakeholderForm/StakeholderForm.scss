@@ -1,49 +1,18 @@
 @import 'src/styles/variables.scss';
 
-.stakeholder-form {
-  width: 100%;
-  background-color: $cardBackgroundColor;
-  border-radius: $borderRadius;
-  box-shadow: $boxShadow;
-  margin-bottom: $spacingLarge;
 
+.page-content {
+  padding: $spacingMedium;
+}
+
+// Media query for mobile compatibility
+@media screen and (max-width: $mobileBreakpoint) {
   .page-content {
-    padding: $spacingSmall;
-
-
     .form-row {
-      display: flex;
-      width: 100%;
-      gap: $spacingSmall;
-
-      @media (max-width: $mobileBreakpoint) {
-        flex-direction: column;
-        gap: 0;
-      }
-
       .input-wrapper {
-        flex: 1;
-
-        label {
-          display: block;
-          margin-bottom: $spacingSmall;
-          color: $textColor;
-        }
-
-
-      }
-    }
-
-  }
-
-  // Media query for mobile compatibility
-  @media screen and (max-width: $mobileBreakpoint) {
-    .page-content {
-      .form-row {
-        .input-wrapper {
-          width: 100%; // Full width on mobile
-        }
+        width: 100%; // Full width on mobile
       }
     }
   }
 }
+

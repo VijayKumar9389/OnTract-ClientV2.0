@@ -1,7 +1,5 @@
 export interface TokenResponse {
     auth: boolean;
-    accessToken: string;
-    refreshToken: string;
     user: string;
 }
 

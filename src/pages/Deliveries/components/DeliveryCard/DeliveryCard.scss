@@ -1,45 +1,56 @@
 @import 'src/styles/variables.scss';
 
+// Delivery Card
 .delivery-card {
   background-color: $cardBackgroundColor;
-  border: $border;
   border-radius: $borderRadius;
-  padding: $spacingMedium;
   box-shadow: $boxShadow;
+  padding: $spacingMedium;
   margin-bottom: $spacingMedium;
   cursor: pointer;
-  transition: ease-in-out 0.3s;
+  transition: ease-in-out .3s;
+  width: 100%;
 
-    &:hover {
-        box-shadow: $boxShadowHover;
-    }
+  &:hover {
+    box-shadow: $boxShadowHover;
+  }
 
-  .details {
-    display: flex;
-    margin-bottom: $spacingMedium;
-
-    @media (max-width: $mobileBreakpoint) {
-      flex-direction: column;
+  .delivery-details {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grid layout with minimum item width of 100px */
+      align-items: center;
+      gap: $spacingSmall; /* Gap between grid items */
       margin-bottom: $spacingSmall;
-    }
 
     .detail {
-      margin-right: $spacingMedium;
+      display: flex;
+      align-items: center;
 
-      @media (max-width: $mobileBreakpoint) {
-        margin-right: 0;
-        margin-bottom: $spacingSmall;
+      .detail-icon {
+        margin-right: $spacingSmall;
       }
 
-      .value {
+      .detail-label {
+        margin-bottom: $spacingSmall;
         font-weight: bold;
-        color: $textColor;
       }
     }
+  }
 
-    .separator {
-      margin: 0 $spacingSmall;
+  .status-chip {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+
+    &.red {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    &.green {
+      background-color: #2ecc71;
+      color: white;
     }
   }
 }
-

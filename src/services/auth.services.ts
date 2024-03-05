@@ -1,31 +1,19 @@
 import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
-import {setLogin, setLogout} from "../store/reducers/auth.reducer.ts";
-import { TokenResponse} from "../models/auth.models.ts";
+import { setLogin, setLogout } from "../store/reducers/auth.reducer.ts";
+import { TokenResponse } from "../models/auth.models.ts";
 
 // Refresh the access token
-export const refreshAccessToken = async (): Promise<string> => {
+export const refreshAccessToken = async (): Promise<boolean> => {
     try {
-        // Make a POST request to the server to refresh the token
-        const response: Response = await fetch('http://localhost:3005/user/refresh-token', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        const response = await axios.post<TokenResponse>('http://localhost:3005/user/refresh-token', {}, {
+            withCredentials: true,
         });
 
-        // Check if the response status is not ok
-        if (!response.ok) {
-            console.error('Token refresh failed:', response.statusText);
-            throw new Error('Token refresh failed');
-        }
+        console.log(response)
 
-        // Parse the response and return the access token
-        const data: TokenResponse = await response.json();
-        console.log('Refreshed access token:', data.accessToken);
-        return data.accessToken;
-
+        // Return the refreshed access token
+        return true;
     } catch (error) {
         console.error('Token refresh failed:', error);
         throw error;
@@ -35,62 +23,43 @@ export const refreshAccessToken = async (): Promise<string> => {
 // Handle the login process
 export const handleLogin = async (username: string, password: string, dispatch: Dispatch): Promise<void> => {
     try {
-        // Make a POST request to the server to log in the user
-        const response: Response = await fetch('http://localhost:3005/user/login', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({username, password}),
+        const response = await axios.post<TokenResponse>('http://localhost:3005/user/login', { username, password }, {
+            withCredentials: true,
         });
 
-        // If the request was not successful, throw an error
-        if (!response.ok) {
-            throw new Error('Invalid credentials');
-        }
-        // If the request was successful, extract user information from the response
-        const data: TokenResponse = await response.json();
-        dispatch(setLogin(data));
+        // Dispatch login action with token response
+        dispatch(setLogin(response.data));
     } catch (error) {
         console.error('Login failed:', error);
-        // Handle login error, e.g., display an error message to the user
+        // Handle login error
     }
 };
 
-// Verify the refresh token
+// Client-side code to verify user session using refresh token
 export const verifyRefreshToken = async (dispatch: Dispatch): Promise<boolean> => {
     try {
-        // Make a POST request to the server to verify the token
-        const response: Response = await fetch('http://localhost:3005/user/verify-token', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+        const response = await axios.post<{auth: boolean, user: string}>('http://localhost:3005/user/verify-token', {}, {
+            withCredentials: true,
         });
 
-        // If the request was not successful, dispatch a logout action and return false
-        if (!response.ok) {
-            dispatch(setLogout());
-            return false;
-        }
+        // Dispatch login action with user data from response
+        dispatch(setLogin(response.data));
 
-        // If the request was successful, refresh the access token and return true
-        await refreshAccessToken();
-        console.log(response.body)
+        // Return true indicating successful verification
         return true;
     } catch (error) {
         console.error('Verification failed:', error);
+        dispatch(setLogout());
         return false;
     }
 };
 
+// Function to activate the Axios interceptors for handling token refresh
 export const activateInterceptor = (dispatch: Dispatch): void => {
     // Define a variable to track whether a token refresh is in progress
     let isRefreshing = false;
 
-    // Add a request interceptor
+    // Add a request interceptor to modify config for all requests
     axios.interceptors.request.use(
         async (config) => {
             // Modify config to include withCredentials for all requests
@@ -103,7 +72,7 @@ export const activateInterceptor = (dispatch: Dispatch): void => {
         }
     );
 
-    // Add a response interceptor
+    // Add a response interceptor to handle token refresh
     axios.interceptors.response.use(
         (response) => {
             // If the response is successful, return it
@@ -115,12 +84,22 @@ export const activateInterceptor = (dispatch: Dispatch): void => {
                 console.log('Unauthorized. Attempting to refresh access token.');
                 try {
                     isRefreshing = true;
+                    // Refresh the access token
+                    await refreshAccessToken();
+                    // Verify the refreshed token
                     await verifyRefreshToken(dispatch);
                     isRefreshing = false;
-                    return Promise.reject(error);
+                    // Retry the original request if error.config is defined
+                    if (error.config) {
+                        return axios.request(error.config);
+                    } else {
+                        console.error('Original request config is undefined');
+                        return Promise.reject(error);
+                    }
                 } catch (refreshError) {
                     isRefreshing = false;
                     console.error('Error refreshing access token:', refreshError);
+                    // Logout user if token refresh fails
                     dispatch(setLogout());
                     return Promise.reject(error);
                 }

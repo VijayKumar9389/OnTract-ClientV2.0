@@ -3,22 +3,50 @@
 .stakeholder-input {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adjust the gap between input and buttons */
-  border-radius: $borderRadius; /* Apply border radius */
+  margin-bottom: $spacingMedium;
   width: 100%;
-  margin-bottom:  $spacingLarge;
 
   @media (max-width: $mobileBreakpoint) {
-    flex-direction: column; /* Change direction to column on mobile */
+    flex-direction: column;
 
-    button {
-      width: 100%; /* Button takes full width */
+    .input-field {
+      margin-bottom: $spacingSmall;
+    }
+
+    .filter-button, .clear-filter-button {
+      margin-bottom: $spacingSmall;
+      width: 100%;
     }
   }
 
-  input {
-    flex: 1; /* Input takes remaining space */
-    padding: 10px;
-    background: #fff;
+  .input-field {
+    padding: $spacingSmall;
+    border: 1px solid #ccc;
+    border-radius: $buttonRadius;
+    flex: 1;
+    margin-right: $spacingSmall;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  .filter-button,
+  .clear-filter-button {
+    padding: $spacingSmall $spacingMedium;
+    border: none;
+    border-radius: $buttonRadius;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    svg {
+      margin-right: $spacingSmall;
+    }
+  }
+
+  .clear-filter-button {
+    background-color: #e74c3c; // Red color for clear filter button
+    margin-left: $spacingSmall;
   }
 }

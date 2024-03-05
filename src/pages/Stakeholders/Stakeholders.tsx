@@ -33,30 +33,28 @@ const Stakeholders = () => {
         fetchStakeholders();
     }, []); // Add project as a dependency to trigger re-fetching when it changes
 
-    // Different returns based on different conditions or states
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    if (error) {
-        return <p>{error}</p>;
-    }
-
-    if (stakeholders.length === 0 || !project) {
-        return <p>No stakeholders found.</p>;
-    }
-
     return (
         <div className="stakeholders-container">
             <Heading heading="Stakeholders"/>
             <div className="page-content">
-                <StakeholderStats/>
-                <StakeholderInput/>
-                <ul className="stakeholder-card-list">
-                    {stakeholders.map((stakeholder: Stakeholder) => (
-                        <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
-                    ))}
-                </ul>
+                {/* Conditionally render loading message */}
+                {loading && <p>Loading...</p>}
+
+                {/* Conditionally render error message */}
+                {error && <p>{error}</p>}
+
+                {/* Render stakeholders if no loading or error */}
+                {!loading && !error && (
+                    <>
+                        <StakeholderStats/>
+                        <StakeholderInput/>
+                        <ul className="stakeholder-card-list">
+                            {stakeholders.map((stakeholder: Stakeholder) => (
+                                <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
+                            ))}
+                        </ul>
+                    </>
+                )}
             </div>
         </div>
     );

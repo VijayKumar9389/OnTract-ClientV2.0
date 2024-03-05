@@ -21,9 +21,9 @@ const App = () => {
 
     useEffect(() => {
         activateInterceptor(dispatch);
-        console.log(verifyRefreshToken(dispatch).then(
-            // (response) => console.log(response)
-        ));
+        verifyRefreshToken(dispatch).then(() => {
+            console.log("Refresh token verified");
+        });
     }, []);
 
     if (!isLoggedIn) return <Login />;

@@ -33,10 +33,12 @@ const Dialog: React.FC<DialogProps> = ({ isOpen, toggle, element, heading }) => 
             <div className="popup-overlay" onClick={toggle}>
                 <div className="popup-menu" onClick={(e) => e.stopPropagation()}>
                     <div className="popup-header">
-                        <h3>{heading}</h3>
+                        <label className="panel-label">{heading}</label>
                         <button onClick={toggle}><MdClose /></button>
                     </div>
-                    {element}
+                    <div className="popup-content">
+                        {element}
+                    </div>
                 </div>
             </div>
         );

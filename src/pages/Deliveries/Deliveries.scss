@@ -9,4 +9,41 @@
     width: 100%;
 
   }
+
+  .card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; // Adjust as needed
+  }
+
+  .card {
+    width: calc(33.33% - 20px); // Adjust width and margin based on your design
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px); // Adjust hover effect as desired
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+
+      .detail-label {
+        margin-right: 5px;
+        font-weight: bold;
+      }
+    }
+
+    .separator {
+      margin: 0 5px;
+    }
+  }
+
 }

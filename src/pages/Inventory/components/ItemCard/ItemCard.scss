@@ -3,12 +3,13 @@
 .item-card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: $cardBackgroundColor;
   border-radius: $borderRadius;
   overflow: hidden;
   cursor: pointer;
-  transition: ease-in-out 0.3s;
-  padding: $spacingSmall;
+  transition: box-shadow $transition;
+  padding: $spacingSmall; // Increased padding for better spacing
   box-shadow: $boxShadow;
 
   &:hover {
@@ -22,32 +23,37 @@
       width: 100%;
       max-height: 150px;
       object-fit: cover;
-      border-radius: $borderRadius;
+      border-radius: $borderRadius; // Use border-radius from variables for consistency
       margin-bottom: $spacingSmall;
+    }
+  }
+
+  .item-quantity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    color: $textColor;
+
+    strong {
+      color: $primaryColor;
+      font-weight: bold;
     }
   }
 
   .item-details {
 
+    h3 {
+      font-size: 1.2rem;
+      color: $textColor;
+      line-break: anywhere;
+    }
+
     .item-description {
       margin-top: $spacingSmall;
       color: $textColorLight;
       min-height: 60px;
-    }
-
-    .item-quantity {
-      margin-top: $spacingSmall;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      color: $textColor;
-
-      strong {
-        color: $primaryColor;
-        font-weight: bold;
-      }
     }
   }
 }

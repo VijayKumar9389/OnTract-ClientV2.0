@@ -21,17 +21,18 @@ const TractItem: React.FC<TractItemProps> = ({tract}) => {
     }, [tract.tract]);
 
     return (
-        <li>
-            <div className="header">
+        <li className="panel">
+            <div className="panel-header">
                 <label className="panel-label">TRACT <strong>{tract.tract}</strong></label>
             </div>
-            <div style={{padding: "1rem"}}>
-                <p className="tract-details">
-                    Carrying: <span className="list-item">{tract.commodity}</span>
+            <div className="page-content
+            ">
+                <p className="info-list">
+                    Carrying: <span className="info-item">{tract.commodity}</span>
                     <span className="separator">|</span>
-                    Currently: <span className="list-item">{tract.pipelineStatus}</span>
+                    Currently: <span className="info-item">{tract.pipelineStatus}</span>
                     <span className="separator">|</span>
-                    Pin: <span className="list-item">{tract.pin}</span>
+                    Pin: <span className="info-item">{tract.pin}</span>
                 </p>
                 <ul className="tract-form-list">
                     {stakeholders.map((stakeholder, index) => {

@@ -1,0 +1,67 @@
+@import 'src/styles/variables.scss';
+
+.package-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  .details {
+    .package-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 3fr;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+
+        .arrow-icon {
+          transform: rotate(90deg);
+        }
+      }
+
+      &:not(:first-child) {
+        border-top: $border;
+      }
+
+      td {
+        padding: $spacingMedium 0;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        strong {
+          display: none;
+        }
+
+        .delivery-list-name {
+          overflow: hidden;
+          line-break: anywhere;
+          text-overflow: ellipsis;
+        }
+
+        @media (max-width: 768px) {
+          padding: $spacingSmall 0;
+
+          strong {
+            display: block;
+          }
+        }
+
+        .icon,
+        .arrow-icon,
+        .user-icon {
+          margin-right: $spacingSmall;
+          color: $primaryColor;
+          font-size: 1rem;
+        }
+
+        span {
+          width: fit-content;
+          color: $textColor;
+        }
+      }
+    }
+  }
+}

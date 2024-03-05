@@ -50,13 +50,15 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
             className="stakeholder-card"
             onClick={() => selectStakeholder()}
         >
-            <label className="panel-label">{stakeholder.name}</label>
-            <p className="desc">{getLocation(stakeholder.streetAddress)}</p>
+            <div className="card-header">
+                <h3>{stakeholder.name}</h3>
+                <p className="desc">{getLocation(stakeholder.streetAddress)}</p>
+            </div>
             <ul className="detail-list">
                 <li>
                     <span><FaPhone/></span>
                     <div>
-                        <p>Phone:</p>
+                    <p>Phone:</p>
                         {isAvailable(stakeholder.phoneNumber)
                             ? <a className="chip green">Yes</a>
                             : <a className="chip red">No</a>
@@ -135,6 +137,7 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
             </ul>
         </div>
     );
+
 
 }
 
