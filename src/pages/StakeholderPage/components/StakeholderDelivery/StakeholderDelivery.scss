@@ -1,10 +1,23 @@
 @import 'src/styles/variables.scss';
 
-.package-table {
-  width: 100%;
-  border-collapse: collapse;
+.delivery-details {
 
-  .details {
+  .destination {
+    font-size: 1.2rem;
+    color: $textColor;
+    line-break: anywhere;
+  }
+
+  .notes {
+    margin-bottom: 1.5rem;
+    color: #666;
+  }
+
+  .package-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+
     .package-item {
       width: 100%;
       display: grid;
@@ -18,49 +31,40 @@
         .arrow-icon {
           transform: rotate(90deg);
         }
+
+        .package-info {
+          padding: 1rem 0;
+        }
+
+        .stakeholder-info {
+          padding: 1rem 0;
+        }
       }
 
-      &:not(:first-child) {
-        border-top: $border;
+      &:last-child {
+        border-bottom: none;
       }
 
-      td {
-        padding: $spacingMedium 0;
-        text-align: left;
+      .package-info,
+      .arrow,
+      .stakeholder-info {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        padding: 1rem;
 
-        strong {
-          display: none;
+        .icon {
+          margin-right: 0.5rem;
+          font-size: 1.2rem;
         }
 
-        .delivery-list-name {
-          overflow: hidden;
-          line-break: anywhere;
-          text-overflow: ellipsis;
+        .package-name,
+        .stakeholder-name {
         }
+      }
 
-        @media (max-width: 768px) {
-          padding: $spacingSmall 0;
-
-          strong {
-            display: block;
-          }
-        }
-
-        .icon,
-        .arrow-icon,
-        .user-icon {
-          margin-right: $spacingSmall;
-          color: $primaryColor;
-          font-size: 1rem;
-        }
-
-        span {
-          width: fit-content;
-          color: $textColor;
-        }
+      .arrow {
+        font-weight: bold;
+        color: #4285f4;
       }
     }
   }
