@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TokenResponse, AuthState} from "../../models/auth.models.ts";
+import { TokenResponse, AuthState } from "../../models/auth.models.ts";
 
 const initialState: AuthState = {
     loggedIn: false,
     username: "",
+    isAdmin: false, // Add isAdmin field to store admin status
 };
 
 export const authSlice = createSlice({
@@ -17,6 +18,7 @@ export const authSlice = createSlice({
         setLogout: (state): void => {
             state.loggedIn = false;
             state.username = "";
+            state.isAdmin = false; // Reset isAdmin status on logout
         },
         refreshLogin: (state, action: PayloadAction<{ auth: boolean}>): void => {
             state.loggedIn = action.payload.auth;
@@ -25,9 +27,12 @@ export const authSlice = createSlice({
             const accessToken = localStorage.getItem("accessToken");
             state.loggedIn = !!accessToken;
         },
+        setAdminStatus: (state, action: PayloadAction<boolean>): void => {
+            state.isAdmin = action.payload;
+        },
     },
 });
 
-export const { setLogin, setLogout, refreshLogin, checkAuthStatus } = authSlice.actions;
+export const { setLogin, setLogout, refreshLogin, checkAuthStatus, setAdminStatus } = authSlice.actions;
 
 export default authSlice.reducer;

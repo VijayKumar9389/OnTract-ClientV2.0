@@ -1,0 +1,64 @@
+@import 'src/styles/variables.scss';
+
+.package-list {
+  width: 100%;
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    gap: $spacingMedium;
+    align-items: center;
+    padding: $spacingMedium;
+
+
+    .item-select {
+      padding: $spacingSmall;
+      border: $border;
+      border-radius: $buttonRadius;
+      font-size: 1rem;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 8fr 1fr;
+      gap: $spacingMedium;
+      padding: $spacingMedium;
+
+
+      .item-image-cell {
+        flex: 0 0 100px;
+        margin-right: $spacingMedium;
+
+        .item-image {
+          border-radius: 50%;
+          height: 60px;
+          width: 60px;
+        }
+      }
+
+      .item-details-cell {
+        flex-grow: 1;
+        margin-right: $spacingMedium;
+
+        h4 {
+          margin: 0;
+          color: $textColor;
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+
+        p {
+          margin: $spacingSmall 0 0;
+          color: $textColorLight;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+

@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
-import { setLogin, setLogout } from "../store/reducers/auth.reducer.ts";
+import {setAdminStatus, setLogin, setLogout} from "../store/reducers/auth.reducer.ts";
 import { TokenResponse } from "../models/auth.models.ts";
 
 // Refresh the access token
@@ -109,4 +109,20 @@ export const activateInterceptor = (dispatch: Dispatch): void => {
             return Promise.reject(error);
         }
     );
+};
+
+
+// Function to check user's admin status
+export const checkAdminStatus = async (dispatch: Dispatch): Promise<void> => {
+    try {
+        const response = await axios.get<{ isAdmin: boolean }>('http://localhost:3005/user/admin-status', {
+            withCredentials: true,
+        });
+
+        // Dispatch action based on admin status
+        dispatch(setAdminStatus(response.data.isAdmin));
+    } catch (error) {
+        console.error('Failed to check admin status:', error);
+        // Handle error
+    }
 };

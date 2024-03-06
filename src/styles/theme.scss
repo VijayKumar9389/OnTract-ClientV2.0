@@ -161,7 +161,10 @@ textarea {
 
 .action-buttons {
   display: flex;
+  height: 100%;
+  align-items: center;
   gap: $spacingSmall;
+
 
   button {
     padding: $spacingSmall $spacingMedium;
@@ -169,6 +172,7 @@ textarea {
     border-radius: $buttonRadius;
     cursor: pointer;
     transition: background-color 0.3s;
+    height: fit-content;
 
     &:hover {
       background-color: $secondaryColor;
