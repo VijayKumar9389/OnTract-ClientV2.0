@@ -4,10 +4,15 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {useEffect, useState} from "react";
 import {getItemById} from "../../services/item.services.ts";
 import {Item} from "../../models/item.models.ts";
+import EditItemForm from "./components/EditItemForm/EditItemForm.tsx";
+import {getPackageByPackageItemId} from "../../services/package.services.ts";
+import {Package} from "../../models/package.models.ts";
+import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
 
 const ItemPage = () => {
     const {id} = useParams();
     const [item, setItem] = useState<Item | null>(null);
+    const [packages, setPackages] = useState<Package[] | null>(null);
 
     useEffect((): void => {
         if (id) {
@@ -15,6 +20,12 @@ const ItemPage = () => {
             getItemById(itemId)
                 .then((response: Item): void => {
                     setItem(response);
+                });
+
+            getPackageByPackageItemId(Number(id))
+                .then((response: Package[]): void => {
+                    setPackages(response);
+                    console.log(response);
                 });
         }
     }, [id]);
@@ -27,9 +38,8 @@ const ItemPage = () => {
         <div className="item-page-container">
             <PageHeading heading={item.name}/>
             <div className="page-content">
-                <h2>{item.name}</h2>
-                <p>{item.description}</p>
-                <p>{item.quantity}</p>
+                <EditItemForm item={item}/>
+                {packages !== null && packages.length > 0 && <PackageItemTable packages={packages} item={item} />}
             </div>
         </div>
     );

@@ -1,0 +1,21 @@
+@import 'src/styles/variables.scss';
+
+.form-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+
+  @media (max-width: $mobileBreakpoint) {
+    grid-template-columns: 1fr;
+  }
+
+
+  .item-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: $buttonRadius;
+    margin: 0 auto;
+  }
+}

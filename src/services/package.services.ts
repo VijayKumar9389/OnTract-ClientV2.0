@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {NewPackageInput, PackageType} from "../models/package.models.ts";
+import {NewPackageInput, Package, PackageType} from "../models/package.models.ts";
 
 //Cancel package
 export const cancelPackage = async (packageId: number, stakeholderId: number): Promise<void> => {
@@ -31,6 +31,19 @@ export const createPackageForExistingDelivery = async (packageData: NewPackageIn
         await axios.post(endpoint, packageData);
     } catch (error) {
         console.error('Error creating package for existing delivery:', error);
+        throw error;
+    }
+}
+
+
+// get all packages by item ID
+export const getPackageByPackageItemId = async (packageItemId: number): Promise<Package[]> => {
+    try {
+        const endpoint: string = `http://localhost:3005/package/get/packagebypackageitemid/${packageItemId}`;
+        const response: AxiosResponse<Package[]> = await axios.get(endpoint);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting package by package item ID:', error);
         throw error;
     }
 }

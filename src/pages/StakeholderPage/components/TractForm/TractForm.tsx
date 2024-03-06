@@ -86,7 +86,7 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
                     ></textarea>
                 </label>
             </div>
-            <div className="tract-actions">
+            <div className="action-buttons">
                 <button type="submit">Submit</button>
                 <button type="button" onClick={() => selectStakeholder(stakeholder)}>View Stakeholder</button>
             </div>
