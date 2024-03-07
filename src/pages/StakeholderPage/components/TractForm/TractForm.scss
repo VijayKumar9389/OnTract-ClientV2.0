@@ -24,6 +24,16 @@
     text-overflow: ellipsis;
   }
 
+  ul {
+    margin-bottom: $spacingSmall;
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+      margin-right: $spacingSmall;
+    }
+  }
+
 }
 
 .tract-form-list {

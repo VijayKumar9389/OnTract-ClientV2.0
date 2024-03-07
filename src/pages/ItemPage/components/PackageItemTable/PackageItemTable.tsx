@@ -34,6 +34,7 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packag
                         <td>
                             <div className="action-buttons">
                                 <button>View Package</button>
+                                <button>View Delivery</button>
                                 <button>View stakeholder</button>
                             </div>
                         </td>

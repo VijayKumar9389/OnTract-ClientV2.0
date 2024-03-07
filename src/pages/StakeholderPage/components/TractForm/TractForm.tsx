@@ -39,6 +39,8 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    const isAvailable = (value: string): boolean => (value !== "");
+
     const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
         // Add your form submission logic here using formData
@@ -52,28 +54,42 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
             <div className="card-header">
                 <h3>{stakeholder.name}</h3>
             </div>
+            <ul className="">
+                {isAvailable(stakeholder.phoneNumber)
+                    ? null
+                    : <a className="chip red">No Phone No.</a>
+                }
+                {isAvailable(stakeholder.streetAddress)
+                    ? null
+                    : <a className="chip red">No Street Address</a>
+                }
+                {isAvailable(stakeholder.mailingAddress)
+                    ? null
+                    : <a className="chip red">No Mailing Address</a>
+                }
+            </ul>
             <div className="input-wrapper">
                 <label>
                     Structure:
-                    <input type="text" name="structure" value={formData.structure} onChange={handleChange} />
+                    <input type="text" name="structure" value={formData.structure} onChange={handleChange}/>
                 </label>
             </div>
             <div className="input-wrapper">
                 <label>
                     Interest:
-                    <input type="text" name="interest" value={formData.interest} onChange={handleChange} />
+                    <input type="text" name="interest" value={formData.interest} onChange={handleChange}/>
                 </label>
             </div>
             <div className="input-wrapper">
                 <label>
                     Occupants:
-                    <input type="number" name="occupants" value={formData.occupants} onChange={handleChange} />
+                    <input type="number" name="occupants" value={formData.occupants} onChange={handleChange}/>
                 </label>
             </div>
             <div className="input-wrapper">
                 <label>
                     Works Land:
-                    <input type="text" name="worksLand" value={formData.worksLand} onChange={handleChange} />
+                    <input type="text" name="worksLand" value={formData.worksLand} onChange={handleChange}/>
                 </label>
             </div>
             <div className="input-wrapper">
