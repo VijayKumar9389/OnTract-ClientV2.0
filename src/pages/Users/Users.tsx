@@ -1,35 +1,35 @@
-import {getUsers} from "../../services/user.services.ts";
-import  { useEffect, useState } from "react";
-import { User } from "../../models/auth.models";
+import Heading from "../../components/Heading/Heading.tsx";
+import UserTable from "./components/UserTable/UserTable.tsx";
+import {FaPlus} from "react-icons/fa";
+import {useEffect, useState} from "react";
+import Dialog from "../../components/Dialog/Dialog.tsx";
+import RegisterUser from "./components/RegisterUser/RegisterUser.tsx";
 
 const Users = () => {
-    const [users, setUsers] = useState<User[]>([]);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await getUsers();
-                setUsers(response);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-                // Handle error
-            }
-        };
+    const [isOpened, setIsOpened] = useState(false);
 
-        fetchUsers();
-    }, []);
+    const toggleModal = () => {
+        setIsOpened(!isOpened);
+    }
 
     return (
         <div>
-            <h1>Users</h1>
-            <ul>
-                {users.map((user: User) => (
-                    <li key={user.id}>
-                        <h1>{user.username}</h1>
-                        <p>{user.isAdmin ? "true" : "false"}</p>
-                    </li>
-                ))}
-            </ul>
+            <Heading heading="Users"/>
+            <div className="page-content">
+                <div className="panel">
+                    <div className="panel-header">
+                        <label className="panel-label">Users</label>
+                    </div>
+                    <div className="panel-content">
+                        <div className="btn-container">
+                            <button onClick={toggleModal} ><FaPlus /> Add User</button>
+                        </div>
+                        <Dialog isOpen={isOpened} toggle={toggleModal} heading="Add User" element={<RegisterUser />} />
+                        <UserTable/>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

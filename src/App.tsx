@@ -13,9 +13,10 @@ import ItemPage from "./pages/ItemPage/ItemPage";
 import Packages from "./pages/Packages/Packages";
 import Users from "./pages/Users/Users.tsx";
 import { RootState } from "./store";
-import { activateInterceptor, verifyRefreshToken, checkAdminStatus } from "./services/auth.services";
+import { activateInterceptor, verifyRefreshToken } from "./services/auth.services";
 import './styles/app.scss';
 import Projects from "./pages/Projects/Projects.tsx";
+import {checkAdminStatus} from "./services/user.services.ts";
 
 const App = () => {
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);

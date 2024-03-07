@@ -1,8 +1,8 @@
 import './Login.scss';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {handleLogin} from "../../services/auth.services.ts";
 import {MdEmergencyShare} from "react-icons/md";
+import {handleLogin} from "../../services/user.services.ts";
 
 const Login = () => {
 

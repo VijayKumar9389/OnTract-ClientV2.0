@@ -1,11 +1,11 @@
-import  { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import React from "react";
-import { Project} from "../../models/stakeholder.models.ts";
+import {Project} from "../../models/stakeholder.models.ts";
 import './ProjectTable.scss';
-import { setProjectCookie} from "../../utils/project.helper.ts";
+import {setProjectCookie} from "../../utils/project.helper.ts";
 import {getProjects} from "../../services/project.services.ts";
 
-const ProjectTable: React.FC<{toggleMenu: () => void}>= ({toggleMenu}) => {
+const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -35,12 +35,12 @@ const ProjectTable: React.FC<{toggleMenu: () => void}>= ({toggleMenu}) => {
         <div>
             {loading && <p>Loading...</p>}
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p style={{color: "red"}}>{error}</p>}
 
             {!loading && !error && (
-                <table className="project-tbl">
+                <table className="project-table">
                     <thead>
-                    <tr className="project-header">
+                    <tr>
                         <th>Project Name</th>
                         <th>Year</th>
                         <th>Notes</th>

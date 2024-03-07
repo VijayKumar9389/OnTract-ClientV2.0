@@ -7,7 +7,7 @@ import {Item} from "../../../../models/item.models.ts";
 const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packages, item}) => (
     <div className="panel">
         <div className="panel-header">
-            <label className="panel-label">Items Scheduled</label>
+            <label className="panel-label">Scheduled Items</label>
         </div>
         <div className="panel-content">
             <table className="package-table">
