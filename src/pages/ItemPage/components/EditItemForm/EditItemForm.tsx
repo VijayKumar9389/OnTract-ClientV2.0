@@ -119,11 +119,9 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                             </label>
                         </div>
 
-                        <div className="btn-container">
-                            <button type="submit" className="btn btn-primary">
-                                <FaRegSave/>Save
-                            </button>
-                        </div>
+                        <button type="submit" className="btn btn-primary">
+                            <FaRegSave/>Save
+                        </button>
                     </div>
 
                 </div>

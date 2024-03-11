@@ -1,0 +1,36 @@
+@import 'src/styles/variables';
+
+.package-card {
+  display: flex;
+  align-items: center;
+  padding: $spacingMedium;
+  background-color: $cardBackgroundColor;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: $border;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  .package-img-wrapper {
+    margin-right: 20px;
+    .package-icon {
+      font-size: 30px;
+      color: #4285f4;
+    }
+  }
+  .package-type-details {
+    h3 {
+      color: #333;
+    }
+    p {
+      margin: 0;
+      color: #666;
+    }
+    strong {
+      color: #333;
+    }
+  }
+}

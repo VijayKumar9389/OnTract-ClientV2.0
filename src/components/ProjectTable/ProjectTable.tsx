@@ -43,8 +43,6 @@ const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
                     <tr>
                         <th>Project Name</th>
                         <th>Year</th>
-                        <th>Notes</th>
-                        <th>Survey Link</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,8 +50,6 @@ const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
                         <tr key={project.id} className="project-row" onClick={() => selectProject(project)}>
                             <td>{project.name}</td>
                             <td>{project.year}</td>
-                            <td>{project.notes}</td>
-                            <td>{project.surveyLink}</td>
                         </tr>
                     ))}
                     </tbody>

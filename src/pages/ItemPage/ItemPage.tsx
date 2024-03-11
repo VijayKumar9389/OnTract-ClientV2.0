@@ -8,6 +8,7 @@ import EditItemForm from "./components/EditItemForm/EditItemForm.tsx";
 import {getPackageByPackageItemId} from "../../services/package.services.ts";
 import {Package} from "../../models/package.models.ts";
 import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
+import ItemStats from "./components/ItemStats/ItemStats.tsx";
 
 const ItemPage = () => {
     const {id} = useParams();
@@ -38,6 +39,7 @@ const ItemPage = () => {
         <div className="item-page-container">
             <PageHeading heading={item.name}/>
             <div className="page-content">
+                <ItemStats packages={packages} item={item}/>
                 <EditItemForm item={item}/>
                 {packages !== null && packages.length > 0 && <PackageItemTable packages={packages} item={item} />}
             </div>

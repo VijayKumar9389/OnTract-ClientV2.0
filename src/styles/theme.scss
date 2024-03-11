@@ -83,7 +83,7 @@ input, select {
   font-size: 1rem;
   transition: border-color 0.3s;
   resize: none;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
 
   &:focus {
     outline: none;
@@ -153,9 +153,11 @@ textarea {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  margin-top: $spacingSmall;
 
-  button {
-    margin-left: $spacingSmall;
+  @media (max-width: $mobileBreakpoint) {
+    flex-direction: column;
+    justify-content: flex-start;
   }
 }
 
@@ -173,14 +175,18 @@ textarea {
     cursor: pointer;
     transition: background-color 0.3s;
     height: fit-content;
+    background-color: $btnBackgroundColor;
 
     &:hover {
-      background-color: $secondaryColor;
+      background-color: $btnHoverBackgroundColor;
     }
   }
 
   .cancel-button {
-    background-color: #e74c3c;
+    background-color: $cancelColor;
+    &:hover {
+      background-color: $cancelColorHover;
+    }
   }
 }
 
@@ -278,7 +284,7 @@ textarea {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   align-items: center;
   gap: $spacingSmall;
   margin-bottom: $spacingSmall;
@@ -341,7 +347,6 @@ textarea {
 
 .input-wrapper {
   flex: 1;
-  margin-bottom: $spacingSmall;
 
 
   label {
@@ -386,6 +391,24 @@ table {
     font-weight: bold;
     text-transform: uppercase;
   }
+}
+
+
+.no-data-message {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.no-data-message::before {
+  content: "!";
+  display: block;
+  font-size: 24px;
+  color: #ff0000;
+  margin-bottom: 5px;
 }
 
 

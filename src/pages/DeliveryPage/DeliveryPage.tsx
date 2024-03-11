@@ -7,12 +7,13 @@ import { Delivery } from "../../models/delivery.models.ts";
 import EditDeliveryForm from "./components/EditDeliveryForm/EditDeliveryForm.tsx";
 import PackageTable from "./components/PackageTable/PackageTable.tsx";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
+import DeliveryDetails from "./components/DeliveryDetails/DeliveryDetails.tsx";
 
 const DeliveryPage = () => {
     const { id } = useParams();
     const [delivery, setDelivery] = useState<Delivery | null>(null);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (id) {
             const deliveryId: number = parseInt(id);
             getDeliveryById(deliveryId)
@@ -39,6 +40,7 @@ const DeliveryPage = () => {
         <div className="delivery-page">
             <PageHeading heading={delivery.destination} />
             <div className="page-content">
+                <DeliveryDetails delivery={delivery} />
                 <EditDeliveryForm delivery={delivery} />
                 <PackageTable packages={delivery.packages} />
                 <div className="btn-container">

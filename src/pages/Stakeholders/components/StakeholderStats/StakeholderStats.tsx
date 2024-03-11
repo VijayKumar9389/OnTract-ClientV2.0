@@ -2,17 +2,21 @@ import './StakeholderStats.scss';
 import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
 import {getStakeholdersContactSummaryByProjectId} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
+import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
 
 const StakeholderStats = () => {
     const [stakeholderStats, setStakeholderStats] = useState<StakeholderStatsDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const project = getProjectFromCookie();
 
     const fetchStakeholderStats = async (): Promise<void> => {
+        if (!project) {
+            return;
+        }
         try {
             setLoading(true);
-            const projectId: number = 1;
-            const fetchedStakeholderStats: StakeholderStatsDTO = await getStakeholdersContactSummaryByProjectId(projectId);
+            const fetchedStakeholderStats: StakeholderStatsDTO = await getStakeholdersContactSummaryByProjectId(project.id);
             setStakeholderStats(fetchedStakeholderStats);
         } catch (error) {
             setError('Failed to fetch stakeholder stats');

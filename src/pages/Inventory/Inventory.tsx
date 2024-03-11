@@ -1,13 +1,13 @@
- import './Inventory.scss';
-import {getItemsByProjectId} from "../../services/item.services.ts";
-import {useState, useEffect} from "react";
-import {Item} from "../../models/item.models.ts";
- import Heading from "../../components/Heading/Heading.tsx";
- import ItemCard from "./components/ItemCard/ItemCard.tsx";
- import {MdAdd} from "react-icons/md";
- import Dialog from "../../components/Dialog/Dialog.tsx";
- import CreateItemForm from "./components/CreateItemForm/CreateItemForm.tsx";
- import {getProjectFromCookie} from "../../utils/project.helper.ts";
+import { useState, useEffect } from 'react';
+import './Inventory.scss';
+import { getItemsByProjectId } from '../../services/item.services.ts';
+import { Item } from '../../models/item.models.ts';
+import Heading from '../../components/Heading/Heading.tsx';
+import ItemCard from './components/ItemCard/ItemCard.tsx';
+import { MdAdd } from 'react-icons/md';
+import Dialog from '../../components/Dialog/Dialog.tsx';
+import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
+import { getProjectFromCookie } from '../../utils/project.helper.ts';
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
@@ -16,34 +16,53 @@ const Inventory = () => {
 
     const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
-    }
+    };
 
-    useEffect((): void => {
-        if (!project) return;
-        getItemsByProjectId(project.id)
-            .then((response: Item[]): void => {
+    useEffect(() => {
+        const fetchData = async () => {
+            if (!project) return;
+            try {
+                const response: Item[] = await getItemsByProjectId(project.id);
                 setItems(response);
-                console.log(response)
-            });
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     return (
         <div className="inventory-container">
-            <Heading heading="Inventory"/>
+            <Heading heading="Inventory" />
             <div className="page-content">
-                <div className="btn-container">
-                    <button onClick={toggleModal}><MdAdd />Add Item</button>
-                </div>
-                <div className="inventory-list">
-                    {items.map((item: Item) => (
-                        <ItemCard item={item} key={item.id}/>
-                    ))}
+                <div className="panel">
+                    <div className="panel-header">
+                        <label className="panel-label">Item List</label>
+                    </div>
+                    <div className="panel-content">
+                        <div className="btn-container">
+                            <button onClick={toggleModal}>
+                                <MdAdd /> Add Item
+                            </button>
+                        </div>
+                        {items.length > 0 ? (
+                            <div className="inventory-list">
+                                {items.map((item: Item) => (
+                                    <ItemCard item={item} key={item.id} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="no-data-message">
+                                <span>No Items Created.</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-            <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm/>} heading={"Create Item"}/>
+            <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading={'Create Item'} />
         </div>
     );
-
-}
+};
 
 export default Inventory;

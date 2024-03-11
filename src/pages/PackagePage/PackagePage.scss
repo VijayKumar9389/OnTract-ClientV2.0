@@ -1,3 +1,11 @@
+@import 'src/styles/variables.scss';
+
 .package-notes-form {
-  margin: 1rem 0;
+  margin-bottom: $spacingMedium;
+  padding: $spacingSmall;
+}
+
+.add-item-form {
+  margin-bottom: $spacingMedium;
+  padding: $spacingSmall;
 }

@@ -16,38 +16,47 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
 
     return (
         <div className="panel">
-
             <div className="panel-header">
                 <label className="panel-label">Package Details</label>
             </div>
-
             <div className="panel-content">
 
                 <form className="package-notes-form">
-                     <textarea
-                         defaultValue={packageType?.notes}
-                         onChange={(event) => setNotes(event.target.value)}
-                         className="notes-textarea"
-                     />
+                    <div className="input-wrapper">
+                        <label className="notes-label">Notes:
+                            <textarea
+                                defaultValue={packageType?.notes}
+                                onChange={(event) => setNotes(event.target.value)}
+                                className="notes-textarea"
+                            />
+                        </label>
+                    </div>
+
                     <button type="button" className="edit-notes-button" onClick={() => handleNotesSubmit()}>
                         Edit Notes
                     </button>
                 </form>
 
-                <div className="package-list">
-                    <div className="table-header">
-                        <select className="item-select">
-                            <option>Add Item</option>
-                            {packageType.items.map((item: PackageItem) => (
-                                <option key={item.id}>{item.item.name}</option>
-                            ))}
-                        </select>
-                        <div className="action-buttons">
-                            <button className="add-button">
-                                Add Item
-                            </button>
-                        </div>
+
+                <div className="add-item-form">
+                    <div className="input-wrapper">
+                        <label>Items
+                            <select className="item-select">
+                                <option>Add Item</option>
+                                {packageType.items.map((item: PackageItem) => (
+                                    <option key={item.id}>{item.item.name}</option>
+                                ))}
+                            </select>
+                        </label>
                     </div>
+
+                    <button className="add-button">
+                        Add Item
+                    </button>
+                </div>
+
+
+                <div className="package-list">
                     <ul>
                         {packageType.items.map((item: PackageItem) => (
                             <li key={item.id} className="table-row">
@@ -72,7 +81,6 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
                     </ul>
                 </div>
             </div>
-
         </div>
     );
 }

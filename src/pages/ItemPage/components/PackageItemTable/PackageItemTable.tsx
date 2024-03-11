@@ -3,7 +3,6 @@ import './PackageItemTable.scss';
 import {Package} from "../../../../models/package.models.ts";
 import {Item} from "../../../../models/item.models.ts";
 
-
 const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packages, item}) => (
     <div className="panel">
         <div className="panel-header">

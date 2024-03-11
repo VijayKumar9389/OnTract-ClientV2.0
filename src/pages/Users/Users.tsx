@@ -1,9 +1,9 @@
 import Heading from "../../components/Heading/Heading.tsx";
 import UserTable from "./components/UserTable/UserTable.tsx";
-import {FaPlus} from "react-icons/fa";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import Dialog from "../../components/Dialog/Dialog.tsx";
 import RegisterUser from "./components/RegisterUser/RegisterUser.tsx";
+import {MdAdd} from "react-icons/md";
 
 const Users = () => {
 
@@ -23,7 +23,7 @@ const Users = () => {
                     </div>
                     <div className="panel-content">
                         <div className="btn-container">
-                            <button onClick={toggleModal} ><FaPlus /> Add User</button>
+                            <button onClick={toggleModal} ><MdAdd /> Add User</button>
                         </div>
                         <Dialog isOpen={isOpened} toggle={toggleModal} heading="Add User" element={<RegisterUser />} />
                         <UserTable/>

@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import { createItem} from "../../../../services/item.services.ts";
 import "./CreateItemForm.scss";
 import {NewItemInput} from "../../../../models/item.models.ts";
+import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
 
 const CreateItemForm = () => {
-    const project = 1;
+    const project = getProjectFromCookie();
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [image, setImage] = useState<File | null>(null);
     const [quantity, setQuantity] = useState<number>(1); // Initial quantity
     const [projectId, setProjectId] = useState<number | null>(null);
 
+
+
     useEffect((): void => {
         if (project) {
-            setProjectId(project);
+            setProjectId(project.id);
         }
     }, [project]);
 

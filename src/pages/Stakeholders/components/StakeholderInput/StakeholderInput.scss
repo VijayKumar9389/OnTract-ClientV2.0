@@ -20,25 +20,26 @@
   }
 
   .input-field {
-    padding: $spacingSmall;
-    border: 1px solid #ccc;
+    border: $border;
     border-radius: $buttonRadius;
     flex: 1;
-    margin-right: $spacingSmall;
 
     &::placeholder {
-      color: #999;
     }
   }
 
   .filter-button,
   .clear-filter-button {
-    padding: $spacingSmall $spacingMedium;
     border: none;
     border-radius: $buttonRadius;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: $spacingSmall;
+
+    @media (max-width: $mobileBreakpoint) {
+      margin-left: 0;
+    }
 
     svg {
       margin-right: $spacingSmall;
@@ -47,6 +48,14 @@
 
   .clear-filter-button {
     background-color: #e74c3c; // Red color for clear filter button
-    margin-left: $spacingSmall;
+
+  }
+
+  .filter-button {
+    background-color: $btnBackgroundColor;
+
+    &:hover {
+      background-color: $btnHoverBackgroundColor;
+    }
   }
 }

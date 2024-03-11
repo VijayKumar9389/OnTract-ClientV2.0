@@ -18,7 +18,7 @@ export interface StakeholderUpdateDTO {
     followUp: string;
 }
 
-const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) => {
+const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
     const [formData, setFormData] = useState<StakeholderUpdateDTO>(stakeholder);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -53,18 +53,14 @@ const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) =>
                 <label className="panel-label">Details</label>
             </div>
             <div className="panel-content">
-                <div className="btn-container">
-                    <button type="submit"><FaRegSave/> Submit</button>
-                </div>
-
                 <div className="form-row">
                     <div className="input-wrapper">
-                        <label>
-                            Name:
-                            <textarea name="name" value={formData.name} onChange={handleChange}/>
-                        </label>
-                    </div>
-                    <div className="input-wrapper">
+                        <div className="input-wrapper">
+                            <label>
+                                Name:
+                                <textarea name="name" value={formData.name} onChange={handleChange}/>
+                            </label>
+                        </div>
                         <label>
                             Stakeholder Comments:
                             <textarea name="stakeholderComments" value={formData.stakeholderComments}
@@ -154,6 +150,7 @@ const StakeholderForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) =>
                     </div>
                 </div>
 
+                <button type="submit"><FaRegSave/>Save</button>
 
             </div>
         </div>

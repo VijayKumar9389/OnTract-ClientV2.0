@@ -50,9 +50,6 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                 <label className="panel-label">EDIT DELIVERY</label>
             </div>
             <form className="panel-content">
-                <div className="btn-container">
-                    <button><FaRegSave/>Save</button>
-                </div>
                 <div className="input-wrapper">
                     <label>
                         Route:
@@ -79,13 +76,7 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                         <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange}/>
                     </label>
                 </div>
-                <p className="info-list">
-                    Status: <span className="info-item">{formData.status}</span>
-                    <span className="separator">|</span>
-                    Date: <span className="info-item">{formData.date}</span>
-                    <span className="separator">|</span>
-                    Type: <span className="info-item">{formData.delivery_method}</span>
-                </p>
+                <button><FaRegSave/>Save</button>
             </form>
         </div>
     );

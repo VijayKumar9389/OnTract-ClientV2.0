@@ -5,14 +5,14 @@
   padding: $spacingMedium;
 }
 
-// Media query for mobile compatibility
-@media screen and (max-width: $mobileBreakpoint) {
-  .page-content {
-    .form-row {
-      .input-wrapper {
-        width: 100%; // Full width on mobile
-      }
-    }
-  }
-}
-
+//// Media query for mobile compatibility
+//@media screen and (max-width: $mobileBreakpoint) {
+//  .page-content {
+//    .form-row {
+//      .input-wrapper {
+//        width: 100%; // Full width on mobile
+//      }
+//    }
+//  }
+//}
+//

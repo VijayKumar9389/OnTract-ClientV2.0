@@ -1,5 +1,5 @@
 import './RegisterUser.scss';
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {registerUser} from "../../../../services/user.services.ts";
 
 const RegisterUser = () => {
@@ -20,18 +20,28 @@ const RegisterUser = () => {
         <div className="register-user">
             <h1>Register User</h1>
             <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="input-wrapper">
+                    <label htmlFor="username">Username:
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div className="input-wrapper">
+                    <label htmlFor="password">Password:
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </label>
+                </div>
+
+
                 <button type="submit">Register</button>
             </form>
         </div>

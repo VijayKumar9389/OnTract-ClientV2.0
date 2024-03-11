@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
+import Heading from '../../components/Heading/Heading.tsx';
+import { getDeliveriesByProjectID } from '../../services/delivery.services.ts';
+import { Delivery } from '../../models/delivery.models.ts';
+import DeliveryCard from './components/DeliveryCard/DeliveryCard.tsx';
+import { getProjectFromCookie } from '../../utils/project.helper.ts';
 import './Deliveries.scss';
-import Heading from "../../components/Heading/Heading.tsx";
-import { getDeliveriesByProjectID } from "../../services/delivery.services.ts";
-import { Delivery } from "../../models/delivery.models.ts";
-import { useEffect, useState } from "react";
-import DeliveryCard from "./components/DeliveryCard/DeliveryCard.tsx";
-import { getProjectFromCookie } from "../../utils/project.helper.ts";
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -12,28 +12,26 @@ const Deliveries = () => {
     const [error, setError] = useState<string | null>(null);
     const project = getProjectFromCookie();
 
-    const fetchDeliveries = async (): Promise<void> => {
-        if (!project) {
-            return;
-        }
-        try {
-            setLoading(true);
-            const fetchedDeliveries: Delivery[] = await getDeliveriesByProjectID(project.id);
-            setDeliveries(fetchedDeliveries);
-        } catch (error) {
-            setError('Failed to fetch deliveries');
-        } finally {
-            setLoading(false);
-        }
-    }
+    useEffect(() => {
+        const fetchDeliveries = async () => {
+            if (!project) return;
+            try {
+                setLoading(true);
+                const fetchedDeliveries: Delivery[] = await getDeliveriesByProjectID(project.id);
+                setDeliveries(fetchedDeliveries);
+            } catch (error) {
+                setError('Failed to fetch deliveries');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    useEffect((): void => {
         fetchDeliveries();
     }, []); // Add project as a dependency to trigger re-fetching when it changes
 
     return (
         <div className="delivery-container">
-            <Heading heading="Deliveries"/>
+            <Heading heading="Deliveries" />
             <div className="page-content">
                 {/* Conditionally render loading message */}
                 {loading && <p>Loading...</p>}
@@ -43,15 +41,29 @@ const Deliveries = () => {
 
                 {/* Render deliveries if no loading or error */}
                 {!loading && !error && (
-                    <ul className="delivery-list">
-                        {deliveries.map((delivery: Delivery) => (
-                            <DeliveryCard key={delivery.id} delivery={delivery}/>
-                        ))}
-                    </ul>
+                    <div className="panel">
+                        <div className="panel-header">
+                            <label className="panel-label">Delivery List</label>
+                        </div>
+                        <div className="panel-content">
+                            {deliveries.length > 0 ? (
+                                <ul className="delivery-list">
+                                    {deliveries.map((delivery: Delivery) => (
+                                        <DeliveryCard key={delivery.id} delivery={delivery} />
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div className="no-data-message">
+                                    <span>No Deliveries Created.</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
     );
-}
+};
 
 export default Deliveries;
+

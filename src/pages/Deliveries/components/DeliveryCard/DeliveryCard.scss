@@ -3,16 +3,14 @@
 // Delivery Card
 .delivery-card {
   background-color: $cardBackgroundColor;
-  border-radius: $borderRadius;
-  box-shadow: $boxShadow;
   padding: $spacingMedium;
-  margin-bottom: $spacingMedium;
+  border-bottom: $border;
   cursor: pointer;
   transition: ease-in-out .3s;
   width: 100%;
 
   &:hover {
-    box-shadow: $boxShadowHover;
+    background-color: #e0e0e0;
   }
 
   .delivery-details {

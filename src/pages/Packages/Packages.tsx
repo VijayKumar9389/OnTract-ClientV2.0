@@ -5,13 +5,12 @@ import {PackageType} from "../../models/package.models.ts";
 import {getProjectFromCookie} from "../../utils/project.helper.ts";
 import {Project} from "../../models/stakeholder.models.ts";
 import './Packages.scss';
-import {useNavigate} from "react-router-dom";
+import PackageList from "./components/PackageList/PackageList.tsx";
 
 
 const Packages = () => {
     const [packageTypes, setPackageTypes] = useState<PackageType[] | null>(null);
     const project: Project | null = getProjectFromCookie();
-    const navigate = useNavigate();
 
     useEffect((): void => {
         if (!project) return;
@@ -21,28 +20,16 @@ const Packages = () => {
             });
     }, []);
 
-    const selectPackage = (id: number): void => {
-        navigate(`/packages/${id}`);
+    if (!packageTypes) {
+        return <div>Loading...</div>
     }
 
     return (
         <div className="packages-container">
             <Heading heading="Packages"/>
             <div className="page-content">
-                <ul>
-                    {packageTypes?.map((packageType: PackageType) => (
-                        <li className="package-card" key={packageType.id} onClick={() => selectPackage(packageType.id)}>
-                            <div className="card-header">
-                                <h3>{packageType.name}</h3>
-                                <p>{packageType.notes}</p>
-                                <p>{packageType.items.length} Items</p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-
+                <PackageList packageTypes={packageTypes}/>
             </div>
-
         </div>
     );
 }

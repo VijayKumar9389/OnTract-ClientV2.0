@@ -20,8 +20,8 @@ const Login = () => {
             <h1 className="login-title"><MdEmergencyShare /> OnTract</h1>
             <form onSubmit={onLoginClick} className="login-form">
                 <h2>Login</h2>
-                <div className="login-input-group">
-                    <label htmlFor="username" className="login-label">Username</label>
+                <div className="input-wrapper">
+                    <label htmlFor="username" className="login-label">Username
                     <input
                         type="text"
                         id="username"
@@ -31,9 +31,10 @@ const Login = () => {
                         placeholder="Enter your username"
                         required
                     />
+                    </label>
                 </div>
-                <div className="login-input-group">
-                    <label htmlFor="password" className="login-label">Password</label>
+                <div className="input-wrapper">
+                    <label htmlFor="password" className="login-label">Password
                     <input
                         type="password"
                         id="password"
@@ -43,6 +44,7 @@ const Login = () => {
                         placeholder="Enter your password"
                         required
                     />
+                    </label>
                 </div>
                 <button type="submit" className="login-button">Login</button>
             </form>

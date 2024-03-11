@@ -15,6 +15,11 @@ export interface NewPackageInput {
     deliveryId: string;
 }
 
+export interface NewPackageTypeInput {
+    name: string;
+    notes: string;
+}
+
 // Package type model
 export interface PackageType {
     id: number;

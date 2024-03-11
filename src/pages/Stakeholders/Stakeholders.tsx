@@ -29,7 +29,7 @@ const Stakeholders = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect((): void => {
         fetchStakeholders();
     }, []); // Add project as a dependency to trigger re-fetching when it changes
 
@@ -47,12 +47,19 @@ const Stakeholders = () => {
                 {!loading && !error && (
                     <>
                         <StakeholderStats/>
-                        <StakeholderInput/>
-                        <ul className="stakeholder-card-list">
-                            {stakeholders.map((stakeholder: Stakeholder) => (
-                                <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
-                            ))}
-                        </ul>
+                        <div className="panel">
+                            <div className="panel-header">
+                                <label className="panel-label">Stakeholder List</label>
+                            </div>
+                            <div className="panel-content">
+                                <StakeholderInput/>
+                                <ul className="stakeholder-card-list">
+                                    {stakeholders.map((stakeholder: Stakeholder) => (
+                                        <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

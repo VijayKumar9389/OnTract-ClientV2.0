@@ -2,16 +2,14 @@
 
 .stakeholder-card {
   background-color: $cardBackgroundColor;
-  border-radius: $borderRadius;
-  box-shadow: $boxShadow;
+  border-bottom: $border;
   padding: $spacingMedium;
-  margin-bottom: $spacingMedium;
   cursor: pointer;
   transition: ease-in-out .3s;
   width: 100%;
 
   &:hover {
-    box-shadow: $boxShadowHover;
+    background-color: #e0e0e0;
   }
 
   .stakeholder-name {

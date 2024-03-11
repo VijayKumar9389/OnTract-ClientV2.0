@@ -8,12 +8,12 @@
   border-radius: $borderRadius;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow $transition;
   padding: $spacingSmall; // Increased padding for better spacing
-  box-shadow: $boxShadow;
+  border: $border; // Use border from variables for consistency
+  transition:  background-color 0.3s ease;
 
   &:hover {
-    box-shadow: $boxShadowHover;
+    background-color: #e0e0e0;
   }
 
   .item-image {

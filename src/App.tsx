@@ -23,12 +23,12 @@ const App = () => {
     const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect((): void => {
         activateInterceptor(dispatch);
-        verifyRefreshToken(dispatch).then(() => {
-            console.log("Refresh token verified");
+        verifyRefreshToken(dispatch).then((): void => {
             // After verifying the refresh token, check admin status
-            checkAdminStatus(dispatch);
+            checkAdminStatus(dispatch)
+                .then((): void => {});
         });
     }, []);
 

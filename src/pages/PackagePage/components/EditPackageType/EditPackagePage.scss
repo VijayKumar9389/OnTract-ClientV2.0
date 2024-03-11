@@ -24,11 +24,15 @@
     padding: 0;
 
     .table-row {
-      display: grid;
-      grid-template-columns: 1fr 8fr 1fr;
+      display: flex;
+      flex-wrap: wrap;
       gap: $spacingMedium;
       padding: $spacingMedium;
+      align-items: center;
 
+      &:not(:last-child) {
+        border-bottom: $border;
+      }
 
       .item-image-cell {
         flex: 0 0 100px;
@@ -53,7 +57,6 @@
         }
 
         p {
-          margin: $spacingSmall 0 0;
           color: $textColorLight;
           font-size: 1rem;
         }
