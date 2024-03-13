@@ -6,6 +6,7 @@ export interface Package {
     id: number;
     packageType: PackageType;
     stakeholder: Stakeholder;
+    deliveryId: number;
 }
 
 // Create new package

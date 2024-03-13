@@ -1,73 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { createItem} from "../../../../services/item.services.ts";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { createItem } from "../../../../services/item.services.ts";
 import "./CreateItemForm.scss";
-import {NewItemInput} from "../../../../models/item.models.ts";
-import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
+import { NewItemInput } from "../../../../models/item.models.ts";
+import { getProjectFromCookie } from "../../../../utils/project.helper.ts";
 
-const CreateItemForm = () => {
+const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [image, setImage] = useState<File | null>(null);
-    const [quantity, setQuantity] = useState<number>(1); // Initial quantity
-    const [projectId, setProjectId] = useState<number | null>(null);
+    const [formData, setFormData] = useState<NewItemInput>({
+        name: '',
+        description: '',
+        image: null,
+        quantity: 1,
+        projectId: null
+    });
 
-
-
-    useEffect((): void => {
+    useEffect(() => {
         if (project) {
-            setProjectId(project.id);
+            setFormData(prevState => ({
+                ...prevState,
+                projectId: project.id
+            }));
         }
     }, [project]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>): void => {
         const { name, value } = e.target;
-        if (name === "name") {
-            setName(value);
-        } else if (name === "description") {
-            setDescription(value);
-        } else if (name === "quantity") {
-            setQuantity(parseInt(value));
-        } else if (name === "projectId") {
-            setProjectId(parseInt(value));
-        }
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: name === "quantity" ? parseInt(value, 10) : value
+        }));
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const file = e.target.files ? e.target.files[0] : null;
-        if (file) {
-            setImage(file);
-        }
+        setFormData(prevState => ({
+            ...prevState,
+            image: file
+        }));
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+        if (!project) {
+            console.error('Project not found');
+            return;
+        }
 
         try {
-            // Create FormData
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('description', description);
-            if (image) {
-                formData.append('image', image);
-            }
-            formData.append('quantity', quantity.toString());
-            if (projectId) {
-                formData.append('projectId', projectId.toString());
-            }
-
-            // Convert FormData to CreateItemDTO
-            const createItemDTO: NewItemInput = {
-                name: formData.get('name') as string,
-                description: formData.get('description') as string,
-                image: formData.get('image') as File | null,
-                projectId: parseInt(formData.get('projectId') as string, 10),
-                quantity: parseInt(formData.get('quantity') as string, 10)
-            };
-
-            await createItem(createItemDTO);
+            await createItem(formData);
+            window.location.reload();
             // Handle success, redirect, or show a message
         } catch (error) {
+            console.error('Error creating item:', error);
             // Handle error
         }
     };
@@ -78,14 +62,14 @@ const CreateItemForm = () => {
                 <div className="input-wrapper">
                     <label htmlFor="name">
                         Name
-                        <input type="text" id="name" name="name" value={name} onChange={handleChange} />
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
                     </label>
                 </div>
 
                 <div className="input-wrapper">
                     <label htmlFor="description">
                         Description
-                        <textarea id="description" name="description" value={description} onChange={handleChange}></textarea>
+                        <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
                     </label>
                 </div>
 
@@ -99,7 +83,7 @@ const CreateItemForm = () => {
                 <div className="input-wrapper">
                     <label htmlFor="quantity">
                         Quantity
-                        <input type="number" id="quantity" name="quantity" value={quantity} onChange={handleChange} />
+                        <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} />
                     </label>
                 </div>
 
@@ -107,7 +91,6 @@ const CreateItemForm = () => {
             </form>
         </div>
     );
-
-}
+};
 
 export default CreateItemForm;

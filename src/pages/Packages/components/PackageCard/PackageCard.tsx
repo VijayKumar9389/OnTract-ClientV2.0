@@ -1,18 +1,14 @@
 // PackageCard.tsx
 import { FiPackage } from 'react-icons/fi';
 import {PackageType} from "../../../../models/package.models.ts";
-import {useNavigate} from "react-router-dom";
+import {Navigation} from "../../../../utils/navigation.ts";
 import './PackageCard.scss';
 
 const PackageCard: React.FC<{packageType: PackageType}> = ({ packageType }) => {
-
-    const navigate = useNavigate();
-    const selectPackage = (id: number): void => {
-        navigate(`/packages/${id}`);
-    }
+    const {navigateToPackage} = Navigation();
 
     return (
-        <li className="package-card" onClick={() => selectPackage(packageType.id)}>
+        <li className="package-card" onClick={() => navigateToPackage(packageType.id)}>
             <div className="package-img-wrapper">
                 <FiPackage className="package-icon" />
             </div>

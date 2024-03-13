@@ -5,6 +5,7 @@ import { Delivery } from '../../models/delivery.models.ts';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard.tsx';
 import { getProjectFromCookie } from '../../utils/project.helper.ts';
 import './Deliveries.scss';
+import DeliveryInput from "./components/DeliveryInput/DeliveryInput.tsx";
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -46,6 +47,7 @@ const Deliveries = () => {
                             <label className="panel-label">Delivery List</label>
                         </div>
                         <div className="panel-content">
+                            <DeliveryInput />
                             {deliveries.length > 0 ? (
                                 <ul className="delivery-list">
                                     {deliveries.map((delivery: Delivery) => (

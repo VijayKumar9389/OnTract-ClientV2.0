@@ -64,3 +64,9 @@ export interface UpdateTrackRecordInput {
     tractComments: string;
 }
 
+export interface RelatedStakeholder {
+    stakeholder: Stakeholder; // Assuming StakeholderWithTractRecords is your existing interface or type
+    isPhoneSame: boolean;
+    isMailingAddressSame: boolean;
+    isStreetAddressSame: boolean;
+}

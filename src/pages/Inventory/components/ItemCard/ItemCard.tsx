@@ -1,17 +1,12 @@
 import './ItemCard.scss';
-import {useNavigate} from "react-router-dom";
-import {Item} from "../../../../models/item.models.ts";
+import { Item } from "../../../../models/item.models.ts";
+import {Navigation} from "../../../../utils/navigation.ts";
 
-const ItemCard: React.FC<{ item: Item }> = ({item}) => {
-
-    const navigate = useNavigate();
-
-    const selectItem = (id: number): void => {
-        navigate(`/inventory/${id}`);
-    }
+const ItemCard: React.FC<{ item: Item }> = ({ item }) => {
+    const {navigateToInventoryItem} = Navigation();
 
     return (
-        <div className="item-card" onClick={() => selectItem(item.id)}>
+        <div className="item-card" onClick={() => navigateToInventoryItem(item.id)}>
             <div className="item-image">
                 <img
                     src={`http://localhost:3005/images/${item.image}`}

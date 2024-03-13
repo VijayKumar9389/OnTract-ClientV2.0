@@ -18,7 +18,6 @@ const RegisterUser = () => {
 
     return (
         <div className="register-user">
-            <h1>Register User</h1>
             <form onSubmit={handleRegister}>
                 <div className="input-wrapper">
                     <label htmlFor="username">Username:

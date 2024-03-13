@@ -36,6 +36,7 @@ const Inventory = () => {
         <div className="inventory-container">
             <Heading heading="Inventory" />
             <div className="page-content">
+                <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading={'Create Item'} />
                 <div className="panel">
                     <div className="panel-header">
                         <label className="panel-label">Item List</label>
@@ -59,8 +60,8 @@ const Inventory = () => {
                         )}
                     </div>
                 </div>
+
             </div>
-            <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading={'Create Item'} />
         </div>
     );
 };

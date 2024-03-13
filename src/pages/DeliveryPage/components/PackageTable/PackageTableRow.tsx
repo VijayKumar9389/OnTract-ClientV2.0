@@ -2,16 +2,11 @@ import React from "react";
 import {Package} from "../../../../models/package.models.ts";
 import {cancelPackage} from "../../../../services/package.services.ts";
 import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
-import {useNavigate} from "react-router-dom";
-import {Stakeholder} from "../../../../models/stakeholder.models.ts";
+import {Navigation} from "../../../../utils/navigation.ts";
 
 const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackage}) => {
+    const {navigateToStakeholder, navigateToPackage} = Navigation();
 
-    const navigate = useNavigate();
-
-    const selectStakeholder = (stakeholder: Stakeholder): void => {
-        navigate(`/stakeholder/${stakeholder.id}`);
-    };
 
     return (
         <tr>
@@ -23,8 +18,12 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
             </td>
             <td>
                 <div className="action-buttons">
-                    <button className="action-button view-package">View Package</button>
-                    <button onClick={() => selectStakeholder(deliveryPackage.stakeholder)} className="action-button view-stakeholder">View Stakeholder</button>
+                    <button className="action-button view-package"
+                            onClick={() => navigateToPackage(deliveryPackage.packageType.id)}>View Package
+                    </button>
+                    <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}
+                            className="action-button view-stakeholder">View Stakeholder
+                    </button>
                     <ConfirmationButton
                         onConfirm={() => cancelPackage(deliveryPackage.id, deliveryPackage.stakeholder.id)}
                         buttonText="Cancel Package"

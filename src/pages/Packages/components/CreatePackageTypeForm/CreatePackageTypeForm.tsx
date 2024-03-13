@@ -54,7 +54,7 @@ const CreatePackageTypeForm: React.FC = () => {
             </div>
 
             <div className="input-wrapper">
-                <label htmlFor="notes">notes:
+                <label htmlFor="notes">Notes:
                     <textarea
                         id="notes"
                         name="notes"

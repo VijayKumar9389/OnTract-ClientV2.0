@@ -22,8 +22,14 @@ export interface NewItemInput {
     name: string;
     description: string;
     image: File | null; // Multer file object
-    projectId: number;
+    projectId: number | null;
     quantity: number;
+}
+
+export interface NewPackageItem {
+    itemID: number;
+    packageTypeID: number;
+    notes: string;
 }
 
 // Change Item information

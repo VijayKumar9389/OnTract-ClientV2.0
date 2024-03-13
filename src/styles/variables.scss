@@ -1,17 +1,17 @@
 // Colors
-$primaryColor: #4caf50; // Main color for primary elements
-$secondaryColor: #388e3c; // Secondary color for accent elements
-$cancelColor: #e74c3c; // Color for cancel buttons
-$cancelColorHover: #c0392b; // Hover color for cancel buttons
+$primaryColor: #2196F3; // Main color for headers and buttons (blue)
+$secondaryColor: #42A5F5; // Secondary color for hover effects (lighter blue)
+$cancelColor: #F44336; // Color for cancel buttons (red)
+$cancelColorHover: #D32F2F; // Hover color for cancel buttons (darker red)
 
 // Backgrounds
 $backgroundColor: #F5F5F5; // Background color for the entire page
 $cardBackgroundColor: #fff; // Background color for cards
-$cardHoverBackgroundColor: #F0F0F0; // Hover background color for cards
-$inputBackgroundColor: #f5f5f5; // Background color for input fields
-$btnBackgroundColor: #CCCCCC; // Background color for buttons
-$btnHoverBackgroundColor: #666666; // Hover background color for buttons
-$btnDisabledBackgroundColor: #CCCCCC; // Disabled background color for buttons
+$cardHoverBackgroundColor: #EEEEEE; // Hover background color for cards (lighter gray)
+$inputBackgroundColor: #EEEEEE; // Background color for input fields (lighter gray)
+$btnBackgroundColor: $primaryColor; // Background color for buttons (same as primary color)
+$btnHoverBackgroundColor: $secondaryColor; // Hover background color for buttons (same as secondary color)
+$btnDisabledBackgroundColor: #CCCCCC; // Disabled background color for buttons (light gray)
 
 // Spacing
 $spacingSmall: 8px; // Base spacing unit
@@ -19,20 +19,20 @@ $spacingMedium: 16px; // Medium spacing unit
 $spacingLarge: 24px; // Large spacing unit
 
 // Borders and Radius
-$borderRadius: 8px; // Border radius for rounded elements
-$buttonRadius: 4px; // Border radius for buttons
+$borderRadius: 4px; // Border radius for rounded elements (slightly reduced)
+$buttonRadius: 4px; // Border radius for buttons (same as border radius)
 $border: 1px solid #ddd; // Default border
 
 // Shadows
-$boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow
-$boxShadowHover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover
+$boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow (same as before)
+$boxShadowHover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover (same as before)
 
 // Text
 $textColor: #333; // Default text color
-$textColorLight: #666; // Lighter text color for secondary text
+$textColorLight: #666; // Lighter text color for secondary text (same as before)
 
 // Transitions
 $transition: ease-in-out .3s; // Default transition
 
 // Breakpoints
-$mobileBreakpoint: 768px; // Breakpoint for mobile devices
+$mobileBreakpoint: 768px; // Breakpoint for mobile devices (same as before)

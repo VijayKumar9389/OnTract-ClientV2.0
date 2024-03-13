@@ -9,6 +9,8 @@ import {getPackageByPackageItemId} from "../../services/package.services.ts";
 import {Package} from "../../models/package.models.ts";
 import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
 import ItemStats from "./components/ItemStats/ItemStats.tsx";
+import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
+import {deleteItem} from "../../services/item.services.ts";
 
 const ItemPage = () => {
     const {id} = useParams();
@@ -22,7 +24,6 @@ const ItemPage = () => {
                 .then((response: Item): void => {
                     setItem(response);
                 });
-
             getPackageByPackageItemId(Number(id))
                 .then((response: Package[]): void => {
                     setPackages(response);
@@ -30,6 +31,16 @@ const ItemPage = () => {
                 });
         }
     }, [id]);
+
+    const removeItem = async (itemId: number): Promise<void> => {
+        try {
+            await deleteItem(itemId);
+            console.log('Item deleted successfully');
+            history.back();
+        } catch (error) {
+            console.error('Error deleting item:', error);
+        }
+    };
 
     if (!item) {
         return <div>Loading...</div>
@@ -41,7 +52,12 @@ const ItemPage = () => {
             <div className="page-content">
                 <ItemStats packages={packages} item={item}/>
                 <EditItemForm item={item}/>
-                {packages !== null && packages.length > 0 && <PackageItemTable packages={packages} item={item} />}
+                {packages && <PackageItemTable packages={packages} item={item}/>}
+                <div className="btn-container">
+                    <ConfirmationButton buttonText="Delete Item"
+                                        confirmationMessage="Are you sure you want to delete this Item?"
+                                        onConfirm={() => removeItem(item.id)}/>
+                </div>
             </div>
         </div>
     );

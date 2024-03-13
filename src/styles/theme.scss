@@ -175,10 +175,8 @@ textarea {
     cursor: pointer;
     transition: background-color 0.3s;
     height: fit-content;
-    background-color: $btnBackgroundColor;
 
     &:hover {
-      background-color: $btnHoverBackgroundColor;
     }
   }
 
@@ -394,6 +392,7 @@ table {
 }
 
 
+// No Data Message
 .no-data-message {
   padding: 10px;
   border-radius: 5px;
@@ -412,3 +411,63 @@ table {
 }
 
 
+// Search Input
+.page-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacingMedium;
+  width: 100%;
+
+  @media (max-width: $mobileBreakpoint) {
+    flex-direction: column;
+
+    .input-field {
+      margin-bottom: $spacingSmall;
+    }
+
+    .filter-button, .clear-filter-button {
+      margin-bottom: $spacingSmall;
+      width: 100%;
+    }
+  }
+
+  .input-field {
+    border: $border;
+    border-radius: $buttonRadius;
+    flex: 1;
+
+    &::placeholder {
+    }
+  }
+
+  .filter-button,
+  .clear-filter-button {
+    border: none;
+    border-radius: $buttonRadius;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: $spacingSmall;
+
+    @media (max-width: $mobileBreakpoint) {
+      margin-left: 0;
+    }
+
+    svg {
+      margin-right: $spacingSmall;
+    }
+  }
+
+  .clear-filter-button {
+    background-color: #e74c3c; // Red color for clear filter button
+
+  }
+
+  .filter-button {
+    background-color: $btnBackgroundColor;
+
+    &:hover {
+      background-color: $btnHoverBackgroundColor;
+    }
+  }
+}

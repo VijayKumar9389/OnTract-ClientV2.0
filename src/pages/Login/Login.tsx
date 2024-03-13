@@ -1,5 +1,5 @@
 import './Login.scss';
-import {useState} from "react";
+import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {MdEmergencyShare} from "react-icons/md";
 import {handleLogin} from "../../services/user.services.ts";
@@ -10,8 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
-    const onLoginClick = async (): Promise<void> => {
-        event.preventDefault();
+    const onLoginClick = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
         await handleLogin(username, password, dispatch);
     };
 

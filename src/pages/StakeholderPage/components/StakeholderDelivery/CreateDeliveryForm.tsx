@@ -3,11 +3,7 @@ import {PackageType} from '../../../../models/package.models.ts';
 import {Stakeholder} from '../../../../models/stakeholder.models.ts';
 import {createDelivery} from '../../../../services/delivery.services.ts';
 import {getPackageTypesByProjectId} from "../../../../services/package.services.ts";
-
-interface CreateDeliveryFormProps {
-    stakeholder: Stakeholder;
-}
-
+import {NewDeliveryInput} from "../../../../models/delivery.models.ts";
 interface CreateDeliveryForm {
     delivery_method: string;
     route: string;
@@ -16,18 +12,8 @@ interface CreateDeliveryForm {
     packageTypeId: number;
 }
 
-export interface CreateDeliveryDTO {
-    projectId: number;
-    route: string;
-    destination: string;
-    delivery_method: string;
-    notes: string;
-    stakeholderId: number;
-    packageTypeId: number;
-}
-
-const CreateDeliveryForm: React.FC<CreateDeliveryFormProps> = ({stakeholder}) => {
-    const initialState: CreateDeliveryForm = {
+const CreateDeliveryForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) => {
+    const initialState  = {
         delivery_method: '',
         route: '',
         destination: '',
@@ -51,7 +37,8 @@ const CreateDeliveryForm: React.FC<CreateDeliveryFormProps> = ({stakeholder}) =>
         };
 
         if (project) {
-            fetchPackageTypes();
+            fetchPackageTypes()
+                .then(() => console.log('Package types fetched'))
         }
     }, [project]);
 
@@ -77,7 +64,7 @@ const CreateDeliveryForm: React.FC<CreateDeliveryFormProps> = ({stakeholder}) =>
         const destinationValue = destinationOptions === 0 ? createDeliveryForm.destination : getAvailableAddresses();
 
         if (project !== null) {
-            const createDeliveryDTO: CreateDeliveryDTO = {
+            const createDeliveryDTO: NewDeliveryInput = {
                 packageTypeId: Number(createDeliveryForm.packageTypeId),
                 delivery_method: createDeliveryForm.delivery_method,
                 route: createDeliveryForm.route,

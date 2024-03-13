@@ -1,15 +1,11 @@
 import './StakeholderCard.scss';
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {Navigation} from "../../../../utils/navigation.ts";
 import {Stakeholder} from "../../../../models/stakeholder.models.ts";
 import {FaPhone, FaMapMarker, FaEnvelope, FaUser, FaComment, FaClock, FaTruck, FaLandmark} from 'react-icons/fa';
 
 const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
-    const navigate = useNavigate();
-
-    const selectStakeholder = (): void => {
-        navigate(`/stakeholder/${stakeholder.id}`);
-    };
+    const {navigateToStakeholder} = Navigation();
 
     const isAvailable = (value: string): boolean => (value !== "");
 
@@ -48,7 +44,7 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
     return (
         <div
             className="stakeholder-card"
-            onClick={() => selectStakeholder()}
+            onClick={() => navigateToStakeholder(stakeholder.id)}
         >
             <div className="card-header">
                 <h3>{stakeholder.name}</h3>

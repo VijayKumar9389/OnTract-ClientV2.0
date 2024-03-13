@@ -7,6 +7,7 @@ import StakeholderForm from "./components/StakeholderForm/StakeholderForm.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import TractList from "./components/TractForm/TractList.tsx";
 import StakeholderDelivery from "./components/StakeholderDelivery/StakeholderDelivery.tsx";
+import RelatedStakeholders from "./components/RelatedStakeholders/RelatedStakeholders.tsx";
 
 const StakeholderPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -48,6 +49,7 @@ const StakeholderPage = () => {
                 <div className="page-content">
                     <StakeholderForm stakeholder={stakeholder}/>
                     <StakeholderDelivery packageId={stakeholder.packageId} stakeholder={stakeholder}/>
+                    <RelatedStakeholders stakeholderId={stakeholder.id}/>
                     <TractList tracts={stakeholder.tractRecords}/>
                 </div>
         </div>

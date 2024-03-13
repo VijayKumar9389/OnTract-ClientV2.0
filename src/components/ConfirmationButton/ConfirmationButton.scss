@@ -38,7 +38,7 @@
          cursor: pointer;
          transition: background-color 0.3s;
 
-         &.confirm-button {
+         &.cancel-button {
            background-color: $primaryColor;
            color: white;
 
@@ -47,7 +47,7 @@
            }
          }
 
-         &.cancel-button {
+         &.confirm-button {
            background-color: $cancelColor;
            color: white;
 

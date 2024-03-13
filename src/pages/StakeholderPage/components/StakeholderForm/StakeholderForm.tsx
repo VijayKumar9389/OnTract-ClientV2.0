@@ -53,14 +53,15 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                 <label className="panel-label">Details</label>
             </div>
             <div className="panel-content">
+
                 <div className="form-row">
                     <div className="input-wrapper">
-                        <div className="input-wrapper">
-                            <label>
-                                Name:
-                                <textarea name="name" value={formData.name} onChange={handleChange}/>
-                            </label>
-                        </div>
+                        <label>
+                            Name:
+                            <textarea name="name" value={formData.name} onChange={handleChange}/>
+                        </label>
+                    </div>
+                    <div className="input-wrapper">
                         <label>
                             Stakeholder Comments:
                             <textarea name="stakeholderComments" value={formData.stakeholderComments}
@@ -68,7 +69,6 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                         </label>
                     </div>
                 </div>
-
 
                 <div className="form-row">
                     <div className="input-wrapper">
