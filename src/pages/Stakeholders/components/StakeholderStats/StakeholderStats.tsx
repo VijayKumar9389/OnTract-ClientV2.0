@@ -2,7 +2,7 @@ import './StakeholderStats.scss';
 import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
 import {getStakeholdersContactSummaryByProjectId} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
-import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
 const StakeholderStats = () => {
     const [stakeholderStats, setStakeholderStats] = useState<StakeholderStatsDTO | null>(null);

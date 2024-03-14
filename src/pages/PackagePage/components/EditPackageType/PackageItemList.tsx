@@ -7,7 +7,6 @@ import {Navigation} from "../../../../utils/navigation.ts";
 const PackageItemList: React.FC<{ packageItems: PackageItem[] }> = ({packageItems}) => {
     const {navigateToInventoryItem} = Navigation();
 
-
     const removeItem = async (id: number): Promise<void> => {
         try {
             await deletePackageItem(id);
@@ -17,7 +16,6 @@ const PackageItemList: React.FC<{ packageItems: PackageItem[] }> = ({packageItem
             console.error('Error removing item from package:', error);
         }
     };
-
 
     return (
         <div className="package-list">

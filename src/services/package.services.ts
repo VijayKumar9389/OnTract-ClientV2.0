@@ -12,6 +12,17 @@ export const cancelPackage = async (packageId: number, stakeholderId: number): P
     }
 }
 
+// Delete Package Type if there are no items associated with it
+export const deletePackageType = async (packageTypeId: number): Promise<void> => {
+    try {
+        const endpoint: string = `http://localhost:3005/package/delete/packagetype/${packageTypeId}`;
+        await axios.delete(endpoint);
+    } catch (error) {
+        console.error('Error deleting package type:', error);
+        throw error;
+    }
+}
+
 // Get all package types by project ID
 export const getPackageTypesByProjectId = async (projectId: number): Promise<PackageType[]> => {
     try {

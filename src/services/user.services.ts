@@ -30,12 +30,21 @@ export const handleLogin = async (username: string, password: string, dispatch: 
     }
 };
 
+// Register a new user
 export const registerUser = async (username: string, password: string): Promise<void> => {
     try {
         await axios.post('http://localhost:3005/user/register', {username , password});
     } catch (error) {
         console.error('Failed to register user:', error);
+    }
+}
 
+// Edit a user
+export const editUser = async (id: number, username: string, password: string): Promise<void> => {
+    try {
+        await axios.post('http://localhost:3005/user/edit', {id, username, password});
+    } catch (error) {
+        console.error('Failed to edit user:', error);
     }
 }
 

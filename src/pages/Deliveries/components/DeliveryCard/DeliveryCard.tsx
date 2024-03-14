@@ -1,7 +1,7 @@
 import './DeliveryCard.scss';
 import React from "react";
 import {Delivery} from "../../../../models/delivery.models.ts";
-import {FaBox, FaInfoCircle, FaPhone, FaStickyNote} from "react-icons/fa";
+import {FaBox, FaInfoCircle, FaPhone} from "react-icons/fa";
 import {Navigation} from "../../../../utils/navigation.ts";
 
 const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
@@ -9,7 +9,6 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
     const {navigateToDelivery} = Navigation();
 
     const isMailout = (method: string) => method === 'mail';
-    const isPending = (status: string) => status === 'pending';
 
     return (
         <div className="delivery-card" onClick={() => navigateToDelivery(delivery.id)}>
@@ -36,20 +35,20 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                     <span><FaInfoCircle/></span>
                     <div>
                         <p>Status:</p>
-                        {isPending(delivery.status)
-                            ? <a className="chip yellow">Pending</a>
-                            : <a className="chip red">Completed</a>
+                        {!delivery.completed
+                            ? <a className="chip red">Pending</a>
+                            : <a className="chip green">Completed</a>
                         }
                     </div>
                 </li>
 
-                <li>
-                    <span><FaStickyNote/></span>
-                    <div>
-                        <p>Notes:</p>
-                        <a className="number">{delivery.notes}</a>
-                    </div>
-                </li>
+                {/*<li>*/}
+                {/*    <span><FaStickyNote/></span>*/}
+                {/*    <div>*/}
+                {/*        <p>Notes:</p>*/}
+                {/*        <a className="number">{delivery.notes}</a>*/}
+                {/*    </div>*/}
+                {/*</li>*/}
             </div>
         </div>
     );

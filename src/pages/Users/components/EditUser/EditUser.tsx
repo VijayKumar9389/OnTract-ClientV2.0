@@ -1,19 +1,24 @@
-import './RegisterUser.scss';
-import React, {useState} from "react";
-import {registerUser} from "../../../../services/user.services.ts";
+import './EditUser.scss';
+import React, {useState, useEffect} from "react";
+import {User} from "../../../../models/auth.models.ts";
+import {editUser} from "../../../../services/user.services.ts";
 
-const RegisterUser = () => {
+const EditUser: React.FC<{user: User}> = ({user}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect((): void => {
+        setUsername(user.username);
+    }, [user]);
 
     const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission behavior
         try {
-            await registerUser(username, password);
-            console.log('User registered successfully');
+            await editUser(user.id, username, password);
+            alert('User registered successfully');
             window.location.reload();
         } catch (error) {
-            console.log('Failed to register user');
+            alert('Failed to register user');
         }
     }
 
@@ -21,7 +26,7 @@ const RegisterUser = () => {
         <div className="register-user">
             <form onSubmit={handleRegister}>
                 <div className="input-wrapper">
-                    <label htmlFor="username">Username:
+                    <label htmlFor="username">Enter New Username:
                         <input
                             type="text"
                             placeholder="Username"
@@ -31,7 +36,7 @@ const RegisterUser = () => {
                     </label>
                 </div>
                 <div className="input-wrapper">
-                    <label htmlFor="password">Password:
+                    <label htmlFor="password">Enter New Password:
                         <input
                             type="password"
                             placeholder="Password"
@@ -48,4 +53,4 @@ const RegisterUser = () => {
     );
 }
 
-export default RegisterUser;
+export default EditUser;

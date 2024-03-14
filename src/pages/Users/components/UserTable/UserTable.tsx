@@ -2,6 +2,7 @@ import './UserTable.scss';
 import {useEffect, useState} from "react";
 import {User} from "../../../../models/auth.models.ts";
 import {getUsers} from "../../../../services/user.services.ts";
+import UserTableRow from "./UserTableRow.tsx";
 
 const UserTable = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -20,6 +21,7 @@ const UserTable = () => {
         fetchUsers();
     }, []);
 
+
     return (
         <table className="user-table">
             <thead>
@@ -32,17 +34,7 @@ const UserTable = () => {
             </thead>
             <tbody>
             {users.map((user: User) => (
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.isAdmin ? "True" : "False"}</td>
-                    <td>
-                        <div className="action-buttons">
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </div>
-                    </td>
-                </tr>
+                <UserTableRow user={user} key={user.id}/>
             ))}
             </tbody>
         </table>

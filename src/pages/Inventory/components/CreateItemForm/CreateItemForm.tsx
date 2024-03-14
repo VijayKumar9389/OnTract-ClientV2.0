@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { createItem } from "../../../../services/item.services.ts";
 import "./CreateItemForm.scss";
 import { NewItemInput } from "../../../../models/item.models.ts";
-import { getProjectFromCookie } from "../../../../utils/project.helper.ts";
+import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
 
 const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();
@@ -14,14 +14,14 @@ const CreateItemForm: React.FC = () => {
         projectId: null
     });
 
-    useEffect(() => {
+    useEffect((): void => {
         if (project) {
             setFormData(prevState => ({
                 ...prevState,
                 projectId: project.id
             }));
         }
-    }, [project]);
+    }, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>): void => {
         const { name, value } = e.target;

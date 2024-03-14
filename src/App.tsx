@@ -1,34 +1,25 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/Login/Login";
-import Stakeholders from "./pages/Stakeholders/Stakeholders";
-import Deliveries from "./pages/Deliveries/Deliveries";
-import Inventory from "./pages/Inventory/Inventory";
-import StakeholderPage from "./pages/StakeholderPage/StakeholderPage";
-import DeliveryPage from "./pages/DeliveryPage/DeliveryPage";
-import PackagePage from "./pages/PackagePage/PackagePage";
-import ItemPage from "./pages/ItemPage/ItemPage";
-import Packages from "./pages/Packages/Packages";
-import Users from "./pages/Users/Users.tsx";
-import { RootState } from "./store";
-import { activateInterceptor, verifyRefreshToken } from "./services/auth.services";
+// App.tsx
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { verifyRefreshToken } from './services/auth.services';
+import { RootState } from './store';
+import { checkAdminStatus } from './services/user.services.ts';
+import Navbar from './components/Navbar/Navbar';
+import Login from './pages/Login/Login';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles/app.scss';
-import Projects from "./pages/Projects/Projects.tsx";
-import {checkAdminStatus} from "./services/user.services.ts";
+import RoutesConfig from "./routes/routes.tsx";
+import {activateInterceptor} from "./utils/interceptors.ts";
 
-const App = () => {
+const App: React.FC = () => {
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
-    const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
     const dispatch = useDispatch();
 
     useEffect((): void => {
         activateInterceptor(dispatch);
         verifyRefreshToken(dispatch).then((): void => {
-            // After verifying the refresh token, check admin status
-            checkAdminStatus(dispatch)
-                .then((): void => {});
+            checkAdminStatus(dispatch).then((): void => {});
         });
     }, []);
 
@@ -38,25 +29,12 @@ const App = () => {
         <div className="app-container">
             <Navbar />
             <div className="content">
-                <Routes>
-                    <Route path="/stakeholders" element={<Stakeholders />} />
-                    <Route path="/stakeholder/:id" element={<StakeholderPage />} />
-                    <Route path="/deliveries" element={<Deliveries />} />
-                    <Route path="/deliveries/:id" element={<DeliveryPage />} />
-                    <Route path="/inventory" element={<Inventory />} />
-                    <Route path="/inventory/:id" element={<ItemPage />} />
-                    <Route path="/packages" element={<Packages />} />
-                    <Route path="/packages/:id" element={<PackagePage />} />
-                    {isAdmin && (
-                        <>
-                            <Route path="/users" element={<Users />} />
-                            <Route path="/projects" element={<Projects />} />
-                        </>
-                    )}
-                </Routes>
+                <ToastContainer />
+                <RoutesConfig />
             </div>
         </div>
     );
-}
+};
 
 export default App;
+

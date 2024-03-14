@@ -54,7 +54,7 @@ export const createPackageItem = async (PackageItemData: NewPackageItem): Promis
 }
 
 
-// Delete an item
+// Delete an item by ID if it isn't associated with a package
 export const deleteItem = async (itemId: number): Promise<void> => {
     try {
         const endpoint: string = `http://localhost:3005/item/delete/${itemId}`;

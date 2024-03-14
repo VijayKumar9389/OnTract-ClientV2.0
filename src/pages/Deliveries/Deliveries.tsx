@@ -3,7 +3,7 @@ import Heading from '../../components/Heading/Heading.tsx';
 import { getDeliveriesByProjectID } from '../../services/delivery.services.ts';
 import { Delivery } from '../../models/delivery.models.ts';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard.tsx';
-import { getProjectFromCookie } from '../../utils/project.helper.ts';
+import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
 import './Deliveries.scss';
 import DeliveryInput from "./components/DeliveryInput/DeliveryInput.tsx";
 

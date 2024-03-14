@@ -6,7 +6,7 @@ import StakeholderCard from "./components/StakeholderCard/StakeholderCard.tsx";
 import StakeholderInput from "./components/StakeholderInput/StakeholderInput.tsx";
 import StakeholderStats from "./components/StakeholderStats/StakeholderStats.tsx";
 import Heading from "../../components/Heading/Heading.tsx";
-import { getProjectFromCookie } from "../../utils/project.helper.ts";
+import { getProjectFromCookie } from "../../utils/cookieHelper.ts";
 
 const Stakeholders = () => {
     const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);

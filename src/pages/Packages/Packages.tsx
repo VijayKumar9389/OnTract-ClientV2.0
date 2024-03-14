@@ -2,7 +2,7 @@ import Heading from "../../components/Heading/Heading.tsx";
 import {getPackageTypesByProjectId} from "../../services/package.services.ts";
 import {useEffect, useState} from "react";
 import {PackageType} from "../../models/package.models.ts";
-import {getProjectFromCookie} from "../../utils/project.helper.ts";
+import {getProjectFromCookie} from "../../utils/cookieHelper.ts";
 import {Project} from "../../models/stakeholder.models.ts";
 import './Packages.scss';
 import PackageList from "./components/PackageList/PackageList.tsx";

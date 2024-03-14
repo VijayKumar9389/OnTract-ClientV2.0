@@ -1,33 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
-
-interface ProjectRecordInput {
-    position: number;
-    tract: number;
-    pin: string;
-    structure: string;
-    interest: string;
-    stakeholderStatus: string;
-    name: string;
-    streetAddress: string;
-    mailingAddress: string;
-    phoneNumber: string;
-    occupants: number;
-    worksLand: string;
-    contacted: string;
-    attempts: string;
-    consultation: string;
-    followUp: string;
-    tractComments: string;
-    pageNo: string;
-    keepDelete: string;
-    email: string;
-    Commodity: string;
-    pipelineStatus: string;
-    isPerson: string;
-    stakeholderComments: string;
-}
+import {ProjectRecordInput} from "../../../../models/project.models.ts";
 
 const CreateProject = () => {
     const [projectForm, setProjectForm] = useState({
@@ -47,10 +21,10 @@ const CreateProject = () => {
 
         reader.onload = (): void => {
             const data = new Uint8Array(reader.result as ArrayBuffer);
-            const workbook = XLSX.read(data, { type: 'array' });
+            const workbook = XLSX.read(data, {type: 'array'});
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
-            const jsonData: string[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) ;
+            const jsonData: string[] = XLSX.utils.sheet_to_json(worksheet, {header: 1});
 
             const projectRecords: ProjectRecordInput[] = jsonData.slice(1).map((row: string, index: number): ProjectRecordInput => ({
                 position: index,
@@ -143,43 +117,64 @@ const CreateProject = () => {
     return (
         <div>
             <h1>Create Project</h1>
-            <div className="project-details">
-                <label>Project Name:</label>
-                <input
-                    type="text"
-                    value={projectForm.projectName}
-                    onChange={(e) => setProjectForm({...projectForm, projectName: e.target.value})}
-                />
+            <div className="create-project-form">
 
-                <label>Year:</label>
-                <input
-                    type="number"
-                    value={projectForm.projectYear}
-                    onChange={(e) => setProjectForm({...projectForm, projectYear: parseInt(e.target.value, 10)})}
-                />
+                <div className="input-wrapper">
+                    <label>Project Name:
+                        <input
+                            type="text"
+                            value={projectForm.projectName}
+                            onChange={(e) => setProjectForm({...projectForm, projectName: e.target.value})}
+                        />
+                    </label>
+                </div>
 
-                <label>Project Notes:</label>
-                <input
-                    type="text"
-                    value={projectForm.projectNotes}
-                    onChange={(e) => setProjectForm({...projectForm, projectNotes: e.target.value})}
-                />
+                <div className="input-wrapper">
+                    <label>Year:
+                        <input
+                            type="number"
+                            value={projectForm.projectYear}
+                            onChange={(e) => setProjectForm({
+                                ...projectForm,
+                                projectYear: parseInt(e.target.value, 10)
+                            })}
+                        />
+                    </label>
+                </div>
 
-                <label>Survey Link:</label>
-                <input
-                    type="text"
-                    value={projectForm.projectSurveyLink}
-                    onChange={(e) => setProjectForm({...projectForm, projectSurveyLink: e.target.value})}
-                />
+                <div className="input-wrapper">
+                    <label>Project Notes:
+                        <input
+                            type="text"
+                            value={projectForm.projectNotes}
+                            onChange={(e) => setProjectForm({...projectForm, projectNotes: e.target.value})}
+                        />
+                    </label>
+                </div>
+
+                <div className="input-wrapper">
+                    <label>Survey Link:
+                        <input
+                            type="text"
+                            value={projectForm.projectSurveyLink}
+                            onChange={(e) => setProjectForm({...projectForm, projectSurveyLink: e.target.value})}
+                        />
+                    </label>
+                </div>
+
+                <div className="input-wrapper">
+                    <label>Survey Link:
+                        <input type="file" onChange={handleFileUpload}/>
+                        <button onClick={handleSaveClick}>Save</button>
+                    </label>
+                </div>
+
             </div>
 
-            <input type="file" onChange={handleFileUpload}/>
-
-            <button onClick={handleSaveClick}>Save</button>
 
             {jsonData && jsonData.length > 0 &&
                 <div>
-                    <h2>Processed Data</h2>
+                <h2>Processed Data</h2>
                     <table>
                         <thead>
                         <tr>

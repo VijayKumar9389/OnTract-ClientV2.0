@@ -19,7 +19,7 @@ const Users = () => {
             <div className="page-content">
                 <div className="panel">
                     <div className="panel-header">
-                        <label className="panel-label">Users</label>
+                        <label className="panel-label">User List</label>
                     </div>
                     <div className="panel-content">
                         <div className="btn-container">

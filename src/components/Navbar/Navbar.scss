@@ -28,7 +28,7 @@
     }
   }
 
-  button {
+  .btn-logout {
     border: 2px solid #fff;
     background: none;
     color: #fff;
@@ -55,7 +55,7 @@
     align-items: center;
 
     svg {
-        margin-right: $spacingSmall;
+      margin-right: $spacingSmall;
       font-size: 2rem;
     }
 
@@ -65,7 +65,7 @@
     }
   }
 
-  ul {
+  .navbar-links {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -85,7 +85,7 @@
       border-radius: $borderRadius;
       display: flex;
       align-items: center;
-      transition: $transition; // Adding transition for smooth hover effect
+      transition: $transition;
 
       svg {
         margin-right: $spacingSmall;
@@ -93,7 +93,62 @@
       }
 
       &:hover {
-        background-color: lighten($primaryColor, 10) // Lighten background on hover
+        background-color: lighten($primaryColor, 10);
+      }
+    }
+  }
+
+  // Modal Overlay
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .modal {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 300px;
+    width: 300px;
+    background: linear-gradient(to right, $primaryColor, $secondaryColor);
+    border-radius: $borderRadius;
+    padding: $spacingMedium;
+    box-shadow: $boxShadow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-links {
+    list-style: none;
+    padding: 0;
+    margin-bottom: $spacingMedium;
+
+    li {
+      margin-bottom: $spacingSmall;
+      text-align: center;
+    }
+
+    a,
+    button {
+      display: block;
+      padding: $spacingSmall $spacingMedium;
+      color: $textColor;
+      text-decoration: none;
+      font-size: 16px;
+      transition: $transition;
+
+      &:hover {
+        background-color: lighten($primaryColor, 10);
       }
     }
   }

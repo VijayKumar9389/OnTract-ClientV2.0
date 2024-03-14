@@ -1,0 +1,38 @@
+@import 'src/styles/variables.scss';
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  marin-top: $spacingSmall;
+}
+
+.project-list-item {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-name {
+  font-weight: bold;
+}
+
+.project-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.project-year,
+.project-notes,
+.project-survey-link {
+  flex: 1;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .project-list-item {
+    padding: 15px;
+  }
+}

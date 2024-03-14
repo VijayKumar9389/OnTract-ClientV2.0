@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import React from "react";
 import {Project} from "../../models/stakeholder.models.ts";
 import './ProjectTable.scss';
-import {setProjectCookie} from "../../utils/project.helper.ts";
+import {setProjectCookie} from "../../utils/cookieHelper.ts";
 import {getProjects} from "../../services/project.services.ts";
 
 const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {

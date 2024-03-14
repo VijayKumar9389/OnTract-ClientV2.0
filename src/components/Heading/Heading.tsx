@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { IoMdSwitch } from "react-icons/io";
 import Dialog from "../Dialog/Dialog.tsx";
 import ProjectTable from "../ProjectTable/ProjectTable.tsx";
-import {getProjectFromCookie} from "../../utils/project.helper.ts";
+import {getProjectFromCookie} from "../../utils/cookieHelper.ts";
 
 const Heading: React.FC<{heading: string}> = ({heading}) => {
     const [isOpened, setIsOpened] = useState(false);

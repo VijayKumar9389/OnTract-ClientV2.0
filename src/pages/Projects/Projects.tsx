@@ -1,13 +1,20 @@
-import ProjectTable from "../../components/ProjectTable/ProjectTable.tsx";
 import Heading from "../../components/Heading/Heading.tsx";
 import CreateProject from "./components/CreateProject/CreateProject.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Dialog from "../../components/Dialog/Dialog.tsx";
-
+import {getProjects} from "../../services/project.services.ts";
+import ProjectList from "./components/ProjectList/ProjectList.tsx";
+import {Project} from "../../models/stakeholder.models.ts";
 
 const Projects = () => {
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [projects, setProjects] = useState<Project[]>([]);
+
+    useEffect((): void => {
+        getProjects().then((res): void => {
+            setProjects(res);
+        });
+    }, []);
 
     const toggleMenu = (): void => {
         setIsMenuOpen(!isMenuOpen);
@@ -28,8 +35,7 @@ const Projects = () => {
                         <div className="btn-container">
                             <button onClick={() => toggleMenu()}>Add Project</button>
                         </div>
-                        <ProjectTable toggleMenu={() => {
-                        }}/>
+                        <ProjectList projects={projects} />
                     </div>
                 </div>
             </div>

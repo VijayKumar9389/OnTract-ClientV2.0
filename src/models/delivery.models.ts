@@ -4,7 +4,7 @@ import {Package} from "./package.models.ts";
 export interface Delivery {
     id: number;
     date: string;
-    status: string;
+    completed: boolean;
     route: string;
     destination: string;
     delivery_method: string; // Use camelCase for consistency with JavaScript naming conventions
@@ -37,6 +37,10 @@ export interface DeliveryReport {
     completedDeliveryCount: number;
 }
 
-
-
-
+// Edit delivery details
+export interface EditDeliveryDTO {
+    route: string;
+    destination: string;
+    delivery_method: string;
+    notes: string;
+}

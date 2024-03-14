@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {createPackageType} from "../../../../services/package.services.ts";
-import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
 const CreatePackageTypeForm: React.FC = () => {
     // Define state variables to hold form data

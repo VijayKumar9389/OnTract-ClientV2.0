@@ -1,4 +1,4 @@
-import {Delivery, NewDeliveryInput} from "../models/delivery.models.ts";
+import {Delivery, EditDeliveryDTO, NewDeliveryInput} from "../models/delivery.models.ts";
 import axios, {AxiosResponse} from "axios";
 
 //Get all deliveries by project ID
@@ -44,6 +44,30 @@ export const createDelivery = async (delivery: NewDeliveryInput): Promise<Delive
         return response.data;
     } catch (error) {
         console.error('Error creating delivery:', error);
+        throw error;
+    }
+}
+
+// Edit Delivery
+export const editDelivery = async (deliveryId: number, delivery: EditDeliveryDTO): Promise<Delivery> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/update/${deliveryId}`;
+        const response: AxiosResponse<Delivery> = await axios.put(endpoint, delivery, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating delivery:', error);
+        throw error;
+    }
+}
+
+//Set completed status and date for delivery
+export const setDeliveryCompleted = async (deliveryId: number, date: string): Promise<Delivery> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/complete/${deliveryId}`;
+        const response: AxiosResponse<Delivery> = await axios.put(endpoint, { date }, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error setting delivery completed:', error);
         throw error;
     }
 }

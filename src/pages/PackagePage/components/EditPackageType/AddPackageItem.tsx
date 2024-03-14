@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getProjectFromCookie } from "../../../../utils/project.helper.ts";
+import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
 import { getItemsByProjectId } from "../../../../services/item.services.ts";
 import { Item } from "../../../../models/item.models.ts";
 import { createPackageItem } from "../../../../services/item.services.ts";

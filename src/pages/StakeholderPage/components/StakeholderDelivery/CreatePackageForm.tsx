@@ -4,7 +4,8 @@ import {getPackageTypesByProjectId} from "../../../../services/package.services.
 import {getDeliveriesByProjectID} from "../../../../services/delivery.services.ts";
 import {NewPackageInput, PackageType} from "../../../../models/package.models.ts";
 import {Delivery} from "../../../../models/delivery.models.ts";
-import {Stakeholder} from "../../../../models/stakeholder.models.ts";
+import {Project, Stakeholder} from "../../../../models/stakeholder.models.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
 interface PackageFormProps {
     stakeholder: Stakeholder;
@@ -15,15 +16,14 @@ const PackageForm = ({stakeholder}: PackageFormProps) => {
     const [deliveryOptions, setDeliveryOptions] = useState<Delivery[]>([]);
     const [selectedPackageTypeId, setSelectedPackageTypeId] = useState<string>('');
     const [selectedDeliveryId, setSelectedDeliveryId] = useState<string>('');
-    const project = 1;
+    const project: Project | null = getProjectFromCookie();
 
     useEffect((): void => {
         async function fetchPackageData(): Promise<void> {
             if (!project) return;
-
             try {
-                const packageTypesResponse: PackageType[] = await getPackageTypesByProjectId(project);
-                const deliveriesResponse: Delivery[] = await getDeliveriesByProjectID(project);
+                const packageTypesResponse: PackageType[] = await getPackageTypesByProjectId(project.id);
+                const deliveriesResponse: Delivery[] = await getDeliveriesByProjectID(project.id);
 
                 setPackageTypes(packageTypesResponse);
                 setDeliveryOptions(deliveriesResponse);
@@ -37,7 +37,7 @@ const PackageForm = ({stakeholder}: PackageFormProps) => {
 
     const formIsValid: boolean = selectedPackageTypeId !== '' && selectedDeliveryId !== '';
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const packageData: NewPackageInput = {
             packageTypeId: selectedPackageTypeId,
@@ -45,9 +45,16 @@ const PackageForm = ({stakeholder}: PackageFormProps) => {
             stakeholderId: stakeholder.id.toString(),
         };
 
-        console.log(packageData);
-        createPackageForExistingDelivery(packageData);
+        try {
+            await createPackageForExistingDelivery(packageData);
+            console.log('Package created successfully');
+            window.location.reload();
+        } catch (error) {
+            console.error('Error creating package:', error);
+            // Optionally, add logic to handle error (e.g., show an error message to the user)
+        }
     };
+
 
     return (
         <form onSubmit={handleSubmit} className="package-form">

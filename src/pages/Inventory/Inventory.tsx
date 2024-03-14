@@ -7,7 +7,7 @@ import ItemCard from './components/ItemCard/ItemCard.tsx';
 import { MdAdd } from 'react-icons/md';
 import Dialog from '../../components/Dialog/Dialog.tsx';
 import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
-import { getProjectFromCookie } from '../../utils/project.helper.ts';
+import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);

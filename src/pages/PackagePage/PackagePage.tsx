@@ -7,6 +7,8 @@ import {Package, PackageType} from "../../models/package.models.ts";
 import EditPackageType from "./components/EditPackageType/EditPackageType.tsx";
 import PackageDeliveryTable from "./components/PackageDeliveryTable/PackageDeliveryTable.tsx";
 import {getPackageByPackageTypeId} from "../../services/package.services.ts";
+import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
+import {deletePackageType} from "../../services/package.services.ts";
 
 const PackagePage = () => {
 
@@ -28,7 +30,15 @@ const PackagePage = () => {
         }
     }, [id]);
 
-
+    const removePackageType = async (packageTypeId: number): Promise<void> => {
+        try {
+            await deletePackageType(packageTypeId);
+            console.log('Package type deleted successfully');
+            history.back();
+        } catch (error) {
+            console.error('Error deleting package type:', error);
+        }
+    }
 
     if (!packageType) {
         return <div>Loading...</div>
@@ -36,10 +46,16 @@ const PackagePage = () => {
 
     return (
         <div className="package-page-container">
-           <PageHeading heading={packageType?.name}/>
+            <PageHeading heading={packageType?.name}/>
             <div className="page-content">
-                <EditPackageType packageType={packageType} />
-                <PackageDeliveryTable packages={packages} />
+                <EditPackageType packageType={packageType}/>
+                <PackageDeliveryTable packages={packages}/>
+                <div className="btn-container">
+                    <ConfirmationButton
+                        buttonText="Delete Package Type"
+                        confirmationMessage={`Are you sure you want to delete ${packageType.name}?`}
+                        onConfirm={() => removePackageType(packageType.id)}/>
+                </div>
             </div>
         </div>
     );

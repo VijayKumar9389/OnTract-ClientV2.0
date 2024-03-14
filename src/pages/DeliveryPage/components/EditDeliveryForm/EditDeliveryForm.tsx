@@ -1,47 +1,53 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import './EditDeliveryForm.scss';
-import {Delivery} from "../../../../models/delivery.models.ts";
-import { FaRegSave} from "react-icons/fa";
+import { FaRegSave } from 'react-icons/fa';
+import { Delivery, EditDeliveryDTO } from '../../../../models/delivery.models';
+import { editDelivery } from '../../../../services/delivery.services';
 
-export interface EditDeliveryDTO {
-    route: string;
-    destination: string;
-    delivery_method: string;
-    notes: string;
-    status: string;
-    date: string;
-}
-
-const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
-
+const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     const [formData, setFormData] = useState<EditDeliveryDTO>({
         route: '',
         destination: '',
         delivery_method: '',
         notes: '',
-        status: 'pending',
-        date: ''
     });
 
-    useEffect((): void => {
+    useEffect(() => {
         if (delivery) {
             setFormData({
                 route: delivery.route,
                 destination: delivery.destination,
                 delivery_method: delivery.delivery_method,
                 notes: delivery.notes,
-                status: delivery.status,
-                date: delivery.date
             });
         }
     }, [delivery]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value,
         }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+
+        if (!delivery) {
+            console.error('Delivery is not available');
+            return;
+        }
+
+        try {
+            const updatedDelivery: Delivery = await editDelivery(delivery.id, formData);
+            console.log('Delivery updated:', updatedDelivery);
+            // Optionally, provide feedback to the user (e.g., show a success message)
+            window.location.reload(); // Reload the page after successful update (consider alternatives like updating state instead)
+        } catch (error) {
+            console.error('Error updating delivery:', error);
+            // Optionally, provide feedback to the user (e.g., show an error message)
+        }
     };
 
     return (
@@ -49,7 +55,7 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
             <div className="panel-header">
                 <label className="panel-label">EDIT DELIVERY</label>
             </div>
-            <form className="panel-content">
+            <form className="panel-content" onSubmit={handleSubmit}>
                 <div className="input-wrapper">
                     <label>
                         Route:
@@ -59,15 +65,27 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                 <div className="input-wrapper">
                     <label>
                         Destination:
-                        <input type="text" id="destination" name="destination" value={formData.destination}
-                               onChange={handleChange}/>
+                        <input
+                            type="text"
+                            id="destination"
+                            name="destination"
+                            value={formData.destination}
+                            onChange={handleChange}
+                        />
                     </label>
                 </div>
                 <div className="input-wrapper">
                     <label>
-                        Delivery Method:
-                        <input type="text" id="delivery_method" name="delivery_method" value={formData.delivery_method}
-                               onChange={handleChange}/>
+                        Delivery Type:
+                        <select
+                            name="delivery_method"
+                            value={formData.delivery_method}
+                            onChange={handleChange}
+                        >
+                            <option value="mail">Mail</option>
+                            <option value="person">Person</option>
+                        </select>
+
                     </label>
                 </div>
                 <div className="input-wrapper">
@@ -76,7 +94,10 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                         <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange}/>
                     </label>
                 </div>
-                <button><FaRegSave/>Save</button>
+                <button type="submit">
+                    <FaRegSave/>
+                    Save
+                </button>
             </form>
         </div>
     );

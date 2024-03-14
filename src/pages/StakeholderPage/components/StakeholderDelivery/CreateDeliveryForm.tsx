@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {PackageType} from '../../../../models/package.models.ts';
-import {Stakeholder} from '../../../../models/stakeholder.models.ts';
+import {Project, Stakeholder} from '../../../../models/stakeholder.models.ts';
 import {createDelivery} from '../../../../services/delivery.services.ts';
 import {getPackageTypesByProjectId} from "../../../../services/package.services.ts";
 import {NewDeliveryInput} from "../../../../models/delivery.models.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+
 interface CreateDeliveryForm {
     delivery_method: string;
     route: string;
@@ -12,8 +14,8 @@ interface CreateDeliveryForm {
     packageTypeId: number;
 }
 
-const CreateDeliveryForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder}) => {
-    const initialState  = {
+const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
+    const initialState = {
         delivery_method: '',
         route: '',
         destination: '',
@@ -24,22 +26,21 @@ const CreateDeliveryForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder})
     const [destinationOptions, setDestinationOptions] = useState<number>(0);
     const [createDeliveryForm, setCreateDeliveryForm] = useState<CreateDeliveryForm>(initialState);
     const [packageTypeOptions, setPackageTypeOptions] = useState<PackageType[]>([]);
-    const project: number = 1;
+    const project: Project | null = getProjectFromCookie();
 
     useEffect(() => {
+        if (!project)
+            return;
         const fetchPackageTypes = async (): Promise<void> => {
             try {
-                const packageTypes = await getPackageTypesByProjectId(project);
+                const packageTypes = await getPackageTypesByProjectId(project.id);
                 setPackageTypeOptions(packageTypes);
             } catch (error) {
                 console.error('Error fetching package types:', error);
             }
         };
-
-        if (project) {
-            fetchPackageTypes()
-                .then(() => console.log('Package types fetched'))
-        }
+        fetchPackageTypes()
+            .then(() => console.log('Package types fetched'))
     }, [project]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -70,13 +71,14 @@ const CreateDeliveryForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder})
                 route: createDeliveryForm.route,
                 destination: destinationValue,
                 notes: createDeliveryForm.notes,
-                projectId: project,
+                projectId: project.id,
                 stakeholderId: stakeholder.id,
             };
 
             try {
                 await createDelivery(createDeliveryDTO);
                 console.log('Form submitted:', createDeliveryDTO);
+                window.location.reload();
             } catch (error) {
                 console.error('Error submitting form:', error);
             }
@@ -107,7 +109,7 @@ const CreateDeliveryForm: React.FC<{stakeholder: Stakeholder}> = ({stakeholder})
                             onChange={handleInputChange}>
                         <option value="">Select a Delivery Method</option>
                         <option value="mail">Mail</option>
-                        <option value="inPerson">In Person</option>
+                        <option value="person">Person</option>
                     </select>
                 </label>
             </div>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {getStakeholdersByTractNo} from "../../../../services/stakeholder.services.ts";
 import TractForm from "./TractForm.tsx";
-import {getProjectFromCookie} from "../../../../utils/project.helper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
 interface TractItemProps {
     tract: TractRecord;
