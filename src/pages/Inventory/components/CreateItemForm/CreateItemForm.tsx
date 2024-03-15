@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { createItem } from "../../../../services/item.services.ts";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {createItem} from "../../../../services/item.services.ts";
 import "./CreateItemForm.scss";
-import { NewItemInput } from "../../../../models/item.models.ts";
-import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
+import {NewItemInput} from "../../../../models/item.models.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
 const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();
@@ -24,7 +24,7 @@ const CreateItemForm: React.FC = () => {
     }, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>): void => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData(prevState => ({
             ...prevState,
             [name]: name === "quantity" ? parseInt(value, 10) : value
@@ -62,28 +62,30 @@ const CreateItemForm: React.FC = () => {
                 <div className="input-wrapper">
                     <label htmlFor="name">
                         Name
-                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
                     </label>
                 </div>
 
                 <div className="input-wrapper">
                     <label htmlFor="description">
                         Description
-                        <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
+                        <textarea id="description" name="description" value={formData.description}
+                                  onChange={handleChange}></textarea>
                     </label>
                 </div>
 
                 <div className="input-wrapper">
                     <label htmlFor="image">
                         Image
-                        <input type="file" id="image" name="image" onChange={handleFileChange} />
+                        <input type="file" id="image" name="image" onChange={handleFileChange}/>
                     </label>
                 </div>
 
                 <div className="input-wrapper">
                     <label htmlFor="quantity">
                         Quantity
-                        <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} />
+                        <input type="number" id="quantity" name="quantity" value={formData.quantity}
+                               onChange={handleChange}/>
                     </label>
                 </div>
 

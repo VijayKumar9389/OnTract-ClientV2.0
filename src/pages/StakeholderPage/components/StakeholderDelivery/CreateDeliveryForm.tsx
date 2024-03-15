@@ -41,7 +41,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
         };
         fetchPackageTypes()
             .then(() => console.log('Package types fetched'))
-    }, [project]);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;

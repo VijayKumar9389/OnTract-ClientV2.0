@@ -1,61 +1,76 @@
-import {Item} from "../../../../models/item.models.ts";
-import React, {useState} from "react";
+import React, {useState, ChangeEvent, FormEvent} from "react";
 import {FaRegSave} from "react-icons/fa";
-import './EditItemForm.scss';
+import {Item, UpdateItemInput} from "../../../../models/item.models.ts";
+import {updateItem} from "../../../../services/item.services.ts";
+import "./EditItemForm.scss";
 
 interface EditItemFormProps {
     item: Item;
 }
 
 const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
-    const [editedItem, setEditedItem] = useState({...item});
+
     const [file, setFile] = useState<File | null>(null);
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const fileList = event.target.files;
-        if (fileList && fileList.length > 0) {
-            const selectedFile = fileList[0];
-            setFile(selectedFile);
-            // You can also display a preview of the selected image if needed
+    const [editedItem, setEditedItem] = useState<UpdateItemInput>({
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        quantity: item.quantity,
+        image: null
+    });
+
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault();
+
+        const updatedItem: UpdateItemInput = {
+            ...editedItem,
+        };
+
+        console.log('Updated item:', updatedItem);
+
+        try {
+            const response = await updateItem(updatedItem.id, updatedItem);
+
+            console.log('Item updated successfully:', response);
+            // Handle the response as needed
+        } catch (error) {
+            console.error('Error updating item:', error);
+            // Handle error
         }
     };
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0];
+        setFile(selectedFile || null);
+        setEditedItem({ ...editedItem, image: selectedFile }); // Update editedItem with the selected file
+    };
+
+    const handleInputChange = (
+        event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const {name, value} = event.target;
         setEditedItem({...editedItem, [name]: value});
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        // Implement the updateItem function
-    };
-
-    // const deleteItem = () => {
-    //     // Implement the deleteItem function
-    // };
-
-    const getDisplayedImage = () => {
+    const getDisplayedImage = (): string => {
         if (file) {
-            // If a new file is selected, display its preview
             return URL.createObjectURL(file);
-        } else if (item && item.image) {
-            // If no new file is selected, display the existing item image
+        } else if (item.image) {
             return `http://localhost:3005/images/${item.image}`;
         } else {
-            // Provide a default image URL or return null if no image is available
-            return 'https://via.placeholder.com/150'; // Example default image URL
+            return 'https://via.placeholder.com/150';
         }
     };
 
     return (
-        <form className="panel" onSubmit={handleSubmit}>
+        <form className="panel" onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="panel-header">
                 <label className="panel-label">Edit Item</label>
             </div>
 
             <div className="panel-content">
                 <div className="form-controls">
-
                     <img
                         src={getDisplayedImage()}
                         alt={`Image for ${item.name}`}
@@ -81,7 +96,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                                 <input
                                     id="editName"
                                     type="text"
-                                    value={item.name}
+                                    value={editedItem.name}
                                     name="name"
                                     onChange={handleInputChange}
                                     className="form-control"
@@ -95,7 +110,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                                 Description:
                                 <textarea
                                     id="editDescription"
-                                    value={item.description}
+                                    value={editedItem.description}
                                     name="description"
                                     onChange={handleInputChange}
                                     className="form-control"
@@ -110,7 +125,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                                 <input
                                     id="editQuantity"
                                     type="number"
-                                    value={item.quantity}
+                                    value={editedItem.quantity}
                                     name="quantity"
                                     onChange={handleInputChange}
                                     className="form-control"
@@ -123,12 +138,10 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                             <FaRegSave/>Save
                         </button>
                     </div>
-
                 </div>
-
             </div>
         </form>
     );
-}
+};
 
 export default EditItemForm;

@@ -26,18 +26,16 @@ export interface NewItemInput {
     quantity: number;
 }
 
-export interface NewPackageItem {
-    itemID: number;
-    packageTypeID: number;
-    notes: string;
-}
-
-// Change Item information
 export interface UpdateItemInput {
     id: number;
     name: string;
     description: string;
-    image: string;
     quantity: number;
-    file?: File | null; // Make the file property optional
+    image?: File | null; // Make the file property optional
+}
+
+export interface NewPackageItem {
+    itemID: number;
+    packageTypeID: number;
+    notes: string;
 }

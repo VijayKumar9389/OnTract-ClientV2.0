@@ -1,4 +1,4 @@
-import {Item, NewItemInput, NewPackageItem, PackageItem} from "../models/item.models.ts";
+import {Item, NewItemInput, NewPackageItem, PackageItem, UpdateItemInput} from "../models/item.models.ts";
 import axios, {AxiosResponse} from "axios";
 
 // Get all items by project ID
@@ -25,6 +25,23 @@ export const getItemById = async (itemId: number): Promise<Item> => {
     }
 }
 
+// Update an item by ID
+export const updateItem = async (itemId: number, formData: FormData): Promise<Item> => {
+    try {
+        const endpoint: string = `http://localhost:3005/item/update/${itemId}`;
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+
+        const response: AxiosResponse<Item> = await axios.put(endpoint, formData, config);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating item:', error);
+        throw error;
+    }
+}
 // Create a new item
 export const createItem = async (formData: NewItemInput): Promise<Item> => {
     try {
