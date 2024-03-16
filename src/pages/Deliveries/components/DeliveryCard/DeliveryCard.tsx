@@ -42,13 +42,6 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                     </div>
                 </li>
 
-                {/*<li>*/}
-                {/*    <span><FaStickyNote/></span>*/}
-                {/*    <div>*/}
-                {/*        <p>Notes:</p>*/}
-                {/*        <a className="number">{delivery.notes}</a>*/}
-                {/*    </div>*/}
-                {/*</li>*/}
             </div>
         </div>
     );

@@ -162,19 +162,21 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="isPerson">Is Person:</label>
-                        <input
-                            type="checkbox"
-                            id="isPerson"
-                            name="isPerson"
-                            checked={formData.isPerson === 'YES'}
-                            onChange={(e) => {
-                                const newValue = e.target.checked ? 'YES' : 'NO';
-                                setFormData((prevData) => ({
-                                    ...prevData,
-                                    isPerson: newValue,
-                                }));
-                            }}
-                        />
+                        <div>
+                            <input
+                                type="checkbox"
+                                id="isPerson"
+                                name="isPerson"
+                                checked={formData.isPerson === 'YES'}
+                                onChange={(e) => {
+                                    const newValue = e.target.checked ? 'YES' : 'NO';
+                                    setFormData((prevData) => ({
+                                        ...prevData,
+                                        isPerson: newValue,
+                                    }));
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
 

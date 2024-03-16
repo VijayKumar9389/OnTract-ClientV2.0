@@ -1,6 +1,6 @@
 import './StakeholderStats.scss';
 import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
-import {getStakeholdersContactSummaryByProjectId} from "../../../../services/stakeholder.services.ts";
+import {getStakeholderReport} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 
@@ -16,7 +16,7 @@ const StakeholderStats = () => {
         }
         try {
             setLoading(true);
-            const fetchedStakeholderStats: StakeholderStatsDTO = await getStakeholdersContactSummaryByProjectId(project.id);
+            const fetchedStakeholderStats: StakeholderStatsDTO = await getStakeholderReport(project.id);
             setStakeholderStats(fetchedStakeholderStats);
         } catch (error) {
             setError('Failed to fetch stakeholder stats');
@@ -70,8 +70,9 @@ const StakeholderStats = () => {
                 <StatItem title={"Consulted"} value={stakeholderStats.consultedCount}
                           total={stakeholderStats.totalCount}/>
                 <StatItem title={"Not Consulted"} value={stakeholderStats.notConsultedCount}
-                            total={stakeholderStats.totalCount}/>
+                          total={stakeholderStats.totalCount}/>
             </div>
+
         </div>
     );
 }

@@ -1,0 +1,54 @@
+@import 'src/styles/variables.scss'; // Import the variable file
+
+.delivery-report {
+    width: 100%;
+    display: flex;
+
+  .delivery-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .card-header {
+      h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      p {
+        margin-bottom: 5px;
+      }
+
+      strong {
+        font-weight: bold;
+        color: #2196F3; /* Primary color */
+      }
+    }
+
+    .package-type-count, .delivery-route-count {
+      margin-top: 20px;
+
+      h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 5px;
+
+          strong {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

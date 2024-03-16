@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import Heading from '../../components/Heading/Heading.tsx';
-import { getDeliveriesByProjectID } from '../../services/delivery.services.ts';
-import { Delivery } from '../../models/delivery.models.ts';
-import DeliveryCard from './components/DeliveryCard/DeliveryCard.tsx';
-import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
+import {useEffect, useState} from 'react';
+import Heading from '../../components/Heading/Heading';
+import DeliveryCard from './components/DeliveryCard/DeliveryCard';
+import DeliveryInput from './components/DeliveryInput/DeliveryInput';
+import {getDeliveriesByProjectID} from '../../services/delivery.services';
+import {getProjectFromCookie} from '../../utils/cookieHelper';
+import {Delivery} from '../../models/delivery.models';
 import './Deliveries.scss';
-import DeliveryInput from "./components/DeliveryInput/DeliveryInput.tsx";
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -28,30 +28,28 @@ const Deliveries = () => {
         };
 
         fetchDeliveries();
-    }, []); // Add project as a dependency to trigger re-fetching when it changes
+    }, []);
 
     return (
         <div className="delivery-container">
-            <Heading heading="Deliveries" />
+            <Heading heading="Deliveries"/>
             <div className="page-content">
-                {/* Conditionally render loading message */}
+
                 {loading && <p>Loading...</p>}
 
-                {/* Conditionally render error message */}
-                {error && <p>Error</p>}
+                {error && <p>Error: {error}</p>}
 
-                {/* Render deliveries if no loading or error */}
                 {!loading && !error && (
                     <div className="panel">
                         <div className="panel-header">
                             <label className="panel-label">Delivery List</label>
                         </div>
                         <div className="panel-content">
-                            <DeliveryInput />
+                            <DeliveryInput/>
                             {deliveries.length > 0 ? (
                                 <ul className="delivery-list">
                                     {deliveries.map((delivery: Delivery) => (
-                                        <DeliveryCard key={delivery.id} delivery={delivery} />
+                                        <DeliveryCard key={delivery.id} delivery={delivery}/>
                                     ))}
                                 </ul>
                             ) : (
@@ -68,4 +66,3 @@ const Deliveries = () => {
 };
 
 export default Deliveries;
-

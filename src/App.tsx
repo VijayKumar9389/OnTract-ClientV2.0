@@ -10,12 +10,14 @@ import { ToastContainer } from 'react-toastify';
 import './styles/app.scss';
 import RoutesConfig from "./routes/routes.tsx";
 import {activateInterceptor} from "./utils/interceptors.ts";
-// import {getProjectFromCookie} from "./utils/cookieHelper.ts";
+import {getProjectFromCookie} from "./utils/cookieHelper.ts";
+import ProjectTable from "./components/ProjectTable/ProjectTable.tsx";
+
 
 
 const App: React.FC = () => {
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
-    // const project = getProjectFromCookie();
+    const project = getProjectFromCookie();
     const dispatch = useDispatch();
 
     useEffect((): void => {
@@ -27,6 +29,7 @@ const App: React.FC = () => {
 
     if (!isLoggedIn) return <Login />;
 
+    if (!project) return <ProjectTable toggleMenu={() => {}} />;
 
     return (
         <div className="app-container">

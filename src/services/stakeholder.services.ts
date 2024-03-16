@@ -7,6 +7,21 @@ import {
 } from "../models/stakeholder.models.ts";
 import {UpdateTrackRecordInput} from "../models/stakeholder.models.ts";
 
+interface Location {
+    province: string;
+    count: number;
+    cities: City[];
+}
+
+interface City {
+    name: string;
+    count: number;
+}
+
+export interface LocationData {
+    locations: Location[];
+}
+
 export const getStakeholdersByProjectId = async (projectId: number): Promise<Stakeholder[]> => {
     try {
         const endpoint: string = `http://localhost:3005/stakeholder/getStakeholdersByProjectId/${projectId}`;
@@ -18,7 +33,8 @@ export const getStakeholdersByProjectId = async (projectId: number): Promise<Sta
     }
 };
 
-export const getStakeholdersContactSummaryByProjectId = async (projectId: number) : Promise<StakeholderStatsDTO> => {
+// Get statistics for stakeholders regarding a project
+export const getStakeholderReport = async (projectId: number) : Promise<StakeholderStatsDTO> => {
     try {
         const endpoint: string = `http://localhost:3005/stakeholder/getStakeholdersContactSummaryByProjectId/${projectId}`;
         const response: AxiosResponse<StakeholderStatsDTO> = await axios.get(endpoint);
@@ -36,6 +52,17 @@ export const getRelatedStakeholder = async (stakeholderId: number): Promise<Rela
         return response.data;
     } catch (error) {
         console.error('Error getting stakeholders:', error);
+        throw error;
+    }
+}
+
+export const getLocationReport = async (projectId: number): Promise<LocationData[]> => {
+    try {
+        const endpoint: string = `http://localhost:3005/stakeholder/getLocations/${projectId}`;
+        const response: AxiosResponse<LocationData[]> = await axios.get(endpoint);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting locations:', error);
         throw error;
     }
 }

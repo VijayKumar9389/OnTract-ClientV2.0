@@ -1,4 +1,4 @@
-import {Delivery, EditDeliveryDTO, NewDeliveryInput} from "../models/delivery.models.ts";
+import {Delivery, DeliveryReportDTO, EditDeliveryDTO, NewDeliveryInput} from "../models/delivery.models.ts";
 import axios, {AxiosResponse} from "axios";
 
 //Get all deliveries by project ID
@@ -44,6 +44,18 @@ export const createDelivery = async (delivery: NewDeliveryInput): Promise<Delive
         return response.data;
     } catch (error) {
         console.error('Error creating delivery:', error);
+        throw error;
+    }
+}
+
+// Get delivery Report by project ID
+export const getDeliveryReport = async (projectId: number): Promise<DeliveryReportDTO> => {
+    try {
+        const endpoint: string = `http://localhost:3005/delivery/report/${projectId}`;
+        const response: AxiosResponse<DeliveryReportDTO> = await axios.get(endpoint, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting delivery report:', error);
         throw error;
     }
 }

@@ -24,7 +24,7 @@ export interface NewDeliveryInput {
 }
 
 // Delivery statistics for a selected project
-export interface DeliveryReport {
+export interface DeliveryReportDTO {
     count: number;
     stakeholderCount: number;
     packageTypeCountMap: {

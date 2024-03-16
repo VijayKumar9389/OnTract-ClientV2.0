@@ -13,13 +13,14 @@ import Packages from "../pages/Packages/Packages.tsx";
 import PackagePage from "../pages/PackagePage/PackagePage.tsx";
 import Users from "../pages/Users/Users.tsx";
 import Projects from "../pages/Projects/Projects.tsx";
-
+import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 
 const RoutesConfig: React.FC = () => {
     const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
     return (
         <Routes>
+            <Route path="/" element={<Dashboard />} />
             <Route path="/stakeholders" element={<Stakeholders />} />
             <Route path="/stakeholder/:id" element={<StakeholderPage />} />
             <Route path="/deliveries" element={<Deliveries />} />

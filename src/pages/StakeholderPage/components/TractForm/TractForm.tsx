@@ -2,14 +2,9 @@ import React, {useEffect, useState} from "react";
 import { UpdateTrackRecordInput} from "../../../../models/stakeholder.models.ts";
 import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {updateTractRecord} from "../../../../services/stakeholder.services.ts";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-interface TractFormProps {
-    stakeholder: Stakeholder;
-    tractRecord: TractRecord;
-}
-
-const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
+const TractForm: React.FC<{stakeholder: Stakeholder, tractRecord: TractRecord}> = ({ stakeholder, tractRecord }) => {
     const [formData, setFormData] = useState<UpdateTrackRecordInput>({
         structure: "",
         interest: "",
@@ -17,6 +12,8 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
         worksLand: "",
         tractComments: "",
     });
+
+    const { id } = useParams<{ id: string }>();
 
     const navigate = useNavigate();
 
@@ -29,10 +26,20 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
             structure: tractRecord.structure,
             interest: tractRecord.interest,
             occupants: tractRecord.occupants,
-            worksLand: tractRecord.worksLand,
+            worksLand: tractRecord.worksLand === "YES" ? "YES" : "NO",
             tractComments: tractRecord.tractComments,
         })
     }, []);
+
+    function isStakeholderIdDifferent(stakeholderId: string | number, idFromParams: string | undefined): boolean {
+        if (typeof stakeholderId === 'number' && idFromParams) {
+            return stakeholderId !== Number(idFromParams);
+        } else if (typeof stakeholderId === 'string' && idFromParams) {
+            return stakeholderId !== idFromParams;
+        }
+        return false; // Default to false if types are incompatible or idFromParams is undefined
+    }
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         const { name, value } = e.target;
@@ -67,6 +74,9 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
                     ? null
                     : <a className="chip red">No Mailing Address</a>
                 }
+                {isStakeholderIdDifferent(stakeholder.id, id)
+                    ? null
+                    : <a className="chip green">Viewing Profile</a>}
             </ul>
             <div className="input-wrapper">
                 <label>
@@ -89,7 +99,21 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
             <div className="input-wrapper">
                 <label>
                     Works Land:
-                    <input type="text" name="worksLand" value={formData.worksLand} onChange={handleChange}/>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="worksLand"
+                            name="worksLand"
+                            checked={formData.worksLand === 'YES'}
+                            onChange={(e) => {
+                                const newValue = e.target.checked ? 'YES' : 'NO';
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    worksLand: newValue,
+                                }));
+                            }}
+                        />
+                    </div>
                 </label>
             </div>
             <div className="input-wrapper">
@@ -104,7 +128,9 @@ const TractForm: React.FC<TractFormProps> = ({ stakeholder, tractRecord }) => {
             </div>
             <div className="action-buttons">
                 <button type="submit">Submit</button>
-                <button type="button" onClick={() => selectStakeholder(stakeholder)}>View Stakeholder</button>
+                {isStakeholderIdDifferent(stakeholder.id, id) ?
+                    <button type="button" onClick={() => selectStakeholder(stakeholder)} >View Stakeholder</button> : null}
+
             </div>
         </form>
     );
