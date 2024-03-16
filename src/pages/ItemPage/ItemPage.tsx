@@ -11,6 +11,7 @@ import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx
 import ItemStats from "./components/ItemStats/ItemStats.tsx";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deleteItem} from "../../services/item.services.ts";
+import {showToastError} from "../../utils/toastHelper.ts";
 
 const ItemPage = () => {
     const {id} = useParams();
@@ -39,6 +40,7 @@ const ItemPage = () => {
             history.back();
         } catch (error) {
             console.error('Error deleting item:', error);
+            showToastError('Error deleting item')
         }
     };
 

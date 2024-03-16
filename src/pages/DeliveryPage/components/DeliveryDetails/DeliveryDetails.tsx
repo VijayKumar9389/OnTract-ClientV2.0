@@ -1,41 +1,44 @@
-import React, {useState} from "react";
-import {Delivery} from "../../../../models/delivery.models.ts";
+import {showToastSuccess} from "../../../../utils/toastHelper.ts";
 import {setDeliveryCompleted} from "../../../../services/delivery.services.ts";
+import {Delivery} from "../../../../models/delivery.models.ts";
+import {useState} from "react";
 import './DeliveryDetails.scss';
 
-const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
+const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     const [selectedDate, setSelectedDate] = useState(delivery.date || "");
 
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(e.target.value);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // Convert selectedDate to a Date object
-        const dateObj = new Date(selectedDate);
+        try {
+            // Convert selectedDate to a Date object
+            const dateObj = new Date(selectedDate);
 
-        // Extract month, day, and year
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-        const day = String(dateObj.getDate() + 1).padStart(2, '0'); // Add 1 to the day
-        const year = String(dateObj.getFullYear());
+            // Format the date as yyyy-mm-dd (required by HTML5 date input)
+            const formattedDate = dateObj.toISOString().split('T')[0];
 
-        // Format the date as mm/dd/yyyy
-        const formattedDate = `${month}/${day}/${year}`;
-
-        // Now you can send the formattedDate to your backend
-        console.log("Formatted Date:", formattedDate);
-
-        // Update delivery.completed to true
-        setDeliveryCompleted(delivery.id, formattedDate).then(response => {
+            // Update delivery.completed to true
+            const response = await setDeliveryCompleted(delivery.id, formattedDate);
             console.log(response);
 
-            // Optionally, provide feedback to the user (e.g., show a success message)
-            window.location.reload(); // Reload the page after successful update (consider alternatives like updating state instead)
-        });
+            // Update state or provide feedback to the user (e.g., show a success message)
+            setSelectedDate(formattedDate);
+            showToastSuccess('Delivery completion date set successfully');
+
+            // Instead of reloading the entire page, consider updating state to reflect the changes
+            // window.location.reload();
+        } catch (error) {
+            console.error('Error setting completion date:', error);
+            // Optionally, handle error (e.g., show an error message to the user)
+        }
     };
 
+    // Disable the button if no date is selected
+    const isDateSelected = selectedDate !== "";
 
     return (
         <div className="delivery-details">
@@ -57,7 +60,9 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                             />
                         </label>
                     </div>
-                    <button type="submit" className="edit-button">Set Completion Date</button>
+                    <button type="submit" className="edit-button" disabled={!isDateSelected}>
+                        Set Completion Date
+                    </button>
                 </form>
             </div>
         </div>

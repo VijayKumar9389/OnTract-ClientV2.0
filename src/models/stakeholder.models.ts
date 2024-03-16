@@ -41,6 +41,32 @@ export interface TractRecord {
     keepdelete: string;
 }
 
+// Update Stakeholder Details
+export interface UpdateStakeholderInput {
+    name: string;
+    streetAddress: string;
+    mailingAddress: string;
+    phoneNumber: string;
+    isPerson: string;  // Updated to boolean
+    stakeholderComments: string;
+    stakeholderStatus: string;
+    contacted: string;  // Updated to boolean
+    consultation: string;
+    attempts: string;
+    email: string;
+    followUp: string;
+}
+
+// Update Tract Record
+export interface UpdateTrackRecordInput {
+    structure: string;
+    interest: string;
+    occupants: number;
+    worksLand: string;
+    tractComments: string;
+}
+
+// Stakeholder Stats for Project
 export interface StakeholderStatsDTO {
     totalCount: number;
     oneTractCount: number;
@@ -56,17 +82,11 @@ export interface StakeholderStatsDTO {
     contactedNoCount: number;
 }
 
-export interface UpdateTrackRecordInput {
-    structure: string;
-    interest: string;
-    occupants: number;
-    worksLand: string;
-    tractComments: string;
-}
-
+// Stakeholder with Tract Records for a 
 export interface RelatedStakeholder {
     stakeholder: Stakeholder; // Assuming StakeholderWithTractRecords is your existing interface or type
     isPhoneSame: boolean;
     isMailingAddressSame: boolean;
     isStreetAddressSame: boolean;
 }
+

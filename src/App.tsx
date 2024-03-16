@@ -7,16 +7,15 @@ import { checkAdminStatus } from './services/user.services.ts';
 import Navbar from './components/Navbar/Navbar';
 import Login from './pages/Login/Login';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './styles/app.scss';
 import RoutesConfig from "./routes/routes.tsx";
 import {activateInterceptor} from "./utils/interceptors.ts";
-import {getProjectFromCookie} from "./utils/cookieHelper.ts";
-import ProjectTable from "./components/ProjectTable/ProjectTable.tsx";
+// import {getProjectFromCookie} from "./utils/cookieHelper.ts";
+
 
 const App: React.FC = () => {
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
-    const project = getProjectFromCookie();
+    // const project = getProjectFromCookie();
     const dispatch = useDispatch();
 
     useEffect((): void => {

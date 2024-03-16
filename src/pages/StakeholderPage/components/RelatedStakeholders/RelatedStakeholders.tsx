@@ -1,11 +1,11 @@
 import './RelatedStakeholder.scss';
 import {getRelatedStakeholder} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
-import {RelatedStakeholder, Stakeholder} from "../../../../models/stakeholder.models.ts";
+import {Stakeholder} from "../../../../models/stakeholder.models.ts";
 import {useNavigate} from "react-router-dom";
+import {RelatedStakeholder} from "../../../../models/stakeholder.models.ts";
 
-
-const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({ stakeholderId }) => {
+const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({stakeholderId}) => {
 
     const [relatedStakeholders, setRelatedStakeholders] = useState<RelatedStakeholder[]>([]);
     const navigate = useNavigate();
@@ -47,18 +47,25 @@ const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({ stakeholderI
                         </thead>
                         <tbody className="details">
                         {relatedStakeholders.map((relatedStakeholder: RelatedStakeholder, index: number) => (
-                            <tr key={index} className="stakeholder-item" onClick={() => selectStakeholder(relatedStakeholder.stakeholder)}>
+                            <tr key={index} className="stakeholder-item"
+                                onClick={() => selectStakeholder(relatedStakeholder.stakeholder)}>
                                 <td>
                                     <span>{relatedStakeholder.stakeholder.name}</span>
                                 </td>
                                 <td>
-                                    <span>{isTrue(relatedStakeholder.isPhoneSame) ? <a className="chip green">Match</a> : <a className="chip red">No Match</a> }</span>
+                                    <span>{isTrue(relatedStakeholder.isPhoneSame) ?
+                                        <a className="chip green">Match</a> :
+                                        <a className="chip red">No Match</a>}</span>
                                 </td>
                                 <td>
-                                    <span>{isTrue(relatedStakeholder.isMailingAddressSame) ? <a className="chip green">Match</a> : <a className="chip red">No Match</a>}</span>
+                                    <span>{isTrue(relatedStakeholder.isMailingAddressSame) ?
+                                        <a className="chip green">Match</a> :
+                                        <a className="chip red">No Match</a>}</span>
                                 </td>
                                 <td>
-                                    <span>{isTrue(relatedStakeholder.isStreetAddressSame) ? <a className="chip green">Match</a> : <a className="chip red">No Match</a>}</span>
+                                    <span>{isTrue(relatedStakeholder.isStreetAddressSame) ?
+                                        <a className="chip green">Match</a> :
+                                        <a className="chip red">No Match</a>}</span>
                                 </td>
                             </tr>
                         ))}

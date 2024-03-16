@@ -26,7 +26,7 @@ export const getItemById = async (itemId: number): Promise<Item> => {
 }
 
 // Update an item by ID
-export const updateItem = async (itemId: number, formData: FormData): Promise<Item> => {
+export const updateItem = async (itemId: number, formData: UpdateItemInput): Promise<Item> => {
     try {
         const endpoint: string = `http://localhost:3005/item/update/${itemId}`;
         const config = {
@@ -82,13 +82,13 @@ export const deleteItem = async (itemId: number): Promise<void> => {
     }
 }
 
-// Delete an package item
+// Delete a package item by ID
 export const deletePackageItem = async (packageItemId: number): Promise<void> => {
     try {
         const endpoint: string = `http://localhost:3005/item/packageItem/delete/${packageItemId}`;
         await axios.delete(endpoint);
     } catch (error) {
         console.error('Error deleting item:', error);
-        throw error;
+        throw error; // Make sure the error is rethrown to propagate it further
     }
 }

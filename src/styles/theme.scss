@@ -66,6 +66,11 @@ button {
   }
 }
 
+button:disabled {
+  background-color: $btnDisabledBackgroundColor;
+  cursor: not-allowed;
+}
+
 .btn-danger {
     background-color: $cancelColor;
     &:hover {
@@ -331,7 +336,12 @@ textarea {
 }
 
 
-//Form Styles
+// Form Styles
+
+.form-btn {
+  margin-top: $spacingMedium;
+}
+
 .form-row {
   display: flex;
   width: 100%;
@@ -346,10 +356,34 @@ textarea {
 .input-wrapper {
   flex: 1;
 
+  .btn-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $textColor; /* Text color */
+
+    button {
+      padding: 0; /* Padding for the button */
+      margin-left: $spacingSmall; /* Spacing between button and label */
+      background-color: transparent; /* Button background color */
+      color: $primaryColor; /* Button text color */
+      border: none; /* Remove button border */
+      border-radius: $buttonRadius; /* Button border radius */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      transition: background-color 0.3s ease; /* Smooth transition on hover */
+
+
+      &:hover {
+        background-color: $primaryColor; /* Lighter shade of primary color on hover */
+        color: #fff; /* Text color on hover */
+      }
+    }
+  }
+
   label {
     display: block;
-    margin-bottom: $spacingSmall;
-    color: $textColor;
+    color: $textColor; /* Text color */
+    margin: $spacingSmall 0; /* Spacing between label and input */
   }
 }
 

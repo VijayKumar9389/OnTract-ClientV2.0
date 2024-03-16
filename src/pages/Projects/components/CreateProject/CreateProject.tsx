@@ -107,6 +107,7 @@ const CreateProject = () => {
             axios.post('http://localhost:3005/project/create', projectInput)
                 .then((response) => {
                     console.log('Project created successfully', response.data);
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.error('Error creating project', error);

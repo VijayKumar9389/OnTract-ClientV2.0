@@ -1,5 +1,6 @@
 import {Stakeholder} from "./stakeholder.models.ts";
 import {PackageItem} from "./item.models.ts";
+import {Delivery} from "./delivery.models.ts";
 
 // Package model
 export interface Package {
@@ -7,6 +8,7 @@ export interface Package {
     packageType: PackageType;
     stakeholder: Stakeholder;
     deliveryId: number;
+    delivery: Delivery;
 }
 
 // Create new package

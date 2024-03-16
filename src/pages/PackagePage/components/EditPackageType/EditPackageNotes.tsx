@@ -1,35 +1,61 @@
+import React, { useEffect, useState } from "react";
 import {PackageType} from "../../../../models/package.models.ts";
-import {useEffect, useState} from "react";
 
-const EditPackageNotes: React.FC<{packageType: PackageType}> = ({packageType}) => {
-
-    useEffect((): void => {
-        setNotes(packageType?.notes);
-    }, [packageType]);
-
+const EditPackageNotes: React.FC<{ packageType: PackageType }> = ({ packageType }) => {
+    const [name, setName] = useState<string>('');
     const [notes, setNotes] = useState<string>('');
 
-    const handleNotesSubmit = (): void => {
-        window.alert(notes);
-    }
+    useEffect(() => {
+        if (packageType) {
+            setName(packageType.name);
+            setNotes(packageType.notes);
+        }
+    }, [packageType]);
+
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
+
+    const handleNotesChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setNotes(event.target.value);
+    };
+
+    const handleEditPackage = () => {
+        // You can perform your update logic here
+        window.alert(`Name: ${name}\nNotes: ${notes}`);
+    };
 
     return (
         <form className="package-notes-form">
             <div className="input-wrapper">
-                <label className="notes-label">Notes:
-                    <textarea
-                        defaultValue={packageType?.notes}
-                        onChange={(event) => setNotes(event.target.value)}
+                <label className="notes-label">Name:
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={handleNameChange}
                         className="notes-textarea"
                     />
                 </label>
             </div>
 
-            <button type="button" className="edit-notes-button" onClick={() => handleNotesSubmit()}>
-                Edit Notes
+            <div className="input-wrapper">
+                <label className="notes-label">Notes:
+                    <textarea
+                        value={notes}
+                        onChange={handleNotesChange}
+                        className="notes-textarea"
+                    />
+                </label>
+            </div>
+
+            <button type="button" className="edit-notes-button" onClick={handleEditPackage}>
+                Edit Package
             </button>
         </form>
-    )
-}
+    );
+};
 
 export default EditPackageNotes;
+
+
+

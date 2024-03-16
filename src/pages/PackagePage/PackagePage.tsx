@@ -9,6 +9,7 @@ import PackageDeliveryTable from "./components/PackageDeliveryTable/PackageDeliv
 import {getPackageByPackageTypeId} from "../../services/package.services.ts";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deletePackageType} from "../../services/package.services.ts";
+import PackageStats from "./components/PackageStats/PackageStats.tsx";
 
 const PackagePage = () => {
 
@@ -26,6 +27,7 @@ const PackagePage = () => {
             getPackageByPackageTypeId(Number(id))
                 .then((response: Package[]): void => {
                     setPackages(response);
+                    console.log(response);
                 });
         }
     }, [id]);
@@ -48,6 +50,7 @@ const PackagePage = () => {
         <div className="package-page-container">
             <PageHeading heading={packageType?.name}/>
             <div className="page-content">
+                <PackageStats packages={packages}/>
                 <EditPackageType packageType={packageType}/>
                 <PackageDeliveryTable packages={packages}/>
                 <div className="btn-container">

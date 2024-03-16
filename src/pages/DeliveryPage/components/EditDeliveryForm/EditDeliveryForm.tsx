@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './EditDeliveryForm.scss';
 import { FaRegSave } from 'react-icons/fa';
 import { Delivery, EditDeliveryDTO } from '../../../../models/delivery.models';
 import { editDelivery } from '../../../../services/delivery.services';
+import './EditDeliveryForm.scss';
 
 const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     const [formData, setFormData] = useState<EditDeliveryDTO>({
         route: '',
         destination: '',
-        delivery_method: '',
+        delivery_method: 'mail', // Renamed from delivery_method to deliveryMethod
         notes: '',
     });
 
@@ -43,7 +43,7 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
             const updatedDelivery: Delivery = await editDelivery(delivery.id, formData);
             console.log('Delivery updated:', updatedDelivery);
             // Optionally, provide feedback to the user (e.g., show a success message)
-            window.location.reload(); // Reload the page after successful update (consider alternatives like updating state instead)
+            // Consider updating the UI instead of reloading the entire page
         } catch (error) {
             console.error('Error updating delivery:', error);
             // Optionally, provide feedback to the user (e.g., show an error message)
@@ -57,45 +57,26 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
             </div>
             <form className="panel-content" onSubmit={handleSubmit}>
                 <div className="input-wrapper">
-                    <label>
-                        Route:
-                        <input type="text" id="route" name="route" value={formData.route} onChange={handleChange}/>
-                    </label>
+                    <label htmlFor="route">Route:</label>
+                    <input type="text" id="route" name="route" value={formData.route} onChange={handleChange} />
                 </div>
                 <div className="input-wrapper">
-                    <label>
-                        Destination:
-                        <input
-                            type="text"
-                            id="destination"
-                            name="destination"
-                            value={formData.destination}
-                            onChange={handleChange}
-                        />
-                    </label>
+                    <label htmlFor="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" value={formData.destination} onChange={handleChange} />
                 </div>
                 <div className="input-wrapper">
-                    <label>
-                        Delivery Type:
-                        <select
-                            name="delivery_method"
-                            value={formData.delivery_method}
-                            onChange={handleChange}
-                        >
-                            <option value="mail">Mail</option>
-                            <option value="person">Person</option>
-                        </select>
-
-                    </label>
+                    <label htmlFor="deliveryMethod">Delivery Type:</label>
+                    <select name="deliveryMethod" value={formData.delivery_method} onChange={handleChange}>
+                        <option value="mail">Mail</option>
+                        <option value="person">Person</option>
+                    </select>
                 </div>
                 <div className="input-wrapper">
-                    <label>
-                        Notes:
-                        <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange}/>
-                    </label>
+                    <label htmlFor="notes">Notes:</label>
+                    <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange} />
                 </div>
-                <button type="submit">
-                    <FaRegSave/>
+                <button type="submit" className="form-btn">
+                    <FaRegSave />
                     Save
                 </button>
             </form>

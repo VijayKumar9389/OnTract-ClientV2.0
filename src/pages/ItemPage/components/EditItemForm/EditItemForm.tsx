@@ -135,7 +135,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                         </div>
 
                         <button type="submit" className="btn btn-primary">
-                            <FaRegSave/>Save
+                            <FaRegSave/>Save Changes
                         </button>
                     </div>
                 </div>

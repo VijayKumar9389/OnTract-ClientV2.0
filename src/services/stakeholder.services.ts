@@ -1,5 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import {RelatedStakeholder, Stakeholder, StakeholderStatsDTO} from "../models/stakeholder.models.ts";
+import {
+    RelatedStakeholder,
+    Stakeholder,
+    StakeholderStatsDTO,
+    UpdateStakeholderInput
+} from "../models/stakeholder.models.ts";
 import {UpdateTrackRecordInput} from "../models/stakeholder.models.ts";
 
 export const getStakeholdersByProjectId = async (projectId: number): Promise<Stakeholder[]> => {
@@ -33,7 +38,6 @@ export const getRelatedStakeholder = async (stakeholderId: number): Promise<Rela
         console.error('Error getting stakeholders:', error);
         throw error;
     }
-
 }
 
 // Get stakeholder by ID
@@ -67,6 +71,18 @@ export const updateTractRecord = async (tractId: number, updatedTractRecord: Upd
         await axios.put(endpoint, updatedTractRecord);
     } catch (error) {
         console.error('Error updating tract record:', error);
+        throw error;
+    }
+}
+
+//Update stakeholder info by id
+
+export const updateStakeholder = async (stakeholderId: number, data: UpdateStakeholderInput): Promise<void> => {
+    try {
+        const endpoint: string = `http://localhost:3005/stakeholder/update/${stakeholderId}`;
+        await axios.post<void>(endpoint, data);
+    } catch (error) {
+        console.error('Error updating stakeholder:', error);
         throw error;
     }
 }
