@@ -44,46 +44,21 @@ const StakeholderStats = () => {
 
     return (
         <div className="stakeholder-stats">
-            <div className="stat-wrapper">
-                <label className="panel-label">Attempted</label>
-                <StatItem title={"Attempted Contact"} value={stakeholderStats.attemptedContactCount}
-                          total={stakeholderStats.totalCount}/>
-                <StatItem title={"Not Attempted"} value={stakeholderStats.notAttemptedContactCount}
-                          total={stakeholderStats.totalCount}/>
-            </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Multi Tract</label>
-                <StatItem title={"One Tract"} value={stakeholderStats.oneTractCount}
-                          total={stakeholderStats.totalCount}/>
-                <StatItem title={"More Than One Tract"} value={stakeholderStats.moreThanOneTractCount}
-                          total={stakeholderStats.totalCount}/>
-            </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Contacted</label>
-                <StatItem title={"Contacted"} value={stakeholderStats.contactedYesCount}
-                          total={stakeholderStats.totalCount}/>
-                <StatItem title={"Not Contacted"} value={stakeholderStats.contactedNoCount}
-                          total={stakeholderStats.totalCount}/>
-            </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Consulted</label>
-                <StatItem title={"Consulted"} value={stakeholderStats.consultedCount}
-                          total={stakeholderStats.totalCount}/>
-                <StatItem title={"Not Consulted"} value={stakeholderStats.notConsultedCount}
-                          total={stakeholderStats.totalCount}/>
-            </div>
-
-        </div>
-    );
-}
-
-const StatItem = (props: { title: string, value: number, total: number }) => {
-    return (
-        <div className="stat-item">
-            <p>{props.title}: <strong>{props.value}</strong> / {props.total}</p>
-            <div className="progress-bar">
-                <div className="progress" style={{width: `${(props.value / props.total) * 100}%`}}></div>
-            </div>
+            <p className="info-list">
+                Total: <span className="info-item">{stakeholderStats.totalCount}</span>
+                <span className="separator">|</span>
+                Contacted: <span className="info-item">{stakeholderStats.contactedYesCount}</span>
+                <span className="separator">|</span>
+                No Contact: <span className="info-item">{stakeholderStats.contactedNoCount}</span>
+                <span className="separator">|</span>
+                Consulted: <span className="info-item">{stakeholderStats.consultedCount}</span>
+                <span className="separator">|</span>
+                No Consultation: <span className="info-item">{stakeholderStats.notConsultedCount}</span>
+                <span className="separator">|</span>
+                Attempted: <span className="info-item">{stakeholderStats.attemptedContactCount}</span>
+                <span className="separator">|</span>
+                No Attempts: <span className="info-item">{stakeholderStats.notAttemptedContactCount}</span>
+            </p>
         </div>
     );
 }

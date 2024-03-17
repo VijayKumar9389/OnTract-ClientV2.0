@@ -1,12 +1,12 @@
-import {useState} from "react";
-import {Link} from "react-router-dom";
-import {FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram, FaTimes} from 'react-icons/fa';
-import {FiPackage} from "react-icons/fi";
-import {GiHamburgerMenu} from "react-icons/gi";
-import {MdEmergencyShare} from "react-icons/md";
-import {setLogout} from "../../store/reducers/auth.reducer.ts";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../../store/reducers/auth.reducer.ts";
+import { RootState } from "../../store";
+import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram, FaTimes } from 'react-icons/fa';
+import { FiPackage } from "react-icons/fi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { MdEmergencyShare } from "react-icons/md";
 import "./Navbar.scss";
 
 const Navbar = () => {
@@ -24,37 +24,35 @@ const Navbar = () => {
 
     return (
         <nav className="nav-container">
-            <h1><MdEmergencyShare/> OnTract</h1>
+            <h1><MdEmergencyShare /> OnTract</h1>
             <ul className="navbar-links">
-                <li><Link to="/" className="sidebar-link" onClick={closeModal}><FaHome/>Dashboard</Link></li>
-                <li><Link to="/stakeholders" className="sidebar-link" onClick={closeModal}><FaUser/>Stakeholders</Link>
-                </li>
-                <li><Link to="/deliveries" className="sidebar-link" onClick={closeModal}><FaTruck/>Deliveries</Link>
-                </li>
-                <li><Link to="/inventory" className="sidebar-link" onClick={closeModal}><FaBoxes/>Inventory</Link></li>
-                <li><Link to="/packages" className="sidebar-link" onClick={closeModal}><FiPackage/>Packages</Link></li>
+                <li><Link to="/" className="sidebar-link" onClick={closeModal}><FaHome />Dashboard</Link></li>
+                <li><Link to="/stakeholders" className="sidebar-link" onClick={closeModal}><FaUser />Stakeholders</Link></li>
+                <li><Link to="/deliveries" className="sidebar-link" onClick={closeModal}><FaTruck />Deliveries</Link></li>
+                <li><Link to="/inventory" className="sidebar-link" onClick={closeModal}><FaBoxes />Inventory</Link></li>
+                <li><Link to="/packages" className="sidebar-link" onClick={closeModal}><FiPackage />Packages</Link></li>
                 {isAdmin && (
                     <>
-                        <li><Link to="/users" className="sidebar-link" onClick={closeModal}><FaUsers/>Users</Link></li>
-                        <li><Link to="/projects" className="sidebar-link" onClick={closeModal}><FaProjectDiagram/>Projects</Link>
-                        </li>
+                        <li><Link to="/users" className="sidebar-link" onClick={closeModal}><FaUsers />Users</Link></li>
+                        <li><Link to="/projects" className="sidebar-link" onClick={closeModal}><FaProjectDiagram />Projects</Link></li>
                     </>
                 )}
                 <li>
-                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt/>Logout</button>
+                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
                 </li>
             </ul>
             <button className="btn-menu" onClick={toggleModal}>
-                <GiHamburgerMenu/>
+                <GiHamburgerMenu />
             </button>
 
             {isModalOpen && (
                 <div className="modal-overlay" onClick={toggleModal}>
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
-                        <button className="btn-menu" onClick={toggleModal}>
-                            <FaTimes/>
-                        </button>
-
+                        <div className="btn-container">
+                            <button className="btn-menu" onClick={toggleModal}>
+                                <FaTimes />
+                            </button>
+                        </div>
                         <ul className="modal-links">
                             <li><Link to="/" onClick={closeModal}>Dashboard</Link></li>
                             <li><Link to="/stakeholders" onClick={closeModal}>Stakeholders</Link></li>
@@ -72,9 +70,9 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
-
         </nav>
     );
 }
 
 export default Navbar;
+

@@ -1,5 +1,5 @@
 import './Dialog.scss';
-import React, {useEffect} from "react";
+import React from "react";
 import {MdClose} from "react-icons/md";
 
 interface DialogProps {
@@ -10,23 +10,23 @@ interface DialogProps {
 }
 
 const Dialog: React.FC<DialogProps> = ({ isOpen, toggle, element, heading }) => {
-    useEffect(() => {
-        const handleBodyScroll = (event: Event) => {
-            event.preventDefault();
-        };
-
-        if (isOpen) {
-            document.body.classList.add("popup-open");
-            document.body.addEventListener("touchmove", handleBodyScroll, { passive: false });
-            document.body.addEventListener("wheel", handleBodyScroll, { passive: false });
-        }
-
-        return (): void => {
-            document.body.classList.remove("popup-open");
-            document.body.removeEventListener("touchmove", handleBodyScroll);
-            document.body.removeEventListener("wheel", handleBodyScroll);
-        };
-    }, [isOpen]);
+    // useEffect(() => {
+    //     const handleBodyScroll = (event: Event) => {
+    //         event.preventDefault();
+    //     };
+    //
+    //     if (isOpen) {
+    //         document.body.classList.add("popup-open");
+    //         document.body.addEventListener("touchmove", handleBodyScroll, { passive: false });
+    //         document.body.addEventListener("wheel", handleBodyScroll, { passive: false });
+    //     }
+    //
+    //     return (): void => {
+    //         document.body.classList.remove("popup-open");
+    //         document.body.removeEventListener("touchmove", handleBodyScroll);
+    //         document.body.removeEventListener("wheel", handleBodyScroll);
+    //     };
+    // }, [isOpen]);
 
     if (isOpen) {
         return (

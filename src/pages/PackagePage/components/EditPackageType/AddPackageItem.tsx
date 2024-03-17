@@ -47,7 +47,7 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
     return (
         <div className="add-item-form">
             <div className="input-wrapper">
-                <label>Items
+                <label>Add Item:
                     <select className="item-select" onChange={(e) => setSelectedItemId(parseInt(e.target.value))}>
                         <option value="">Add Item</option>
                         {packageItems.map((item: Item) => (

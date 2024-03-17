@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import {ProjectRecordInput} from "../../../../models/project.models.ts";
+import './CreateProject.scss';
 
 const CreateProject = () => {
     const [projectForm, setProjectForm] = useState({
@@ -117,7 +118,6 @@ const CreateProject = () => {
 
     return (
         <div>
-            <h1>Create Project</h1>
             <div className="create-project-form">
 
                 <div className="input-wrapper">
@@ -173,29 +173,24 @@ const CreateProject = () => {
             </div>
 
 
-            {jsonData && jsonData.length > 0 &&
-                <div>
-                <h2>Processed Data</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            {Object.keys(jsonData[0]).map((header, index) => (
-                                <th key={index}>{header}</th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
+            {jsonData && jsonData.length > 0 && (
+                <div className="overflow-wrapper">
+                    <h2>Processed Data</h2>
+                    <div className="project-record">
+                        {/* Map over each row in the jsonData array */}
                         {jsonData.map((row, rowIndex) => (
-                            <tr key={rowIndex}>
-                                {Object.values(row).map((cell, cellIndex) => (
-                                    <td key={cellIndex}>{cell}</td>
+                            <li key={rowIndex}>
+                                {/* Map over the entries of each row */}
+                                {Object.entries(row).map(([key, value], cellIndex) => (
+                                    <div key={cellIndex}>
+                                        <span>{key}</span>: <span>{value}</span>
+                                    </div>
                                 ))}
-                            </tr>
+                            </li>
                         ))}
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
-            }
+            )}
         </div>
     );
 };

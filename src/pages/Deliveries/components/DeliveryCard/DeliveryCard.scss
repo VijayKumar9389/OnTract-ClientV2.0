@@ -4,7 +4,9 @@
 .delivery-card {
   background-color: $cardBackgroundColor;
   padding: $spacingMedium;
-  border-bottom: $border;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
+  margin-bottom: $spacingMedium;
   cursor: pointer;
   transition: ease-in-out .3s;
   width: 100%;
@@ -14,12 +16,12 @@
   }
 
   .delivery-details {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grid layout with minimum item width of 100px */
-      align-items: center;
-      gap: $spacingSmall; /* Gap between grid items */
-      margin-bottom: $spacingSmall;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grid layout with minimum item width of 100px */
+    align-items: center;
+    gap: $spacingSmall; /* Gap between grid items */
+    margin-bottom: $spacingSmall;
 
     .detail {
       display: flex;

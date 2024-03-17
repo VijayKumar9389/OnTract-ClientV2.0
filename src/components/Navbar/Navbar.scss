@@ -110,6 +110,10 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
+
+    .btn-menu {
+      color: $primaryColor;
+    }
   }
 
   .modal {
@@ -119,13 +123,15 @@
     height: 100vh;
     width: 300px;
     width: 300px;
-    background: linear-gradient(to right, $primaryColor, $secondaryColor);
-    border-radius: $borderRadius;
+    background: $cardBackgroundColor;
+    border-top-left-radius: $borderRadius;
+    border-bottom-left-radius: $borderRadius;
     padding: $spacingMedium;
     box-shadow: $boxShadow;
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fade 0.3s ease; /* Apply fade animation */
   }
 
   .modal-links {
@@ -151,5 +157,17 @@
         background-color: lighten($primaryColor, 10);
       }
     }
+  }
+}
+
+/* Fade animation */
+@keyframes fade {
+  from {
+    right: -300px; /* Starting position outside the screen */
+    opacity: 0;
+  }
+  to {
+    right: 0; /* Slide in to the right edge */
+    opacity: 1;
   }
 }

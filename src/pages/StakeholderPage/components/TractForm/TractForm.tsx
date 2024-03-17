@@ -81,50 +81,50 @@ const TractForm: React.FC<{stakeholder: Stakeholder, tractRecord: TractRecord}> 
             <div className="input-wrapper">
                 <label>
                     Structure:
-                    <input type="text" name="structure" value={formData.structure} onChange={handleChange}/>
                 </label>
+                <input type="text" name="structure" value={formData.structure} onChange={handleChange}/>
             </div>
             <div className="input-wrapper">
                 <label>
                     Interest:
-                    <input type="text" name="interest" value={formData.interest} onChange={handleChange}/>
                 </label>
+                <input type="text" name="interest" value={formData.interest} onChange={handleChange}/>
             </div>
             <div className="input-wrapper">
                 <label>
                     Occupants:
-                    <input type="number" name="occupants" value={formData.occupants} onChange={handleChange}/>
                 </label>
+                <input type="number" name="occupants" value={formData.occupants} onChange={handleChange}/>
             </div>
             <div className="input-wrapper">
                 <label>
                     Works Land:
-                    <div>
-                        <input
-                            type="checkbox"
-                            id="worksLand"
-                            name="worksLand"
-                            checked={formData.worksLand === 'YES'}
-                            onChange={(e) => {
-                                const newValue = e.target.checked ? 'YES' : 'NO';
-                                setFormData((prevData) => ({
-                                    ...prevData,
-                                    worksLand: newValue,
-                                }));
-                            }}
-                        />
-                    </div>
                 </label>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="worksLand"
+                        name="worksLand"
+                        checked={formData.worksLand === 'YES'}
+                        onChange={(e) => {
+                            const newValue = e.target.checked ? 'YES' : 'NO';
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                worksLand: newValue,
+                            }));
+                        }}
+                    />
+                </div>
             </div>
             <div className="input-wrapper">
                 <label>
                     Tract Comments:
-                    <textarea
-                        name="tractComments"
-                        value={formData.tractComments}
-                        onChange={handleChange}
-                    ></textarea>
                 </label>
+                <textarea
+                    name="tractComments"
+                    value={formData.tractComments}
+                    onChange={handleChange}
+                ></textarea>
             </div>
             <div className="action-buttons">
                 <button type="submit">Submit</button>
@@ -134,6 +134,8 @@ const TractForm: React.FC<{stakeholder: Stakeholder, tractRecord: TractRecord}> 
             </div>
         </form>
     );
+
+
 }
 
 export default TractForm;

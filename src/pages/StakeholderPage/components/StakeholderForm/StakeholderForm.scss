@@ -30,7 +30,6 @@ input[type="checkbox"] {
   height: 20px; /* Adjust the height of the switch */
   background-color: #ccc; /* Background color when unchecked */
   border-radius: 10px; /* Make it round */
-  margin-top: $spacingSmall;
 
   &::before {
     content: "";

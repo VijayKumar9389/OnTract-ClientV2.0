@@ -6,14 +6,14 @@
   justify-content: space-between;
   background-color: $cardBackgroundColor;
   border-radius: $borderRadius;
+  box-shadow: $boxShadow;
   overflow: hidden;
   cursor: pointer;
   padding: $spacingSmall; // Increased padding for better spacing
-  border: $border; // Use border from variables for consistency
-  transition:  background-color 0.3s ease;
+  transition: ease-in-out .3s;
 
   &:hover {
-    background-color: #e0e0e0;
+    box-shadow: $boxShadowHover;
   }
 
   .item-image {

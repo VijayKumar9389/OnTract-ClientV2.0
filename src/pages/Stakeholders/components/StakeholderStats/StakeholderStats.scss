@@ -5,7 +5,6 @@
   gap: $spacingSmall;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grid layout with minimum item width of 100px */
   width: 100%;
-  margin-bottom: $spacingLarge;
 
   .stat-wrapper {
     width: 100%;

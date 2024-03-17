@@ -1,10 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Heading from '../../components/Heading/Heading';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
-import {getDeliveriesByProjectID} from '../../services/delivery.services';
-import {getProjectFromCookie} from '../../utils/cookieHelper';
-import {Delivery} from '../../models/delivery.models';
+import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
+import { getDeliveriesByProjectID } from '../../services/delivery.services';
+import { getProjectFromCookie } from '../../utils/cookieHelper';
+import { Delivery } from '../../models/delivery.models';
 import './Deliveries.scss';
 
 const Deliveries = () => {
@@ -32,33 +33,26 @@ const Deliveries = () => {
 
     return (
         <div className="delivery-container">
-            <Heading heading="Deliveries"/>
+            <Heading heading="Deliveries" />
             <div className="page-content">
-
                 {loading && <p>Loading...</p>}
-
                 {error && <p>Error: {error}</p>}
-
                 {!loading && !error && (
-                    <div className="panel">
-                        <div className="panel-header">
-                            <label className="panel-label">Delivery List</label>
-                        </div>
-                        <div className="panel-content">
-                            <DeliveryInput/>
-                            {deliveries.length > 0 ? (
-                                <ul className="delivery-list">
-                                    {deliveries.map((delivery: Delivery) => (
-                                        <DeliveryCard key={delivery.id} delivery={delivery}/>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <div className="no-data-message">
-                                    <span>No Deliveries Created.</span>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                    <>
+                        <DeliveryStats />
+                        <DeliveryInput />
+                        {deliveries.length > 0 ? (
+                            <ul className="delivery-list">
+                                {deliveries.map((delivery: Delivery) => (
+                                    <DeliveryCard key={delivery.id} delivery={delivery} />
+                                ))}
+                            </ul>
+                        ) : (
+                            <div className="no-data-message">
+                                <span>No Deliveries Created.</span>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>
@@ -66,3 +60,4 @@ const Deliveries = () => {
 };
 
 export default Deliveries;
+

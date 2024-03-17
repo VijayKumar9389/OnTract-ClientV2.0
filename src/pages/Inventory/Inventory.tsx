@@ -60,7 +60,6 @@ const Inventory = () => {
                         )}
                     </div>
                 </div>
-
             </div>
         </div>
     );

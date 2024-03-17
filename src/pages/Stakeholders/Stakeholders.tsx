@@ -1,12 +1,12 @@
 import './Stakeholders.scss';
-import { getStakeholdersByProjectId } from "../../services/stakeholder.services.ts";
-import { useEffect, useState } from "react";
-import { Stakeholder } from "../../models/stakeholder.models.ts";
+import {getStakeholdersByProjectId} from "../../services/stakeholder.services.ts";
+import {useEffect, useState} from "react";
+import {Stakeholder} from "../../models/stakeholder.models.ts";
 import StakeholderCard from "./components/StakeholderCard/StakeholderCard.tsx";
 import StakeholderInput from "./components/StakeholderInput/StakeholderInput.tsx";
 import StakeholderStats from "./components/StakeholderStats/StakeholderStats.tsx";
 import Heading from "../../components/Heading/Heading.tsx";
-import { getProjectFromCookie } from "../../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../../utils/cookieHelper.ts";
 
 const Stakeholders = () => {
     const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
@@ -47,19 +47,12 @@ const Stakeholders = () => {
                 {!loading && !error && (
                     <>
                         <StakeholderStats/>
-                        <div className="panel">
-                            <div className="panel-header">
-                                <label className="panel-label">Stakeholder List</label>
-                            </div>
-                            <div className="panel-content">
-                                <StakeholderInput/>
-                                <ul className="stakeholder-card-list">
-                                    {stakeholders.map((stakeholder: Stakeholder) => (
-                                        <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
+                        <StakeholderInput/>
+                        <ul className="stakeholder-card-list">
+                            {stakeholders.map((stakeholder: Stakeholder) => (
+                                <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
+                            ))}
+                        </ul>
                     </>
                 )}
             </div>

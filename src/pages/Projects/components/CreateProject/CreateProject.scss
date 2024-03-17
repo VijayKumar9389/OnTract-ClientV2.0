@@ -1,2 +1,35 @@
 @import 'src/styles/variables.scss';
 
+.overflow-wrapper {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .project-record {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+
+      div {
+        margin-bottom: 5px;
+
+        span:first-child {
+          font-weight: bold;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

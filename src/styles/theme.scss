@@ -176,12 +176,14 @@ textarea {
   button {
     padding: $spacingSmall $spacingMedium;
     border: none;
+    box-shadow: $boxShadow;
     border-radius: $buttonRadius;
     cursor: pointer;
     transition: background-color 0.3s;
     height: fit-content;
 
     &:hover {
+      box-shadow: $boxShadowHover;
     }
   }
 
