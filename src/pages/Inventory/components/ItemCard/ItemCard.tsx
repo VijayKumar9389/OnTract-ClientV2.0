@@ -14,9 +14,9 @@ const ItemCard: React.FC<{ item: Item }> = ({ item }) => {
                     className="item-image"
                 />
             </div>
-            <div className="item-details">
+            <div className="card-header">
                 <h3>{item.name}</h3>
-                <p className="item-description">{item.description}</p>
+                <p className="desc">{item.description}</p>
             </div>
             <p className="item-quantity">Quantity: <strong>{item.quantity}</strong></p>
         </div>

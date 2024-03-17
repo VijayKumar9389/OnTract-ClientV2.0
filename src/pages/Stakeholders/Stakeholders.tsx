@@ -30,11 +30,12 @@ const Stakeholders = () => {
     };
 
     useEffect((): void => {
-        fetchStakeholders();
-    }, []); // Add project as a dependency to trigger re-fetching when it changes
+        fetchStakeholders()
+            .then( () => console.log('Stakeholders fetched'));
+    }, []);
 
     return (
-        <div className="stakeholders-container">
+        <div className="section">
             <Heading heading="Stakeholders"/>
             <div className="page-content">
                 {/* Conditionally render loading message */}

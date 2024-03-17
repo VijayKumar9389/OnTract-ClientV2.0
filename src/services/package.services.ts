@@ -70,6 +70,17 @@ export const createPackageType = async (packageTypeData: NewPackageTypeInput, pr
     }
 }
 
+// Update Package Type
+export const updatePackageType = async (packageTypeId: number, packageTypeData: NewPackageTypeInput): Promise<void> => {
+    try {
+        const endpoint: string = `http://localhost:3005/package/update/packagetype/${packageTypeId}`;
+        await axios.put(endpoint, packageTypeData);
+    } catch (error) {
+        console.error('Error updating package type:', error);
+        throw error;
+    }
+}
+
 
 // get all packages by item ID
 export const getPackageByPackageItemId = async (packageItemId: number): Promise<Package[]> => {
@@ -84,10 +95,10 @@ export const getPackageByPackageItemId = async (packageItemId: number): Promise<
 }
 
 // Get packages by package type ID
-export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<any> => {
+export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<Package[]> => {
     try {
         const endpoint: string = `http://localhost:3005/package/get/packagebypackagetypeid/${packageTypeId}`;
-        const response: AxiosResponse<any> = await axios.get(endpoint);
+        const response: AxiosResponse<Package[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
         console.error('Error getting package by package type ID:', error);

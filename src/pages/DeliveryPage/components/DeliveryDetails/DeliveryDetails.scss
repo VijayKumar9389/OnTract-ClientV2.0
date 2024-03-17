@@ -1,38 +1,69 @@
-@import 'src/styles/variables.scss';
+@import "src/styles/variables.scss";
+
+// DeliveryDetails.scss
 
 .delivery-details {
   background-color: $cardBackgroundColor;
   padding: $spacingMedium;
   border-radius: $borderRadius;
-  margin-bottom: $spacingMedium;
   border: $border;
   width: 100%;
+  margin-bottom: $spacingLarge;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  .delivery-info {
+    .info-list {
+      margin-bottom: $spacingSmall;
 
-  p {
-    margin-bottom: $spacingSmall;
-  }
+      .info-item {
+        margin-right: $spacingMedium;
+        font-weight: bold;
 
-  .date-picker-container {
-    display: flex;
-    align-items: center;
+        .status {
+          &.completed {
+            color: $primaryColor;
+          }
 
-    label {
-      margin-right: $spacingSmall;
+          &.pending {
+            color: $cancelColor;
+          }
+        }
+
+        .separator {
+          margin: 0 $spacingMedium;
+          color: $textColorLight;
+        }
+
+        .date {
+          color: $primaryColor;
+        }
+      }
     }
 
-    input[type="date"] {
-      background-color: $inputBackgroundColor;
-      border: $border;
-      border-radius: $borderRadius;
-      padding: $spacingSmall;
-      width: 100%; // Adjust as needed
-      font-size: inherit;
-      color: $textColor;
+    .date-form {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      margin-bottom: $spacingMedium;
+
+        .date-input {
+      width: 100%;
+        }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+      }
+
+      button {
+        margin-left: $spacingMedium;
+
+        @media (max-width: 768px) {
+          margin-left: 0;
+          margin-top: $spacingSmall;
+        }
+      }
     }
   }
 }
+

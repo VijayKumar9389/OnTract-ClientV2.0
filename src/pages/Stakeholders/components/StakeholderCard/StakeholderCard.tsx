@@ -2,44 +2,21 @@ import './StakeholderCard.scss';
 import React from "react";
 import {Navigation} from "../../../../utils/navigation.ts";
 import {Stakeholder} from "../../../../models/stakeholder.models.ts";
-import {FaPhone, FaMapMarker, FaEnvelope, FaUser, FaComment, FaClock, FaTruck, FaLandmark} from 'react-icons/fa';
+import {
+    FaPhone,
+    FaMapMarker,
+    FaEnvelope,
+    FaUser,
+    FaComment,
+    FaTruck,
+    FaVoicemail, FaHandshake
+} from 'react-icons/fa';
+import {FaLocationDot} from "react-icons/fa6";
+import { isAvailable, getAttemptNo, isNotNull, getLocation, getStatus} from "../../../../utils/helpers.ts";
+
 
 const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
     const {navigateToStakeholder} = Navigation();
-
-    const isAvailable = (value: string): boolean => (value !== "");
-
-    const getAttemptNo = (attempts: string): number => {
-        const cleanedAttempts = attempts.trim();
-
-        if (cleanedAttempts !== "") {
-            const splitAttempts = cleanedAttempts.split(",");
-            return splitAttempts.length;
-        } else {
-            return 0;
-        }
-    };
-
-    const isNotNull = (value: number | null): string => (value !== null ? "Planned" : "Not Planned");
-
-    const getLocation = (streetAddress: string): string => {
-        const location = streetAddress.split(",");
-
-        if (location.length >= 3) {
-            return `${location[location.length - 3].trim()}, ${location[location.length - 2].trim()}`;
-        }
-
-        return "MISSING LOCATION";
-    };
-
-    const getStatus = (stakeholderStatus: string): string => {
-        if (stakeholderStatus === "GREEN") {
-            return "green";
-        } else if (stakeholderStatus === "YELLOW") {
-            return "yellow";
-        }
-        return "red";
-    };
 
     return (
         <div
@@ -99,11 +76,12 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                     </div>
                 </li>
                 <li>
-                    <span><FaComment/></span>
+                    <span><FaHandshake/></span>
                     <div>
                         <p>Consultation:</p>
-                        {isAvailable(stakeholder.consultation) ? <a className="chip green">Yes</a> :
-                            <a className="chip red">No</a>}
+                        {isAvailable(stakeholder.consultation)
+                            ? <a className="chip green">Yes</a>
+                            : <a className="chip red">No</a>}
                     </div>
                 </li>
                 <li>
@@ -117,14 +95,14 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                     </div>
                 </li>
                 <li>
-                    <span><FaClock/></span>
+                    <span><FaVoicemail/></span>
                     <div>
                         <p>Attempts:</p>
                         <a className="number">{getAttemptNo(stakeholder.attempts)}</a>
                     </div>
                 </li>
                 <li>
-                    <span><FaLandmark/></span>
+                    <span><FaLocationDot/></span>
                     <div>
                         <p>Tracts:</p>
                         <a className="number">{stakeholder.tractRecords.length}</a>
@@ -133,8 +111,6 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
             </ul>
         </div>
     );
-
-
 }
 
 export default StakeholderCard;

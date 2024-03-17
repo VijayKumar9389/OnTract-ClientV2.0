@@ -79,69 +79,63 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
 
                     <div>
                         <div className="input-wrapper">
-                            <label htmlFor="fileInput" className="form-label">
-                                File:
-                                <input
-                                    type="file"
-                                    id="fileInput"
-                                    onChange={handleFileChange}
-                                    className="form-control"
-                                />
-                            </label>
+                            <label htmlFor="fileInput" className="form-label">File:</label>
+                            <input
+                                type="file"
+                                id="fileInput"
+                                onChange={handleFileChange}
+                                className="form-control"
+                            />
                         </div>
 
                         <div className="input-wrapper">
-                            <label htmlFor="editName" className="form-label">
-                                Name:
-                                <input
-                                    id="editName"
-                                    type="text"
-                                    value={editedItem.name}
-                                    name="name"
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                    required
-                                />
-                            </label>
+                            <label htmlFor="editName" className="form-label">Name:</label>
+                            <input
+                                id="editName"
+                                type="text"
+                                value={editedItem.name}
+                                name="name"
+                                onChange={handleInputChange}
+                                className="form-control"
+                                required
+                            />
                         </div>
 
                         <div className="input-wrapper">
-                            <label htmlFor="editDescription" className="form-label">
-                                Description:
-                                <textarea
-                                    id="editDescription"
-                                    value={editedItem.description}
-                                    name="description"
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                    required
-                                />
-                            </label>
+                            <label htmlFor="editDescription" className="form-label">Description:</label>
+                            <textarea
+                                id="editDescription"
+                                value={editedItem.description}
+                                name="description"
+                                onChange={handleInputChange}
+                                className="form-control"
+                                required
+                            />
                         </div>
 
                         <div className="input-wrapper">
-                            <label htmlFor="editQuantity" className="form-label">
-                                Quantity:
-                                <input
-                                    id="editQuantity"
-                                    type="number"
-                                    value={editedItem.quantity}
-                                    name="quantity"
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                    required
-                                />
-                            </label>
+                            <label htmlFor="editQuantity" className="form-label">Quantity:</label>
+                            <input
+                                id="editQuantity"
+                                type="number"
+                                value={editedItem.quantity}
+                                name="quantity"
+                                onChange={handleInputChange}
+                                className="form-control"
+                                required
+                            />
                         </div>
 
-                        <button type="submit" className="btn btn-primary">
-                            <FaRegSave/>Save Changes
+                        <button type="submit" className="form-btn">
+                            <FaRegSave/>
+                            Save
                         </button>
                     </div>
                 </div>
             </div>
         </form>
     );
+
 };
 
 export default EditItemForm;

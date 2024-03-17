@@ -5,6 +5,7 @@ import {createDelivery} from '../../../../services/delivery.services.ts';
 import {getPackageTypesByProjectId} from "../../../../services/package.services.ts";
 import {NewDeliveryInput} from "../../../../models/delivery.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {FaTruck} from "react-icons/fa";
 
 interface CreateDeliveryForm {
     delivery_method: string;
@@ -171,7 +172,8 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
                 className="form-btn"
                 disabled={!createDeliveryForm.packageTypeId || !createDeliveryForm.delivery_method || !createDeliveryForm.route}
             >
-                Submit
+                <FaTruck />
+                Create Delivery
             </button>
         </form>
     );

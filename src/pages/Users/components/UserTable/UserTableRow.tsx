@@ -18,7 +18,6 @@ const UserTableRow = ({user}: { user: User }) => {
                 heading="Edit User"
                 element={<EditUser user={user}/>}/>
             <tr>
-                <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.isAdmin ? "True" : "False"}</td>
                 <td>

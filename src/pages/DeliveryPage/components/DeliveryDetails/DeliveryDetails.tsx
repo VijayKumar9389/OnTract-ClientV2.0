@@ -3,8 +3,9 @@ import {setDeliveryCompleted} from "../../../../services/delivery.services.ts";
 import {Delivery} from "../../../../models/delivery.models.ts";
 import {useState} from "react";
 import './DeliveryDetails.scss';
+import {FaCheck} from "react-icons/fa6";
 
-const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
+const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
     const [selectedDate, setSelectedDate] = useState(delivery.date || "");
 
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,31 +43,32 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
 
     return (
         <div className="delivery-details">
-            <div className="info-list">
-                <label className="panel-label">Delivery Status</label>
+            <div className="delivery-info">
+                <form onSubmit={handleSubmit} className="date-form">
+                    <div className="input-wrapper">
+                        <label htmlFor="deliveryDate">Completion Date:</label>
+                        <input
+                            type="date"
+                            id="deliveryDate"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            className="date-input"
+                        />
+                    </div>
+                    <button type="submit" disabled={!isDateSelected}>
+                        <FaCheck/>
+                        Set Completion Date
+                    </button>
+                </form>
                 <p className="info-list">
                     Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
                     <span className="separator">|</span>
                     Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/a</a>}</span>
                 </p>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-wrapper">
-                        <label htmlFor="deliveryDate">Date:
-                            <input
-                                type="date"
-                                id="deliveryDate"
-                                value={selectedDate}
-                                onChange={handleDateChange}
-                            />
-                        </label>
-                    </div>
-                    <button type="submit" className="edit-button" disabled={!isDateSelected}>
-                        Set Completion Date
-                    </button>
-                </form>
             </div>
         </div>
     );
+
 }
 
 export default DeliveryDetails;

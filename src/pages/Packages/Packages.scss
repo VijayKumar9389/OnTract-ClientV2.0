@@ -1,16 +1,9 @@
 @import 'src/styles/variables.scss';
 
-.packages-container {
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: $spacingMedium;
-      margin-top: $spacingMedium; /* Utilizing theme variable for medium spacing */
-
-    }
+.package-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $spacingMedium; /* Utilizing theme variable for medium spacing */
 }
 

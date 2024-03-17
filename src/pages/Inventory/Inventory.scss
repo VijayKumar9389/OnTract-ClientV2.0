@@ -1,60 +1,11 @@
 @import 'src/styles/variables.scss';
 
-.inventory-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-
-  h1 {
-    font-size: 32px;
-    color: $primaryColor;
-    margin-bottom: $spacingMedium;
-  }
-
-  //.btn-container {
-  //  margin-bottom: $spacingMedium;
-  //  width: 100%;
-  //  display: flex;
-  //  justify-content: flex-end;
-  //
-  //  button {
-  //    background-color: $primaryColor;
-  //    color: white;
-  //    border: none;
-  //    border-radius: 4px;
-  //    padding: 10px 20px;
-  //    font-size: 16px;
-  //    cursor: pointer;
-  //    transition: background-color $transition;
-  //
-  //    &:hover {
-  //      background-color: darken($primaryColor, 10%);
-  //    }
-  //  }
-  //}
-
   .inventory-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: $spacingMedium; /* Utilizing theme variable for medium spacing */
-    margin-top: $spacingMedium; /* Utilizing theme variable for medium spacing */
-
-    h3 {
-      font-size: 24px;
-      color: $primaryColor;
-      margin-bottom: $spacingSmall;
-    }
-
-    p {
-      font-size: 16px;
-      color: $textColor;
-      margin-bottom: $spacingSmall;
-    }
   }
 
 
-}
+

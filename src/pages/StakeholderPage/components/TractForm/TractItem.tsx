@@ -25,8 +25,7 @@ const TractItem: React.FC<TractItemProps> = ({tract}) => {
             <div className="panel-header">
                 <label className="panel-label">TRACT <strong>{tract.tract}</strong></label>
             </div>
-            <div className="page-content
-            ">
+            <div className="page-content">
                 <p className="info-list">
                     Carrying: <span className="info-item">{tract.commodity}</span>
                     <span className="separator">|</span>

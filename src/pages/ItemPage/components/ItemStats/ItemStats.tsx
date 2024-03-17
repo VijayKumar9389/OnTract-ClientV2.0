@@ -14,20 +14,30 @@ const ItemStats: React.FC<{item: Item, packages: Package[] | null}> = ({item, pa
     const pendingDeliveries = packages.filter((deliveryPackage: Package) => !deliveryPackage.delivery.completed);
 
     return (
-        <div className="item-stats">
-            <p className="info-list">
-                Stock: <span className="info-item">{item.quantity}</span>
-                <span className="separator">|</span>
-                Remaining: <span className="info-item">{item.quantity - packages.length}</span>
-                <span className="separator">|</span>
-                Scheduled: <span className="info-item">{packages.length}</span>
-                <span className="separator">|</span>
-                Completed: <span className="info-item">{completedDeliveries.length}</span>
-                <span className="separator">|</span>
-                Pending Deliveries: <span className="info-item">{pendingDeliveries.length}</span>
-            </p>
+        <div className="project-statistics">
+            <div className="statistic-item">
+                <span className="label">Stock:</span>
+                <span className="value">{item.quantity}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Remaining:</span>
+                <span className="value">{item.quantity - packages.length}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Scheduled:</span>
+                <span className="value">{packages.length}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Completed:</span>
+                <span className="value">{completedDeliveries.length}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Pending Deliveries:</span>
+                <span className="value">{pendingDeliveries.length}</span>
+            </div>
         </div>
     );
+
 }
 
 export default ItemStats;

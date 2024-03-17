@@ -43,22 +43,35 @@ const StakeholderStats = () => {
     }
 
     return (
-        <div className="stakeholder-stats">
-            <p className="info-list">
-                Total: <span className="info-item">{stakeholderStats.totalCount}</span>
-                <span className="separator">|</span>
-                Contacted: <span className="info-item">{stakeholderStats.contactedYesCount}</span>
-                <span className="separator">|</span>
-                No Contact: <span className="info-item">{stakeholderStats.contactedNoCount}</span>
-                <span className="separator">|</span>
-                Consulted: <span className="info-item">{stakeholderStats.consultedCount}</span>
-                <span className="separator">|</span>
-                No Consultation: <span className="info-item">{stakeholderStats.notConsultedCount}</span>
-                <span className="separator">|</span>
-                Attempted: <span className="info-item">{stakeholderStats.attemptedContactCount}</span>
-                <span className="separator">|</span>
-                No Attempts: <span className="info-item">{stakeholderStats.notAttemptedContactCount}</span>
-            </p>
+        <div className="project-statistics">
+            <div className="statistic-item">
+                <span className="label">Total:</span>
+                <span className="value">{stakeholderStats.totalCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Contacted:</span>
+                <span className="value">{stakeholderStats.contactedYesCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">No Contact:</span>
+                <span className="value">{stakeholderStats.contactedNoCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Consulted:</span>
+                <span className="value">{stakeholderStats.consultedCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">No Consultation:</span>
+                <span className="value">{stakeholderStats.notConsultedCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Attempted:</span>
+                <span className="value">{stakeholderStats.attemptedContactCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">No Attempts:</span>
+                <span className="value">{stakeholderStats.notAttemptedContactCount}</span>
+            </div>
         </div>
     );
 }

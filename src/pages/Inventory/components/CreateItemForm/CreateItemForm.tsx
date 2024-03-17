@@ -3,6 +3,7 @@ import {createItem} from "../../../../services/item.services.ts";
 import "./CreateItemForm.scss";
 import {NewItemInput} from "../../../../models/item.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {FaBox} from "react-icons/fa";
 
 const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();
@@ -60,39 +61,33 @@ const CreateItemForm: React.FC = () => {
         <div className="create-item-form">
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="input-wrapper">
-                    <label htmlFor="name">
-                        Name
-                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
-                    </label>
+                    <label htmlFor="name">Name</label>
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
                 </div>
 
                 <div className="input-wrapper">
-                    <label htmlFor="description">
-                        Description
-                        <textarea id="description" name="description" value={formData.description}
-                                  onChange={handleChange}></textarea>
-                    </label>
+                    <label htmlFor="description">Description</label>
+                    <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
                 </div>
 
                 <div className="input-wrapper">
-                    <label htmlFor="image">
-                        Image
-                        <input type="file" id="image" name="image" onChange={handleFileChange}/>
-                    </label>
+                    <label htmlFor="image">Image</label>
+                    <input type="file" id="image" name="image" onChange={handleFileChange}/>
                 </div>
 
                 <div className="input-wrapper">
-                    <label htmlFor="quantity">
-                        Quantity
-                        <input type="number" id="quantity" name="quantity" value={formData.quantity}
-                               onChange={handleChange}/>
-                    </label>
+                    <label htmlFor="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange}/>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit" className="form-btn">
+                    <FaBox />
+                    Create Item
+                </button>
             </form>
         </div>
     );
+
 };
 
 export default CreateItemForm;

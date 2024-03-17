@@ -6,6 +6,7 @@ import { NewPackageInput, PackageType } from '../../../../models/package.models.
 import { Delivery } from '../../../../models/delivery.models.ts';
 import { Project, Stakeholder } from '../../../../models/stakeholder.models.ts';
 import { getProjectFromCookie } from '../../../../utils/cookieHelper.ts';
+import {FaBoxesPacking} from "react-icons/fa6";
 
 interface PackageFormProps {
     stakeholder: Stakeholder;
@@ -80,6 +81,7 @@ const PackageForm: React.FC<PackageFormProps> = ({ stakeholder }) => {
                 </select>
             </div>
             <button type="submit" className="form-btn" disabled={!formIsValid}>
+                <FaBoxesPacking />
                 Create Package
             </button>
         </form>

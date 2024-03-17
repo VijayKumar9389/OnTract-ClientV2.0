@@ -45,14 +45,19 @@ const DeliveryStats = () => {
     }
 
     return (
-        <div className="stakeholder-stats">
-            <p className="info-list">
-                Total: <span className="info-item">{deliveryReport.count}</span>
-                <span className="separator">|</span>
-                Contacted: <span className="info-item">{deliveryReport.pendingDeliveryCount}</span>
-                <span className="separator">|</span>
-                No Contact: <span className="info-item">{deliveryReport.completedDeliveryCount}</span>
-            </p>
+        <div className="project-statistics">
+            <div className="statistic-item">
+                <span className="label">Total:</span>
+                <span className="value">{deliveryReport.count}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Contacted:</span>
+                <span className="value">{deliveryReport.pendingDeliveryCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">No Contact:</span>
+                <span className="value">{deliveryReport.completedDeliveryCount}</span>
+            </div>
         </div>
     );
 }

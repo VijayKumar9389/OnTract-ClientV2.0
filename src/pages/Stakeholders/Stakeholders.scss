@@ -1,12 +1,5 @@
 @import "src/styles/variables.scss";
 
-.stakeholders-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
 
   .stakeholder-card-list {
     display: flex;
@@ -19,4 +12,3 @@
     width: 100%;
     height: 100%;
   }
-}

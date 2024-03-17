@@ -3,11 +3,7 @@ import React from "react";
 import TractItem from "./TractItem.tsx";
 import './TractForm.scss';
 
-interface TractListProps {
-    tracts: TractRecord[];
-}
-
-const TractList: React.FC<TractListProps> = ({tracts}) => {
+const TractList: React.FC<{tracts: TractRecord[]}> = ({tracts}) => {
     return (
         <ul className="tract-list">
             {tracts.map((tract, index) => {

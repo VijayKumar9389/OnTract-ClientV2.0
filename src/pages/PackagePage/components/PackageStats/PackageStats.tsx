@@ -9,16 +9,22 @@ const PackageStats: React.FC<{ packages: Package[] }> = ({packages}) => {
     const pendingDeliveries = packages.filter((deliveryPackage: Package) => !deliveryPackage.delivery.completed);
 
     return (
-        <div className="package-stats">
-            <p className="info-list">
-                Scheduled: <span className="info-item">{packages.length}</span>
-                <span className="separator">|</span>
-                Completed: <span className="info-item">{completedDeliveries.length}</span>
-                <span className="separator">|</span>
-                Pending: <span className="info-item">{pendingDeliveries.length}</span>
-            </p>
+        <div className="project-statistics">
+            <div className="statistic-item">
+                <span className="label">Scheduled:</span>
+                <span className="value">{packages.length}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Completed:</span>
+                <span className="value">{completedDeliveries.length}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Pending:</span>
+                <span className="value">{pendingDeliveries.length}</span>
+            </div>
         </div>
     );
+
 }
 
 export default PackageStats;

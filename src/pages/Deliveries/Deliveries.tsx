@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Heading from '../../components/Heading/Heading';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
 import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
-import { getDeliveriesByProjectID } from '../../services/delivery.services';
-import { getProjectFromCookie } from '../../utils/cookieHelper';
-import { Delivery } from '../../models/delivery.models';
+import {getDeliveriesByProjectID} from '../../services/delivery.services';
+import {getProjectFromCookie} from '../../utils/cookieHelper';
+import {Delivery} from '../../models/delivery.models';
 import './Deliveries.scss';
 
 const Deliveries = () => {
@@ -14,8 +14,8 @@ const Deliveries = () => {
     const [error, setError] = useState<string | null>(null);
     const project = getProjectFromCookie();
 
-    useEffect(() => {
-        const fetchDeliveries = async () => {
+    useEffect((): void => {
+        const fetchDeliveries = async (): Promise<void> => {
             if (!project) return;
             try {
                 setLoading(true);
@@ -28,31 +28,32 @@ const Deliveries = () => {
             }
         };
 
-        fetchDeliveries();
+        fetchDeliveries()
+            .then(() => console.log('Deliveries fetched'));
     }, []);
 
     return (
-        <div className="delivery-container">
-            <Heading heading="Deliveries" />
+        <div className="section">
+            <Heading heading="Deliveries"/>
             <div className="page-content">
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
                 {!loading && !error && (
-                    <>
-                        <DeliveryStats />
-                        <DeliveryInput />
-                        {deliveries.length > 0 ? (
+                    deliveries.length > 0 ? (
+                        <>
+                            <DeliveryStats/>
+                            <DeliveryInput/>
                             <ul className="delivery-list">
                                 {deliveries.map((delivery: Delivery) => (
-                                    <DeliveryCard key={delivery.id} delivery={delivery} />
+                                    <DeliveryCard key={delivery.id} delivery={delivery}/>
                                 ))}
                             </ul>
-                        ) : (
-                            <div className="no-data-message">
-                                <span>No Deliveries Created.</span>
-                            </div>
-                        )}
-                    </>
+                        </>
+                    ) : (
+                        <div className="no-data-message">
+                            <span>No Deliveries Created.</span>
+                        </div>
+                    )
                 )}
             </div>
         </div>
@@ -60,4 +61,5 @@ const Deliveries = () => {
 };
 
 export default Deliveries;
+
 

@@ -1,4 +1,3 @@
-import './RegisterUser.scss';
 import React, {useState} from "react";
 import {registerUser} from "../../../../services/user.services.ts";
 

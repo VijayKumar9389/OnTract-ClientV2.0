@@ -1,4 +1,3 @@
-import './EditUser.scss';
 import React, {useState, useEffect} from "react";
 import {User} from "../../../../models/auth.models.ts";
 import {editUser} from "../../../../services/user.services.ts";

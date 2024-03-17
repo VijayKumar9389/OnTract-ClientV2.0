@@ -21,7 +21,7 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         followUp: stakeholder.followUp,
     });
 
-    useEffect(() => {
+    useEffect((): void => {
         setFormData({
             name: stakeholder.name,
             streetAddress: stakeholder.streetAddress,
@@ -49,7 +49,7 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
     };
 
     // Add a date to the attempts field
-    const addAttempt = () => {
+    const addAttempt = (): void => {
         const date = new Date().toLocaleDateString();
         const updatedAttempts = formData.attempts ? `${formData.attempts}, ${date}` : date;
         setFormData((prevData) => ({
@@ -59,7 +59,7 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
     };
 
     // Set a date to the consultation field
-    const stampDate = () => {
+    const stampDate = (): void => {
         const date = new Date().toLocaleDateString();
         setFormData((prevData) => ({
             ...prevData,
@@ -85,8 +85,6 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                 <label className="panel-label">Details</label>
             </div>
             <div className="panel-content">
-
-
                 <div className="form-row">
                     <div className="input-wrapper">
                         <label htmlFor="name">Name:</label>
@@ -179,7 +177,6 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                         </div>
                     </div>
                 </div>
-
 
                 <div className="form-row">
                     <div className="input-wrapper">
