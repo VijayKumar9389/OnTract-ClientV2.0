@@ -1,4 +1,3 @@
-import './StakeholderInput.scss';
 import { MdFilterAlt, MdFilterAltOff } from 'react-icons/md';
 
 const StakeholderInput = () => {

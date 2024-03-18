@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
-import { getItemsByProjectId } from "../../../../services/item.services.ts";
-import { Item } from "../../../../models/item.models.ts";
-import { createPackageItem } from "../../../../services/item.services.ts";
+import React, {useEffect, useState} from "react";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {getItemsByProjectId} from "../../../../services/item.services.ts";
+import {Item} from "../../../../models/item.models.ts";
+import {createPackageItem} from "../../../../services/item.services.ts";
+import {FaCheck} from "react-icons/fa6";
 
-const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) => {
+const AddPackageItem: React.FC<{ packageTypeID: number }> = ({packageTypeID}) => {
     const [packageItems, setItems] = useState<Item[]>([]);
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
     const project = getProjectFromCookie();
@@ -22,7 +23,8 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
     };
 
     useEffect((): void => {
-        fetchItems().then(():void => {});
+        fetchItems().then((): void => {
+        });
     }, []);
 
     const AddPackageItem = async (): Promise<void> => {
@@ -47,18 +49,21 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
     return (
         <div className="add-item-form">
             <div className="input-wrapper">
-                <label>Add Item:
-                    <select className="item-select" onChange={(e) => setSelectedItemId(parseInt(e.target.value))}>
-                        <option value="">Add Item</option>
+                <label>Add Item:</label>
+                <div className="submit-wrapper">
+                    <select onChange={(e) => setSelectedItemId(parseInt(e.target.value))}>
+                        <option value="">Select Item</option>
                         {packageItems.map((item: Item) => (
                             <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </select>
-                </label>
+                    <button className="add-button" onClick={() => AddPackageItem()}>
+                        <FaCheck/>
+                        Add Item
+                    </button>
+                </div>
             </div>
-            <button className="add-button" onClick={() => AddPackageItem()}>
-                Add Item
-            </button>
+
         </div>
     );
 }

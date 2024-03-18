@@ -26,23 +26,24 @@ const Navbar = () => {
         <nav className="nav-container">
             <h1><MdEmergencyShare /> OnTract</h1>
             <ul className="navbar-links">
-                <li><Link to="/" className="sidebar-link" onClick={closeModal}><FaHome />Dashboard</Link></li>
-                <li><Link to="/stakeholders" className="sidebar-link" onClick={closeModal}><FaUser />Stakeholders</Link></li>
-                <li><Link to="/deliveries" className="sidebar-link" onClick={closeModal}><FaTruck />Deliveries</Link></li>
-                <li><Link to="/inventory" className="sidebar-link" onClick={closeModal}><FaBoxes />Inventory</Link></li>
-                <li><Link to="/packages" className="sidebar-link" onClick={closeModal}><FiPackage />Packages</Link></li>
+                <li><Link to="/" className="sidebar-link" onClick={closeModal}><FaHome/>Dashboard</Link></li>
+                <li><Link to="/stakeholders" className="sidebar-link" onClick={closeModal}><FaUser/>Stakeholders</Link></li>
+                <li><Link to="/deliveries" className="sidebar-link" onClick={closeModal}><FaTruck/>Deliveries</Link></li>
+                <li><Link to="/packages" className="sidebar-link" onClick={closeModal}><FiPackage/>Packages</Link></li>
+                <li><Link to="/inventory" className="sidebar-link" onClick={closeModal}><FaBoxes/>Inventory</Link></li>
                 {isAdmin && (
                     <>
-                        <li><Link to="/users" className="sidebar-link" onClick={closeModal}><FaUsers />Users</Link></li>
-                        <li><Link to="/projects" className="sidebar-link" onClick={closeModal}><FaProjectDiagram />Projects</Link></li>
+                        <li><Link to="/users" className="sidebar-link" onClick={closeModal}><FaUsers/>Users</Link></li>
+                        <li><Link to="/projects" className="sidebar-link" onClick={closeModal}><FaProjectDiagram/>Projects</Link>
+                        </li>
                     </>
                 )}
                 <li>
-                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
+                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt/>Logout</button>
                 </li>
             </ul>
             <button className="btn-menu" onClick={toggleModal}>
-                <GiHamburgerMenu />
+                <GiHamburgerMenu/>
             </button>
 
             {isModalOpen && (

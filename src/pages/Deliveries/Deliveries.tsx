@@ -6,7 +6,6 @@ import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
 import {getDeliveriesByProjectID} from '../../services/delivery.services';
 import {getProjectFromCookie} from '../../utils/cookieHelper';
 import {Delivery} from '../../models/delivery.models';
-import './Deliveries.scss';
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -42,12 +41,20 @@ const Deliveries = () => {
                     deliveries.length > 0 ? (
                         <>
                             <DeliveryStats/>
-                            <DeliveryInput/>
-                            <ul className="delivery-list">
-                                {deliveries.map((delivery: Delivery) => (
-                                    <DeliveryCard key={delivery.id} delivery={delivery}/>
-                                ))}
-                            </ul>
+                            <div className="panel">
+                                <div className="panel-header">
+                                    <label className="panel-label">Delivery List</label>
+                                </div>
+                                <div className="panel-content">
+                                    <DeliveryInput/>
+                                    <ul className="card-list">
+                                        {deliveries.map((delivery: Delivery) => (
+                                            <DeliveryCard key={delivery.id} delivery={delivery}/>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
                         </>
                     ) : (
                         <div className="no-data-message">

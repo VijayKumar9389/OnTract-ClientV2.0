@@ -1,4 +1,3 @@
-import './DeliveryStats.scss';
 import {useEffect, useState} from "react";
 import {DeliveryReportDTO} from "../../../../models/delivery.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
@@ -27,7 +26,8 @@ const DeliveryStats = () => {
     }
 
     useEffect((): void => {
-        fetchDeliveryReport();
+        fetchDeliveryReport()
+            .then(() => console.log('Delivery report fetched'));
     }, []);
 
 
@@ -51,11 +51,11 @@ const DeliveryStats = () => {
                 <span className="value">{deliveryReport.count}</span>
             </div>
             <div className="statistic-item">
-                <span className="label">Contacted:</span>
+                <span className="label">Completed:</span>
                 <span className="value">{deliveryReport.pendingDeliveryCount}</span>
             </div>
             <div className="statistic-item">
-                <span className="label">No Contact:</span>
+                <span className="label">Pending:</span>
                 <span className="value">{deliveryReport.completedDeliveryCount}</span>
             </div>
         </div>

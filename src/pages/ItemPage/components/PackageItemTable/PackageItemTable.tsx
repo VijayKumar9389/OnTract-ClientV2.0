@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import './PackageItemTable.scss';
-import { Package } from "../../../../models/package.models.ts";
-import { Item } from "../../../../models/item.models.ts";
-import { Navigation } from "../../../../utils/navigation.ts";
+import React, {useState} from "react";
+import {Package} from "../../../../models/package.models.ts";
+import {Item} from "../../../../models/item.models.ts";
+import {Navigation} from "../../../../utils/navigation.ts";
 
 const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packages, item}) => {
-    const { navigateToPackage, navigateToStakeholder, navigateToDelivery } = Navigation();
+    const {navigateToPackage, navigateToStakeholder, navigateToDelivery} = Navigation();
     const [deliveryType, setDeliveryType] = useState('All'); // State to track the selected delivery type
 
     // Function to toggle delivery type
@@ -25,21 +24,23 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packag
             <div className="panel-header">
                 <label className="panel-label">Scheduled Items</label>
             </div>
-            <div className="panel-content">
-                {/* Submenu */}
-                <div className="submenu">
-                    <div className={`submenu-item ${deliveryType === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryType('All')}>
-                        All
-                    </div>
-                    <div className={`submenu-item ${deliveryType === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryType('Completed')}>
-                        Completed
-                    </div>
-                    <div className={`submenu-item ${deliveryType === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryType('Pending')}>
-                        Pending
-                    </div>
-                </div>
 
-                {/* Package Table */}
+            <div className="submenu">
+                <div className={`submenu-item ${deliveryType === 'All' ? 'selected' : ''}`}
+                     onClick={() => toggleDeliveryType('All')}>
+                    All
+                </div>
+                <div className={`submenu-item ${deliveryType === 'Completed' ? 'selected' : ''}`}
+                     onClick={() => toggleDeliveryType('Completed')}>
+                    Completed
+                </div>
+                <div className={`submenu-item ${deliveryType === 'Pending' ? 'selected' : ''}`}
+                     onClick={() => toggleDeliveryType('Pending')}>
+                    Pending
+                </div>
+            </div>
+
+            <div className="panel-content">
                 {filteredPackages.length > 0 ? (
                     <table className="package-table">
                         <thead>
@@ -67,9 +68,16 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packag
                                 </td>
                                 <td>
                                     <div className="action-buttons">
-                                        <button onClick={() => navigateToPackage(deliveryPackage.packageType.id)}>View Package</button>
-                                        <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>View Stakeholder</button>
-                                        <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId)}>View Delivery</button>
+                                        <button onClick={() => navigateToPackage(deliveryPackage.packageType.id)}>View
+                                            Package
+                                        </button>
+                                        <button
+                                            onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>View
+                                            Stakeholder
+                                        </button>
+                                        <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId)}>View
+                                            Delivery
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

@@ -1,0 +1,295 @@
+@import 'src/styles/variables.scss';
+
+// Buttons
+button {
+  background-color: $primaryColor;
+  color: #fff;
+  border: none;
+  border-radius: $buttonRadius;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color $transition;
+  align-items: center;
+  display: flex;
+
+  svg {
+    margin-right: $spacingSmall;
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+  }
+}
+
+button:disabled {
+  background-color: $btnDisabledBackgroundColor;
+  color: $textColorLight;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background-color: $cancelColor;
+  &:hover {
+    background-color: $cancelColorHover;
+  }
+}
+
+// Action Buttons
+.action-buttons {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: $spacingSmall;
+  margin: 0;
+
+
+  button {
+    padding: $spacingSmall $spacingMedium;
+    border: none;
+    box-shadow: $boxShadow;
+    border-radius: $buttonRadius;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: fit-content;
+
+    &:hover {
+      box-shadow: $boxShadowHover;
+    }
+  }
+
+  .cancel-button {
+    background-color: $cancelColor;
+    &:hover {
+      background-color: $cancelColorHover;
+    }
+  }
+}
+
+// Card Styles
+.card-header {
+  margin-bottom: $spacingSmall;
+
+  h3 {
+    font-size: 1.2rem;
+    color: $textColor;
+    line-break: anywhere;
+  }
+
+  p {
+    color: $textColorLight;
+  }
+}
+
+
+// Chip Styles
+.chip {
+  border-radius: $buttonRadius;
+  font-weight: bold;
+  padding: 5px 10px;
+
+  &.green {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+  }
+
+  &.red {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+  }
+
+  &.yellow {
+    background-color: rgba(255, 235, 59, 0.2);
+    color: #ffeb3b;
+  }
+
+  &.number {
+    color: #007bff;
+    font-weight: bold;
+  }
+}
+
+// Form Styles
+.form-btn {
+  margin-top: $spacingMedium;
+}
+
+// No Data Message
+.no-data-message {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+// No Data Message with Icon
+.no-data-message::before {
+  content: "!";
+  display: block;
+  font-size: 24px;
+  color: #ff0000;
+  margin-bottom: 5px;
+}
+
+// Inputs
+textarea,
+input, select {
+  width: 100%;
+  padding: $spacingSmall;
+  border: $border;
+  border-radius: $buttonRadius;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  resize: none;
+  background-color: $inputBackgroundColor;
+
+  &:focus {
+    outline: none;
+    border-color: $primaryColor; // Highlight color on focus
+  }
+}
+
+textarea {
+  height: 80px;
+}
+
+// Search Input
+.page-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacingMedium;
+  width: 100%;
+
+  @media (max-width: $mobileBreakpoint) {
+    flex-direction: column;
+
+    .input-field {
+      margin-bottom: $spacingSmall;
+    }
+
+    .filter-button, .clear-filter-button {
+      margin-bottom: $spacingSmall;
+      width: 100%;
+    }
+  }
+
+  .input-field {
+    border: $border;
+    border-radius: $buttonRadius;
+    flex: 1;
+
+    &::placeholder {
+    }
+  }
+
+  .filter-button,
+  .clear-filter-button {
+    border: none;
+    border-radius: $buttonRadius;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: $spacingSmall;
+
+    @media (max-width: $mobileBreakpoint) {
+      margin-left: 0;
+    }
+
+    svg {
+      margin-right: $spacingSmall;
+    }
+  }
+
+  .clear-filter-button {
+    background-color: #e74c3c; // Red color for clear filter button
+
+  }
+
+  .filter-button {
+    background-color: $btnBackgroundColor;
+
+    &:hover {
+      background-color: $btnHoverBackgroundColor;
+    }
+  }
+}
+
+.switch-wrapper {
+  background-color: red;
+  padding: 13rem;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  appearance: none; /* Remove default checkbox appearance */
+  width: 40px; /* Adjust the width of the switch */
+  height: 20px; /* Adjust the height of the switch */
+  background-color: #ccc; /* Background color when unchecked */
+  border-radius: 10px; /* Make it round */
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px; /* Adjust the vertical position */
+    left: 2px; /* Adjust the horizontal position */
+    width: 16px; /* Width of the switch handle */
+    height: 16px; /* Height of the switch handle */
+    background-color: #fff; /* Color of the switch handle */
+    border-radius: 50%; /* Make it round */
+    transition: transform 0.3s; /* Add a smooth transition effect */
+  }
+
+  &:checked::before {
+    transform: translateX(20px); /* Move the switch handle to the right when checked */
+    background-color: #007bff; /* Set switch handle color to blue when checked */
+  }
+}
+
+// Statistics
+.project-statistics {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Display six items in a row */
+  background-color: $cardBackgroundColor;
+  padding: $spacingSmall;
+  width: 100%;
+  margin-bottom: $spacingLarge;
+  border-radius: $borderRadius;
+  border: $border;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr); /* Display four items in a row on larger tablets and laptops */
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr); /* Display three items in a row on smaller tablets */
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr); /* Display two items in a row on phones */
+  }
+
+  .statistic-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    padding: $spacingSmall;
+
+    .label {
+      font-size: 16px;
+      color: $textColorLight;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: bold;
+      color: $textColor; /* or any color of your choice */
+    }
+  }
+}
+
+
+

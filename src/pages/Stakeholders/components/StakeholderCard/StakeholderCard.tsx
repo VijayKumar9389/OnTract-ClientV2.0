@@ -1,4 +1,3 @@
-import './StakeholderCard.scss';
 import React from "react";
 import {Navigation} from "../../../../utils/navigation.ts";
 import {Stakeholder} from "../../../../models/stakeholder.models.ts";
@@ -14,18 +13,17 @@ import {
 import {FaLocationDot} from "react-icons/fa6";
 import { isAvailable, getAttemptNo, isNotNull, getLocation, getStatus} from "../../../../utils/helpers.ts";
 
-
 const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
     const {navigateToStakeholder} = Navigation();
 
     return (
         <div
-            className="stakeholder-card"
+            className="card"
             onClick={() => navigateToStakeholder(stakeholder.id)}
         >
             <div className="card-header">
                 <h3>{stakeholder.name}</h3>
-                <p className="desc">{getLocation(stakeholder.streetAddress)}</p>
+                <p>{getLocation(stakeholder.streetAddress)}</p>
             </div>
             <ul className="detail-list">
                 <li>

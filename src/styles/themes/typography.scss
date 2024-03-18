@@ -1,0 +1,44 @@
+@import 'src/styles/variables.scss';
+
+// Typography
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: $primaryColor;
+  text-align: center;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: $primaryColor;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  color: $textColor;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: $textColor;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: $textColorLight;
+}
+
+label {
+  font-size: 16px;
+  display: block;
+}
+
+.panel-label {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

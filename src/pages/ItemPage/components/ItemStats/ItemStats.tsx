@@ -1,4 +1,3 @@
-import './ItemStats.scss';
 import React from "react";
 import {Item} from "../../../../models/item.models.ts";
 import {Package} from "../../../../models/package.models.ts";

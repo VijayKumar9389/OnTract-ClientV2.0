@@ -15,8 +15,8 @@ export const getAttemptNo = (attempts: string): number => {
     }
 };
 
-// Checks if a field is null or not
-export const isNotNull = (value: number | null): string => (value !== null ? "Planned" : "Not Planned");
+// Checks if a field is null or not and returns a boolean
+export const isNotNull = (value: number | null): boolean => value !== null;
 
 // Get the location from the street address
 export const getLocation = (streetAddress: string): string => {

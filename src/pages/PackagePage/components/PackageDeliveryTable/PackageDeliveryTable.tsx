@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Package } from "../../../../models/package.models.ts";
-import './PackageDeliveryTable.scss';
 import { Navigation } from "../../../../utils/navigation.ts";
 
 const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => {
@@ -24,23 +23,22 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
             <div className="panel-header">
                 <label className="panel-label">Scheduled Packages</label>
             </div>
-            <div className="panel-content">
-                {/* Delivery Status Submenu */}
-                <div className="submenu">
-                    <div className={`submenu-item ${deliveryStatus === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('All')}>
-                        All
-                    </div>
-                    <div className={`submenu-item ${deliveryStatus === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Completed')}>
-                        Completed
-                    </div>
-                    <div className={`submenu-item ${deliveryStatus === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Pending')}>
-                        Pending
-                    </div>
+            {/* Delivery Status Submenu */}
+            <div className="submenu">
+                <div className={`submenu-item ${deliveryStatus === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('All')}>
+                    All
                 </div>
-
+                <div className={`submenu-item ${deliveryStatus === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Completed')}>
+                    Completed
+                </div>
+                <div className={`submenu-item ${deliveryStatus === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Pending')}>
+                    Pending
+                </div>
+            </div>
+            <div className="panel-content">
                 {/* Package Table */}
                 {filteredPackages.length > 0 ? (
-                    <table className="package-table">
+                    <table>
                         <thead>
                         <tr>
                             <th>Package</th>
@@ -49,7 +47,7 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
                             <th>Actions</th>
                         </tr>
                         </thead>
-                        <tbody className="details">
+                        <tbody>
                         {filteredPackages.map((deliveryPackage: Package) => (
                             <tr key={deliveryPackage.id} className="package-item">
                                 <td><span>{deliveryPackage.packageType.name}</span></td>

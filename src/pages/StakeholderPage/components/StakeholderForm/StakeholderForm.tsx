@@ -1,4 +1,3 @@
-import './StakeholderForm.scss';
 import {Stakeholder, UpdateStakeholderInput} from '../../../../models/stakeholder.models.ts';
 import {updateStakeholder} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from 'react';

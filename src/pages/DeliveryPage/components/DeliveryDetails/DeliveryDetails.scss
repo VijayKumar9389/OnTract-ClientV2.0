@@ -8,62 +8,6 @@
   border-radius: $borderRadius;
   border: $border;
   width: 100%;
-  margin-bottom: $spacingLarge;
-
-  .delivery-info {
-    .info-list {
-      margin-bottom: $spacingSmall;
-
-      .info-item {
-        margin-right: $spacingMedium;
-        font-weight: bold;
-
-        .status {
-          &.completed {
-            color: $primaryColor;
-          }
-
-          &.pending {
-            color: $cancelColor;
-          }
-        }
-
-        .separator {
-          margin: 0 $spacingMedium;
-          color: $textColorLight;
-        }
-
-        .date {
-          color: $primaryColor;
-        }
-      }
-    }
-
-    .date-form {
-      display: flex;
-      align-items: flex-end;
-      width: 100%;
-      margin-bottom: $spacingMedium;
-
-        .date-input {
-      width: 100%;
-        }
-
-      @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
-
-      }
-
-      button {
-        margin-left: $spacingMedium;
-
-        @media (max-width: 768px) {
-          margin-left: 0;
-          margin-top: $spacingSmall;
-        }
-      }
-    }
-  }
+  margin-top: $spacingLarge;
 }
 

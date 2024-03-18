@@ -1,6 +1,5 @@
 import React from "react";
 import {Package} from "../../../../models/package.models.ts";
-import "./PackageTable.scss";
 import PackageTableRow from "./PackageTableRow.tsx"; // Import CSS file for styling
 
 const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
@@ -10,8 +9,7 @@ const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
                 <label className="panel-label">Delivery Packages</label>
             </div>
             <div className="panel-content">
-                <div className="table-wrapper">
-                    <table className="package-table">
+                    <table>
                         <thead>
                         <tr>
                             <th>Package</th>
@@ -25,7 +23,6 @@ const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
                         ))}
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     );

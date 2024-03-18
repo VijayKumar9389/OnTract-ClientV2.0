@@ -1,4 +1,3 @@
-import './DeliveryPage.scss';
 import { useParams } from "react-router-dom";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import { cancelDeliveryById, getDeliveryById } from "../../services/delivery.services.ts";
@@ -37,7 +36,7 @@ const DeliveryPage = () => {
     }
 
     return (
-        <div className="delivery-page">
+        <div className="section">
             <PageHeading heading={delivery.destination} />
             <div className="page-content">
                 <DeliveryDetails delivery={delivery} />

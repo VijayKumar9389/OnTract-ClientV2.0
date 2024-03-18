@@ -27,30 +27,44 @@ const PackageItemList: React.FC<{ packageItems: PackageItem[], packageTypeId: nu
             <div className="panel-content">
                 <AddPackageItem packageTypeID={packageTypeId}/>
                 {packageItems.length > 0 ? (
-                    <ul className="package-item-list">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Item</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {packageItems.map((item: PackageItem) => (
-                            <li key={item.id} className="table-row">
-                                <div className="item-image-cell">
+                            <tr key={item.id}>
+                                <td className="item-image">
                                     <img
                                         src={`http://localhost:3005/images/${item.item.image}`}
                                         alt={`Image for ${item.item.name}`}
-                                        className="item-image"
                                     />
-                                </div>
-                                <div className="item-details-cell">
+                                </td>
+                                <td className="item-details-cell">
                                     <h4>{item.item.name}</h4>
                                     <p>{item.item.description}</p>
-                                </div>
-                                <div className="action-buttons">
+                                </td>
+                                <td >
+                                    <div className="action-buttons">
                                     <button onClick={() => navigateToInventoryItem(item.item.id)}>
                                         View Item
                                     </button>
-                                    <ConfirmationButton confirmationMessage="Remove Item From Package?"
-                                                        buttonText="Remove Item" onConfirm={() => removeItem(item.id)}/>
-                                </div>
-                            </li>
+                                    <ConfirmationButton
+                                        confirmationMessage="Remove Item From Package?"
+                                        buttonText="Remove Item"
+                                        onConfirm={() => removeItem(item.id)}
+                                    />
+                                    </div>
+                                </td>
+                            </tr>
                         ))}
-                    </ul>
+                        </tbody>
+                    </table>
+
                 ) : (
                     <div className="no-data-message">
                         <span>No Items in Package</span>

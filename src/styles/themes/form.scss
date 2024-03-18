@@ -1,0 +1,101 @@
+@import 'src/styles/variables.scss';
+
+// Form Styles
+.form-row {
+  display: flex;
+  width: 100%;
+  gap: $spacingSmall;
+
+  @media (max-width: $mobileBreakpoint) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.input-wrapper {
+  flex: 1;
+
+  .submit-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacingSmall;
+    margin-bottom: $spacingMedium;
+  }
+
+  .btn-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $textColor; /* Text color */
+
+    button {
+      padding: 0; /* Padding for the button */
+      margin-left: $spacingSmall; /* Spacing between button and label */
+      background-color: transparent; /* Button background color */
+      color: $primaryColor; /* Button text color */
+      border: none; /* Remove button border */
+      border-radius: $buttonRadius; /* Button border radius */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      transition: background-color 0.3s ease; /* Smooth transition on hover */
+
+
+      &:hover {
+        background-color: $primaryColor; /* Lighter shade of primary color on hover */
+        color: #fff; /* Text color on hover */
+      }
+    }
+  }
+
+  label {
+    display: block;
+    color: $textColor; /* Text color */
+    margin-top: $spacingSmall; /* Spacing between label and input */
+  }
+}
+
+
+// For filter inputs
+.page-input {
+  display: flex;
+  align-items: center;
+
+  .input-field {
+    flex: 1;
+    padding: $spacingSmall;
+    border-radius: $buttonRadius;
+    margin-right: $spacingSmall;
+    outline: none;
+
+    @media (max-width: $mobileBreakpoint) {
+      margin: $spacingSmall 0;
+    }
+
+  }
+
+  .filter-button,
+  .clear-filter-button {
+    background-color: $primaryColor;
+    color: #fff;
+    border: none;
+    border-radius: $buttonRadius;
+    padding: $spacingSmall $spacingMedium;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primaryColor, 10%);
+    }
+
+    svg {
+      margin-right: $spacingSmall;
+    }
+  }
+
+  .clear-filter-button {
+    background-color: $cancelColor;
+
+    &:hover {
+      background-color: darken($cancelColorHover, 10%);
+    }
+  }
+}

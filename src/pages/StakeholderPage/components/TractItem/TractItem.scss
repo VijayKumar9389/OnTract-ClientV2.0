@@ -1,0 +1,49 @@
+@import 'src/styles/variables.scss';
+
+.tract-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: $borderRadius;
+
+  .tract-form-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: $spacingMedium;
+    width: 100%;
+
+    // Mobile layout
+    @media (max-width: $mobileBreakpoint) {
+      grid-template-columns: 1fr;
+    }
+
+    .tract-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 500px;
+      border-radius: $buttonRadius;
+      border: $border;
+      box-shadow: $boxShadow;
+      padding: $spacingSmall;
+      overflow: hidden;
+
+      h3 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      ul {
+        margin-bottom: $spacingSmall;
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+          margin-right: $spacingSmall;
+        }
+      }
+    }
+  }
+}

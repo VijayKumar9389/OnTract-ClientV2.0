@@ -3,12 +3,9 @@ import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts
 import {getStakeholdersByTractNo} from "../../../../services/stakeholder.services.ts";
 import TractForm from "./TractForm.tsx";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import './TractItem.scss';
 
-interface TractItemProps {
-    tract: TractRecord;
-}
-
-const TractItem: React.FC<TractItemProps> = ({tract}) => {
+const TractItem: React.FC<{tract: TractRecord}> = ({tract}) => {
 
     const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
     const project = getProjectFromCookie()

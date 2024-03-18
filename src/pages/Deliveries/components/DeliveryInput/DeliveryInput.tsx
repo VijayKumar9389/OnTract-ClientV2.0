@@ -1,4 +1,3 @@
-import './DeliveryInput.scss';
 import {MdFilterAlt, MdFilterAltOff} from "react-icons/md";
 
 const DeliveryInput = () => {

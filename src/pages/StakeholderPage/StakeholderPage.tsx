@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getStakeholderById } from "../../services/stakeholder.services";
-import "./StakeholderPage.scss";
 import { Stakeholder } from "../../models/stakeholder.models.ts";
 import StakeholderForm from "./components/StakeholderForm/StakeholderForm.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
-import TractList from "./components/TractForm/TractList.tsx";
 import StakeholderDelivery from "./components/StakeholderDelivery/StakeholderDelivery.tsx";
 import RelatedStakeholders from "./components/RelatedStakeholders/RelatedStakeholders.tsx";
+import TractItem from "./components/TractItem/TractItem.tsx";
 
 const StakeholderPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -44,13 +43,17 @@ const StakeholderPage = () => {
     }
 
     if (stakeholder) return (
-        <div className="stakeholder-page">
+        <div className="section">
             <PageHeading heading={stakeholder.name} />
                 <div className="page-content">
                     <StakeholderForm stakeholder={stakeholder}/>
                     <StakeholderDelivery packageId={stakeholder.packageId} stakeholder={stakeholder}/>
                     <RelatedStakeholders stakeholderId={stakeholder.id}/>
-                    <TractList tracts={stakeholder.tractRecords}/>
+                    <ul className="tract-list">
+                        {stakeholder.tractRecords.map((tract, index) => {
+                            return <TractItem key={index} tract={tract}/>
+                        })}
+                    </ul>
                 </div>
         </div>
     );

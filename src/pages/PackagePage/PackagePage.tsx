@@ -1,4 +1,3 @@
-import './PackagePage.scss';
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {useParams} from "react-router-dom";
 import {getPackageTypeById} from "../../services/package.services.ts";
@@ -48,7 +47,7 @@ const PackagePage = () => {
     }
 
     return (
-        <div className="package-page-container">
+        <div className="section">
             <PageHeading heading={packageType?.name}/>
             <div className="page-content">
                 <PackageStats packages={packages}/>

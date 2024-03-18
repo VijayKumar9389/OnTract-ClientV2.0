@@ -1,4 +1,3 @@
-import './RelatedStakeholder.scss';
 import {getRelatedStakeholder} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
 import {Stakeholder} from "../../../../models/stakeholder.models.ts";
@@ -36,7 +35,7 @@ const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({stakeholderId
             </div>
             <div className="panel-content">
                 {relatedStakeholders.length > 0 ? (
-                    <table className="related-stakeholder-table">
+                    <table className="select-table">
                         <thead>
                         <tr>
                             <th>Stakeholder</th>

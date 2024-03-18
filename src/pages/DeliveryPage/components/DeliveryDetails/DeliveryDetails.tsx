@@ -1,7 +1,7 @@
 import {showToastSuccess} from "../../../../utils/toastHelper.ts";
 import {setDeliveryCompleted} from "../../../../services/delivery.services.ts";
 import {Delivery} from "../../../../models/delivery.models.ts";
-import {useState} from "react";
+import React, {useState} from "react";
 import './DeliveryDetails.scss';
 import {FaCheck} from "react-icons/fa6";
 
@@ -43,10 +43,15 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
 
     return (
         <div className="delivery-details">
-            <div className="delivery-info">
-                <form onSubmit={handleSubmit} className="date-form">
-                    <div className="input-wrapper">
-                        <label htmlFor="deliveryDate">Completion Date:</label>
+            <p className="info-list">
+                Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
+                <span className="separator">|</span>
+                Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/a</a>}</span>
+            </p>
+            <form onSubmit={handleSubmit} className="date-form">
+                <div className="input-wrapper">
+                    <label htmlFor="deliveryDate">Completion Date:</label>
+                    <div className="submit-wrapper">
                         <input
                             type="date"
                             id="deliveryDate"
@@ -54,18 +59,13 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                             onChange={handleDateChange}
                             className="date-input"
                         />
+                        <button type="submit" disabled={!isDateSelected}>
+                            <FaCheck/>
+                            Set Completion Date
+                        </button>
                     </div>
-                    <button type="submit" disabled={!isDateSelected}>
-                        <FaCheck/>
-                        Set Completion Date
-                    </button>
-                </form>
-                <p className="info-list">
-                    Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
-                    <span className="separator">|</span>
-                    Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/a</a>}</span>
-                </p>
-            </div>
+                </div>
+            </form>
         </div>
     );
 

@@ -1,10 +1,11 @@
-import Heading from "../../components/Heading/Heading.tsx";
 import CreateProject from "./components/CreateProject/CreateProject.tsx";
 import {useEffect, useState} from "react";
 import Dialog from "../../components/Dialog/Dialog.tsx";
 import {getProjects} from "../../services/project.services.ts";
-import ProjectList from "./components/ProjectList/ProjectList.tsx";
+import ProjectInfoTable from "./components/ProjectInfoTable/ProjectInfoTable.tsx";
 import {Project} from "../../models/stakeholder.models.ts";
+import {FaCheck} from "react-icons/fa6";
+import {FaProjectDiagram} from "react-icons/fa";
 
 const Projects = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,21 +22,20 @@ const Projects = () => {
     }
 
     return (
-        <div>
-            <Heading heading="Projects"/>
+        <div className="section">
             <div className="page-content">
-
-                <Dialog isOpen={isMenuOpen} toggle={toggleMenu} element={<CreateProject />} heading={"Create Project"} />
+                <Dialog isOpen={isMenuOpen} toggle={toggleMenu} element={<CreateProject/>} heading={"Create Project"}/>
+                <div className="header">
+                    <h3><FaProjectDiagram/> PROJECTS (<strong>{projects.length}</strong>)</h3>
+                    <button onClick={toggleMenu}>
+                        <FaCheck/>
+                        Create Project
+                    </button>
+                </div>
 
                 <div className="panel">
-                    <div className="panel-header">
-                        <label className="panel-label">Projects</label>
-                    </div>
                     <div className="panel-content">
-                        <div className="btn-container">
-                            <button onClick={() => toggleMenu()}>Add Project</button>
-                        </div>
-                        <ProjectList projects={projects} />
+                        <ProjectInfoTable projects={projects}/>
                     </div>
                 </div>
             </div>

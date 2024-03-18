@@ -1,4 +1,3 @@
-import './ItemPage.scss';
 import {useParams} from "react-router-dom";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {useEffect, useState} from "react";
@@ -49,7 +48,7 @@ const ItemPage = () => {
     }
 
     return (
-        <div className="item-page-container">
+        <div className="section">
             <PageHeading heading={item.name}/>
             <div className="page-content">
                 <ItemStats packages={packages} item={item}/>

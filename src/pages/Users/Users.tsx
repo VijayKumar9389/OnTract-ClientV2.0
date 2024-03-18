@@ -1,4 +1,3 @@
-import Heading from "../../components/Heading/Heading.tsx";
 import UserTable from "./components/UserTable/UserTable.tsx";
 import {useEffect, useState} from "react";
 import Dialog from "../../components/Dialog/Dialog.tsx";
@@ -6,6 +5,7 @@ import RegisterUser from "./components/RegisterUser/RegisterUser.tsx";
 import {MdAdd} from "react-icons/md";
 import {User} from "../../models/auth.models.ts";
 import {getUsers} from "../../services/user.services.ts";
+import {FaUsers} from "react-icons/fa";
 
 const Users = () => {
     const [isOpened, setIsOpened] = useState(false);
@@ -31,10 +31,9 @@ const Users = () => {
 
     return (
         <div className="section">
-            <Heading heading="Users"/>
             <div className="page-content">
                 <div className="header">
-                    <h3>Users ({users.length})</h3>
+                    <h3><FaUsers /> USERS (<strong>{users.length}</strong>)</h3>
                     <button onClick={toggleModal}><MdAdd/> Add User</button>
                 </div>
                 <div className="panel">

@@ -1,4 +1,3 @@
-import './PackageStats.scss';
 import {Package} from "../../../../models/package.models.ts";
 
 const PackageStats: React.FC<{ packages: Package[] }> = ({packages}) => {

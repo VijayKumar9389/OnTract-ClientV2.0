@@ -1,6 +1,5 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {createItem} from "../../../../services/item.services.ts";
-import "./CreateItemForm.scss";
 import {NewItemInput} from "../../../../models/item.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 import {FaBox} from "react-icons/fa";

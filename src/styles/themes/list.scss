@@ -1,0 +1,78 @@
+@import 'src/styles/variables.scss';
+
+// List of cards
+.card-list {
+  width: 100%;
+}
+
+.card {
+  background-color: $cardBackgroundColor;
+  padding: $spacingMedium;
+  border-bottom: $border;
+  cursor: pointer;
+  transition: ease-in-out .3s;
+  width: 100%;
+
+  &:hover {
+    background-color: $cardHoverBackgroundColor;
+  }
+}
+
+// List of information
+.info-list {
+  margin-bottom: 1rem;
+  width: 100%;
+  color: $textColorLight;
+
+  @media (max-width: $mobileBreakpoint) {
+    display: flex;
+    flex-direction: column;
+
+    .separator {
+      display: none;
+    }
+
+    .info-item {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .info-item {
+    font-weight: bold;
+    color: $primaryColor;
+    text-transform: uppercase;
+  }
+
+  .separator {
+    margin: 0 $spacingMedium;
+  }
+
+  strong {
+    color: $primaryColor;
+  }
+}
+
+// List of details
+.detail-list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  align-items: center;
+  gap: $spacingSmall;
+  margin-bottom: $spacingSmall;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacingSmall;
+
+    span {
+      margin-right: $spacingSmall;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

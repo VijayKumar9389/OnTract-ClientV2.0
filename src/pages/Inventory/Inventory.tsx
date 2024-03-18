@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import './Inventory.scss';
 import { getItemsByProjectId } from '../../services/item.services.ts';
 import { Item } from '../../models/item.models.ts';
 import Heading from '../../components/Heading/Heading.tsx';
-import ItemCard from './components/ItemCard/ItemCard.tsx';
+import ItemTable from './components/ItemTable/ItemTable.tsx';
 import { MdAdd } from 'react-icons/md';
 import Dialog from '../../components/Dialog/Dialog.tsx';
 import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
 import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
+import {FaBoxes} from "react-icons/fa";
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
@@ -38,22 +38,12 @@ const Inventory = () => {
             <div className="page-content">
                 <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
                 <div className="header">
-                    <h3>Items ({items.length})</h3>
+                    <h3><FaBoxes /> ITEMS (<strong>{items.length}</strong>)</h3>
                     <button onClick={toggleModal}>
                         <MdAdd /> Add Item
                     </button>
                 </div>
-                {items.length > 0 ? (
-                    <div className="inventory-list">
-                        {items.map((item: Item) => (
-                            <ItemCard item={item} key={item.id} />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="no-data-message">
-                        <span>No Items Created.</span>
-                    </div>
-                )}
+                <ItemTable items={items} />
             </div>
         </div>
     );

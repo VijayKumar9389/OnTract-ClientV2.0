@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FaRegSave } from 'react-icons/fa';
 import { Delivery, EditDeliveryDTO } from '../../../../models/delivery.models';
 import { editDelivery } from '../../../../services/delivery.services';
-import './EditDeliveryForm.scss';
 
 const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     const [formData, setFormData] = useState<EditDeliveryDTO>({

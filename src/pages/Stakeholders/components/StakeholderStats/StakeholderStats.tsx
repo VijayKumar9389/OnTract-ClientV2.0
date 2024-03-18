@@ -1,4 +1,3 @@
-import './StakeholderStats.scss';
 import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
 import {getStakeholderReport} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";

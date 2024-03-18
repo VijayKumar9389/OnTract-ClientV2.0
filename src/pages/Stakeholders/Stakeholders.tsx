@@ -1,4 +1,3 @@
-import './Stakeholders.scss';
 import {getStakeholdersByProjectId} from "../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
 import {Stakeholder} from "../../models/stakeholder.models.ts";
@@ -31,7 +30,7 @@ const Stakeholders = () => {
 
     useEffect((): void => {
         fetchStakeholders()
-            .then( () => console.log('Stakeholders fetched'));
+            .then(() => console.log('Stakeholders fetched'));
     }, []);
 
     return (
@@ -48,12 +47,20 @@ const Stakeholders = () => {
                 {!loading && !error && (
                     <>
                         <StakeholderStats/>
-                        <StakeholderInput/>
-                        <ul className="stakeholder-card-list">
-                            {stakeholders.map((stakeholder: Stakeholder) => (
-                                <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
-                            ))}
-                        </ul>
+
+                        <div className="panel">
+                            <div className="panel-header">
+                                <label className="panel-label">Stakeholder List</label>
+                            </div>
+                            <div className="panel-content">
+                                <StakeholderInput/>
+                                <ul className="card-list">
+                                    {stakeholders.map((stakeholder: Stakeholder) => (
+                                        <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

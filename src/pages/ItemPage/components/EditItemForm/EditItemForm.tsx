@@ -74,7 +74,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                     <img
                         src={getDisplayedImage()}
                         alt={`Image for ${item.name}`}
-                        className="item-image"
+                        className="form-image"
                     />
 
                     <div>

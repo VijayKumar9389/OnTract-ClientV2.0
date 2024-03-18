@@ -6,8 +6,8 @@ import {getProjectFromCookie} from "../../utils/cookieHelper.ts";
 import Dialog from "../../components/Dialog/Dialog.tsx";
 import CreatePackageTypeForm from "./components/CreatePackageTypeForm/CreatePackageTypeForm.tsx";
 import {MdAdd} from "react-icons/md";
-import PackageCard from "./components/PackageCard/PackageCard.tsx";
-import './Packages.scss';
+import PackageTypeTable from "./components/PackageTypeTable/PackageTypeTable.tsx";
+import {FaBox} from "react-icons/fa";
 
 const Packages = () => {
     const [packageTypes, setPackageTypes] = useState<PackageType[] | null>(null);
@@ -42,22 +42,12 @@ const Packages = () => {
                 <Dialog isOpen={isOpened} toggle={toggleModal} heading="Create Package Type"
                         element={<CreatePackageTypeForm/>}/>
                 <div className="header">
-                    <h3>Package Types ({packageTypes.length})</h3>
+                    <h3><FaBox/> PACKAGE TYPES ( <strong>{packageTypes.length}</strong> )</h3>
                     <button onClick={toggleModal}>
                         <MdAdd/> Add Package
                     </button>
                 </div>
-                {packageTypes.length > 0 ? (
-                    <div className="package-list">
-                        {packageTypes.map((packageType: PackageType) => (
-                            <PackageCard packageType={packageType} key={packageType.id}/>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="no-data-message">
-                        <span>No Packages Created.</span>
-                    </div>
-                )}
+                <PackageTypeTable packageTypes={packageTypes}/>
             </div>
         </div>
     );

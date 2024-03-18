@@ -1,4 +1,11 @@
 @import 'src/styles/variables.scss';
+@import 'src/styles/variables.scss';
+@import 'themes/table';
+@import 'themes/typography';
+@import 'themes/ui';
+@import 'themes/layout';
+@import 'themes/form.scss';
+@import 'themes/list.scss';
 
 .app-container {
     min-height: 100vh;
