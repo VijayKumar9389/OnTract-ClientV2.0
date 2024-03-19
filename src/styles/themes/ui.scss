@@ -25,12 +25,12 @@ button {
 
 button:disabled {
   background-color: $btnDisabledBackgroundColor;
-  color: $textColorLight;
   cursor: not-allowed;
 }
 
 .btn-danger {
   background-color: $cancelColor;
+
   &:hover {
     background-color: $cancelColorHover;
   }
@@ -40,27 +40,28 @@ button:disabled {
 .action-buttons {
   display: flex;
   height: 100%;
-  align-items: center;
+  align-items: flex-end;
   gap: $spacingSmall;
   margin: 0;
 
+  button:disabled {
+    background-color: $btnDisabledBackgroundColor;
+    cursor: not-allowed;
+  }
 
   button {
     padding: $spacingSmall $spacingMedium;
     border: none;
-    box-shadow: $boxShadow;
     border-radius: $buttonRadius;
     cursor: pointer;
     transition: background-color 0.3s;
     height: fit-content;
 
-    &:hover {
-      box-shadow: $boxShadowHover;
-    }
   }
 
   .cancel-button {
     background-color: $cancelColor;
+
     &:hover {
       background-color: $cancelColorHover;
     }

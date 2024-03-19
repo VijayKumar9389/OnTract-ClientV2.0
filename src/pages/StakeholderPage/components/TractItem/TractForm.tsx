@@ -40,6 +40,16 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
         });
     };
 
+    const hasDataChanged = (): boolean => {
+        return (
+            formData.structure !== tractRecord.structure ||
+            formData.interest !== tractRecord.interest ||
+            formData.occupants !== tractRecord.occupants ||
+            formData.worksLand !== (tractRecord.worksLand === 'YES' ? 'YES' : 'NO') ||
+            formData.tractComments !== tractRecord.tractComments
+        );
+    };
+
     return (
         <form onSubmit={handleSubmit} className="tract-form">
             <div className="card-header">
@@ -85,7 +95,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
             </>
 
             <div className="action-buttons">
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={!hasDataChanged()}>Submit</button>
                 {isStakeholderProfile(stakeholder.id, id) && (
                     <button type="button" className="form-btn"
                             onClick={() => navigate(`/stakeholder/${stakeholder.id}`)}>

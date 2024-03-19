@@ -2,13 +2,14 @@ import React, {useState, ChangeEvent, FormEvent} from "react";
 import {FaRegSave} from "react-icons/fa";
 import {Item, UpdateItemInput} from "../../../../models/item.models.ts";
 import {updateItem} from "../../../../services/item.services.ts";
-import "./EditItemForm.scss";
+import "./EditItem.scss";
+import {showToastError} from "../../../../utils/toastHelper.ts";
 
 interface EditItemFormProps {
     item: Item;
 }
 
-const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
+const EditItem: React.FC<EditItemFormProps> = ({item}) => {
 
     const [file, setFile] = useState<File | null>(null);
 
@@ -33,17 +34,26 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
             const response = await updateItem(updatedItem.id, updatedItem);
 
             console.log('Item updated successfully:', response);
-            // Handle the response as needed
+            window.location.reload();
         } catch (error) {
             console.error('Error updating item:', error);
-            // Handle error
+            showToastError('Error updating item');
         }
     };
+
+    const hasDataChanged = (): boolean => {
+        return (
+            editedItem.name !== item.name ||
+            editedItem.description !== item.description ||
+            editedItem.quantity !== item.quantity ||
+            file !== null
+        );
+    }
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
         setFile(selectedFile || null);
-        setEditedItem({ ...editedItem, image: selectedFile }); // Update editedItem with the selected file
+        setEditedItem({...editedItem, image: selectedFile}); // Update editedItem with the selected file
     };
 
     const handleInputChange = (
@@ -126,7 +136,7 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
                             />
                         </div>
 
-                        <button type="submit" className="form-btn">
+                        <button type="submit" className="form-btn" disabled={!hasDataChanged()}>
                             <FaRegSave/>
                             Save
                         </button>
@@ -138,4 +148,4 @@ const EditItemForm: React.FC<EditItemFormProps> = ({item}) => {
 
 };
 
-export default EditItemForm;
+export default EditItem;

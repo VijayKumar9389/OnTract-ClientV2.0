@@ -11,12 +11,12 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
         notes: '',
     });
 
-    useEffect(() => {
+    useEffect((): void => {
         if (delivery) {
             setFormData({
                 route: delivery.route,
                 destination: delivery.destination,
-                delivery_method: delivery.delivery_method,
+                delivery_method: delivery.delivery_method === 'mail' ? 'mail' : 'person',
                 notes: delivery.notes,
             });
         }
@@ -41,13 +41,13 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
         try {
             const updatedDelivery: Delivery = await editDelivery(delivery.id, formData);
             console.log('Delivery updated:', updatedDelivery);
-            // Optionally, provide feedback to the user (e.g., show a success message)
-            // Consider updating the UI instead of reloading the entire page
+            window.location.reload();
         } catch (error) {
             console.error('Error updating delivery:', error);
-            // Optionally, provide feedback to the user (e.g., show an error message)
         }
     };
+
+    const hasDataChanged: boolean = formData.route !== delivery.route || formData.destination !== delivery.destination || formData.delivery_method !== delivery.delivery_method || formData.notes !== delivery.notes;
 
     return (
         <div className="panel">
@@ -64,8 +64,8 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
                     <input type="text" id="destination" name="destination" value={formData.destination} onChange={handleChange} />
                 </div>
                 <div className="input-wrapper">
-                    <label htmlFor="deliveryMethod">Delivery Type:</label>
-                    <select name="deliveryMethod" value={formData.delivery_method} onChange={handleChange}>
+                    <label htmlFor="delivery_method">Delivery Type:</label>
+                    <select name="delivery_method" value={formData.delivery_method} onChange={handleChange}>
                         <option value="mail">Mail</option>
                         <option value="person">Person</option>
                     </select>
@@ -74,7 +74,7 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
                     <label htmlFor="notes">Notes:</label>
                     <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange} />
                 </div>
-                <button type="submit" className="form-btn">
+                <button type="submit" disabled={!hasDataChanged} className="form-btn">
                     <FaRegSave />
                     Save
                 </button>

@@ -3,7 +3,7 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {useEffect, useState} from "react";
 import {getItemById} from "../../services/item.services.ts";
 import {Item} from "../../models/item.models.ts";
-import EditItemForm from "./components/EditItemForm/EditItemForm.tsx";
+import EditItem from "./components/EditItem/EditItem.tsx";
 import {getPackageByPackageItemId} from "../../services/package.services.ts";
 import {Package} from "../../models/package.models.ts";
 import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
@@ -52,7 +52,7 @@ const ItemPage = () => {
             <PageHeading heading={item.name}/>
             <div className="page-content">
                 <ItemStats packages={packages} item={item}/>
-                <EditItemForm item={item}/>
+                <EditItem item={item}/>
                 {packages && <PackageItemTable packages={packages} item={item}/>}
                 <div className="btn-container">
                     <ConfirmationButton buttonText="Delete Item"

@@ -35,6 +35,8 @@ export interface DeliveryReportDTO {
     };
     pendingDeliveryCount: number;
     completedDeliveryCount: number;
+    mailCount: number;
+    deliveryCount: number;
 }
 
 // Edit delivery details

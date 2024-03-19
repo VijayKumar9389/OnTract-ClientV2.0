@@ -29,7 +29,7 @@ const Packages = () => {
             }
         };
         fetchPackageTypes();
-    }, [project]);
+    }, []);
 
     if (!packageTypes) {
         return <div>Loading...</div>;

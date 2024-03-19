@@ -1,4 +1,3 @@
-import {showToastSuccess} from "../../../../utils/toastHelper.ts";
 import {setDeliveryCompleted} from "../../../../services/delivery.services.ts";
 import {Delivery} from "../../../../models/delivery.models.ts";
 import React, {useState} from "react";
@@ -28,18 +27,17 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
 
             // Update state or provide feedback to the user (e.g., show a success message)
             setSelectedDate(formattedDate);
-            showToastSuccess('Delivery completion date set successfully');
+            window.location.reload()
 
-            // Instead of reloading the entire page, consider updating state to reflect the changes
-            // window.location.reload();
         } catch (error) {
             console.error('Error setting completion date:', error);
             // Optionally, handle error (e.g., show an error message to the user)
         }
     };
 
-    // Disable the button if no date is selected
-    const isDateSelected = selectedDate !== "";
+    // Disable the button if no date is selected or if the selected date is the same as the current delivery date
+    const isValid: boolean = selectedDate !== "" && selectedDate !== delivery.date;
+
 
     return (
         <div className="delivery-details">
@@ -59,7 +57,7 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                             onChange={handleDateChange}
                             className="date-input"
                         />
-                        <button type="submit" disabled={!isDateSelected}>
+                        <button type="submit" disabled={!isValid}>
                             <FaCheck/>
                             Set Completion Date
                         </button>

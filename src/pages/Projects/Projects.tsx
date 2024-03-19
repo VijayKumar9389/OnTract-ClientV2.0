@@ -4,7 +4,7 @@ import Dialog from "../../components/Dialog/Dialog.tsx";
 import {getProjects} from "../../services/project.services.ts";
 import ProjectInfoTable from "./components/ProjectInfoTable/ProjectInfoTable.tsx";
 import {Project} from "../../models/stakeholder.models.ts";
-import {FaCheck} from "react-icons/fa6";
+import {FaPlus} from "react-icons/fa6";
 import {FaProjectDiagram} from "react-icons/fa";
 
 const Projects = () => {
@@ -28,11 +28,10 @@ const Projects = () => {
                 <div className="header">
                     <h3><FaProjectDiagram/> PROJECTS (<strong>{projects.length}</strong>)</h3>
                     <button onClick={toggleMenu}>
-                        <FaCheck/>
+                        <FaPlus/>
                         Create Project
                     </button>
                 </div>
-
                 <div className="panel">
                     <div className="panel-content">
                         <ProjectInfoTable projects={projects}/>

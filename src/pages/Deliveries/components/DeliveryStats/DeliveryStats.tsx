@@ -58,6 +58,14 @@ const DeliveryStats = () => {
                 <span className="label">Pending:</span>
                 <span className="value">{deliveryReport.completedDeliveryCount}</span>
             </div>
+            <div className="statistic-item">
+                <span className="label">In Person:</span>
+                <span className="value">{deliveryReport.deliveryCount}</span>
+            </div>
+            <div className="statistic-item">
+                <span className="label">Mailouts:</span>
+                <span className="value">{deliveryReport.mailCount}</span>
+            </div>
         </div>
     );
 }

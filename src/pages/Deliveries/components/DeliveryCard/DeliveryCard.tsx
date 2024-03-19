@@ -20,10 +20,10 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
             <div className="detail-list">
                 <li>
 
-                    {isMailout(delivery.delivery_method) ? <span><FaTruck/></span> : <span><IoMdMail/></span>}
+                    {isMailout(delivery.delivery_method) ? <span><IoMdMail/></span> : <span><FaTruck/></span>}
                     <div>
                         <p>Type:</p>
-                        <a className="number">{isMailout(delivery.delivery_method) ? 'Mail-out' : 'In-Person'}</a>
+                        <a className="number">{isMailout(delivery.delivery_method) ? 'Mailout' : 'In Person'}</a>
                     </div>
                 </li>
                 <li>

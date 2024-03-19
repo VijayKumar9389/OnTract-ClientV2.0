@@ -10,6 +10,7 @@ import ConfirmationButton from "../../components/ConfirmationButton/Confirmation
 import {deletePackageType} from "../../services/package.services.ts";
 import PackageStats from "./components/PackageStats/PackageStats.tsx";
 import PackageItemList from "./components/PackageItemList/PackageItemList.tsx";
+import {showToastError} from "../../utils/toastHelper.ts";
 
 const PackagePage = () => {
 
@@ -39,6 +40,7 @@ const PackagePage = () => {
             history.back();
         } catch (error) {
             console.error('Error deleting package type:', error);
+            showToastError('Unable to delete the package type. Please ensure all deliveries associated with this package type are cancelled before attempting to delete it.')
         }
     }
 

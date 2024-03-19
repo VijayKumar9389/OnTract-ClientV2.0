@@ -26,17 +26,18 @@
       border-radius: $buttonRadius;
       border: $border;
       box-shadow: $boxShadow;
-      padding: $spacingSmall;
+      padding: $spacingMedium; // Increased padding
       overflow: hidden;
 
       h3 {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        margin-bottom: $spacingSmall; // Added spacing
       }
 
       ul {
-        margin-bottom: $spacingSmall;
+        margin: $spacingSmall 0;
         display: flex;
         flex-wrap: wrap;
 

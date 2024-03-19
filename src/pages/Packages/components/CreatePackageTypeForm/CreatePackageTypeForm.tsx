@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {createPackageType} from "../../../../services/package.services.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {showToastError} from "../../../../utils/toastHelper.ts";
 
 const CreatePackageTypeForm: React.FC = () => {
     // Define state variables to hold form data
@@ -26,6 +27,7 @@ const CreatePackageTypeForm: React.FC = () => {
         } catch (error) {
             // Handle error
             console.error('Error creating package type:', error);
+            showToastError('Failed to create package type')
         }
     };
 
@@ -37,6 +39,8 @@ const CreatePackageTypeForm: React.FC = () => {
             [name]: value
         }));
     };
+
+    const isFormValid = formData.name && formData.notes;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -66,7 +70,7 @@ const CreatePackageTypeForm: React.FC = () => {
             </div>
 
 
-            <button type="submit">Create</button>
+            <button type="submit" disabled={!isFormValid} className="form-btn">Create</button>
         </form>
     );
 }

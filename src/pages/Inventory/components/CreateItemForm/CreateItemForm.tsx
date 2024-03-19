@@ -3,6 +3,7 @@ import {createItem} from "../../../../services/item.services.ts";
 import {NewItemInput} from "../../../../models/item.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
 import {FaBox} from "react-icons/fa";
+import {showToastError} from "../../../../utils/toastHelper.ts";
 
 const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();
@@ -14,6 +15,7 @@ const CreateItemForm: React.FC = () => {
         projectId: null
     });
 
+    // Set the project ID in the form data
     useEffect((): void => {
         if (project) {
             setFormData(prevState => ({
@@ -23,6 +25,7 @@ const CreateItemForm: React.FC = () => {
         }
     }, []);
 
+    // Handle form input change
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>): void => {
         const {name, value} = e.target;
         setFormData(prevState => ({
@@ -31,6 +34,7 @@ const CreateItemForm: React.FC = () => {
         }));
     };
 
+    // Handle file change
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const file = e.target.files ? e.target.files[0] : null;
         setFormData(prevState => ({
@@ -39,19 +43,24 @@ const CreateItemForm: React.FC = () => {
         }));
     };
 
+    // Check if the form is valid
+    const isFormValid = (): boolean => {
+        return formData.name !== '' && formData.description !== '' && formData.image !== null && formData.quantity > 0;
+    }
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         if (!project) {
             console.error('Project not found');
             return;
         }
-
         try {
             await createItem(formData);
             window.location.reload();
             // Handle success, redirect, or show a message
         } catch (error) {
             console.error('Error creating item:', error);
+            showToastError('Failed to create item');
             // Handle error
         }
     };
@@ -79,7 +88,7 @@ const CreateItemForm: React.FC = () => {
                     <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange}/>
                 </div>
 
-                <button type="submit" className="form-btn">
+                <button type="submit" disabled={!isFormValid()} className="form-btn">
                     <FaBox />
                     Create Item
                 </button>

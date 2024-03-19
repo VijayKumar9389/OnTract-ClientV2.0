@@ -20,6 +20,7 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         followUp: stakeholder.followUp,
     });
 
+    // Update the form data when the stakeholder changes
     useEffect((): void => {
         setFormData({
             name: stakeholder.name,
@@ -37,8 +38,25 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         });
     }, [stakeholder]);
 
+    // Check if the form data has changed
+    const hasDataChanged = (): boolean => {
+        return (
+            formData.name !== stakeholder.name ||
+            formData.streetAddress !== stakeholder.streetAddress ||
+            formData.mailingAddress !== stakeholder.mailingAddress ||
+            formData.phoneNumber !== stakeholder.phoneNumber ||
+            formData.isPerson !== (stakeholder.isPerson === 'YES' ? 'YES' : 'NO') ||
+            formData.stakeholderComments !== stakeholder.stakeholderComments ||
+            formData.stakeholderStatus !== stakeholder.stakeholderStatus ||
+            formData.contacted !== (stakeholder.contacted === 'YES' ? 'YES' : 'NO') ||
+            formData.consultation !== stakeholder.consultation ||
+            formData.attempts !== stakeholder.attempts ||
+            formData.email !== stakeholder.email ||
+            formData.followUp !== stakeholder.followUp
+        );
+    }
 
-// Handle form input changes
+    // Handle form input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
         const {name, value} = e.target;
         setFormData((prevData) => ({
@@ -66,10 +84,11 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         }));
     };
 
+    // Handle form submission
     const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         try {
-            const response = await updateStakeholder(stakeholder.id, formData);
+            const response: void = await updateStakeholder(stakeholder.id, formData);
             console.log('Stakeholder updated successfully', response);
             window.location.reload();
         } catch (error) {
@@ -230,8 +249,7 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                         />
                     </div>
                 </div>
-
-                <button className="form-btn" onClick={(event) => handleSubmit(event)}>
+                <button className="form-btn" disabled={!hasDataChanged()} onClick={(event) => handleSubmit(event)}>
                     <FaRegSave/> Save
                 </button>
             </div>

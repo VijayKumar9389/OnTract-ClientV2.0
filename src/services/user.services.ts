@@ -21,7 +21,6 @@ export const handleLogin = async (username: string, password: string, dispatch: 
         const response = await axios.post<TokenResponse>('http://localhost:3005/user/login', {username, password}, {
             withCredentials: true,
         });
-
         // Dispatch login action with token response
         dispatch(setLogin(response.data));
     } catch (error) {

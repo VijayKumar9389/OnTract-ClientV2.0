@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {PackageType} from '../../../../models/package.models.ts';
-import {Project, Stakeholder} from '../../../../models/stakeholder.models.ts';
-import {createDelivery} from '../../../../services/delivery.services.ts';
-import {getPackageTypesByProjectId} from "../../../../services/package.services.ts";
-import {NewDeliveryInput} from "../../../../models/delivery.models.ts";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
-import {FaTruck} from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { PackageType } from '../../../../models/package.models.ts';
+import { Project, Stakeholder } from '../../../../models/stakeholder.models.ts';
+import { createDelivery } from '../../../../services/delivery.services.ts';
+import { getPackageTypesByProjectId } from '../../../../services/package.services.ts';
+import { NewDeliveryInput } from '../../../../models/delivery.models.ts';
+import { getProjectFromCookie } from '../../../../utils/cookieHelper.ts';
+import { FaTruck } from 'react-icons/fa';
 
 interface CreateDeliveryForm {
     delivery_method: string;
@@ -15,8 +15,8 @@ interface CreateDeliveryForm {
     packageTypeId: number;
 }
 
-const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
-    const initialState = {
+const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholder }) => {
+    const initialState: CreateDeliveryForm = {
         delivery_method: '',
         route: '',
         destination: '',
@@ -30,8 +30,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
     const project: Project | null = getProjectFromCookie();
 
     useEffect(() => {
-        if (!project)
-            return;
+        if (!project) return;
         const fetchPackageTypes = async (): Promise<void> => {
             try {
                 const packageTypes = await getPackageTypesByProjectId(project.id);
@@ -40,13 +39,12 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
                 console.error('Error fetching package types:', error);
             }
         };
-        fetchPackageTypes()
-            .then(() => console.log('Package types fetched'))
+        fetchPackageTypes();
     }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const {name, value} = e.target;
-        setCreateDeliveryForm((prevForm) => ({...prevForm, [name]: value}));
+        const { name, value } = e.target;
+        setCreateDeliveryForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 
     const addressAvailable = () => {
@@ -59,6 +57,12 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
     const getAvailableAddresses = () => {
         return createDeliveryForm.delivery_method === 'mail' ? stakeholder.mailingAddress : stakeholder.streetAddress || '';
     };
+
+    // const isFormValid: boolean =
+    //     createDeliveryForm.packageTypeId !== 0 &&
+    //     createDeliveryForm.delivery_method !== '' &&
+    //     createDeliveryForm.route !== '' &&
+    //     createDeliveryForm.destination !== '';
 
     const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
@@ -96,7 +100,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
                     value={createDeliveryForm.packageTypeId}
                     onChange={handleInputChange}
                 >
-                    <option value="">Select Package Type</option>
+                    <option value={0}>Select Package Type</option>
                     {packageTypeOptions.map((option) => (
                         <option key={option.id} value={option.id}>
                             {option.name}
@@ -121,23 +125,12 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
 
             <div className="input-wrapper">
                 <label htmlFor="notes">Notes:</label>
-                <textarea
-                    id="notes"
-                    name="notes"
-                    value={createDeliveryForm.notes}
-                    onChange={handleInputChange}
-                />
+                <textarea id="notes" name="notes" value={createDeliveryForm.notes} onChange={handleInputChange} />
             </div>
 
             <div className="input-wrapper">
                 <label htmlFor="route">Route:</label>
-                <input
-                    type="text"
-                    id="route"
-                    name="route"
-                    value={createDeliveryForm.route}
-                    onChange={handleInputChange}
-                />
+                <input type="text" id="route" name="route" value={createDeliveryForm.route} onChange={handleInputChange} />
             </div>
 
             <div className="input-wrapper">
@@ -152,7 +145,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
                 </select>
             </div>
 
-            {destinationOptions === 0 && createDeliveryForm.delivery_method !== "" && (
+            {destinationOptions === 0 && createDeliveryForm.delivery_method !== '' && (
                 <div className="input-wrapper">
                     <label htmlFor="destination">Destination:</label>
                     <input
@@ -167,17 +160,12 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder
 
             {destinationOptions === 1 && <h1>{getAvailableAddresses()}</h1>}
 
-            <button
-                type="submit"
-                className="form-btn"
-                disabled={!createDeliveryForm.packageTypeId || !createDeliveryForm.delivery_method || !createDeliveryForm.route}
-            >
+            <button type="submit" className="form-btn" >
                 <FaTruck />
                 Create Delivery
             </button>
         </form>
     );
-
 };
 
 export default CreateDeliveryForm;

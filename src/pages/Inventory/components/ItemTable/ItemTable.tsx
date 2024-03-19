@@ -1,8 +1,8 @@
-import { Item } from "../../../../models/item.models.ts";
+import {Item} from "../../../../models/item.models.ts";
 import {Navigation} from "../../../../utils/navigation.ts";
 import React from "react";
 
-const ItemTable: React.FC<{ items: Item[] }> = ({ items }) => {
+const ItemTable: React.FC<{ items: Item[] }> = ({items}) => {
     const {navigateToInventoryItem} = Navigation();
     return (
         <div className="panel">
@@ -26,9 +26,9 @@ const ItemTable: React.FC<{ items: Item[] }> = ({ items }) => {
                                         className="form-image"
                                     />
                                 </td>
-                                <td >
+                                <td>
                                     <h3>{item.name}</h3>
-                                    <p className="item-description">{item.description}</p>
+                                    <p>{item.description}</p>
                                 </td>
                                 <td>
                                     <strong>{item.quantity}</strong>

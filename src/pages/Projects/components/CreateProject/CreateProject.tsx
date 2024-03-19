@@ -3,6 +3,8 @@ import axios from 'axios';
 import * as XLSX from 'xlsx';
 import {ProjectRecordInput} from "../../../../models/project.models.ts";
 import './CreateProject.scss';
+import {FaList} from "react-icons/fa6";
+import {showToastError} from "../../../../utils/toastHelper.ts";
 
 const CreateProject = () => {
     const [projectForm, setProjectForm] = useState({
@@ -103,8 +105,6 @@ const CreateProject = () => {
                 projectRecords: projectRecords,
             };
 
-            console.log(projectInput);
-
             axios.post('http://localhost:3005/project/create', projectInput)
                 .then((response) => {
                     console.log('Project created successfully', response.data);
@@ -112,9 +112,18 @@ const CreateProject = () => {
                 })
                 .catch((error) => {
                     console.error('Error creating project', error);
+                    showToastError('Error creating project')
                 });
         }
     };
+
+    const isFileValid = (): boolean => {
+        return projectForm.fileInput !== null;
+    }
+
+    const isFormValid = (): boolean => {
+        return projectForm.projectName.length > 0 && projectForm.projectYear > 0 && isFileValid();
+    }
 
     return (
         <div>
@@ -166,10 +175,13 @@ const CreateProject = () => {
                 <div className="input-wrapper">
                     <label>Survey Link:
                         <input type="file" onChange={handleFileUpload}/>
-                        <button onClick={handleSaveClick}>Save</button>
                     </label>
                 </div>
 
+                <button className="form-btn" onClick={handleSaveClick} disabled={!isFormValid()}>
+                    <FaList />
+                    Create Project
+                </button>
             </div>
 
 
