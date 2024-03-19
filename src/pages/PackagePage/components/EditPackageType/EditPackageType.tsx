@@ -27,6 +27,7 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
     const handleNotesChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
         setNotes(event.target.value);
     };
+
     const handleEditPackage = (): void => {
         const packageData: NewPackageTypeInput = {
             name: name,
@@ -38,7 +39,7 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
                 console.log("Package updated successfully:", response);
                 window.location.reload();
             })
-            .catch((error) => {
+            .catch((error): void => {
                 // Handle error if needed
                 console.error("Error updating package:", error);
             });

@@ -8,11 +8,12 @@ import Dialog from '../../components/Dialog/Dialog.tsx';
 import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
 import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
 import {FaBoxes} from "react-icons/fa";
+import {Project} from "../../models/stakeholder.models.ts";
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const project = getProjectFromCookie();
+    const project: Project | null = getProjectFromCookie();
 
     const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
@@ -22,7 +23,7 @@ const Inventory = () => {
         const fetchData = async (): Promise<void> => {
             if (!project) return;
             try {
-                const response = await getItemsByProjectId(project.id);
+                const response: Item[] = await getItemsByProjectId(project.id);
                 setItems(response);
             } catch (error) {
                 console.error('Error fetching items:', error);
@@ -35,10 +36,13 @@ const Inventory = () => {
     return (
         <div className="section">
             <Heading heading="Inventory" />
+            <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
             <div className="page-content">
-                <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
                 <div className="header">
-                    <h3><FaBoxes /> ITEMS (<strong>{items.length}</strong>)</h3>
+                    <h3>
+                        <FaBoxes />
+                        ITEMS (<strong>{items.length}</strong>)
+                    </h3>
                     <button onClick={toggleModal}>
                         <MdAdd /> Add Item
                     </button>

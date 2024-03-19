@@ -3,9 +3,18 @@ import {Package} from "../../../../models/package.models.ts";
 import {cancelPackage} from "../../../../services/package.services.ts";
 import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {Navigation} from "../../../../utils/navigation.ts";
+import Dialog from "../../../../components/Dialog/Dialog.tsx";
+import {useState} from "react";
+import {showToastError} from "../../../../utils/toastHelper.ts";
+import ChangePackage from "../ChangePackage/ChangePackage.tsx";
 
 const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackage}) => {
-    const {navigateToStakeholder, navigateToPackage} = Navigation();
+    const {navigateToStakeholder} = Navigation();
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+    const toggleDialog = (): void => {
+        setIsDialogOpen(!isDialogOpen);
+    };
 
     const handleCancelPackage = async (packageId: number, stakeholderId: number): Promise<void> => {
         try {
@@ -13,10 +22,10 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
             window.location.reload();
         } catch (error) {
             console.error('Failed to cancel package:', error);
-            // Optionally, you can provide feedback to the user about the error
+            showToastError('Failed to cancel package');
         }
     };
-    
+
     return (
         <tr>
             <td>
@@ -27,11 +36,11 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
             </td>
             <td>
                 <div className="action-buttons">
-                    <button className="action-button view-package"
-                            onClick={() => navigateToPackage(deliveryPackage.packageType.id)}>View Package
+                    <button onClick={() => toggleDialog()}>
+                        Edit Package
                     </button>
-                    <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}
-                            className="action-button view-stakeholder">View Stakeholder
+                    <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>
+                        View Stakeholder
                     </button>
                     <ConfirmationButton
                         onConfirm={() => handleCancelPackage(deliveryPackage.id, deliveryPackage.stakeholder.id)}
@@ -40,6 +49,11 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
                     />
                 </div>
             </td>
+            <Dialog
+                element={<ChangePackage packageType={deliveryPackage.packageType} packageId={deliveryPackage.id}/>}
+                heading={"Change Package"}
+                isOpen={isDialogOpen}
+                toggle={() => toggleDialog()}/>
         </tr>
     );
 }

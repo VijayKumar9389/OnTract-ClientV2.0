@@ -13,9 +13,9 @@ export interface Package {
 
 // Create new package
 export interface NewPackageInput {
-    stakeholderId: string;
-    packageTypeId: string;
-    deliveryId: string;
+    stakeholderId: number;
+    packageTypeId: number;
+    deliveryId: number;
 }
 
 export interface NewPackageTypeInput {

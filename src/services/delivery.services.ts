@@ -1,4 +1,4 @@
-import {Delivery, DeliveryReportDTO, EditDeliveryDTO, NewDeliveryInput} from "../models/delivery.models.ts";
+import {Delivery, DeliveryReportDTO, UpdateDeliveryInput, NewDeliveryInput} from "../models/delivery.models.ts";
 import axios, {AxiosResponse} from "axios";
 
 //Get all deliveries by project ID
@@ -61,7 +61,7 @@ export const getDeliveryReport = async (projectId: number): Promise<DeliveryRepo
 }
 
 // Edit Delivery
-export const editDelivery = async (deliveryId: number, delivery: EditDeliveryDTO): Promise<Delivery> => {
+export const editDelivery = async (deliveryId: number, delivery: UpdateDeliveryInput): Promise<Delivery> => {
     try {
         const endpoint: string = `http://localhost:3005/delivery/update/${deliveryId}`;
         const response: AxiosResponse<Delivery> = await axios.put(endpoint, delivery, { withCredentials: true });

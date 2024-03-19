@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaRegSave } from 'react-icons/fa';
-import { Delivery, EditDeliveryDTO } from '../../../../models/delivery.models';
+import { Delivery, UpdateDeliveryInput } from '../../../../models/delivery.models';
 import { editDelivery } from '../../../../services/delivery.services';
 
 const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
-    const [formData, setFormData] = useState<EditDeliveryDTO>({
+    const [formData, setFormData] = useState<UpdateDeliveryInput>({
         route: '',
         destination: '',
         delivery_method: 'mail', // Renamed from delivery_method to deliveryMethod

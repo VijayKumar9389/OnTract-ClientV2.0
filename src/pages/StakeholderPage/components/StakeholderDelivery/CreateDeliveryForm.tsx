@@ -50,19 +50,27 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
     const addressAvailable = () => {
         return (
             (stakeholder.mailingAddress && createDeliveryForm.delivery_method === 'mail') ||
-            (stakeholder.streetAddress && createDeliveryForm.delivery_method === 'inPerson')
+            (stakeholder.streetAddress && createDeliveryForm.delivery_method === 'person')
         );
     };
 
-    const getAvailableAddresses = () => {
-        return createDeliveryForm.delivery_method === 'mail' ? stakeholder.mailingAddress : stakeholder.streetAddress || '';
+    const isFormValid = () => {
+        return createDeliveryForm.packageTypeId !== 0 && createDeliveryForm.delivery_method !== ''  && createDeliveryForm.destination !== '';
+    }
+
+    const handleDeliveryMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { value } = e.target;
+        setCreateDeliveryForm((prevForm) => ({
+            ...prevForm,
+            delivery_method: value,
+            destination: '', // Clear the destination
+        }));
+        setDestinationOptions(0); // Reset destination options to custom
     };
 
-    // const isFormValid: boolean =
-    //     createDeliveryForm.packageTypeId !== 0 &&
-    //     createDeliveryForm.delivery_method !== '' &&
-    //     createDeliveryForm.route !== '' &&
-    //     createDeliveryForm.destination !== '';
+    const getAvailableAddresses = () => {
+        return createDeliveryForm.delivery_method === 'mail' ? stakeholder.mailingAddress : stakeholder.streetAddress;
+    };
 
     const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
@@ -115,7 +123,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
                     id="deliveryMethod"
                     name="delivery_method"
                     value={createDeliveryForm.delivery_method}
-                    onChange={handleInputChange}
+                    onChange={handleDeliveryMethodChange}
                 >
                     <option value="">Select a Delivery Method</option>
                     <option value="mail">Mail</option>
@@ -125,12 +133,13 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
 
             <div className="input-wrapper">
                 <label htmlFor="notes">Notes:</label>
-                <textarea id="notes" name="notes" value={createDeliveryForm.notes} onChange={handleInputChange} />
+                <textarea id="notes" name="notes" value={createDeliveryForm.notes} onChange={handleInputChange}/>
             </div>
 
             <div className="input-wrapper">
                 <label htmlFor="route">Route:</label>
-                <input type="text" id="route" name="route" value={createDeliveryForm.route} onChange={handleInputChange} />
+                <input type="text" id="route" name="route" value={createDeliveryForm.route}
+                       onChange={handleInputChange}/>
             </div>
 
             <div className="input-wrapper">
@@ -141,9 +150,10 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
                     onChange={(e) => setDestinationOptions(Number(e.target.value))}
                 >
                     <option value={0}>Custom</option>
-                    {addressAvailable() && <option value={1}>Current</option>}
+                    {addressAvailable() && <option value={1}>Current Location</option>}
                 </select>
             </div>
+
 
             {destinationOptions === 0 && createDeliveryForm.delivery_method !== '' && (
                 <div className="input-wrapper">
@@ -158,10 +168,22 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
                 </div>
             )}
 
-            {destinationOptions === 1 && <h1>{getAvailableAddresses()}</h1>}
+            {destinationOptions === 1 && (
+                <div className="input-wrapper">
+                    <label htmlFor="destination">Destination:</label>
+                    <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        value={getAvailableAddresses()}
+                        readOnly // Set readOnly attribute to true
+                    />
+                </div>
+            )}
 
-            <button type="submit" className="form-btn" >
-                <FaTruck />
+
+            <button type="submit" className="form-btn" disabled={!isFormValid()}>
+                <FaTruck/>
                 Create Delivery
             </button>
         </form>

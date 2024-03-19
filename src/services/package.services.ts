@@ -105,3 +105,14 @@ export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<
         throw error;
     }
 }
+
+// Change Package's Package Type
+export const changePackagePackageType = async (packageId: number, packageTypeId: number): Promise<void> => {
+    try {
+        const endpoint: string = `http://localhost:3005/package/change/packagepackagetype/${packageId}/${packageTypeId}`;
+        await axios.put(endpoint);
+    } catch (error) {
+        console.error('Error changing package package type:', error);
+        throw error;
+    }
+}

@@ -9,6 +9,7 @@ table {
   // Table row hover effect
   .item-image {
     width: 80px;
+
     img {
       border-radius: 50%;
       height: 60px;
@@ -59,14 +60,26 @@ table {
 
 .select-table {
   tbody {
+    .selected {
+        background-color: $cardHoverBackgroundColor;
+    }
+
     tr {
       cursor: pointer;
       transition: background-color 0.3s ease;
+
       &:hover {
-        background-color: #e0e0e0;
+        background-color: $cardHoverBackgroundColor;
       }
     }
   }
+}
+
+.table-wrapper {
+  border: $border;
+  border-radius: $buttonRadius;
+  max-height: 500px;
+  overflow: auto;
 }
 
 // Responsive styles

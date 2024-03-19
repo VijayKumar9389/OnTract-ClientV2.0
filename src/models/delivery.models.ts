@@ -7,7 +7,7 @@ export interface Delivery {
     completed: boolean;
     route: string;
     destination: string;
-    delivery_method: string; // Use camelCase for consistency with JavaScript naming conventions
+    delivery_method: string;
     notes: string;
     packages: Package[];
 }
@@ -21,6 +21,14 @@ export interface NewDeliveryInput {
     notes: string;
     stakeholderId: number;
     packageTypeId: number;
+}
+
+// Edit delivery details
+export interface UpdateDeliveryInput {
+    route: string;
+    destination: string;
+    delivery_method: string;
+    notes: string;
 }
 
 // Delivery statistics for a selected project
@@ -39,10 +47,3 @@ export interface DeliveryReportDTO {
     deliveryCount: number;
 }
 
-// Edit delivery details
-export interface EditDeliveryDTO {
-    route: string;
-    destination: string;
-    delivery_method: string;
-    notes: string;
-}
