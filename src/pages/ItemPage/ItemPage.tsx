@@ -39,7 +39,7 @@ const ItemPage = () => {
             history.back();
         } catch (error) {
             console.error('Error deleting item:', error);
-            showToastError('Error deleting item')
+            showToastError('Cannot delete item associated with packages.')
         }
     };
 

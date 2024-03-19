@@ -19,7 +19,6 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
             </div>
             <div className="detail-list">
                 <li>
-
                     {isMailout(delivery.delivery_method) ? <span><IoMdMail/></span> : <span><FaTruck/></span>}
                     <div>
                         <p>Type:</p>
