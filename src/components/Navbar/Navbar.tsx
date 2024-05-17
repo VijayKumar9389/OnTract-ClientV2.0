@@ -1,79 +1,102 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../store/reducers/auth.reducer.ts";
-import { RootState } from "../../store";
-import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram, FaTimes } from 'react-icons/fa';
-import { FiPackage } from "react-icons/fi";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { MdEmergencyShare } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.scss";
+import Dialog from "../Dialog/Dialog.tsx";
+import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram } from 'react-icons/fa';
+import { FiPackage } from "react-icons/fi";
+import { RootState } from "../../store";
+
+interface NavbarLink {
+    to: string;
+    text: string;
+    icon: JSX.Element;
+}
 
 const Navbar = () => {
     const dispatch = useDispatch();
     const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const location = useLocation(); // Get the current location
 
-    const toggleModal = () => {
+    const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
     };
 
-    const closeModal = () => {
+    const closeModal = (): void => {
         setIsModalOpen(false);
+    };
+
+    const navbarLinks: NavbarLink[] = [
+        { to: "/", text: "Dashboard", icon: <FaHome /> },
+        { to: "/stakeholders", text: "Stakeholders", icon: <FaUser /> },
+        { to: "/deliveries", text: "Deliveries", icon: <FaTruck /> },
+        { to: "/packages", text: "Packages", icon: <FiPackage /> },
+        { to: "/inventory", text: "Inventory", icon: <FaBoxes /> },
+    ];
+
+    const adminLinks: NavbarLink[] = [
+        { to: "/users", text: "Users", icon: <FaUsers /> },
+        { to: "/projects", text: "Projects", icon: <FaProjectDiagram /> },
+    ];
+
+    // Function to determine if a link is active
+    const isActiveLink = (linkTo: string) => {
+        return location.pathname === linkTo;
     };
 
     return (
         <nav className="nav-container">
             <h1><MdEmergencyShare /> OnTract</h1>
             <ul className="navbar-links">
-                <li><Link to="/" className="sidebar-link" onClick={closeModal}><FaHome/>Dashboard</Link></li>
-                <li><Link to="/stakeholders" className="sidebar-link" onClick={closeModal}><FaUser/>Stakeholders</Link></li>
-                <li><Link to="/deliveries" className="sidebar-link" onClick={closeModal}><FaTruck/>Deliveries</Link></li>
-                <li><Link to="/packages" className="sidebar-link" onClick={closeModal}><FiPackage/>Packages</Link></li>
-                <li><Link to="/inventory" className="sidebar-link" onClick={closeModal}><FaBoxes/>Inventory</Link></li>
-                {isAdmin && (
-                    <>
-                        <li><Link to="/users" className="sidebar-link" onClick={closeModal}><FaUsers/>Users</Link></li>
-                        <li><Link to="/projects" className="sidebar-link" onClick={closeModal}><FaProjectDiagram/>Projects</Link>
-                        </li>
-                    </>
-                )}
+                {navbarLinks.map((link, index) => (
+                    <li key={index}>
+                        <Link to={link.to} className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`} onClick={closeModal} >
+                            {link.icon}
+                            {link.text}
+                        </Link>
+                    </li>
+                ))}
+                {isAdmin && adminLinks.map((link, index) => (
+                    <li key={index}>
+                        <Link to={link.to} className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`} onClick={closeModal}>
+                            {link.icon}
+                            {link.text}
+                        </Link>
+                    </li>
+                ))}
                 <li>
-                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt/>Logout</button>
+                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
                 </li>
             </ul>
+
             <button className="btn-menu" onClick={toggleModal}>
-                <GiHamburgerMenu/>
+                <GiHamburgerMenu />
             </button>
 
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={toggleModal}>
-                    <div className="modal" onClick={(e) => e.stopPropagation()}>
-                        <div className="btn-container">
-                            <button className="btn-menu" onClick={toggleModal}>
-                                <FaTimes />
-                            </button>
-                        </div>
-                        <ul className="modal-links">
-                            <li><Link to="/" onClick={closeModal}>Dashboard</Link></li>
-                            <li><Link to="/stakeholders" onClick={closeModal}>Stakeholders</Link></li>
-                            <li><Link to="/deliveries" onClick={closeModal}>Deliveries</Link></li>
-                            <li><Link to="/inventory" onClick={closeModal}>Inventory</Link></li>
-                            <li><Link to="/packages" onClick={closeModal}>Packages</Link></li>
-                            {isAdmin && (
-                                <>
-                                    <li><Link to="/users" onClick={closeModal}>Users</Link></li>
-                                    <li><Link to="/projects" onClick={closeModal}>Projects</Link></li>
-                                </>
-                            )}
-                        </ul>
-                        <button className="btn-logout" onClick={() => dispatch(setLogout())}>Logout</button>
-                    </div>
-                </div>
-            )}
+            <Dialog isOpen={isModalOpen} toggle={toggleModal} heading={"Select Page"} element={
+                <ul className="popup-links">
+                    {navbarLinks.map((link, index) => (
+                        <li key={index}>
+                            <Link to={link.to} onClick={closeModal}>{link.text}</Link>
+                        </li>
+                    ))}
+                    {isAdmin && adminLinks.map((link, index) => (
+                        <li key={index}>
+                            <Link to={link.to} onClick={closeModal}>{link.text}</Link>
+                        </li>
+                    ))}
+                    <li>
+                        <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
+                    </li>
+                </ul>
+            } />
+
         </nav>
     );
 }
 
 export default Navbar;
-

@@ -10,6 +10,7 @@ import PackageTypeTable from "./components/PackageTypeTable/PackageTypeTable.tsx
 import {FaBox} from "react-icons/fa";
 
 const Packages = () => {
+
     const [packageTypes, setPackageTypes] = useState<PackageType[] | null>(null);
     const project = getProjectFromCookie();
     const [isOpened, setIsOpened] = useState(false);
@@ -18,17 +19,18 @@ const Packages = () => {
         setIsOpened(!isOpened);
     }
 
-    useEffect(() => {
+    useEffect((): void => {
         if (!project) return;
-        const fetchPackageTypes = async () => {
+        const fetchPackageTypes = async (): Promise<void> => {
             try {
-                const response = await getPackageTypesByProjectId(project.id);
+                const response: PackageType[] = await getPackageTypesByProjectId(project.id);
                 setPackageTypes(response);
             } catch (error) {
                 console.error("Error fetching package types:", error);
             }
         };
-        fetchPackageTypes();
+        fetchPackageTypes()
+            .then(() => console.log("Package types fetched successfully"));
     }, []);
 
     if (!packageTypes) {

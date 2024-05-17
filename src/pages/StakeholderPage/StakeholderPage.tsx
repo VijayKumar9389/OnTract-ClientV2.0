@@ -18,7 +18,8 @@ const StakeholderPage = () => {
         if (!id) return;
         setLoading(true);
         getStakeholderById(parseInt(id))
-            .then((response: Stakeholder) => {
+            .then((response: Stakeholder): void => {
+                console.log(response);
                 setStakeholder(response);
             })
             .catch((): void => {

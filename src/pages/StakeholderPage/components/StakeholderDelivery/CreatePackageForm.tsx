@@ -85,7 +85,7 @@ const PackageForm: React.FC<PackageFormProps> = ({stakeholder}) => {
                         <thead>
                         <tr>
                             <th>Destination</th>
-                            <th>Destination</th>
+                            <th>Stakeholders</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -2,21 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {getLocationReport} from '../../../../services/stakeholder.services.ts';
 import {getProjectFromCookie} from '../../../../utils/cookieHelper.ts';
 import './LocationReport.scss';
-
-interface Location {
-    province: string;
-    count: number;
-    cities: City[];
-}
-
-interface City {
-    name: string;
-    count: number;
-}
-
-export interface LocationData {
-    locations: Location[];
-}
+import {Location, LocationData} from "../../../../models/report.model.ts";
 
 const LocationReport: React.FC = () => {
     const [locations, setLocations] = useState<Location[]>([]);
@@ -42,11 +28,12 @@ const LocationReport: React.FC = () => {
     };
 
     return (
+
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">Locations Report</label>
+                <label className="panel-label">Location Report</label>
             </div>
-            <div className="page-content">
+            <div className="panel-content">
                 <div className="location-report">
                     {locations.map((location: Location, index: number) => (
                         <div key={index} className="location-item">
@@ -58,8 +45,8 @@ const LocationReport: React.FC = () => {
                                 <ul className="city-list">
                                     {location.cities.map((city, cityIndex) => (
                                         <li key={cityIndex}>
-                                            <strong><span className="city-count">{city.count}</span></strong>
                                             <span className="city-name">{city.name}</span>
+                                            <strong><span className="city-count">{city.count}</span></strong>
                                         </li>
                                     ))}
                                 </ul>
@@ -70,8 +57,8 @@ const LocationReport: React.FC = () => {
                     ))}
                 </div>
             </div>
-
         </div>
+
 
     );
 };

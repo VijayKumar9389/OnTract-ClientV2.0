@@ -1,6 +1,7 @@
 import {PackageType, NewPackageTypeInput} from "../../../../models/package.models.ts";
 import {updatePackageType} from "../../../../services/package.services.ts";
 import React, {useEffect, useState} from "react";
+import {FaSave} from "react-icons/fa";
 
 const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) => {
     const [name, setName] = useState<string>('');
@@ -70,7 +71,8 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
                         />
                     </div>
                     <button type="button" className="form-btn" disabled={!hasDataChanged()} onClick={handleEditPackage}>
-                        Edit Package
+                        <FaSave />
+                        Save
                     </button>
                 </form>
             </div>

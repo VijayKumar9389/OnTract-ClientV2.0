@@ -66,23 +66,7 @@ export interface UpdateTrackRecordInput {
     tractComments: string;
 }
 
-// Stakeholder Stats for Project
-export interface StakeholderStatsDTO {
-    totalCount: number;
-    oneTractCount: number;
-    moreThanOneTractCount: number;
-    attemptedContactCount: number;
-    notAttemptedContactCount: number;
-    consultedCount: number;
-    notConsultedCount: number;
-    deliveryPlannedCount: number;
-    deliveryNotPlannedCount: number;
-    missingPhoneNumbers: number;
-    contactedYesCount: number;
-    contactedNoCount: number;
-}
-
-// Stakeholder with Tract Records for a 
+// Stakeholder with Tract Records for a
 export interface RelatedStakeholder {
     stakeholder: Stakeholder; // Assuming StakeholderWithTractRecords is your existing interface or type
     isPhoneSame: boolean;

@@ -24,3 +24,10 @@ export interface ProjectRecordInput {
     isPerson: string;
     stakeholderComments: string;
 }
+
+export interface EditProjectInputDTO {
+    name: string;
+    year: number;
+    notes: string;
+    surveyLink: string;
+}

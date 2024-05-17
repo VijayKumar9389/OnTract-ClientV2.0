@@ -17,8 +17,8 @@ const ItemTable: React.FC<{ items: Item[] }> = ({items}) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {items.map((item: Item) => (
-                            <tr onClick={() => navigateToInventoryItem(item.id)}>
+                        {items.map((item: Item, index: number) => (
+                            <tr onClick={() => navigateToInventoryItem(item.id)} key={index}>
                                 <td className="item-image">
                                     <img
                                         src={`http://localhost:3005/images/${item.image}`}

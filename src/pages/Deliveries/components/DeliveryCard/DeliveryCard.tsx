@@ -4,12 +4,11 @@ import {FaInfoCircle, FaTruck} from "react-icons/fa";
 import {Navigation} from "../../../../utils/navigation.ts";
 import {IoMdMail} from "react-icons/io";
 import {IoPerson} from "react-icons/io5";
+import {isMailout} from "../../../../utils/helpers.ts";
 
 const DeliveryCard: React.FC<{ delivery: Delivery }> = ({delivery}) => {
 
     const {navigateToDelivery} = Navigation();
-
-    const isMailout = (method: string) => method === 'mail';
 
     return (
         <div className="card" onClick={() => navigateToDelivery(delivery.id)}>

@@ -1,15 +1,16 @@
 import './DeliveryReport.scss';
-import { getDeliveryReport } from "../../../../services/delivery.services.ts";
-import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
-import { useEffect, useState } from "react";
-import { DeliveryReportDTO } from "../../../../models/delivery.models.ts";
+import {getDeliveryReport} from "../../../../services/delivery.services.ts";
+import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {useEffect, useState} from "react";
+import {DeliveryReportDTO} from "../../../../models/delivery.models.ts";
+import {Project} from "../../../../models/stakeholder.models.ts";
 
 const DeliveryReport = () => {
     const [deliveryReport, setDeliveryReport] = useState<DeliveryReportDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    const project = getProjectFromCookie();
+    const project: Project | null = getProjectFromCookie();
 
     const fetchDeliveryReport = async (): Promise<void> => {
         if (!project) {
@@ -39,44 +40,82 @@ const DeliveryReport = () => {
         return <p>{error}</p>;
     }
 
+    if (!deliveryReport) {
+        return <p>Error</p>;
+    }
+
     return (
-        <div className="panel">
-            <div className="panel-header">
-                <label className="panel-label">Delivery Report</label>
+
+        <div className="delivery-report">
+            <div className="report-wrapper">
+                <div className="report-item">
+                    <label>Total Deliveries</label>
+                    <h2>{deliveryReport.count}</h2>
+                </div>
+                <div className="report-item">
+                    <label>Total Stakeholders Planned</label>
+                    <h2>{deliveryReport.stakeholderCount}</h2>
+                </div>
+                <div className="report-item">
+                    <label>Pending Delivery</label>
+                    <h2>{deliveryReport.pendingDeliveryCount}</h2>
+                </div>
+                <div className="report-item">
+                    <label>Delivery Completed</label>
+                    <h2>{deliveryReport.completedDeliveryCount}</h2>
+                </div>
             </div>
-            <div className="page-content">
-                <div className="delivery-report">
-                    <div className="delivery-item">
-                        <div className="card-header">
-                            <h3>Delivery Stats</h3>
-                            <p>Total Count: <strong>{deliveryReport?.count}</strong></p>
-                            <p>Stakeholder Count: <strong>{deliveryReport?.stakeholderCount}</strong></p>
-                            <p>Pending Delivery Count: <strong>{deliveryReport?.pendingDeliveryCount}</strong></p>
-                            <p>Completed Delivery Count: <strong>{deliveryReport?.completedDeliveryCount}</strong></p>
-                        </div>
-                        <div className="package-type-count">
-                            <h4>Package Type Count</h4>
-                            <ul>
-                                {Object.entries(deliveryReport?.packageTypeCountMap || {}).map(([type, count], index) => (
-                                    <li key={index}>
-                                        {type}: <strong>{count}</strong>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="delivery-route-count">
-                            <h4>Delivery Route Count</h4>
-                            <ul>
-                                {Object.entries(deliveryReport?.deliveryRouteCountMap || {}).map(([route, count], index) => (
-                                    <li key={index}>
-                                        {route}: <strong>{count}</strong>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+            <div className="table-container">
+                <div className="panel">
+                    <div className="panel-header">
+                        <label className="panel-label">Planned Packages</label>
+                    </div>
+                    <div className="panel-content">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Package Type</th>
+                                <th>Count</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {Object.entries(deliveryReport?.packageTypeCountMap || {}).map(([type, count], index) => (
+                                <tr key={index}>
+                                    <td>{type}</td>
+                                    <td><strong>{count}</strong></td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div className="panel">
+                    <div className="panel-header">
+                        <label className="panel-label">Planned Routes</label>
+                    </div>
+                    <div className="panel-content">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Delivery Route</th>
+                                <th>Count</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {Object.entries(deliveryReport?.deliveryRouteCountMap || {}).map(([route, count], index) => (
+                                <tr key={index}>
+                                    <td>{route}</td>
+                                    <td><strong>{count}</strong></td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+
+
         </div>
     );
 }

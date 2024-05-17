@@ -11,7 +11,7 @@ import {
     FaVoicemail, FaHandshake
 } from 'react-icons/fa';
 import {FaLocationDot} from "react-icons/fa6";
-import { isAvailable, getAttemptNo, isNotNull, getLocation, getStatus} from "../../../../utils/helpers.ts";
+import {isAvailable, getAttemptNo, isNotNull, getLocation, getStatus, isContacted} from "../../../../utils/helpers.ts";
 
 const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
     const {navigateToStakeholder} = Navigation();
@@ -67,7 +67,7 @@ const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                     <span><FaComment/></span>
                     <div>
                         <p>Contacted:</p>
-                        {isAvailable(stakeholder.contacted)
+                        {isContacted(stakeholder.contacted)
                             ? <a className="chip green">Yes</a>
                             : <a className="chip red">No</a>
                         }

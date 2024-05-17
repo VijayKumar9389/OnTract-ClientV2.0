@@ -8,7 +8,7 @@ $cancelColorHover: #D32F2F; // Hover color for cancel buttons (darker red)
 $backgroundColor: #F5F5F5; // Background color for the entire page
 $cardBackgroundColor: #fff; // Background color for cards
 $cardHoverBackgroundColor: #EEEEEE; // Hover background color for cards (lighter gray)
-$inputBackgroundColor: #EEEEEE; // Background color for input fields (lighter gray)
+$inputBackgroundColor: #f5f5f5; // Background color for input fields (lighter gray)
 $btnBackgroundColor: $primaryColor; // Background color for buttons (same as primary color)
 $btnHoverBackgroundColor: $secondaryColor; // Hover background color for buttons (same as secondary color)
 $btnDisabledBackgroundColor: #CCCCCC; // Disabled background color for buttons (light gray)
@@ -24,16 +24,25 @@ $buttonRadius: 4px; // Border radius for buttons (same as border radius)
 $border: 1px solid #ddd; // Default border
 
 // Shadows
-$boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow (same as before)
-$boxShadowHover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover (same as before)
+$boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow
+$boxShadowHover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover
 
 // Text
 $textColor: #333; // Default text color
-$textColorLight: #666; // Lighter text color for secondary text (same as before)
+$textColorLight: #666; // Lighter text color for secondary text
+
+// Text Sizes
+$textExtraSmall: 12px; // Extra small text size
+$textSmall: 14px; // Small text size
+$textMedium: 16px; // Medium text size
+$textMediumLarge: 20px; // Medium large text size
+$textLarge: 18px; // Large text size
+$textExtraLarge: 24px; // Extra large text size
+
 
 // Transitions
 $transition: ease-in-out .3s; // Default transition
 
 // Breakpoints
-$mobileBreakpoint: 768px; // Breakpoint for mobile devices (same as before)
-$tabletBreakpoint: 1024px; // Breakpoint for tablets (same as before)
+$mobileBreakpoint: 768px; // Breakpoint for mobile devices
+$tabletBreakpoint: 1024px; // Breakpoint for tablets

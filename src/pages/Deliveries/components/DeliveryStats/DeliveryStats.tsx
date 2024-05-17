@@ -45,29 +45,34 @@ const DeliveryStats = () => {
     }
 
     return (
-        <div className="project-statistics">
-            <div className="statistic-item">
-                <span className="label">Total:</span>
-                <span className="value">{deliveryReport.count}</span>
+        <div className="stats-wrapper">
+            <div className="stat-item">
+                <p>Total Deliveries:</p>
+                <h4>{deliveryReport.count}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Completed:</span>
-                <span className="value">{deliveryReport.pendingDeliveryCount}</span>
+            <div className="stat-item">
+                <p>Total Stakeholders:</p>
+                <h4>{deliveryReport.stakeholderCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Pending:</span>
-                <span className="value">{deliveryReport.completedDeliveryCount}</span>
+            <div className="stat-item">
+                <p>Delivery Pending:</p>
+                <h4>{deliveryReport.pendingDeliveryCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">In Person:</span>
-                <span className="value">{deliveryReport.deliveryCount}</span>
+            <div className="stat-item">
+                <p>Delivered:</p>
+                <h4>{deliveryReport.completedDeliveryCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Mailouts:</span>
-                <span className="value">{deliveryReport.mailCount}</span>
+            <div className="stat-item">
+                <p>In Person:</p>
+                <h4>{deliveryReport.deliveryCount}</h4>
+            </div>
+            <div className="stat-item">
+                <p>Mailouts:</p>
+                <h4>{deliveryReport.mailCount}</h4>
             </div>
         </div>
     );
+
 }
 
 export default DeliveryStats;

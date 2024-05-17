@@ -117,13 +117,13 @@ const CreateProject = () => {
         }
     };
 
-    const isFileValid = (): boolean => {
-        return projectForm.fileInput !== null;
-    }
+    // const isFileValid = (): boolean => {
+    //     return projectForm.fileInput !== null;
+    // }
 
-    const isFormValid = (): boolean => {
-        return projectForm.projectName.length > 0 && projectForm.projectYear > 0 && isFileValid();
-    }
+    // const isFormValid = (): boolean => {
+    //     return projectForm.projectName.length > 0 && projectForm.projectYear > 0 && isFileValid();
+    // }
 
     return (
         <div>
@@ -178,7 +178,7 @@ const CreateProject = () => {
                     </label>
                 </div>
 
-                <button className="form-btn" onClick={handleSaveClick} disabled={!isFormValid()}>
+                <button className="form-btn" onClick={handleSaveClick}>
                     <FaList />
                     Create Project
                 </button>

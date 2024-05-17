@@ -19,11 +19,11 @@
       color: #fff;
       background: none;
       border: none;
-      width: fit-content;
       padding: 0;
 
       svg {
         margin: 0;
+        font-size: 1.5rem; // Adjust icon size for better visibility on small screens
       }
     }
   }
@@ -85,7 +85,7 @@
       border-radius: $borderRadius;
       display: flex;
       align-items: center;
-      transition: $transition;
+      transition: ease-in-out .3s;
 
       svg {
         margin-right: $spacingSmall;
@@ -95,57 +95,47 @@
       &:hover {
         background-color: lighten($primaryColor, 10);
       }
+
+      &.active { // Define styles for active link
+        background-color: lighten($primaryColor, 10);
+      }
     }
   }
 
-  // Modal Overlay
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
 
-    .btn-menu {
-      color: $primaryColor;
-    }
-  }
-
-  .modal {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    width: 300px;
-    width: 300px;
-    background: $cardBackgroundColor;
-    border-top-left-radius: $borderRadius;
-    border-bottom-left-radius: $borderRadius;
-    padding: $spacingMedium;
-    box-shadow: $boxShadow;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: fade 0.3s ease; /* Apply fade animation */
-  }
-
-  .modal-links {
+  .popup-links {
     list-style: none;
     padding: 0;
     margin-bottom: $spacingMedium;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .btn-logout {
+      margin: 0;
+      border: 2px solid $primaryColor;
+      background: none;
+      color: $primaryColor;
+      padding: $spacingSmall $spacingLarge;
+      width: 100%;
+
+      &:hover {
+        background-color: #fff;
+        color: $primaryColor;
+      }
+    }
 
     li {
       margin-bottom: $spacingSmall;
       text-align: center;
+
+      @media (max-width: $mobileBreakpoint) {
+        margin-bottom: $spacingSmall; // Adjust spacing for better readability on small screens
+      }
     }
 
-    a,
-    button {
+    a, button {
       display: block;
       padding: $spacingSmall $spacingMedium;
       color: $textColor;
@@ -156,18 +146,10 @@
       &:hover {
         background-color: lighten($primaryColor, 10);
       }
-    }
-  }
-}
 
-/* Fade animation */
-@keyframes fade {
-  from {
-    right: -300px; /* Starting position outside the screen */
-    opacity: 0;
-  }
-  to {
-    right: 0; /* Slide in to the right edge */
-    opacity: 1;
+      @media (max-width: $mobileBreakpoint) {
+        padding: $spacingSmall; // Adjust padding for better spacing on small screens
+      }
+    }
   }
 }

@@ -1,11 +1,48 @@
 import {MdFilterAlt, MdFilterAltOff} from "react-icons/md";
+import {useState} from 'react';
+import Dialog from "../../../../components/Dialog/Dialog.tsx";
+import DeliveryFilter from "../DeliveryFilter/DeliveryFilter.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../store";
+import {setDeliverySearch} from "../../../../store/reducers/delivery.reducer.ts";
 
 const DeliveryInput = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const searchText: string = useSelector((state: RootState) => state.delivery.searchText);
+    const dispatch = useDispatch();
+
+    const toggleModal = (): void => {
+        setIsModalOpen(!isModalOpen);
+    }
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        dispatch(setDeliverySearch(event.target.value));
+    }
+
     return (
         <div className="page-input">
-            <input type="text" placeholder="Search for a Route" className="input-field"/>
-            <button className="filter-button"><MdFilterAlt/>Filter</button>
-            <button className="clear-filter-button"><MdFilterAltOff/>Clear Filter</button>
+            <Dialog
+                heading={"Filter Deliveries"}
+                isOpen={isModalOpen}
+                toggle={toggleModal}
+                element={<DeliveryFilter/>}
+            />
+            <input
+                type="text"
+                placeholder="Search for a Route"
+                className="input-field"
+                value={searchText}
+                onChange={handleSearchChange}
+            />
+            <button
+                className="filter-button" onClick={() => toggleModal()}>
+                <MdFilterAlt/>
+                Filter
+            </button>
+            <button className="clear-filter-button">
+                <MdFilterAltOff/>
+                Clear Filter
+            </button>
         </div>
     );
 }

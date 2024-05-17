@@ -31,19 +31,35 @@
 
 // Ui Elements
 .panel {
-  border: $border;
   box-shadow: $boxShadow;
   border-radius: $borderRadius;
-  margin-bottom: $spacingMedium;
+  margin-bottom: $spacingLarge;
   width: 100%;
   background-color: $cardBackgroundColor;
+  overflow: hidden;
 
   .panel-header {
-    padding: $spacingMedium;
-    border-bottom: $border;
+    padding: $spacingMedium $spacingSmall;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    h3 {
+      color: $textColor;
+      font-weight: bold;
+      margin: 0; // Add margin to reset default browser styles
+    }
+  }
+
+  // Panel Content
+  .panel-heading {
+    font-size: $textLarge;
+    color: $textColorLight;
+    margin-bottom: 0;
+
+    strong {
+      color: $primaryColor;
+    }
   }
 
   .panel-content {
@@ -68,7 +84,7 @@
 // Header Styles
 .header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin-bottom: $spacingLarge;
@@ -77,25 +93,13 @@
     align-items: center;
     display: flex;
     font-weight: bold;
-    margin-bottom: 0; // Remove default margin
+    margin-bottom: 0;
+    color: $primaryColor;
+    font-size: $textLarge;
 
     svg {
       color: $primaryColor;
       margin-right: $spacingSmall;
-    }
-  }
-
-  strong {
-    color: $primaryColor;
-  }
-
-  @media (max-width: $mobileBreakpoint) {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-
-    h3 {
-      margin-bottom: $spacingSmall;
     }
   }
 }
@@ -104,15 +108,14 @@
 .submenu {
   display: flex;
   justify-content: flex-start;
-  padding-left: $spacingSmall;
+  border-bottom: $border;
 
   .submenu-item {
-    padding: $spacingMedium $spacingSmall;
+    padding: $spacingSmall;
     cursor: pointer;
     transition: ease-in-out .3s;
     color: $textColorLight;
     font-weight: bold;
-
 
     &:hover {
       color: $textColor;

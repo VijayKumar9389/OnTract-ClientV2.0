@@ -3,6 +3,8 @@
 // Checks if a field is blank or not
 export const isAvailable = (value: string): boolean => (value !== "");
 
+export const isContacted = (contacted: string): boolean => contacted === "YES";
+
 // Get the number of attempts
 export const getAttemptNo = (attempts: string): number => {
     const cleanedAttempts = attempts.trim();
@@ -43,3 +45,5 @@ export const getStatus = (stakeholderStatus: string): string => {
 export const isStakeholderProfile = (stakeholderId: string | number, idFromParams: string | undefined): boolean => {
     return stakeholderId !== Number(idFromParams);
 };
+
+export const isMailout = (method: string) => method === 'mail';

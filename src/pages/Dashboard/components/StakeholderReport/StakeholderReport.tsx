@@ -1,8 +1,8 @@
 import './StakeholderReport.scss';
 import {getStakeholderReport} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
-import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
 import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {StakeholderStatsDTO} from "../../../../models/report.model.ts";
 const StakeholderReport = () => {
     const [stakeholderReport, setStakeholderReport] = useState<StakeholderStatsDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -42,55 +42,59 @@ const StakeholderReport = () => {
     }
 
     return (
-        <div className="stakeholder-stats">
-            <div className="stat-wrapper">
-                <label className="panel-label">Attempted</label>
-                <StatItem title={"Attempted Contact"} value={stakeholderReport.attemptedContactCount}
-                          total={stakeholderReport.totalCount}/>
-                <StatItem title={"Not Attempted"} value={stakeholderReport.notAttemptedContactCount}
-                          total={stakeholderReport.totalCount}/>
+        <div className="report-wrapper">
+            <div className="report-item">
+                <label>Total Stakeholders</label>
+                <h2>{stakeholderReport.totalCount}</h2>
             </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Multi Tract</label>
-                <StatItem title={"One Tract"} value={stakeholderReport.oneTractCount}
-                          total={stakeholderReport.totalCount}/>
-                <StatItem title={"More Than One Tract"} value={stakeholderReport.moreThanOneTractCount}
-                          total={stakeholderReport.totalCount}/>
+            <div className="report-item">
+                <label>Stakeholders with One Tract</label>
+                <h2>{stakeholderReport.oneTractCount}</h2>
             </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Contacted</label>
-                <StatItem title={"Contacted"} value={stakeholderReport.contactedYesCount}
-                          total={stakeholderReport.totalCount}/>
-                <StatItem title={"Not Contacted"} value={stakeholderReport.contactedNoCount}
-                          total={stakeholderReport.totalCount}/>
+            <div className="report-item">
+                <label>Stakeholders with More Than One Tract</label>
+                <h2>{stakeholderReport.moreThanOneTractCount}</h2>
             </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Consulted</label>
-                <StatItem title={"Consulted"} value={stakeholderReport.consultedCount}
-                          total={stakeholderReport.totalCount}/>
-                <StatItem title={"Not Consulted"} value={stakeholderReport.notConsultedCount}
-                          total={stakeholderReport.totalCount}/>
+            <div className="report-item">
+                <label>Attempted Contact Count</label>
+                <h2>{stakeholderReport.attemptedContactCount}</h2>
             </div>
-            <div className="stat-wrapper">
-                <label className="panel-label">Delivery</label>
-                <StatItem title={"Planned"} value={stakeholderReport.deliveryPlannedCount}
-                          total={stakeholderReport.totalCount}/>
-                <StatItem title={"Not Planned"} value={stakeholderReport.deliveryNotPlannedCount}
-                          total={stakeholderReport.totalCount}/>
+            <div className="report-item">
+                <label>Not Attempted Contact Count</label>
+                <h2>{stakeholderReport.notAttemptedContactCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Consulted Count</label>
+                <h2>{stakeholderReport.consultedCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Not Consulted Count</label>
+                <h2>{stakeholderReport.notConsultedCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Delivery Planned Count</label>
+                <h2>{stakeholderReport.deliveryPlannedCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Delivery Not Planned Count</label>
+                <h2>{stakeholderReport.deliveryNotPlannedCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Missing Phone Numbers</label>
+                <h2>{stakeholderReport.missingPhoneNumbers}</h2>
+            </div>
+            <div className="report-item">
+                <label>Contacted Yes Count</label>
+                <h2>{stakeholderReport.contactedYesCount}</h2>
+            </div>
+            <div className="report-item">
+                <label>Contacted No Count</label>
+                <h2>{stakeholderReport.contactedNoCount}</h2>
             </div>
         </div>
     );
 }
 
-const StatItem = (props: { title: string, value: number, total: number }) => {
-    return (
-        <div className="stat-item">
-            <p>{props.title}: <strong>{props.value}</strong> / {props.total}</p>
-            <div className="progress-bar">
-                <div className="progress" style={{width: `${(props.value / props.total) * 100}%`}}></div>
-            </div>
-        </div>
-    );
-}
+
 
 export default StakeholderReport;

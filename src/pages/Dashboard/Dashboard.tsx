@@ -9,9 +9,17 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <Heading heading="Dashboard"/>
             <div className="page-content">
-                <StakeholderReport/>
-                <LocationReport />
-                <DeliveryReport />
+                <section className="report-section">
+                    <h2 className="section-header">Stakeholder Report</h2>
+                    <StakeholderReport/>
+                </section>
+                <section className="report-section">
+                    <h2 className="section-header">Delivery Report</h2>
+                    <DeliveryReport />
+                </section>
+                <section className="report-section">
+                    <LocationReport />
+                </section>
             </div>
         </div>
     );

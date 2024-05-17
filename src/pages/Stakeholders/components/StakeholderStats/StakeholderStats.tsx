@@ -1,7 +1,7 @@
-import {StakeholderStatsDTO} from "../../../../models/stakeholder.models.ts";
-import {getStakeholderReport} from "../../../../services/stakeholder.services.ts";
-import {useEffect, useState} from "react";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import { getStakeholderReport } from '../../../../services/stakeholder.services.ts';
+import { useEffect, useState } from 'react';
+import { getProjectFromCookie } from '../../../../utils/cookieHelper.ts';
+import { StakeholderStatsDTO } from '../../../../models/report.model.ts';
 
 const StakeholderStats = () => {
     const [stakeholderStats, setStakeholderStats] = useState<StakeholderStatsDTO | null>(null);
@@ -24,11 +24,10 @@ const StakeholderStats = () => {
         }
     }
 
-    useEffect((): void => {
+    useEffect(() => {
         fetchStakeholderStats();
     }, []);
 
-    // Different returns based on different conditions or states
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -42,37 +41,47 @@ const StakeholderStats = () => {
     }
 
     return (
-        <div className="project-statistics">
-            <div className="statistic-item">
-                <span className="label">Total:</span>
-                <span className="value">{stakeholderStats.totalCount}</span>
+        <div className="stats-wrapper">
+            <div className="stat-item">
+                <p>Total:</p>
+                <h4>{stakeholderStats.totalCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Contacted:</span>
-                <span className="value">{stakeholderStats.contactedYesCount}</span>
+            <div className="stat-item">
+                <p>Contacted:</p>
+                <h4>{stakeholderStats.contactedYesCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">No Contact:</span>
-                <span className="value">{stakeholderStats.contactedNoCount}</span>
+            <div className="stat-item">
+                <p>No Contact:</p>
+                <h4>{stakeholderStats.contactedNoCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Consulted:</span>
-                <span className="value">{stakeholderStats.consultedCount}</span>
+            <div className="stat-item">
+                <p>Consulted:</p>
+                <h4>{stakeholderStats.consultedCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">No Consultation:</span>
-                <span className="value">{stakeholderStats.notConsultedCount}</span>
+            <div className="stat-item">
+                <p>No Consultation:</p>
+                <h4>{stakeholderStats.notConsultedCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Attempted:</span>
-                <span className="value">{stakeholderStats.attemptedContactCount}</span>
+            <div className="stat-item">
+                <p>Attempted:</p>
+                <h4>{stakeholderStats.attemptedContactCount}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">No Attempts:</span>
-                <span className="value">{stakeholderStats.notAttemptedContactCount}</span>
+            <div className="stat-item">
+                <p>No Attempts:</p>
+                <h4>{stakeholderStats.notAttemptedContactCount}</h4>
+            </div>
+            <div className="stat-item">
+                <p>Delivery Planned:</p>
+                <h4>{stakeholderStats.deliveryPlannedCount}</h4>
+            </div>
+            <div className="stat-item">
+                <p>No Delivery:</p>
+                <h4>{stakeholderStats.deliveryNotPlannedCount}</h4>
             </div>
         </div>
     );
+
+
 }
 
 export default StakeholderStats;

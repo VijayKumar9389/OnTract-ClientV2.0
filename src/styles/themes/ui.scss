@@ -73,7 +73,6 @@ button:disabled {
   margin-bottom: $spacingSmall;
 
   h3 {
-    font-size: 1.2rem;
     color: $textColor;
     line-break: anywhere;
   }
@@ -83,8 +82,7 @@ button:disabled {
   }
 }
 
-
-// Chip Styles
+// Chip styles
 .chip {
   border-radius: $buttonRadius;
   font-weight: bold;
@@ -204,6 +202,13 @@ textarea {
     }
   }
 
+  .filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: $spacingMedium;
+    width: 100%;
+  }
+
   .clear-filter-button {
     background-color: #e74c3c; // Red color for clear filter button
 
@@ -228,69 +233,28 @@ input[type="checkbox"] {
   appearance: none; /* Remove default checkbox appearance */
   width: 40px; /* Adjust the width of the switch */
   height: 20px; /* Adjust the height of the switch */
-  background-color: #ccc; /* Background color when unchecked */
-  border-radius: 10px; /* Make it round */
+  background-color: $inputBackgroundColor; /* Background color when unchecked */
+  border-radius: $borderRadius; /* Make it round */
+  cursor: pointer; /* Change cursor to pointer */
+  border: $border;
+
+  &:checked {
+    background-color: $primaryColor; /* Background color when checked */
+  }
 
   &::before {
     content: "";
     position: absolute;
-    top: 2px; /* Adjust the vertical position */
+    top: 1px; /* Adjust the vertical position */
     left: 2px; /* Adjust the horizontal position */
     width: 16px; /* Width of the switch handle */
     height: 16px; /* Height of the switch handle */
     background-color: #fff; /* Color of the switch handle */
     border-radius: 50%; /* Make it round */
-    transition: transform 0.3s; /* Add a smooth transition effect */
+    transition: transform $transition; /* Add a smooth transition effect */
   }
 
   &:checked::before {
     transform: translateX(20px); /* Move the switch handle to the right when checked */
-    background-color: #007bff; /* Set switch handle color to blue when checked */
   }
 }
-
-// Statistics
-.project-statistics {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Display six items in a row */
-  background-color: $cardBackgroundColor;
-  padding: $spacingSmall;
-  width: 100%;
-  margin-bottom: $spacingLarge;
-  border-radius: $borderRadius;
-  border: $border;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr); /* Display four items in a row on larger tablets and laptops */
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 1fr); /* Display three items in a row on smaller tablets */
-  }
-
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(2, 1fr); /* Display two items in a row on phones */
-  }
-
-  .statistic-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 100px;
-    padding: $spacingSmall;
-
-    .label {
-      font-size: 16px;
-      color: $textColorLight;
-    }
-
-    .value {
-      font-size: 18px;
-      font-weight: bold;
-      color: $textColor; /* or any color of your choice */
-    }
-  }
-}
-
-
-

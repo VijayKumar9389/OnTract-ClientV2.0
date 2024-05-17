@@ -31,7 +31,7 @@ const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({stakeholderId
     return (
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">Related Stakeholders</label>
+                <h3 className="panel-heading">Related Stakeholders</h3>
             </div>
             <div className="panel-content">
                 {relatedStakeholders.length > 0 ? (

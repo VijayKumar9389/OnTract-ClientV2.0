@@ -1,10 +1,17 @@
-import {Delivery, DeliveryReportDTO, UpdateDeliveryInput, NewDeliveryInput} from "../models/delivery.models.ts";
-import axios, {AxiosResponse} from "axios";
+import { Delivery, DeliveryReportDTO, UpdateDeliveryInput, NewDeliveryInput } from "../models/delivery.models.ts";
+import axios, { AxiosResponse } from "axios";
 
-//Get all deliveries by project ID
+// Get the base URL from environment variables
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!API_BASE_URL) {
+    throw new Error("VITE_API_BASE_URL is not defined");
+}
+
+// Get all deliveries by project ID
 export const getDeliveriesByProjectID = async (projectId: number): Promise<Delivery[]> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/getbyproject/${projectId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/getbyproject/${projectId}`;
         const response: AxiosResponse<Delivery[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -13,9 +20,10 @@ export const getDeliveriesByProjectID = async (projectId: number): Promise<Deliv
     }
 }
 
+// Get Delivery By ID number
 export const getDeliveryById = async (deliveryId: number): Promise<Delivery> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/getbyid/${deliveryId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/getbyid/${deliveryId}`;
         const response: AxiosResponse<Delivery> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -27,7 +35,7 @@ export const getDeliveryById = async (deliveryId: number): Promise<Delivery> => 
 // Get delivery by matching package ID
 export const getDeliveryByPackageId = async (packageId: number): Promise<Delivery> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/getbypackage/${packageId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/getbypackage/${packageId}`;
         const response: AxiosResponse<Delivery> = await axios.get(endpoint, { withCredentials: true });
         return response.data;
     } catch (error) {
@@ -39,7 +47,7 @@ export const getDeliveryByPackageId = async (packageId: number): Promise<Deliver
 // Create delivery
 export const createDelivery = async (delivery: NewDeliveryInput): Promise<Delivery> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/create/delivery`;
+        const endpoint: string = `${API_BASE_URL}/delivery/create/delivery`;
         const response: AxiosResponse<Delivery> = await axios.post(endpoint, delivery, { withCredentials: true });
         return response.data;
     } catch (error) {
@@ -51,7 +59,7 @@ export const createDelivery = async (delivery: NewDeliveryInput): Promise<Delive
 // Get delivery Report by project ID
 export const getDeliveryReport = async (projectId: number): Promise<DeliveryReportDTO> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/report/${projectId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/report/${projectId}`;
         const response: AxiosResponse<DeliveryReportDTO> = await axios.get(endpoint, { withCredentials: true });
         return response.data;
     } catch (error) {
@@ -63,7 +71,7 @@ export const getDeliveryReport = async (projectId: number): Promise<DeliveryRepo
 // Edit Delivery
 export const editDelivery = async (deliveryId: number, delivery: UpdateDeliveryInput): Promise<Delivery> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/update/${deliveryId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/update/${deliveryId}`;
         const response: AxiosResponse<Delivery> = await axios.put(endpoint, delivery, { withCredentials: true });
         return response.data;
     } catch (error) {
@@ -72,10 +80,10 @@ export const editDelivery = async (deliveryId: number, delivery: UpdateDeliveryI
     }
 }
 
-//Set completed status and date for delivery
+// Set completed status and date for delivery
 export const setDeliveryCompleted = async (deliveryId: number, date: string): Promise<Delivery> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/complete/${deliveryId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/complete/${deliveryId}`;
         const response: AxiosResponse<Delivery> = await axios.put(endpoint, { date }, { withCredentials: true });
         return response.data;
     } catch (error) {
@@ -87,11 +95,10 @@ export const setDeliveryCompleted = async (deliveryId: number, date: string): Pr
 // Cancel delivery by ID
 export const cancelDeliveryById = async (deliveryId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/delivery/cancel/${deliveryId}`;
+        const endpoint: string = `${API_BASE_URL}/delivery/cancel/${deliveryId}`;
         await axios.delete(endpoint, { withCredentials: true });
     } catch (error) {
         console.error('Error canceling delivery:', error);
         throw error;
     }
 }
-

@@ -1,4 +1,5 @@
 import {Package} from "../../../../models/package.models.ts";
+import React from "react";
 
 const PackageStats: React.FC<{ packages: Package[] }> = ({packages}) => {
     // get the number of packages that have a completed delivery
@@ -8,18 +9,18 @@ const PackageStats: React.FC<{ packages: Package[] }> = ({packages}) => {
     const pendingDeliveries = packages.filter((deliveryPackage: Package) => !deliveryPackage.delivery.completed);
 
     return (
-        <div className="project-statistics">
-            <div className="statistic-item">
-                <span className="label">Scheduled:</span>
-                <span className="value">{packages.length}</span>
+        <div className="stats-wrapper">
+            <div className="stat-item">
+                <p>Scheduled:</p>
+                <h4>{packages.length}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Completed:</span>
-                <span className="value">{completedDeliveries.length}</span>
+            <div className="stat-item">
+                <p>Delivered:</p>
+                <h4>{completedDeliveries.length}</h4>
             </div>
-            <div className="statistic-item">
-                <span className="label">Pending:</span>
-                <span className="value">{pendingDeliveries.length}</span>
+            <div className="stat-item">
+                <p>Pending:</p>
+                <h4>{pendingDeliveries.length}</h4>
             </div>
         </div>
     );

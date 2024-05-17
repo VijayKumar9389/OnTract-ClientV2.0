@@ -24,7 +24,7 @@ export const authSlice = createSlice({
             state.loggedIn = action.payload.auth;
         },
         checkAuthStatus: (state): void => {
-            const accessToken = localStorage.getItem("accessToken");
+            const accessToken: string | null = localStorage.getItem("accessToken");
             state.loggedIn = !!accessToken;
         },
         setAdminStatus: (state, action: PayloadAction<boolean>): void => {

@@ -1,16 +1,17 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Heading from '../../components/Heading/Heading';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
 import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
-import {getDeliveriesByProjectID} from '../../services/delivery.services';
-import {getProjectFromCookie} from '../../utils/cookieHelper';
-import {Delivery} from '../../models/delivery.models';
+import { getDeliveriesByProjectID } from '../../services/delivery.services';
+import { getProjectFromCookie } from '../../utils/cookieHelper';
+import { Delivery } from '../../models/delivery.models';
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [dataFetched, setDataFetched] = useState<boolean>(false);
     const project = getProjectFromCookie();
 
     useEffect((): void => {
@@ -20,6 +21,7 @@ const Deliveries = () => {
                 setLoading(true);
                 const fetchedDeliveries: Delivery[] = await getDeliveriesByProjectID(project.id);
                 setDeliveries(fetchedDeliveries);
+                setDataFetched(true);
             } catch (error) {
                 setError('Failed to fetch deliveries');
             } finally {
@@ -27,9 +29,11 @@ const Deliveries = () => {
             }
         };
 
-        fetchDeliveries()
-            .then(() => console.log('Deliveries fetched'));
-    }, []);
+        if (!dataFetched) { // Check if data has not been fetched before making the API call
+            fetchDeliveries()
+                .then(() => console.log('Deliveries fetched'));
+        }
+    }, [dataFetched, project]);
 
     return (
         <div className="section">
@@ -43,7 +47,7 @@ const Deliveries = () => {
                             <DeliveryStats/>
                             <div className="panel">
                                 <div className="panel-header">
-                                    <label className="panel-label">Delivery List</label>
+                                    <h3>Delivery</h3>
                                 </div>
                                 <div className="panel-content">
                                     <DeliveryInput/>
@@ -68,5 +72,4 @@ const Deliveries = () => {
 };
 
 export default Deliveries;
-
 

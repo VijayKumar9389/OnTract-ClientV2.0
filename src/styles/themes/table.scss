@@ -1,5 +1,21 @@
 @import '../variables';
 
+.select-table {
+  tbody {
+    .selected {
+      background-color: $cardHoverBackgroundColor;
+    }
+
+    tr{
+      cursor: pointer;
+      &:hover {
+        background-color: $cardHoverBackgroundColor;
+      }
+    }
+  }
+}
+
+
 // Table Style
 table {
   width: 100%;
@@ -7,19 +23,15 @@ table {
   overflow: hidden;
 
   // Table row hover effect
-  .item-image {
-    width: 80px;
+  .item-image, .table-icon {
+    width: 100px;
 
     img {
       border-radius: 50%;
-      height: 60px;
-      width: 60px;
+      height: 100px;
+      width: 100px;
       object-fit: cover; // Ensure the image fills the container
     }
-  }
-
-  .table-icon {
-    width: 80px; // Set image row to auto width
 
     svg {
       height: 60px;
@@ -32,22 +44,17 @@ table {
     padding: $spacingMedium;
     text-align: left;
     vertical-align: middle;
-  }
-
-  td {
-    min-width: 150px;
-  }
-
-  th {
-    border-bottom: $border;
-    border-top: $border;
+    min-width: 150px; // Set min-width for table cells
   }
 
   tr {
     &:not(:last-child) {
       border-bottom: $border;
-
     }
+
+    transition: background-color 0.3s ease;
+
+
   }
 
   thead {
@@ -55,21 +62,16 @@ table {
     color: $textColorLight;
     font-weight: bold;
     text-transform: uppercase;
-  }
-}
 
-.select-table {
-  tbody {
-    .selected {
-        background-color: $cardHoverBackgroundColor;
-    }
+    th, td {
+      &:first-child {
+        border-top-left-radius: $borderRadius;
+        border-bottom-left-radius: $borderRadius;
+      }
 
-    tr {
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: $cardHoverBackgroundColor;
+      &:last-child {
+        border-top-right-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
       }
     }
   }

@@ -9,6 +9,7 @@ export interface Package {
     stakeholder: Stakeholder;
     deliveryId: number;
     delivery: Delivery;
+
 }
 
 // Create new package

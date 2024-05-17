@@ -9,7 +9,7 @@ import {getPackageByPackageTypeId} from "../../services/package.services.ts";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deletePackageType} from "../../services/package.services.ts";
 import PackageStats from "./components/PackageStats/PackageStats.tsx";
-import PackageItemList from "./components/PackageItemList/PackageItemList.tsx";
+import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
 import {showToastError} from "../../utils/toastHelper.ts";
 
 const PackagePage = () => {
@@ -24,11 +24,9 @@ const PackagePage = () => {
                 .then((response: PackageType): void => {
                     setPackageType(response);
                 });
-
             getPackageByPackageTypeId(Number(id))
                 .then((response: Package[]): void => {
                     setPackages(response);
-                    console.log(response);
                 });
         }
     }, [id]);
@@ -54,7 +52,7 @@ const PackagePage = () => {
             <div className="page-content">
                 <PackageStats packages={packages}/>
                 <EditPackageType packageType={packageType}/>
-                <PackageItemList packageTypeId={packageType.id} packageItems={packageType.items}/>
+                <PackageItemTable packageTypeId={packageType.id} packageItems={packageType.items}/>
                 <PackageDeliveryTable packages={packages}/>
                 <div className="btn-container">
                     <ConfirmationButton

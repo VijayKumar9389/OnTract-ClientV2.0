@@ -1,10 +1,17 @@
-import {Item, NewItemInput, NewPackageItem, PackageItem, UpdateItemInput} from "../models/item.models.ts";
-import axios, {AxiosResponse} from "axios";
+import { Item, NewItemInput, NewPackageItem, PackageItem, UpdateItemInput } from "../models/item.models";
+import axios, { AxiosResponse } from "axios";
+
+// Get the base URL from environment variables
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!API_BASE_URL) {
+    throw new Error("VITE_API_BASE_URL is not defined");
+}
 
 // Get all items by project ID
 export const getItemsByProjectId = async (projectId: number): Promise<Item[]> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/getall/${projectId}`;
+        const endpoint: string = `${API_BASE_URL}/item/getall/${projectId}`;
         const response: AxiosResponse<Item[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -16,7 +23,7 @@ export const getItemsByProjectId = async (projectId: number): Promise<Item[]> =>
 // Get item by ID
 export const getItemById = async (itemId: number): Promise<Item> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/get/${itemId}`;
+        const endpoint: string = `${API_BASE_URL}/item/get/${itemId}`;
         const response: AxiosResponse<Item> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -28,7 +35,7 @@ export const getItemById = async (itemId: number): Promise<Item> => {
 // Update an item by ID
 export const updateItem = async (itemId: number, formData: UpdateItemInput): Promise<Item> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/update/${itemId}`;
+        const endpoint: string = `${API_BASE_URL}/item/update/${itemId}`;
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -42,10 +49,11 @@ export const updateItem = async (itemId: number, formData: UpdateItemInput): Pro
         throw error;
     }
 }
+
 // Create a new item
 export const createItem = async (formData: NewItemInput): Promise<Item> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/create`;
+        const endpoint: string = `${API_BASE_URL}/item/create`;
         const response: AxiosResponse<Item> = await axios.post(endpoint, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -58,10 +66,10 @@ export const createItem = async (formData: NewItemInput): Promise<Item> => {
     }
 }
 
-// Delete item by ID
+// Create package item
 export const createPackageItem = async (PackageItemData: NewPackageItem): Promise<PackageItem> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/createpackageitem`;
+        const endpoint: string = `${API_BASE_URL}/item/createpackageitem`;
         const response: AxiosResponse<PackageItem> = await axios.post(endpoint, PackageItemData);
         return response.data;
     } catch (error) {
@@ -70,11 +78,10 @@ export const createPackageItem = async (PackageItemData: NewPackageItem): Promis
     }
 }
 
-
 // Delete an item by ID if it isn't associated with a package
 export const deleteItem = async (itemId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/delete/${itemId}`;
+        const endpoint: string = `${API_BASE_URL}/item/delete/${itemId}`;
         await axios.delete(endpoint);
     } catch (error) {
         console.error('Error deleting item:', error);
@@ -85,10 +92,21 @@ export const deleteItem = async (itemId: number): Promise<void> => {
 // Delete a package item by ID
 export const deletePackageItem = async (packageItemId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/item/packageItem/delete/${packageItemId}`;
+        const endpoint: string = `${API_BASE_URL}/item/packageItem/delete/${packageItemId}`;
         await axios.delete(endpoint);
     } catch (error) {
-        console.error('Error deleting item:', error);
-        throw error; // Make sure the error is rethrown to propagate it further
+        console.error('Error deleting package item:', error);
+        throw error;
+    }
+}
+
+// Update package item quantity by ID
+export const updatePackageItemQuantity = async (packageItemId: number, newQuantity: number): Promise<void> => {
+    try {
+        const endpoint: string = `${API_BASE_URL}/item/packageItem/update/${packageItemId}`;
+        await axios.put(endpoint, { quantity: newQuantity });
+    } catch (error) {
+        console.error('Error updating package item quantity:', error);
+        throw error;
     }
 }

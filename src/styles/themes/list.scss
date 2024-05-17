@@ -8,13 +8,16 @@
 .card {
   background-color: $cardBackgroundColor;
   padding: $spacingMedium;
-  border-bottom: $border;
   cursor: pointer;
   transition: ease-in-out .3s;
   width: 100%;
 
   &:hover {
     background-color: $cardHoverBackgroundColor;
+  }
+
+  &:not(:last-child) {
+    border-bottom: $border;
   }
 }
 
@@ -38,6 +41,7 @@
   }
 
   .info-item {
+    font-size: $textSmall; /* Use text size variable */
     font-weight: bold;
     color: $primaryColor;
     text-transform: uppercase;

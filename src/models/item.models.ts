@@ -11,6 +11,7 @@ export interface Item {
 
 // Package item model
 export interface PackageItem {
+    quantity: number;
     id: number;
     item: Item;
     packageType: PackageType;

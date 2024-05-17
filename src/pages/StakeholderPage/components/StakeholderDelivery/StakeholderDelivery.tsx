@@ -28,25 +28,25 @@ const StakeholderDelivery: React.FC<{ packageId: number; stakeholder: Stakeholde
     return (
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">Delivery Details</label>
+                <h3 className="panel-heading">Delivery Details</h3>
             </div>
-            {!delivery && (
-                <div className="submenu">
-                    <div
-                        className={`submenu-item ${deliveryType === 'create' ? 'selected' : ''}`}
-                        onClick={() => toggleDeliveryType('create')}
-                    >
-                        Create Delivery
-                    </div>
-                    <div
-                        className={`submenu-item ${deliveryType === 'plan' ? 'selected' : ''}`}
-                        onClick={() => toggleDeliveryType('plan')}
-                    >
-                        Add To Delivery
-                    </div>
-                </div>
-            )}
             <div className="panel-content">
+                {!delivery && (
+                    <div className="submenu">
+                        <div
+                            className={`submenu-item ${deliveryType === 'create' ? 'selected' : ''}`}
+                            onClick={() => toggleDeliveryType('create')}
+                        >
+                            Create Delivery
+                        </div>
+                        <div
+                            className={`submenu-item ${deliveryType === 'plan' ? 'selected' : ''}`}
+                            onClick={() => toggleDeliveryType('plan')}
+                        >
+                            Add To Delivery
+                        </div>
+                    </div>
+                )}
                 {delivery ? (
                     <DeliveryDetails delivery={delivery}/>
                 ) : (

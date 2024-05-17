@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
 import { getItemsByProjectId, createPackageItem } from "../../../../services/item.services.ts";
 import { Item } from "../../../../models/item.models.ts";
-import { FaCheck } from "react-icons/fa6";
 import {showToastError} from "../../../../utils/toastHelper.ts";
+import {MdAdd} from "react-icons/md";
 
 const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) => {
     const [packageItems, setPackageItems] = useState<Item[]>([]);
@@ -65,7 +65,7 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
                         ))}
                     </select>
                     <button className="add-button" disabled={!hasSelectedItemId()} onClick={handleAddPackageItem}>
-                        <FaCheck/>
+                        <MdAdd/>
                         Add Item
                     </button>
                 </div>

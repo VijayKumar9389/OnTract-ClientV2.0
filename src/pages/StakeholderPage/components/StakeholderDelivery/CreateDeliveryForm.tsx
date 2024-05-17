@@ -53,10 +53,10 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
             (stakeholder.streetAddress && createDeliveryForm.delivery_method === 'person')
         );
     };
-
-    const isFormValid = () => {
-        return createDeliveryForm.packageTypeId !== 0 && createDeliveryForm.delivery_method !== ''  && createDeliveryForm.destination !== '';
-    }
+    //
+    // const isFormValid = () => {
+    //     return createDeliveryForm.packageTypeId !== 0 && createDeliveryForm.delivery_method !== ''  && createDeliveryForm.destination !== '';
+    // }
 
     const handleDeliveryMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
@@ -182,7 +182,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
             )}
 
 
-            <button type="submit" className="form-btn" disabled={!isFormValid()}>
+            <button type="submit" className="form-btn" >
                 <FaTruck/>
                 Create Delivery
             </button>

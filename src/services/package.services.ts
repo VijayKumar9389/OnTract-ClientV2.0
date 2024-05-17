@@ -1,10 +1,17 @@
-import axios, {AxiosResponse} from "axios";
-import {NewPackageInput, NewPackageTypeInput, Package, PackageType} from "../models/package.models.ts";
+import axios, { AxiosResponse } from "axios";
+import { NewPackageInput, NewPackageTypeInput, Package, PackageType } from "../models/package.models.ts";
 
-//Cancel package
+// Get the base URL from environment variables
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!API_BASE_URL) {
+    throw new Error("VITE_API_BASE_URL is not defined");
+}
+
+// Cancel package
 export const cancelPackage = async (packageId: number, stakeholderId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/cancel/package/${packageId}/${stakeholderId}`;
+        const endpoint: string = `${API_BASE_URL}/package/cancel/package/${packageId}/${stakeholderId}`;
         await axios.delete(endpoint);
     } catch (error) {
         console.error('Error canceling package:', error);
@@ -15,7 +22,7 @@ export const cancelPackage = async (packageId: number, stakeholderId: number): P
 // Delete Package Type if there are no items associated with it
 export const deletePackageType = async (packageTypeId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/delete/packagetype/${packageTypeId}`;
+        const endpoint: string = `${API_BASE_URL}/package/delete/packagetype/${packageTypeId}`;
         await axios.delete(endpoint);
     } catch (error) {
         console.error('Error deleting package type:', error);
@@ -26,7 +33,7 @@ export const deletePackageType = async (packageTypeId: number): Promise<void> =>
 // Get all package types by project ID
 export const getPackageTypesByProjectId = async (projectId: number): Promise<PackageType[]> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/get/packagetype/${projectId}`;
+        const endpoint: string = `${API_BASE_URL}/package/get/packagetype/${projectId}`;
         const response: AxiosResponse<PackageType[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -38,7 +45,7 @@ export const getPackageTypesByProjectId = async (projectId: number): Promise<Pac
 // Get packages by package type ID
 export const getPackageTypeById = async (packageTypeId: number): Promise<PackageType> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/get/packagetypebyid/${packageTypeId}`;
+        const endpoint: string = `${API_BASE_URL}/package/get/packagetypebyid/${packageTypeId}`;
         const response: AxiosResponse<PackageType> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -47,10 +54,10 @@ export const getPackageTypeById = async (packageTypeId: number): Promise<Package
     }
 }
 
-//Create package for existing delivery
+// Create package for existing delivery
 export const createPackageForExistingDelivery = async (packageData: NewPackageInput): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/create/packageforexistingdelivery`;
+        const endpoint: string = `${API_BASE_URL}/package/create/packageforexistingdelivery`;
         await axios.post(endpoint, packageData);
     } catch (error) {
         console.error('Error creating package for existing delivery:', error);
@@ -61,7 +68,7 @@ export const createPackageForExistingDelivery = async (packageData: NewPackageIn
 // Create Package Type
 export const createPackageType = async (packageTypeData: NewPackageTypeInput, projectId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/create/packagetype/${projectId}`;
+        const endpoint: string = `${API_BASE_URL}/package/create/packagetype/${projectId}`;
         const response: AxiosResponse<void> = await axios.post(endpoint, packageTypeData);
         return response.data;
     } catch (error) {
@@ -73,7 +80,7 @@ export const createPackageType = async (packageTypeData: NewPackageTypeInput, pr
 // Update Package Type
 export const updatePackageType = async (packageTypeId: number, packageTypeData: NewPackageTypeInput): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/update/packagetype/${packageTypeId}`;
+        const endpoint: string = `${API_BASE_URL}/package/update/packagetype/${packageTypeId}`;
         await axios.put(endpoint, packageTypeData);
     } catch (error) {
         console.error('Error updating package type:', error);
@@ -81,11 +88,10 @@ export const updatePackageType = async (packageTypeId: number, packageTypeData: 
     }
 }
 
-
-// get all packages by item ID
+// Get all packages by item ID
 export const getPackageByPackageItemId = async (packageItemId: number): Promise<Package[]> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/get/packagebypackageitemid/${packageItemId}`;
+        const endpoint: string = `${API_BASE_URL}/package/get/packagebypackageitemid/${packageItemId}`;
         const response: AxiosResponse<Package[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -97,7 +103,7 @@ export const getPackageByPackageItemId = async (packageItemId: number): Promise<
 // Get packages by package type ID
 export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<Package[]> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/get/packagebypackagetypeid/${packageTypeId}`;
+        const endpoint: string = `${API_BASE_URL}/package/get/packagebypackagetypeid/${packageTypeId}`;
         const response: AxiosResponse<Package[]> = await axios.get(endpoint);
         return response.data;
     } catch (error) {
@@ -109,7 +115,7 @@ export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<
 // Change Package's Package Type
 export const changePackagePackageType = async (packageId: number, packageTypeId: number): Promise<void> => {
     try {
-        const endpoint: string = `http://localhost:3005/package/change/packagepackagetype/${packageId}/${packageTypeId}`;
+        const endpoint: string = `${API_BASE_URL}/package/change/packagepackagetype/${packageId}/${packageTypeId}`;
         await axios.put(endpoint);
     } catch (error) {
         console.error('Error changing package package type:', error);
