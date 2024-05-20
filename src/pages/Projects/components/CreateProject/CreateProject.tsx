@@ -105,7 +105,14 @@ const CreateProject = () => {
                 projectRecords: projectRecords,
             };
 
-            axios.post('http://localhost:3005/project/create', projectInput)
+            // Get the base URL from environment variables
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+            if (!API_BASE_URL) {
+                throw new Error("VITE_API_BASE_URL is not defined");
+            }
+
+            axios.post(`${API_BASE_URL}/project/create`, projectInput)
                 .then((response) => {
                     console.log('Project created successfully', response.data);
                     window.location.reload();
