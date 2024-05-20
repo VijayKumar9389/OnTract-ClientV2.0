@@ -1,5 +1,9 @@
 @import 'src/styles/variables.scss';
 
+.project-select {
+  padding: $spacingMedium;
+}
+
 .project-table {
   tbody {
     tr {

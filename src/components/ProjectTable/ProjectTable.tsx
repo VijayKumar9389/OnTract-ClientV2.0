@@ -4,6 +4,7 @@ import {Project} from "../../models/stakeholder.models.ts";
 import './ProjectTable.scss';
 import {setProjectCookie} from "../../utils/cookieHelper.ts";
 import {getProjects} from "../../services/project.services.ts";
+import CreateProject from "../../pages/Projects/components/CreateProject/CreateProject.tsx";
 
 const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -32,12 +33,13 @@ const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
     }
 
     return (
-        <div>
+        <div className="project-select">
             {loading && <p>Loading...</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
 
-            {error && <p style={{color: "red"}}>{error}</p>}
+            {!loading && !error && projects.length === 0 && <CreateProject />}
 
-            {!loading && !error && (
+            {!loading && !error && projects.length > 0 && (
                 <table className="project-table">
                     <thead>
                     <tr>
