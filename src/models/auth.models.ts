@@ -1,6 +1,8 @@
 export interface TokenResponse {
     auth: boolean;
     user: string;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export interface AuthState {

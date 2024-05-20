@@ -30,6 +30,12 @@ const Navbar = () => {
         setIsModalOpen(false);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        dispatch(setLogout());
+    }
+
     const navbarLinks: NavbarLink[] = [
         { to: "/", text: "Dashboard", icon: <FaHome /> },
         { to: "/stakeholders", text: "Stakeholders", icon: <FaUser /> },
@@ -90,7 +96,7 @@ const Navbar = () => {
                         </li>
                     ))}
                     <li>
-                        <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
+                        <button className="btn-logout" onClick={() => handleLogout()}><FaSignOutAlt />Logout</button>
                     </li>
                 </ul>
             } />

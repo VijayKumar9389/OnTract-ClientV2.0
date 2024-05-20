@@ -1,16 +1,30 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { Dispatch } from 'redux';
-import { setLogout } from '../store/reducers/auth.reducer.ts';
-import { refreshAccessToken, verifyRefreshToken } from '../services/auth.services.ts';
+import { setLogout } from '../store/reducers/auth.reducer';
+import { refreshAccessToken, verifyRefreshToken } from '../services/auth.services';
 
 export const activateInterceptor = (dispatch: Dispatch): void => {
-
     let isRefreshing: boolean = false;
+    let refreshSubscribers: ((token: string) => void)[] = [];
+
+    const onAccessTokenFetched = (accessToken: string) => {
+        refreshSubscribers.forEach(callback => callback(accessToken));
+        refreshSubscribers = [];
+    };
+
+    const addRefreshSubscriber = (callback: (token: string) => void) => {
+        refreshSubscribers.push(callback);
+    };
 
     // Add a request interceptor to modify config for all requests
     axios.interceptors.request.use(
-        async (config) => {
-            config.withCredentials = true;
+        (config: InternalAxiosRequestConfig) => {
+            const token: string | null = localStorage.getItem('accessToken');
+
+            if (token) {
+                config.headers = config.headers || {};
+                config.headers['accessToken'] = token;
+            }
             return config;
         },
         (error: AxiosError) => {
@@ -20,54 +34,51 @@ export const activateInterceptor = (dispatch: Dispatch): void => {
 
     // Add a response interceptor to handle token refresh
     axios.interceptors.response.use(
-        (response) => {
-            return response;
-        },
+        (response) => response,
         async (error: AxiosError) => {
-            if (error.response && error.response.status === 401 && !isRefreshing) {
-                console.log('Unauthorized. Attempting to refresh access token.');
+            const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+
+            if (error.response && error.response.status === 401 && !originalRequest._retry) {
+                if (isRefreshing) {
+                    return new Promise((resolve) => {
+                        addRefreshSubscriber((token: string) => {
+                            originalRequest.headers['accessToken'] = token;
+                            resolve(axios(originalRequest));
+                        });
+                    });
+                }
+
+                originalRequest._retry = true;
+                isRefreshing = true;
+
                 try {
-                    isRefreshing = true;
+                    console.log('Unauthorized. Attempting to refresh access token.');
+
                     // Verify the refresh token before attempting to refresh access token
                     const isRefreshTokenValid: boolean = await verifyRefreshToken(dispatch);
+
                     if (isRefreshTokenValid) {
                         // Refresh the access token
-                        await refreshAccessToken();
-                        // Retry the original request if error.config is defined
-                        if (error.config) {
-                            // Retry logic
-                            let retryCount: number = 0;
-                            while (retryCount < 5) {
-                                retryCount++;
-                                try {
-                                    const response = await axios.request(error.config);
-                                    return response;
-                                } catch (retryError) {
-                                    console.error('Retry failed:', retryError);
-                                }
-                            }
-                            console.error('Retry limit exceeded');
-                            return Promise.reject(error);
+                        const newAccessToken = await refreshAccessToken();
+
+                        if (newAccessToken) {
+                            onAccessTokenFetched(newAccessToken);
+                            originalRequest.headers['accessToken'] = newAccessToken;
+                            return axios(originalRequest);
                         } else {
-                            console.error('Original request config is undefined');
-                            return Promise.reject(error);
+                            throw new Error('Failed to refresh access token');
                         }
                     } else {
-                        // Logout user if refresh token is expired or invalid
                         dispatch(setLogout());
-                        return Promise.reject(error);
                     }
                 } catch (refreshError) {
                     console.error('Error refreshing access token:', refreshError);
-                    // Logout user if token refresh fails
                     dispatch(setLogout());
-                    return Promise.reject(error);
                 } finally {
                     isRefreshing = false;
                 }
             }
 
-            // Return the error for other status codes
             return Promise.reject(error);
         }
     );

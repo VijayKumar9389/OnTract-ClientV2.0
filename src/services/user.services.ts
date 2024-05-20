@@ -27,15 +27,42 @@ export const getUsers = async (): Promise<User[]> => {
 // Handle the login process
 export const handleLogin = async (username: string, password: string, dispatch: Dispatch): Promise<void> => {
     try {
+        // Define the login endpoint
         const endpoint: string = `${API_BASE_URL}/user/login`;
+
+        // Make a POST request to the login endpoint
         const response = await axios.post<TokenResponse>(endpoint, { username, password }, {
             withCredentials: true,
         });
+
+        // Log the response for debugging purposes
+        console.log('Login response:', response.data); // For debugging purposes
+
+        //  Extract the tokens from the response
+        const { accessToken, refreshToken } = response.data;
+
+        // Check if tokens are present in the response
+        if (!accessToken || !refreshToken) {
+            throw new Error('Tokens not found in response');
+        }
+
+        // Store tokens in local storage
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+
         // Dispatch login action with token response
         dispatch(setLogin(response.data));
+
     } catch (error) {
-        console.error('Login failed:', error);
-        // Handle login error
+        if (axios.isAxiosError(error)) {
+            // Handle Axios errors
+            console.error('Axios error:', error.message, error.response?.data);
+        } else {
+            // Handle generic errors
+            console.error('Login failed:', error);
+        }
+        // Optionally, dispatch a logout or error action
+        // dispatch(setLogout());
     }
 };
 
@@ -63,12 +90,23 @@ export const editUser = async (id: number, username: string, password: string): 
 export const checkAdminStatus = async (dispatch: Dispatch): Promise<void> => {
     try {
         const endpoint: string = `${API_BASE_URL}/user/admin-status`;
-        const response = await axios.get<{ isAdmin: boolean }>(endpoint, {
+
+        // Get the refresh token from local storage
+        const refreshToken: string | null = localStorage.getItem('refreshToken');
+
+        // If no refresh token is found, log an error
+        if (!refreshToken) {
+            console.error('No refresh token found');
+            return;
+        }
+
+        // Send a POST request with the refresh token in the body
+        const response = await axios.post<{ auth: boolean }>(endpoint, { refreshToken }, {
             withCredentials: true,
         });
 
         // Dispatch action based on admin status
-        dispatch(setAdminStatus(response.data.isAdmin));
+        dispatch(setAdminStatus(response.data.auth));
     } catch (error) {
         console.error('Failed to check admin status:', error);
         // Handle error
