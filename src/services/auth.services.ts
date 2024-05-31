@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {TokenResponse} from '../models/auth.models';
+import {AuthResponse, TokenResponse} from '../models/auth.models';
 import {Dispatch} from "redux";
 import {setLogout} from "../store/reducers/auth.reducer.ts";
 
@@ -45,7 +45,7 @@ export const refreshAccessToken = async (dispatch: Dispatch): Promise<boolean> =
 };
 
 // Verify the refresh token
-export const verifyRefreshToken = async (): Promise<{ auth: boolean, user: string }> => {
+export const verifyRefreshToken = async (): Promise<AuthResponse> => {
     try {
         // Get the refresh token from local storage
         const refreshToken: string | null = localStorage.getItem('refreshToken');
@@ -57,7 +57,7 @@ export const verifyRefreshToken = async (): Promise<{ auth: boolean, user: strin
         }
 
         // Verify the refresh token
-        const response = await axios.post<{ auth: boolean, user: string, accessToken: string, refreshToken: string }>(
+        const response = await axios.post<{ auth: boolean, user: string }>(
             `${API_BASE_URL}/user/verify-token`,
             {},
             {
@@ -68,8 +68,7 @@ export const verifyRefreshToken = async (): Promise<{ auth: boolean, user: strin
             }
         );
 
-        const {auth, user} = response.data;
-        return {auth, user};
+        return response.data;
     } catch (error) {
         console.error('Verification failed:', error);
         throw error;

@@ -22,7 +22,7 @@ const App: React.FC = () => {
         const initializeApp = async (): Promise<void> => {
             try {
                 activateInterceptor(dispatch);
-                const status = await verifyRefreshToken();
+                const status: {auth: boolean, user: string} = await verifyRefreshToken();
                 dispatch(setLogin(status));
                 const adminStatus: boolean = await checkAdminStatus();
                 dispatch(setAdminStatus(adminStatus));
