@@ -4,6 +4,7 @@ import {deleteProject, downloadProject} from "../../../../services/project.servi
 import Dialog from "../../../../components/Dialog/Dialog.tsx";
 import EditProject from "../EditProject/EditProject.tsx";
 import {useState} from "react";
+import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
 
 const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
     const {id, name, year, notes, surveyLink} = project;
@@ -56,7 +57,8 @@ const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
 
     return (
         <>
-            <Dialog heading={"Edit Project"} isOpen={isEditOpen} toggle={toggleEdit} element={<EditProject project={project} />} />
+            <Dialog heading={"Edit Project"} isOpen={isEditOpen} toggle={toggleEdit}
+                    element={<EditProject project={project}/>}/>
             <tr>
                 <td>{name}</td>
                 <td>{year}</td>
@@ -66,7 +68,11 @@ const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
                     <div className="action-buttons">
                         <button onClick={() => handleDownload(project.id)}>Download</button>
                         <button onClick={() => toggleEdit()}>Edit</button>
-                        <button onClick={handleDelete}>Delete</button>
+                        <ConfirmationButton
+                            buttonText={"Delete Project"}
+                            confirmationMessage={`Are you sure you want to delete ${project.name + ' ' + project.year}?`}
+                            onConfirm={handleDelete}
+                        />
                     </div>
                 </td>
             </tr>
