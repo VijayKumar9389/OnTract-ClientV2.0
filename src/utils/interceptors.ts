@@ -1,30 +1,26 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { refreshAccessToken } from '../services/auth.services';
 import { Dispatch } from 'redux';
-import { setLogout } from '../store/reducers/auth.reducer';
-import { refreshAccessToken, verifyRefreshToken } from '../services/auth.services';
 
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+    _retryCount?: number;
+}
+
+// Function to activate the interceptors
 export const activateInterceptor = (dispatch: Dispatch): void => {
-    let isRefreshing: boolean = false;
-    let refreshSubscribers: ((token: string) => void)[] = [];
+    // Maximum retry attempts
+    const MAX_RETRY_ATTEMPTS: number = 5;
 
-    const onAccessTokenFetched = (accessToken: string) => {
-        refreshSubscribers.forEach(callback => callback(accessToken));
-        refreshSubscribers = [];
-    };
-
-    const addRefreshSubscriber = (callback: (token: string) => void) => {
-        refreshSubscribers.push(callback);
-    };
-
-    // Add a request interceptor to modify config for all requests
+    // Request interceptor
     axios.interceptors.request.use(
-        (config: InternalAxiosRequestConfig) => {
-            const token: string | null = localStorage.getItem('accessToken');
+        async (config) => {
+            config.withCredentials = true; // Ensure cookies are sent
 
-            if (token) {
-                config.headers = config.headers || {};
-                config.headers['accessToken'] = token;
+            const accessToken: string | null = localStorage.getItem('accessToken');
+            if (accessToken) {
+                config.headers['accessToken'] = accessToken; // Attach access token to headers
             }
+
             return config;
         },
         (error: AxiosError) => {
@@ -32,54 +28,38 @@ export const activateInterceptor = (dispatch: Dispatch): void => {
         }
     );
 
-    // Add a response interceptor to handle token refresh
+    // Response interceptor
     axios.interceptors.response.use(
-        (response) => response,
+        (response) => {
+            return response;
+        },
         async (error: AxiosError) => {
-            const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+            const originalRequest = error.config as CustomAxiosRequestConfig;
 
-            if (error.response && error.response.status === 401 && !originalRequest._retry) {
-                if (isRefreshing) {
-                    return new Promise((resolve) => {
-                        addRefreshSubscriber((token: string) => {
-                            originalRequest.headers['accessToken'] = token;
-                            resolve(axios(originalRequest));
-                        });
-                    });
-                }
+            // If the response status is 401 (Unauthorized)
+            if (error.response && error.response.status === 401) {
+                console.log('Unauthorized. Attempting to refresh access token.');
 
-                originalRequest._retry = true;
-                isRefreshing = true;
+                // Initialize or increment the retry count
+                originalRequest._retryCount = (originalRequest._retryCount || 0) + 1;
 
-                try {
-                    console.log('Unauthorized. Attempting to refresh access token.');
-
-                    // Verify the refresh token before attempting to refresh access token
-                    const isRefreshTokenValid: boolean = await verifyRefreshToken(dispatch);
-
-                    if (isRefreshTokenValid) {
+                // Check if we have not exceeded the maximum retry attempts
+                if (originalRequest._retryCount <= MAX_RETRY_ATTEMPTS) {
+                    try {
                         // Refresh the access token
-                        const newAccessToken = await refreshAccessToken();
+                        await refreshAccessToken(dispatch);
 
-                        if (newAccessToken) {
-                            onAccessTokenFetched(newAccessToken);
-                            originalRequest.headers['accessToken'] = newAccessToken;
-                            return axios(originalRequest);
-                        } else {
-                            throw new Error('Failed to refresh access token');
-                        }
-                    } else {
-                        dispatch(setLogout());
+                        // Retry the original request
+                        return axios.request(originalRequest);
+                    } catch (refreshError) {
+                        console.error('Error refreshing access token:', refreshError);
                     }
-                } catch (refreshError) {
-                    console.error('Error refreshing access token:', refreshError);
-                    dispatch(setLogout());
-                } finally {
-                    isRefreshing = false;
+                } else {
+                    console.error('Maximum retry attempts reached');
                 }
             }
 
             return Promise.reject(error);
         }
     );
-};
+}

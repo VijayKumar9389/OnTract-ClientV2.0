@@ -3,6 +3,7 @@ import { getPackageTypesByProjectId, changePackagePackageType } from '../../../.
 import { getProjectFromCookie } from '../../../../utils/cookieHelper.ts';
 import { PackageType } from '../../../../models/package.models.ts';
 import { Project } from '../../../../models/stakeholder.models.ts';
+import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
 
 const ChangePackage: React.FC<{ packageType: PackageType, packageId: number }> = ({ packageType , packageId}) => {
     const [packageTypes, setPackageTypes] = useState<PackageType[]>([]);
@@ -20,7 +21,8 @@ const ChangePackage: React.FC<{ packageType: PackageType, packageId: number }> =
                 console.error('Error fetching package data:', error);
             }
         }
-        fetchPackageData();
+        fetchPackageData()
+            .then(() => console.log('Package data fetched'));
     }, []);
 
     useEffect(() => {
@@ -81,7 +83,7 @@ const ChangePackage: React.FC<{ packageType: PackageType, packageId: number }> =
                         {selectedPackage.items.map((item) => (
                             <tr key={item.id}>
                                 <td className="item-image">
-                                    <img src={`http://localhost:3005/images/${item.item.image}`} alt={`Image for ${item.item.name}`} />
+                                    <ImageWithAlt imageName={item.item.image} />
                                 </td>
                                 <td>{item.item.name}</td>
                                 <td>{item.item.description}</td>

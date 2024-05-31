@@ -4,6 +4,7 @@ import {Item, UpdateItemInput} from "../../../../models/item.models.ts";
 import {updateItem} from "../../../../services/item.services.ts";
 import "./EditItem.scss";
 import {showToastError} from "../../../../utils/toastHelper.ts";
+import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
 
 interface EditItemFormProps {
     item: Item;
@@ -63,15 +64,6 @@ const EditItem: React.FC<EditItemFormProps> = ({item}) => {
         setEditedItem({...editedItem, [name]: value});
     };
 
-    const getDisplayedImage = (): string => {
-        if (file) {
-            return URL.createObjectURL(file);
-        } else if (item.image) {
-            return `http://localhost:3005/images/${item.image}`;
-        } else {
-            return 'https://via.placeholder.com/150';
-        }
-    };
 
     return (
         <form className="panel" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -81,12 +73,7 @@ const EditItem: React.FC<EditItemFormProps> = ({item}) => {
 
             <div className="panel-content">
                 <div className="form-controls">
-                    <img
-                        src={getDisplayedImage()}
-                        alt={`Image for ${item.name}`}
-                        className="form-image"
-                    />
-
+                    <ImageWithAlt imageName={item.image} />
                     <div>
                         <div className="input-wrapper">
                             <label htmlFor="fileInput" className="form-label">File:</label>

@@ -4,6 +4,7 @@ import { deletePackageItem, updatePackageItemQuantity } from "../../../../servic
 import { Navigation } from "../../../../utils/navigation.ts";
 import { PackageItem } from "../../../../models/item.models.ts";
 import Counter from "../../../../components/Counter/Counter.tsx";
+import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
 
 const PackageItemRow: React.FC<{
     item: PackageItem;
@@ -35,10 +36,7 @@ const PackageItemRow: React.FC<{
     return (
         <tr>
             <td className="item-image">
-                <img
-                    src={`http://localhost:3005/images/${item.item.image}`}
-                    alt={`Image for ${item.item.name}`}
-                />
+                <ImageWithAlt imageName={item.item.image} />
             </td>
             <td className="item-details-cell">
                 <h4>{item.item.name}</h4>

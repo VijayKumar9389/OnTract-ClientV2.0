@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TokenResponse, AuthState } from "../../models/auth.models.ts";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AuthState, AuthResponse} from "../../models/auth.models.ts";
 
 const initialState: AuthState = {
     loggedIn: false,
@@ -11,7 +11,7 @@ export const authSlice = createSlice({
     name: "auth",
     initialState: initialState,
     reducers: {
-        setLogin: (state, action: PayloadAction<TokenResponse>): void => {
+        setLogin: (state, action: PayloadAction<AuthResponse>): void => {
             state.loggedIn = action.payload.auth;
             state.username = action.payload.user;
         },
@@ -19,8 +19,9 @@ export const authSlice = createSlice({
             state.loggedIn = false;
             state.username = "";
             state.isAdmin = false; // Reset isAdmin status on logout
+            localStorage.clear();
         },
-        refreshLogin: (state, action: PayloadAction<{ auth: boolean}>): void => {
+        refreshLogin: (state, action: PayloadAction<{ auth: boolean }>): void => {
             state.loggedIn = action.payload.auth;
         },
         checkAuthStatus: (state): void => {
@@ -33,6 +34,6 @@ export const authSlice = createSlice({
     },
 });
 
-export const { setLogin, setLogout, refreshLogin, checkAuthStatus, setAdminStatus } = authSlice.actions;
+export const {setLogin, setLogout, refreshLogin, checkAuthStatus, setAdminStatus} = authSlice.actions;
 
 export default authSlice.reducer;

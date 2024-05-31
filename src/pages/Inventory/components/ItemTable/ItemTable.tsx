@@ -1,6 +1,7 @@
 import {Item} from "../../../../models/item.models.ts";
 import {Navigation} from "../../../../utils/navigation.ts";
 import React from "react";
+import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
 
 const ItemTable: React.FC<{ items: Item[] }> = ({items}) => {
     const {navigateToInventoryItem} = Navigation();
@@ -20,11 +21,7 @@ const ItemTable: React.FC<{ items: Item[] }> = ({items}) => {
                         {items.map((item: Item, index: number) => (
                             <tr onClick={() => navigateToInventoryItem(item.id)} key={index}>
                                 <td className="item-image">
-                                    <img
-                                        src={`http://localhost:3005/images/${item.image}`}
-                                        alt={`Image for ${item.name}`}
-                                        className="form-image"
-                                    />
+                                    <ImageWithAlt imageName={item.image} />
                                 </td>
                                 <td>
                                     <h3>{item.name}</h3>

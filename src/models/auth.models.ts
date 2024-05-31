@@ -5,6 +5,11 @@ export interface TokenResponse {
     refreshToken: string;
 }
 
+export interface AuthResponse {
+    auth: boolean;
+    user: string;
+}
+
 export interface AuthState {
     loggedIn: boolean;
     username: string;

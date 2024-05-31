@@ -33,7 +33,7 @@ const Deliveries = () => {
             fetchDeliveries()
                 .then(() => console.log('Deliveries fetched'));
         }
-    }, [dataFetched, project]);
+    }, []);
 
     return (
         <div className="section">

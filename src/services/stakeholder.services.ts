@@ -29,8 +29,6 @@ if (!API_BASE_URL) {
     throw new Error("VITE_API_BASE_URL is not defined");
 }
 
-console.log("API_BASE_URL:", API_BASE_URL); // For debugging purposes
-
 export const getStakeholdersByProjectId = async (projectId: number): Promise<Stakeholder[]> => {
     try {
         const endpoint: string = `${API_BASE_URL}/stakeholder/getStakeholdersByProjectId/${projectId}`;

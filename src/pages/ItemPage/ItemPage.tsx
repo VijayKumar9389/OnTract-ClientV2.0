@@ -32,6 +32,7 @@ const ItemPage = () => {
         }
     }, [id]);
 
+    // Remove item from the database
     const removeItem = async (itemId: number): Promise<void> => {
         try {
             await deleteItem(itemId);
