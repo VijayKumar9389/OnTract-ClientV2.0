@@ -7,7 +7,6 @@ import Dialog from "../../components/Dialog/Dialog.tsx";
 import CreatePackageTypeForm from "./components/CreatePackageTypeForm/CreatePackageTypeForm.tsx";
 import {MdAdd} from "react-icons/md";
 import PackageTypeTable from "./components/PackageTypeTable/PackageTypeTable.tsx";
-import {FaBox} from "react-icons/fa";
 
 const Packages = () => {
 
@@ -44,7 +43,7 @@ const Packages = () => {
                 <Dialog isOpen={isOpened} toggle={toggleModal} heading="Create Package Type"
                         element={<CreatePackageTypeForm/>}/>
                 <div className="header">
-                    <h3><FaBox/> PACKAGE TYPES ( <strong>{packageTypes.length}</strong> )</h3>
+                    <h3>PACKAGE TYPES <strong>{packageTypes.length}</strong></h3>
                     <button onClick={toggleModal}>
                         <MdAdd/> Add Package
                     </button>

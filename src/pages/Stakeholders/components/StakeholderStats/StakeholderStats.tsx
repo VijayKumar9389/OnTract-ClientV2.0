@@ -44,39 +44,39 @@ const StakeholderStats = () => {
         <div className="stats-wrapper">
             <div className="stat-item">
                 <p>Total:</p>
-                <h4>{stakeholderStats.totalCount}</h4>
+                <h3>{stakeholderStats.totalCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Contacted:</p>
-                <h4>{stakeholderStats.contactedYesCount}</h4>
+                <h3>{stakeholderStats.contactedYesCount}</h3>
             </div>
             <div className="stat-item">
                 <p>No Contact:</p>
-                <h4>{stakeholderStats.contactedNoCount}</h4>
+                <h3>{stakeholderStats.contactedNoCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Consulted:</p>
-                <h4>{stakeholderStats.consultedCount}</h4>
+                <h3>{stakeholderStats.consultedCount}</h3>
             </div>
             <div className="stat-item">
                 <p>No Consultation:</p>
-                <h4>{stakeholderStats.notConsultedCount}</h4>
+                <h3>{stakeholderStats.notConsultedCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Attempted:</p>
-                <h4>{stakeholderStats.attemptedContactCount}</h4>
+                <h3>{stakeholderStats.attemptedContactCount}</h3>
             </div>
             <div className="stat-item">
                 <p>No Attempts:</p>
-                <h4>{stakeholderStats.notAttemptedContactCount}</h4>
+                <h3>{stakeholderStats.notAttemptedContactCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Delivery Planned:</p>
-                <h4>{stakeholderStats.deliveryPlannedCount}</h4>
+                <h3>{stakeholderStats.deliveryPlannedCount}</h3>
             </div>
             <div className="stat-item">
                 <p>No Delivery:</p>
-                <h4>{stakeholderStats.deliveryNotPlannedCount}</h4>
+                <h3>{stakeholderStats.deliveryNotPlannedCount}</h3>
             </div>
         </div>
     );

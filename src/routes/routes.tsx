@@ -22,7 +22,7 @@ const RoutesConfig: React.FC = () => {
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/stakeholders" element={<Stakeholders />} />
-            <Route path="/stakeholder/:id" element={<StakeholderPage />} />
+            <Route path="/stakeholders/:id" element={<StakeholderPage />} />
             <Route path="/deliveries" element={<Deliveries />} />
             <Route path="/deliveries/:id" element={<DeliveryPage />} />
             <Route path="/inventory" element={<Inventory />} />

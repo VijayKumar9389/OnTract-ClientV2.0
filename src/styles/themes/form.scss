@@ -92,10 +92,9 @@
 
   label {
     display: block;
-    color: $textColor; /* Text color */
+    color: $textColorLight; /* Text color */
     margin-top: $spacingSmall; /* Spacing between label and input */
     margin-bottom: calc($spacingSmall / 2); /* Spacing between label and input */
-    font-size: $textSmall; /* Use text size variable */
   }
 }
 
@@ -111,11 +110,11 @@
     margin-right: $spacingSmall;
     outline: none;
     font-size: $textMedium; /* Use text size variable */
+    background-color: #fff;
 
     @media (max-width: $mobileBreakpoint) {
       margin: $spacingSmall 0;
     }
-
   }
 
   .filter-button,

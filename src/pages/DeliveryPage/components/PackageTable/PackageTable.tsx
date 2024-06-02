@@ -6,7 +6,7 @@ const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
     return (
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">Delivery Packages</label>
+                <h3>Delivery Packages</h3>
             </div>
             <div className="panel-content">
                     <table>

@@ -23,19 +23,21 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
             <div className="panel-header">
                 <label className="panel-label">Scheduled Packages</label>
             </div>
-            {/* Delivery Status Submenu */}
-            <div className="submenu">
-                <div className={`submenu-item ${deliveryStatus === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('All')}>
-                    All
-                </div>
-                <div className={`submenu-item ${deliveryStatus === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Completed')}>
-                    Completed
-                </div>
-                <div className={`submenu-item ${deliveryStatus === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Pending')}>
-                    Pending
-                </div>
-            </div>
             <div className="panel-content">
+
+                {/* Delivery Status Submenu */}
+                <div className="submenu">
+                    <div className={`submenu-item ${deliveryStatus === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('All')}>
+                        All
+                    </div>
+                    <div className={`submenu-item ${deliveryStatus === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Completed')}>
+                        Completed
+                    </div>
+                    <div className={`submenu-item ${deliveryStatus === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Pending')}>
+                        Pending
+                    </div>
+                </div>
+
                 {/* Package Table */}
                 {filteredPackages.length > 0 ? (
                     <table>

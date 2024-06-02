@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Heading from '../../components/Heading/Heading';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
 import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
-import { getDeliveriesByProjectID } from '../../services/delivery.services';
-import { getProjectFromCookie } from '../../utils/cookieHelper';
-import { Delivery } from '../../models/delivery.models';
+import {getDeliveriesByProjectID} from '../../services/delivery.services';
+import {getProjectFromCookie} from '../../utils/cookieHelper';
+import {Delivery} from '../../models/delivery.models';
 
 const Deliveries = () => {
     const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -45,18 +45,13 @@ const Deliveries = () => {
                     deliveries.length > 0 ? (
                         <>
                             <DeliveryStats/>
+                            <DeliveryInput/>
                             <div className="panel">
-                                <div className="panel-header">
-                                    <h3>Delivery</h3>
-                                </div>
-                                <div className="panel-content">
-                                    <DeliveryInput/>
-                                    <ul className="card-list">
-                                        {deliveries.map((delivery: Delivery) => (
-                                            <DeliveryCard key={delivery.id} delivery={delivery}/>
-                                        ))}
-                                    </ul>
-                                </div>
+                                <ul className="card-list">
+                                    {deliveries.map((delivery: Delivery) => (
+                                        <DeliveryCard key={delivery.id} delivery={delivery}/>
+                                    ))}
+                                </ul>
                             </div>
 
                         </>

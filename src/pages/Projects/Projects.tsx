@@ -33,9 +33,7 @@ const Projects = () => {
                     </button>
                 </div>
                 <div className="panel">
-                    <div className="panel-content">
-                        <ProjectInfoTable projects={projects}/>
-                    </div>
+                    <ProjectInfoTable projects={projects}/>
                 </div>
             </div>
         </div>

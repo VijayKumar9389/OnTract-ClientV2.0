@@ -5,7 +5,7 @@ export const Navigation = () => {
     const navigate = useNavigate();
 
     const navigateToStakeholder = (stakeholderId: number): void => {
-        navigate(`/stakeholder/${stakeholderId}`);
+        navigate(`/stakeholders/${stakeholderId}`);
     };
 
     const navigateToInventoryItem = (itemId: number): void => {

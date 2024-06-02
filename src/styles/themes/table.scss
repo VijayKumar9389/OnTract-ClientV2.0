@@ -15,7 +15,6 @@
   }
 }
 
-
 // Table Style
 table {
   width: 100%;
@@ -53,27 +52,26 @@ table {
     }
 
     transition: background-color 0.3s ease;
-
-
   }
 
   thead {
-    background-color: $backgroundColor;
+    //background-color: $backgroundColor;
     color: $textColorLight;
     font-weight: bold;
     text-transform: uppercase;
+    border-bottom: $border;
 
-    th, td {
-      &:first-child {
-        border-top-left-radius: $borderRadius;
-        border-bottom-left-radius: $borderRadius;
-      }
-
-      &:last-child {
-        border-top-right-radius: $borderRadius;
-        border-bottom-right-radius: $borderRadius;
-      }
-    }
+    //th, td {
+    //  &:first-child {
+    //    border-top-left-radius: $borderRadius;
+    //    border-bottom-left-radius: $borderRadius;
+    //  }
+    //
+    //  &:last-child {
+    //    border-top-right-radius: $borderRadius;
+    //    border-bottom-right-radius: $borderRadius;
+    //  }
+    //}
   }
 }
 

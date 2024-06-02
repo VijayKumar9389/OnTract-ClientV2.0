@@ -22,8 +22,7 @@
       padding: 0;
 
       svg {
-        margin: 0;
-        font-size: 1.5rem; // Adjust icon size for better visibility on small screens
+        font-size: 1.5rem;
       }
     }
   }
@@ -50,7 +49,6 @@
 
   h1 {
     color: #fff;
-    text-align: center;
     display: flex;
     align-items: center;
 
@@ -60,7 +58,6 @@
     }
 
     @media (max-width: $mobileBreakpoint) {
-      text-align: left;
       margin: 0;
     }
   }
@@ -70,7 +67,6 @@
     padding: 0;
     margin: 0;
     display: flex;
-    height: 100%;
 
     @media (max-width: $mobileBreakpoint) {
       display: none;
@@ -82,10 +78,10 @@
       color: #fff;
       text-decoration: none;
       font-size: 16px;
-      border-radius: $borderRadius;
       display: flex;
       align-items: center;
       transition: ease-in-out .3s;
+      border-radius: $buttonRadius;
 
       svg {
         margin-right: $spacingSmall;
@@ -93,24 +89,25 @@
       }
 
       &:hover {
-        background-color: lighten($primaryColor, 10);
+        background-color: #fff;
+        color: $primaryColor;
+        box-shadow: $boxShadow;
       }
 
-      &.active { // Define styles for active link
-        background-color: lighten($primaryColor, 10);
+      &.active {
+        background-color: #fff;
+        color: $primaryColor;
+        box-shadow: $boxShadow;
       }
     }
   }
-
 
   .popup-links {
     list-style: none;
     padding: 0;
     margin-bottom: $spacingMedium;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 
     .btn-logout {
       margin: 0;
@@ -131,7 +128,7 @@
       text-align: center;
 
       @media (max-width: $mobileBreakpoint) {
-        margin-bottom: $spacingSmall; // Adjust spacing for better readability on small screens
+        margin-bottom: $spacingSmall;
       }
     }
 
@@ -144,11 +141,11 @@
       transition: $transition;
 
       &:hover {
-        background-color: lighten($primaryColor, 10);
+        background-color: lighten($primaryColor, 10%);
       }
 
       @media (max-width: $mobileBreakpoint) {
-        padding: $spacingSmall; // Adjust padding for better spacing on small screens
+        padding: $spacingSmall;
       }
     }
   }

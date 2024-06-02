@@ -7,7 +7,6 @@ import { MdAdd } from 'react-icons/md';
 import Dialog from '../../components/Dialog/Dialog.tsx';
 import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
 import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
-import {FaBoxes} from "react-icons/fa";
 import {Project} from "../../models/stakeholder.models.ts";
 
 const Inventory = () => {
@@ -39,10 +38,7 @@ const Inventory = () => {
             <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
             <div className="page-content">
                 <div className="header">
-                    <h3>
-                        <FaBoxes />
-                        ITEMS (<strong>{items.length}</strong>)
-                    </h3>
+                    <h3>ITEMS <strong>{items.length}</strong></h3>
                     <button onClick={toggleModal}>
                         <MdAdd /> Add Item
                     </button>

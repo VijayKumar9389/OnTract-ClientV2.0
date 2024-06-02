@@ -48,27 +48,27 @@ const DeliveryStats = () => {
         <div className="stats-wrapper">
             <div className="stat-item">
                 <p>Total Deliveries:</p>
-                <h4>{deliveryReport.count}</h4>
+                <h3>{deliveryReport.count}</h3>
             </div>
             <div className="stat-item">
                 <p>Total Stakeholders:</p>
-                <h4>{deliveryReport.stakeholderCount}</h4>
+                <h3>{deliveryReport.stakeholderCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Delivery Pending:</p>
-                <h4>{deliveryReport.pendingDeliveryCount}</h4>
+                <h3>{deliveryReport.pendingDeliveryCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Delivered:</p>
-                <h4>{deliveryReport.completedDeliveryCount}</h4>
+                <h3>{deliveryReport.completedDeliveryCount}</h3>
             </div>
             <div className="stat-item">
                 <p>In Person:</p>
-                <h4>{deliveryReport.deliveryCount}</h4>
+                <h3>{deliveryReport.deliveryCount}</h3>
             </div>
             <div className="stat-item">
                 <p>Mailouts:</p>
-                <h4>{deliveryReport.mailCount}</h4>
+                <h3>{deliveryReport.mailCount}</h3>
             </div>
         </div>
     );

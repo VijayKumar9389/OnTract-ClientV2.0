@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { FaRegSave } from 'react-icons/fa';
-import { Delivery, UpdateDeliveryInput } from '../../../../models/delivery.models';
-import { editDelivery } from '../../../../services/delivery.services';
+import React, {useEffect, useState} from 'react';
+import {FaRegSave} from 'react-icons/fa';
+import {Delivery, UpdateDeliveryInput} from '../../../../models/delivery.models';
+import {editDelivery} from '../../../../services/delivery.services';
 
-const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
+const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({delivery}) => {
     const [formData, setFormData] = useState<UpdateDeliveryInput>({
         route: '',
         destination: '',
@@ -23,7 +23,7 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     }, [delivery]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData(prevState => ({
             ...prevState,
             [name]: value,
@@ -52,16 +52,17 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     return (
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">EDIT DELIVERY</label>
+                <h3>EDIT DELIVERY</h3>
             </div>
             <form className="panel-content" onSubmit={handleSubmit}>
                 <div className="input-wrapper">
                     <label htmlFor="route">Route:</label>
-                    <input type="text" id="route" name="route" value={formData.route} onChange={handleChange} />
+                    <input type="text" id="route" name="route" value={formData.route} onChange={handleChange}/>
                 </div>
                 <div className="input-wrapper">
                     <label htmlFor="destination">Destination:</label>
-                    <input type="text" id="destination" name="destination" value={formData.destination} onChange={handleChange} />
+                    <input type="text" id="destination" name="destination" value={formData.destination}
+                           onChange={handleChange}/>
                 </div>
                 <div className="input-wrapper">
                     <label htmlFor="delivery_method">Delivery Type:</label>
@@ -72,10 +73,10 @@ const EditDeliveryForm: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
                 </div>
                 <div className="input-wrapper">
                     <label htmlFor="notes">Notes:</label>
-                    <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange} />
+                    <textarea id="notes" name="notes" value={formData.notes} onChange={handleChange}/>
                 </div>
                 <button type="submit" disabled={!hasDataChanged} className="form-btn">
-                    <FaRegSave />
+                    <FaRegSave/>
                     Save
                 </button>
             </form>

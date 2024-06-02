@@ -37,25 +37,19 @@
   width: 100%;
   background-color: $cardBackgroundColor;
   overflow: hidden;
+  border: 1px solid #ddd;
 
   .panel-header {
     padding: $spacingMedium $spacingSmall;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: $border;
 
     h3 {
       color: $textColor;
-      font-weight: bold;
       margin: 0; // Add margin to reset default browser styles
     }
-  }
-
-  // Panel Content
-  .panel-heading {
-    font-size: $textLarge;
-    color: $textColorLight;
-    margin-bottom: 0;
 
     strong {
       color: $primaryColor;
@@ -93,14 +87,12 @@
     align-items: center;
     display: flex;
     font-weight: bold;
-    margin-bottom: 0;
-    color: $primaryColor;
-    font-size: $textLarge;
+    color: $textColorLight;
+  }
 
-    svg {
-      color: $primaryColor;
-      margin-right: $spacingSmall;
-    }
+  strong {
+    color: $primaryColor;
+    margin-left: $spacingSmall;
   }
 }
 
@@ -108,7 +100,10 @@
 .submenu {
   display: flex;
   justify-content: flex-start;
-  border-bottom: $border;
+  border: $border;
+  border-radius: $buttonRadius;
+  background-color: #f4f4f4;
+  padding: calc($spacingSmall / 2);
 
   .submenu-item {
     padding: $spacingSmall;
@@ -116,14 +111,19 @@
     transition: ease-in-out .3s;
     color: $textColorLight;
     font-weight: bold;
+    border-radius: $buttonRadius;
+    margin-right: $spacingSmall;
 
     &:hover {
       color: $textColor;
+      background-color: #fff;
+      box-shadow: $boxShadow;
     }
 
     &.selected {
       color: $textColor;
-      border-bottom: 2px solid $primaryColor;
+      background-color: #fff;
+      box-shadow: $boxShadow;
     }
   }
 }

@@ -5,11 +5,13 @@ import './Login.scss';
 import {useDispatch} from "react-redux";
 
 const Login = () => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const dispatch = useDispatch();
 
-    const onLoginClick = async (e: React.FormEvent<HTMLFormElement>) => {
+    const onLoginClick = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         await handleLogin(username, password, dispatch);
     };
@@ -29,7 +31,7 @@ const Login = () => {
                             type="text"
                             id="username"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                             className="login-input"
                             placeholder="Enter your username"
                             required
@@ -43,7 +45,7 @@ const Login = () => {
                             type="password"
                             id="password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                             className="login-input"
                             placeholder="Enter your password"
                             required

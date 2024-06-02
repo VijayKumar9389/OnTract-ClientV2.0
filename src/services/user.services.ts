@@ -70,6 +70,16 @@ export const registerUser = async (username: string, password: string): Promise<
     }
 }
 
+// Delete a user
+export const deleteUser = async (id: number): Promise<void> => {
+    try {
+        const endpoint: string = `${API_BASE_URL}/user/delete/${id}`;
+        await axios.delete(endpoint);
+    } catch (error) {
+        console.error('Failed to delete user:', error);
+    }
+}
+
 // Edit a user
 export const editUser = async (id: number, username: string, password: string): Promise<void> => {
     try {

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "../../store/reducers/auth.reducer.ts";
+import { setLogout } from "../../store/reducers/auth.reducer";
 import { MdEmergencyShare } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
-import "./Navbar.scss";
-import Dialog from "../Dialog/Dialog.tsx";
 import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram } from 'react-icons/fa';
 import { FiPackage } from "react-icons/fi";
+import Dialog from "../Dialog/Dialog";
 import { RootState } from "../../store";
+import "./Navbar.scss";
 
 interface NavbarLink {
     to: string;
@@ -18,22 +18,13 @@ interface NavbarLink {
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
+    const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const location = useLocation(); // Get the current location
+    const location = useLocation();
 
-    const toggleModal = (): void => {
-        setIsModalOpen(!isModalOpen);
-    };
-
-    const closeModal = (): void => {
-        setIsModalOpen(false);
-    };
-
-    const handleLogout = () => {
-
-        dispatch(setLogout());
-    }
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    const closeModal = () => setIsModalOpen(false);
+    const handleLogout = () => dispatch(setLogout());
 
     const navbarLinks: NavbarLink[] = [
         { to: "/", text: "Dashboard", icon: <FaHome /> },
@@ -50,7 +41,10 @@ const Navbar = () => {
 
     // Function to determine if a link is active
     const isActiveLink = (linkTo: string) => {
-        return location.pathname === linkTo;
+        if (linkTo === "/") {
+            return location.pathname === linkTo;
+        }
+        return location.pathname.startsWith(linkTo);
     };
 
     return (
@@ -59,7 +53,11 @@ const Navbar = () => {
             <ul className="navbar-links">
                 {navbarLinks.map((link, index) => (
                     <li key={index}>
-                        <Link to={link.to} className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`} onClick={closeModal} >
+                        <Link
+                            to={link.to}
+                            className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`}
+                            onClick={closeModal}
+                        >
                             {link.icon}
                             {link.text}
                         </Link>
@@ -67,14 +65,20 @@ const Navbar = () => {
                 ))}
                 {isAdmin && adminLinks.map((link, index) => (
                     <li key={index}>
-                        <Link to={link.to} className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`} onClick={closeModal}>
+                        <Link
+                            to={link.to}
+                            className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`}
+                            onClick={closeModal}
+                        >
                             {link.icon}
                             {link.text}
                         </Link>
                     </li>
                 ))}
                 <li>
-                    <button className="btn-logout" onClick={() => dispatch(setLogout())}><FaSignOutAlt />Logout</button>
+                    <button className="btn-logout" onClick={handleLogout}>
+                        <FaSignOutAlt /> Logout
+                    </button>
                 </li>
             </ul>
 
@@ -82,24 +86,30 @@ const Navbar = () => {
                 <GiHamburgerMenu />
             </button>
 
-            <Dialog isOpen={isModalOpen} toggle={toggleModal} heading={"Select Page"} element={
-                <ul className="popup-links">
-                    {navbarLinks.map((link, index) => (
-                        <li key={index}>
-                            <Link to={link.to} onClick={closeModal}>{link.text}</Link>
+            <Dialog
+                isOpen={isModalOpen}
+                toggle={toggleModal}
+                heading="Select Page"
+                element={
+                    <ul className="popup-links">
+                        {navbarLinks.map((link, index) => (
+                            <li key={index}>
+                                <Link to={link.to} onClick={closeModal}>{link.text}</Link>
+                            </li>
+                        ))}
+                        {isAdmin && adminLinks.map((link, index) => (
+                            <li key={index}>
+                                <Link to={link.to} onClick={closeModal}>{link.text}</Link>
+                            </li>
+                        ))}
+                        <li>
+                            <button className="btn-logout" onClick={handleLogout}>
+                                <FaSignOutAlt /> Logout
+                            </button>
                         </li>
-                    ))}
-                    {isAdmin && adminLinks.map((link, index) => (
-                        <li key={index}>
-                            <Link to={link.to} onClick={closeModal}>{link.text}</Link>
-                        </li>
-                    ))}
-                    <li>
-                        <button className="btn-logout" onClick={() => handleLogout()}><FaSignOutAlt />Logout</button>
-                    </li>
-                </ul>
-            } />
-
+                    </ul>
+                }
+            />
         </nav>
     );
 }

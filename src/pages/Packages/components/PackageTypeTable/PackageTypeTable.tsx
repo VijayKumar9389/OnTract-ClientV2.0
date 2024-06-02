@@ -7,40 +7,38 @@ const PackageTypeTable: React.FC<{ packageTypes: PackageType[] }> = ({packageTyp
     const {navigateToPackage} = Navigation();
     return (
         <div className="panel">
-            <div className="panel-content">
-                {packageTypes.length > 0 ? (
-                    <table className="select-table">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Package</th>
-                            <th>Items</th>
+            {packageTypes.length > 0 ? (
+                <table className="select-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Package</th>
+                        <th>Items</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {packageTypes.map((packageType: PackageType) => (
+                        <tr key={packageType.id}
+                            onClick={() => navigateToPackage(packageType.id)}>
+                            <td className="table-icon">
+                                <FiPackage/>
+                            </td>
+                            <td>
+                                <h3>{packageType.name}</h3>
+                                <p>{packageType.notes}</p>
+                            </td>
+                            <td>
+                                <strong>{packageType.items.length}</strong>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {packageTypes.map((packageType: PackageType) => (
-                            <tr key={packageType.id}
-                                onClick={() => navigateToPackage(packageType.id)}>
-                                <td className="table-icon">
-                                    <FiPackage/>
-                                </td>
-                                <td>
-                                    <h3>{packageType.name}</h3>
-                                    <p>{packageType.notes}</p>
-                                </td>
-                                <td>
-                                    <strong>{packageType.items.length}</strong>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <div className="no-data-message">
-                        <span>No Packages Created.</span>
-                    </div>
-                )}
-            </div>
+                    ))}
+                    </tbody>
+                </table>
+            ) : (
+                <div className="no-data-message">
+                    <span>No Packages Created.</span>
+                </div>
+            )}
         </div>
     );
 }

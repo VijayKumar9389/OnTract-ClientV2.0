@@ -15,27 +15,21 @@ h2 {
 }
 
 h3 {
-  font-size:  1.25rem;
+  font-size: 1.25rem;
   font-weight: normal;
   color: $textColor;
 }
 
 h4 {
-    font-size: 1rem;
+  font-size: 1rem;
   font-weight: normal;
-  color: $textColor;///
+  color: $textColor; ///
 }
 
 p {
-    font-size: 1rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: $textColorLight;
-}
-
-label {
-  font-size: 1rem;
-  font-weight: bold;
-  display: block;
 }
 
 .panel-label {

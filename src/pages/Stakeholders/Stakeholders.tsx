@@ -136,18 +136,16 @@ const Stakeholders = () => {
                 {!loading && !error && (
                     <>
                         <StakeholderStats/>
+                        <StakeholderInput/>
                         <div className="panel">
-                            <div className="panel-header">
-                                <h3>Stakeholders</h3>
-                            </div>
-                            <div className="panel-content">
-                                <StakeholderInput/>
+                            {/*<div className="panel-header">*/}
+                            {/*    <h3>Stakeholders</h3>*/}
+                            {/*</div>*/}
                                 <ul className="card-list">
                                     {filteredContactedConsultedAndAttemptedAndDeliveryStakeholders.map(stakeholder => (
                                         <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
                                     ))}
                                 </ul>
-                            </div>
                         </div>
                     </>
                 )}
