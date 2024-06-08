@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { Package } from "../../../../models/package.models.ts";
-import { Navigation } from "../../../../utils/navigation.ts";
+import React, {useState} from "react";
+import {Package} from "../../../../models/package.models.ts";
+import {Navigation} from "../../../../utils/navigation.ts";
+import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 
 const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => {
-    const { navigateToStakeholder, navigateToDelivery } = Navigation();
+    const {navigateToStakeholder, navigateToDelivery} = Navigation();
     const [deliveryStatus, setDeliveryStatus] = useState('All'); // State to track selected delivery status
 
     // Function to toggle delivery status
-    const toggleDeliveryStatus = (status: string) => {
+    const toggleDeliveryStatus = (status: string): void => {
         setDeliveryStatus(status);
     };
 
     // Filter packages based on delivery status
-    const filteredPackages = deliveryStatus === 'Completed' ?
+    const filteredPackages: Package[] = deliveryStatus === 'Completed' ?
         packages.filter((deliveryPackage: Package) => deliveryPackage.delivery.completed) :
         deliveryStatus === 'Pending' ?
             packages.filter((deliveryPackage: Package) => !deliveryPackage.delivery.completed) :
@@ -21,57 +22,64 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
     return (
         <div className="panel">
             <div className="panel-header">
-                <label className="panel-label">Scheduled Packages</label>
+                <h3>Scheduled Packages</h3>
             </div>
             <div className="panel-content">
 
                 {/* Delivery Status Submenu */}
-                <div className="submenu">
-                    <div className={`submenu-item ${deliveryStatus === 'All' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('All')}>
-                        All
-                    </div>
-                    <div className={`submenu-item ${deliveryStatus === 'Completed' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Completed')}>
-                        Completed
-                    </div>
-                    <div className={`submenu-item ${deliveryStatus === 'Pending' ? 'selected' : ''}`} onClick={() => toggleDeliveryStatus('Pending')}>
-                        Pending
-                    </div>
-                </div>
+                <SubMenu
+                    items={[
+                        { label: 'All', value: 'All' },
+                        { label: 'Completed', value: 'Completed' },
+                        { label: 'Pending', value: 'Pending' }
+                    ]}
+                    selected={deliveryStatus}
+                    onSelect={toggleDeliveryStatus}
+                />
 
                 {/* Package Table */}
                 {filteredPackages.length > 0 ? (
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Package</th>
-                            <th>Stakeholder</th>
-                            <th>Delivery Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {filteredPackages.map((deliveryPackage: Package) => (
-                            <tr key={deliveryPackage.id} className="package-item">
-                                <td><span>{deliveryPackage.packageType.name}</span></td>
-                                <td><span className="delivery-list-name">{deliveryPackage.stakeholder.name}</span></td>
-                                <td>
+                    <div className="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Stakeholder</th>
+                                <th>Delivery Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {filteredPackages.map((deliveryPackage: Package) => (
+                                <tr key={deliveryPackage.id} className="package-item">
+                                    <td><span>{deliveryPackage.packageType.name}</span></td>
+                                    <td><span className="delivery-list-name">{deliveryPackage.stakeholder.name}</span>
+                                    </td>
+                                    <td>
                                         <span className="delivery-list-name">
                                             {deliveryPackage.delivery.completed
                                                 ? <a className="chip green">Completed</a>
                                                 : <a className="chip red">Pending</a>
                                             }
                                         </span>
-                                </td>
-                                <td>
-                                    <div className="action-buttons">
-                                        <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId)}>View Delivery</button>
-                                        <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>View Stakeholder</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td>
+                                        <div className="action-buttons">
+                                            <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId)}>View
+                                                Delivery
+                                            </button>
+                                            <button
+                                                onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>View
+                                                Stakeholder
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+
+                    </div>
                 ) : (
                     <div className="no-data-message">
                         <span>No Packages Scheduled.</span>

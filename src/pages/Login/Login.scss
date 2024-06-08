@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to bottom, $primaryColor, $secondaryColor);
+  background: linear-gradient(to bottom, $primary-color, $secondary-color);
 }
 
 .login-wrapper {
@@ -18,7 +18,7 @@
 }
 
 .login-title {
-  color: $primaryColor;
+  color: $primary-color;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
@@ -31,7 +31,7 @@
 }
 
 .login-label {
-  color: $primaryColor;
+  color: $primary-color;
   margin-bottom: 5px;
   display: block;
 }
@@ -44,8 +44,8 @@
   width: 100%;
 }
 
-.form-btn {
-  background-color: $primaryColor;
+.login-btn {
+  background-color: $primary-color;
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -53,8 +53,9 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: $spacing-large;
 }
 
-.form-btn:hover {
-  background-color: darken($primaryColor, 10%);
+.login-btn:hover {
+  background-color: darken($primary-color, 10%);
 }

@@ -1,78 +1,33 @@
-import {useEffect, useState} from "react";
-import {DeliveryReportDTO} from "../../../../models/delivery.models.ts";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
-import {getDeliveryReport} from "../../../../services/delivery.services.ts";
+import React from 'react';
+import { useDeliveryReport} from "../../../../hooks/delivery.hooks.ts";
+import {Stat} from "../../../../models/report.model.ts";
 
-const DeliveryStats = () => {
+const DeliveryStats: React.FC = () => {
+    const { deliveryReport, loading, error } = useDeliveryReport();
 
-    const [deliveryReport, setDeliveryReport] = useState<DeliveryReportDTO | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const project = getProjectFromCookie();
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
+    if (!deliveryReport) return <p>Error</p>;
 
-    const fetchDeliveryReport = async (): Promise<void> => {
-        if (!project) {
-            return;
-        }
-        try {
-            setLoading(true);
-            const fetchedDeliveryReport: DeliveryReportDTO = await getDeliveryReport(project.id);
-            setDeliveryReport(fetchedDeliveryReport);
-        } catch (error) {
-            setError('Failed to fetch delivery report');
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect((): void => {
-        fetchDeliveryReport()
-            .then(() => console.log('Delivery report fetched'));
-    }, []);
-
-
-    // Different returns based on different conditions or states
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    if (error) {
-        return <p>{error}</p>;
-    }
-
-    if (!deliveryReport) {
-        return <p>Error</p>;
-    }
+    const stats: Stat[] = [
+        { label: 'Total Deliveries', value: deliveryReport.count },
+        { label: 'Total Stakeholders', value: deliveryReport.stakeholderCount },
+        { label: 'Delivery Pending', value: deliveryReport.pendingDeliveryCount },
+        { label: 'Delivered', value: deliveryReport.completedDeliveryCount },
+        { label: 'In Person', value: deliveryReport.deliveryCount },
+        { label: 'Mailouts', value: deliveryReport.mailCount }
+    ];
 
     return (
         <div className="stats-wrapper">
-            <div className="stat-item">
-                <p>Total Deliveries:</p>
-                <h3>{deliveryReport.count}</h3>
-            </div>
-            <div className="stat-item">
-                <p>Total Stakeholders:</p>
-                <h3>{deliveryReport.stakeholderCount}</h3>
-            </div>
-            <div className="stat-item">
-                <p>Delivery Pending:</p>
-                <h3>{deliveryReport.pendingDeliveryCount}</h3>
-            </div>
-            <div className="stat-item">
-                <p>Delivered:</p>
-                <h3>{deliveryReport.completedDeliveryCount}</h3>
-            </div>
-            <div className="stat-item">
-                <p>In Person:</p>
-                <h3>{deliveryReport.deliveryCount}</h3>
-            </div>
-            <div className="stat-item">
-                <p>Mailouts:</p>
-                <h3>{deliveryReport.mailCount}</h3>
-            </div>
+            {stats.map((stat: Stat, index: number) => (
+                <div key={index} className="stat-item">
+                    <p>{stat.label}:</p>
+                    <h3>{stat.value}</h3>
+                </div>
+            ))}
         </div>
     );
-
-}
+};
 
 export default DeliveryStats;

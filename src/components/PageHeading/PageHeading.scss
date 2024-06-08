@@ -1,34 +1,30 @@
-@import 'src/styles/variables.scss'; /* Importing theme variables */
+@import 'src/styles/variables.scss';
 
-.page-heading {
+.heading {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: $spacingLarge; /* Utilizing theme variable for large spacing */
+  justify-content: space-between;
+  padding: $spacing-medium;
   width: 100%;
-  border-bottom: $border; /* Utilizing theme variable for border */
-  background-color: #ffff; /* Utilizing theme variable for background color */
+  box-shadow: $box-shadow;
+  background-color: $card-background-color;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   h2 {
     margin: 0;
     text-transform: uppercase;
-    font-weight: bold;
-  }
+    color: $text-color;
 
-}
+    strong {
+      color: $primary-color;
+    }
 
-.back-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  color: $textColor; /* Utilizing theme variable for text color */
-  margin-right: $spacingSmall; /* Utilizing theme variable for medium spacing */
-  transition: color 0.3s ease;
-  padding: 0;
-
-  &:hover {
-    color: $primaryColor; /* Utilizing theme variable for primary color */
-    background-color: transparent;
+    @media (max-width: 768px) {
+      margin-bottom: $spacing-medium;
+    }
   }
 }

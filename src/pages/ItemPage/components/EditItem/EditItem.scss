@@ -6,7 +6,7 @@
   gap: 1rem;
   align-items: center;
 
-  @media (max-width: $mobileBreakpoint) {
+  @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
   }
 
@@ -14,7 +14,7 @@
     width: 300px;
     height: 300px;
     object-fit: cover;
-    border-radius: $buttonRadius;
+    border-radius: $button-radius;
     margin: 0 auto;
   }
 }

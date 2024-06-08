@@ -1,43 +1,17 @@
-import {useEffect, useState} from 'react';
-import Heading from '../../components/Heading/Heading';
+import React from 'react';
+import PageHeading from '../../components/PageHeading/PageHeading.tsx';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
 import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
-import {getDeliveriesByProjectID} from '../../services/delivery.services';
-import {getProjectFromCookie} from '../../utils/cookieHelper';
-import {Delivery} from '../../models/delivery.models';
+import {useGetDeliveries} from "../../hooks/delivery.hooks.ts";
+import {Delivery} from "../../models/delivery.models.ts";
 
-const Deliveries = () => {
-    const [deliveries, setDeliveries] = useState<Delivery[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const [dataFetched, setDataFetched] = useState<boolean>(false);
-    const project = getProjectFromCookie();
-
-    useEffect((): void => {
-        const fetchDeliveries = async (): Promise<void> => {
-            if (!project) return;
-            try {
-                setLoading(true);
-                const fetchedDeliveries: Delivery[] = await getDeliveriesByProjectID(project.id);
-                setDeliveries(fetchedDeliveries);
-                setDataFetched(true);
-            } catch (error) {
-                setError('Failed to fetch deliveries');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (!dataFetched) { // Check if data has not been fetched before making the API call
-            fetchDeliveries()
-                .then(() => console.log('Deliveries fetched'));
-        }
-    }, []);
+const Deliveries: React.FC = () => {
+    const {deliveries, loading, error} = useGetDeliveries();
 
     return (
         <div className="section">
-            <Heading heading="Deliveries"/>
+            <PageHeading heading="Deliveries"/>
             <div className="page-content">
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
@@ -46,14 +20,12 @@ const Deliveries = () => {
                         <>
                             <DeliveryStats/>
                             <DeliveryInput/>
-                            <div className="panel">
-                                <ul className="card-list">
-                                    {deliveries.map((delivery: Delivery) => (
-                                        <DeliveryCard key={delivery.id} delivery={delivery}/>
-                                    ))}
-                                </ul>
-                            </div>
-
+                            <p>Results: <strong>{deliveries.length}</strong></p>
+                            <ul className="card-list">
+                                {deliveries.map((delivery: Delivery) => (
+                                    <DeliveryCard key={delivery.id} delivery={delivery}/>
+                                ))}
+                            </ul>
                         </>
                     ) : (
                         <div className="no-data-message">
@@ -67,4 +39,3 @@ const Deliveries = () => {
 };
 
 export default Deliveries;
-

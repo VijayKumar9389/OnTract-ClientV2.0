@@ -47,35 +47,30 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
     };
 
     return (
-        <div className="panel">
-            <div className="panel-header">
-                <label className="panel-label">Package Details</label>
-            </div>
-            <div className="panel-content">
-                <form className="package-notes-form">
-                    <div className="input-wrapper">
-                        <label className="notes-label">Name:</label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={handleNameChange}
-                            className="notes-textarea"
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label className="notes-label">Notes:</label>
-                        <textarea
-                            value={notes}
-                            onChange={handleNotesChange}
-                            className="notes-textarea"
-                        />
-                    </div>
-                    <button type="button" className="form-btn" disabled={!hasDataChanged()} onClick={handleEditPackage}>
-                        <FaSave />
-                        Save
-                    </button>
-                </form>
-            </div>
+        <div className="form-wrapper">
+            <form className="package-notes-form">
+                <div className="input-wrapper">
+                    <label className="notes-label">Name:</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={handleNameChange}
+                        className="notes-textarea"
+                    />
+                </div>
+                <div className="input-wrapper">
+                    <label className="notes-label">Notes:</label>
+                    <textarea
+                        value={notes}
+                        onChange={handleNotesChange}
+                        className="notes-textarea"
+                    />
+                </div>
+                <button type="button" className="form-btn" disabled={!hasDataChanged()} onClick={handleEditPackage}>
+                    <FaSave/>
+                    Save
+                </button>
+            </form>
         </div>
     );
 }

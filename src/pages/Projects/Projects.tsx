@@ -5,7 +5,6 @@ import {getProjects} from "../../services/project.services.ts";
 import ProjectInfoTable from "./components/ProjectInfoTable/ProjectInfoTable.tsx";
 import {Project} from "../../models/stakeholder.models.ts";
 import {FaPlus} from "react-icons/fa6";
-import {FaProjectDiagram} from "react-icons/fa";
 
 const Projects = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +25,7 @@ const Projects = () => {
             <div className="page-content">
                 <Dialog isOpen={isMenuOpen} toggle={toggleMenu} element={<CreateProject/>} heading={"Create Project"}/>
                 <div className="header">
-                    <h3><FaProjectDiagram/> PROJECTS (<strong>{projects.length}</strong>)</h3>
+                    <h3>PROJECTS <strong>{projects.length}</strong></h3>
                     <button onClick={toggleMenu}>
                         <FaPlus/>
                         Create Project

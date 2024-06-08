@@ -1,47 +1,44 @@
-// Colors
-$primaryColor: #007BFF; // Main color for headers and buttons (blue)
-$secondaryColor: #0056b3; // Secondary color for hover effects (lighter blue)
+$primary-color: #007BFF; // Main color for headers and buttons (blue)
+$secondary-color: #0056b3; // Secondary color for hover effects (lighter blue)
 $cancelColor: #F44336; // Color for cancel buttons (red)
 $cancelColorHover: #D32F2F; // Hover color for cancel buttons (darker red)
 
 // Backgrounds
-$backgroundColor: #F5F5F5; // Background color for the entire page
-$cardBackgroundColor: #fff; // Background color for cards
-$cardHoverBackgroundColor: #EEEEEE; // Hover background color for cards (lighter gray)
-$inputBackgroundColor: #f5f5f5; // Background color for input fields (lighter gray)
-$btnBackgroundColor: $primaryColor; // Background color for buttons (same as primary color)
-$btnHoverBackgroundColor: $secondaryColor; // Hover background color for buttons (same as secondary color)
-$btnDisabledBackgroundColor: #CCCCCC; // Disabled background color for buttons (light gray)
+$background-color: #fff; // Background color for the entire page
+$card-background-color: #fff; // Background color for cards
+$card-background-hover-color: #EEEEEE; // Hover background color for cards (lighter gray)
+$input-background-color: #f4f4f4; // Background color for input fields (lighter gray)
+$btn-background-color: $primary-color; // Background color for buttons (same as primary color)
+$btn-background-hover-color: $secondary-color; // Hover background color for buttons (same as secondary color)
+$btn-background-disabled-color: #CCCCCC; // Disabled background color for buttons (light gray)
 
 // Spacing
-$spacingSmall: 8px; // Base spacing unit
-$spacingMedium: 16px; // Medium spacing unit
-$spacingLarge: 24px; // Large spacing unit
+$spacing-small: 8px; // Base spacing unit
+$spacing-medium: 16px; // Medium spacing unit
+$spacing-large: 24px; // Large spacing unit
 
 // Borders and Radius
-$borderRadius: 8px; // Border radius for rounded elements (slightly reduced)
-$buttonRadius: 4px; // Border radius for buttons (same as border radius)
+$border-radius: 8px; // Border radius for rounded elements (slightly reduced)
+$button-radius: 4px; // Border radius for buttons (same as border radius)
 $border: 1px solid #ddd; // Default border
 
 // Shadows
-$boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow
-$boxShadowHover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Default box shadow
+$box-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.2); // Box shadow on hover
 
 // Text
-$textColor: #333; // Default text color
-$textColorLight: #666; // Lighter text color for secondary text
+$text-color: #333; // Default text color
+$text-color-light: #666; // Lighter text color for secondary text
 
 // Text Sizes
-$textExtraSmall: 12px; // Extra small text size
-$textSmall: 14px; // Small text size
-$textMedium: 16px; // Medium text size
-$textMediumLarge: 20px; // Medium large text size
-$textLarge: 18px; // Large text size
-$textExtraLarge: 24px; // Extra large text size
+$text-small: 1rem; // Small text size
+$text-medium: 1.25rem; // Medium text size
+$text-large: 1.5rem; // Large text size
+$text-xlarge: 2rem; // Extra large text size
 
 // Transitions
 $transition: ease-in-out .3s; // Default transition
 
 // Breakpoints
-$mobileBreakpoint: 768px; // Breakpoint for mobile devices
-$tabletBreakpoint: 1024px; // Breakpoint for tablets
+$mobile-breakpoint: 768px; // Breakpoint for mobile devices
+$tablet-breakpoint: 1024px; // Breakpoint for tablets

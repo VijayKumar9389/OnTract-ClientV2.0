@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getItemsByProjectId } from '../../services/item.services.ts';
 import { Item } from '../../models/item.models.ts';
-import Heading from '../../components/Heading/Heading.tsx';
+import PageHeading from '../../components/PageHeading/PageHeading.tsx';
 import ItemTable from './components/ItemTable/ItemTable.tsx';
 import { MdAdd } from 'react-icons/md';
 import Dialog from '../../components/Dialog/Dialog.tsx';
@@ -34,7 +34,7 @@ const Inventory = () => {
 
     return (
         <div className="section">
-            <Heading heading="Inventory" />
+            <PageHeading heading="Inventory" />
             <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
             <div className="page-content">
                 <div className="header">

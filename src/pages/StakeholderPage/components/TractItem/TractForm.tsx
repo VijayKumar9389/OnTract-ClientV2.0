@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import {UpdateTrackRecordInput} from "../../../../models/stakeholder.models.ts";
 import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {updateTractRecord} from "../../../../services/stakeholder.services.ts";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {Navigation} from "../../../../utils/navigation.ts";
 import {isStakeholderProfile} from "../../../../utils/helpers.ts";
 
 const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }> = ({stakeholder, tractRecord}) => {
@@ -15,7 +16,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
     });
 
     const {id} = useParams<{ id: string }>();
-    const navigate = useNavigate();
+    const {navigateToStakeholder} = Navigation();
 
     useEffect((): void => {
         setFormData((prevData) => ({
@@ -98,7 +99,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
                 <button type="submit" disabled={!hasDataChanged()}>Submit</button>
                 {isStakeholderProfile(stakeholder.id, id) && (
                     <button type="button" className="form-btn"
-                            onClick={() => navigate(`/stakeholder/${stakeholder.id}`)}>
+                            onClick={() => navigateToStakeholder(stakeholder.id)}>
                         View Stakeholder
                     </button>
                 )}

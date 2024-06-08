@@ -20,11 +20,16 @@ export interface Location {
     cities: City[];
 }
 
-interface City {
+export interface City {
     name: string;
     count: number;
 }
 
 export interface LocationData {
     locations: Location[];
+}
+
+export interface Stat {
+    label: string;
+    value: number;
 }

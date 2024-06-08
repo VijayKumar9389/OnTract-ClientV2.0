@@ -1,0 +1,41 @@
+@import 'src/styles/variables.scss'; /* Importing theme variables */
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: $spacing-medium; /* Utilizing theme variable for large spacing */
+  width: 100%;
+  background-color: #ffff; /* Utilizing theme variable for background color */
+  box-shadow: $box-shadow;
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: $spacing-medium; /* Utilizing theme variable for medium spacing */
+    border-radius: $border-radius;
+    border: $border;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    color: $text-color-light;
+    background-color: #f4f4f4;
+
+    svg {
+      position: absolute;
+      margin: 0;
+    }
+
+    &:hover {
+      background-color: $card-background-hover-color;
+      color: $text-color;
+    }
+  }
+
+  h2 {
+    color: #333;
+    margin: 0;
+  }
+}

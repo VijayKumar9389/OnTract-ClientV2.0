@@ -98,161 +98,149 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
     };
 
     return (
-        <div className="panel">
-            <div className="panel-header">
-                <h3 className="panel-heading">Details</h3>
+        <div className="form-wrapper">
+            <div className="form-row">
+                <div className="input-wrapper">
+                    <label htmlFor="name">Name:</label>
+                    <textarea id="name" name="name" value={formData.name} onChange={handleChange}/>
+                </div>
+                <div className="input-wrapper">
+                    <label htmlFor="stakeholderComments">Stakeholder Comments:</label>
+                    <textarea
+                        id="stakeholderComments"
+                        name="stakeholderComments"
+                        value={formData.stakeholderComments}
+                        onChange={handleChange}
+                    />
+                </div>
             </div>
-            <div className="panel-content">
-                <div className="form-row">
-                    <div className="input-wrapper">
-                        <label htmlFor="name">Name:</label>
-                        <textarea id="name" name="name" value={formData.name} onChange={handleChange}/>
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="stakeholderComments">Stakeholder Comments:</label>
-                        <textarea
-                            id="stakeholderComments"
-                            name="stakeholderComments"
-                            value={formData.stakeholderComments}
-                            onChange={handleChange}
-                        />
-                    </div>
+            <div className="form-row">
+                <div className="input-wrapper">
+                    <label htmlFor="mailingAddress">Mailing Address:</label>
+                    <textarea
+                        id="mailingAddress"
+                        name="mailingAddress"
+                        value={formData.mailingAddress}
+                        onChange={handleChange}
+                    />
                 </div>
-
-                <div className="form-row">
-                    <div className="input-wrapper">
-                        <label htmlFor="mailingAddress">Mailing Address:</label>
-                        <textarea
-                            id="mailingAddress"
-                            name="mailingAddress"
-                            value={formData.mailingAddress}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="streetAddress">Street Address:</label>
-                        <textarea
-                            id="streetAddress"
-                            name="streetAddress"
-                            value={formData.streetAddress}
-                            onChange={handleChange}
-                        />
-                    </div>
+                <div className="input-wrapper">
+                    <label htmlFor="streetAddress">Street Address:</label>
+                    <textarea
+                        id="streetAddress"
+                        name="streetAddress"
+                        value={formData.streetAddress}
+                        onChange={handleChange}
+                    />
                 </div>
-
-                <div className="form-row">
-                    <div className="input-wrapper">
-                        <label htmlFor="email">Email:</label>
-                        <textarea id="email" name="email" value={formData.email} onChange={handleChange}/>
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="phoneNumber">Phone Number:</label>
-                        <textarea
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                        />
-                    </div>
+            </div>
+            <div className="form-row">
+                <div className="input-wrapper">
+                    <label htmlFor="email">Email:</label>
+                    <textarea id="email" name="email" value={formData.email} onChange={handleChange}/>
                 </div>
+                <div className="input-wrapper">
+                    <label htmlFor="phoneNumber">Phone Number:</label>
+                    <textarea
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
+            <div className="form-row">
 
-                <div className="form-row">
-
-                    <div className="input-wrapper">
-                        <label htmlFor="contacted">
-                            Contacted:
-                        </label>
+                <div className="input-wrapper">
+                    <label htmlFor="contacted">
+                        Contacted:
+                    </label>
+                    <input
+                        type="checkbox"
+                        id="contacted"
+                        name="contacted"
+                        checked={formData.contacted === 'YES'}
+                        onChange={(e) => {
+                            const newValue = e.target.checked ? 'YES' : 'NO';
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                contacted: newValue,
+                            }));
+                        }}
+                    />
+                </div>
+                <div className="input-wrapper">
+                    <label htmlFor="isPerson">Is Person:</label>
+                    <div>
                         <input
                             type="checkbox"
-                            id="contacted"
-                            name="contacted"
-                            checked={formData.contacted === 'YES'}
+                            id="isPerson"
+                            name="isPerson"
+                            checked={formData.isPerson === 'YES'}
                             onChange={(e) => {
                                 const newValue = e.target.checked ? 'YES' : 'NO';
                                 setFormData((prevData) => ({
                                     ...prevData,
-                                    contacted: newValue,
+                                    isPerson: newValue,
                                 }));
                             }}
                         />
                     </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="isPerson">Is Person:</label>
-                        <div>
-                            <input
-                                type="checkbox"
-                                id="isPerson"
-                                name="isPerson"
-                                checked={formData.isPerson === 'YES'}
-                                onChange={(e) => {
-                                    const newValue = e.target.checked ? 'YES' : 'NO';
-                                    setFormData((prevData) => ({
-                                        ...prevData,
-                                        isPerson: newValue,
-                                    }));
-                                }}
-                            />
-                        </div>
-                    </div>
                 </div>
-
-                <div className="form-row">
-                    <div className="input-wrapper">
-                        <div className="btn-label">
-                            <label>
-                                Attempts:
-                            </label>
-                            <button type="button" onClick={addAttempt}>Add Attempt</button>
-                        </div>
-                        <input type="text" name="attempts" value={formData.attempts} onChange={handleChange}/>
-                    </div>
-
-                    <div className="input-wrapper">
-                        <div className="btn-label">
-                            <label>
-                                Consultation:
-                            </label>
-                            <button type="button" onClick={stampDate}>Stamp Date</button>
-                        </div>
-
-                        <input
-                            type="text"
-                            name="consultation"
-                            value={formData.consultation}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-
-                <div className="form-row">
-                    <div className="input-wrapper">
-                        <label htmlFor="stakeholderStatus">Stakeholder Status:</label>
-                        <select
-                            id="stakeholderStatus"
-                            name="stakeholderStatus"
-                            value={formData.stakeholderStatus}
-                            onChange={handleChange}
-                        >
-                            <option value="GREEN">GREEN</option>
-                            <option value="YELLOW">YELLOW</option>
-                            <option value="RED">RED</option>
-                        </select>
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="followUp">Follow Up:</label>
-                        <input
-                            type="text"
-                            id="followUp"
-                            name="followUp"
-                            value={formData.followUp}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-                <button className="form-btn" disabled={!hasDataChanged()} onClick={(event) => handleSubmit(event)}>
-                    <FaRegSave/> Save
-                </button>
             </div>
+            <div className="form-row">
+                <div className="input-wrapper">
+                    <div className="btn-label">
+                        <label>
+                            Attempts:
+                        </label>
+                        <button type="button" onClick={addAttempt}>Add Attempt</button>
+                    </div>
+                    <input type="text" name="attempts" value={formData.attempts} onChange={handleChange}/>
+                </div>
+                <div className="input-wrapper">
+                    <div className="btn-label">
+                        <label>
+                            Consultation:
+                        </label>
+                        <button type="button" onClick={stampDate}>Stamp Date</button>
+                    </div>
+                    <input
+                        type="text"
+                        name="consultation"
+                        value={formData.consultation}
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
+            <div className="form-row">
+                <div className="input-wrapper">
+                    <label htmlFor="stakeholderStatus">Stakeholder Status:</label>
+                    <select
+                        id="stakeholderStatus"
+                        name="stakeholderStatus"
+                        value={formData.stakeholderStatus}
+                        onChange={handleChange}
+                    >
+                        <option value="GREEN">GREEN</option>
+                        <option value="YELLOW">YELLOW</option>
+                        <option value="RED">RED</option>
+                    </select>
+                </div>
+                <div className="input-wrapper">
+                    <label htmlFor="followUp">Follow Up:</label>
+                    <input
+                        type="text"
+                        id="followUp"
+                        name="followUp"
+                        value={formData.followUp}
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
+            <button className="form-btn" disabled={!hasDataChanged()} onClick={(event) => handleSubmit(event)}>
+                <FaRegSave/> Save
+            </button>
         </div>
     );
 };

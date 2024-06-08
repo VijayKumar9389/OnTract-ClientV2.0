@@ -2,34 +2,34 @@
 
 // Typography
 h1 {
-  font-size: 2rem;
+  font-size: $text-xlarge;
   font-weight: bold;
-  color: $primaryColor; // Using primary color for consistency
+  color: $primary-color; // Using primary color for consistency
   text-align: center;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: $text-large;
   font-weight: bold;
-  color: $primaryColor; // Using primary color for consistency
+  color: $primary-color; // Using primary color for consistency
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: $text-medium;
   font-weight: normal;
-  color: $textColor;
+  color: $text-color;
 }
 
 h4 {
-  font-size: 1rem;
+  font-size: $text-small;
   font-weight: normal;
-  color: $textColor; ///
+  color: $text-color; ///
 }
 
 p {
-  font-size: 1rem;
+  font-size: $text-small;
   line-height: 1.5;
-  color: $textColorLight;
+  color: $text-color-light;
 }
 
 .panel-label {

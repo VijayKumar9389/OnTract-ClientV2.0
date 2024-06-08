@@ -1,12 +1,12 @@
 import {useParams} from "react-router-dom";
-import PageHeading from "../../components/PageHeading/PageHeading.tsx";
+import SubPageHeading from "../../components/SubPageHeading/SubPageHeading.tsx";
 import {useEffect, useState} from "react";
 import {getItemById} from "../../services/item.services.ts";
 import {Item} from "../../models/item.models.ts";
 import EditItem from "./components/EditItem/EditItem.tsx";
 import {getPackageByPackageItemId} from "../../services/package.services.ts";
 import {Package} from "../../models/package.models.ts";
-import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
+import PackageItemTable from "./components/ScheduledItemsTable/PackageItemTable.tsx";
 import ItemStats from "./components/ItemStats/ItemStats.tsx";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deleteItem} from "../../services/item.services.ts";
@@ -27,7 +27,6 @@ const ItemPage = () => {
             getPackageByPackageItemId(Number(id))
                 .then((response: Package[]): void => {
                     setPackages(response);
-                    console.log(response);
                 });
         }
     }, [id]);
@@ -50,7 +49,7 @@ const ItemPage = () => {
 
     return (
         <div className="section">
-            <PageHeading heading={item.name}/>
+            <SubPageHeading heading={item.name}/>
             <div className="page-content">
                 <ItemStats packages={packages} item={item}/>
                 <EditItem item={item}/>

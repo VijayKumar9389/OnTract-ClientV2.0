@@ -1,16 +1,21 @@
 @import 'src/styles/variables.scss'; // Import the variable file
 
 .delivery-report {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
   flex-direction: column;
 
   .table-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: $spacingMedium;
+    gap: $spacing-medium;
+    margin-top: $spacing-medium;
 
-    @media (max-width: $tabletBreakpoint) {
+    .panel {
+      margin: 0;
+    }
+
+    @media (max-width: $tablet-breakpoint) {
       grid-template-columns: 1fr;
     }
   }
@@ -21,8 +26,6 @@
     background-color: #f8f8f8;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-
 
     .package-type-count, .delivery-route-count {
       margin-top: 20px;

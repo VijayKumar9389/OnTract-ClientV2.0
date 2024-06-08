@@ -5,6 +5,7 @@ import CreateDeliveryForm from './CreateDeliveryForm.tsx';
 import CreatePackageForm from './CreatePackageForm.tsx';
 import DeliveryDetails from './DeliveryDetails.tsx';
 import {Stakeholder} from "../../../../models/stakeholder.models.ts";
+import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 
 const StakeholderDelivery: React.FC<{ packageId: number; stakeholder: Stakeholder }> = ({packageId, stakeholder}) => {
     const [delivery, setDelivery] = useState<Delivery | null>(null);
@@ -32,20 +33,14 @@ const StakeholderDelivery: React.FC<{ packageId: number; stakeholder: Stakeholde
             </div>
             <div className="panel-content">
                 {!delivery && (
-                    <div className="submenu">
-                        <div
-                            className={`submenu-item ${deliveryType === 'create' ? 'selected' : ''}`}
-                            onClick={() => toggleDeliveryType('create')}
-                        >
-                            Create Delivery
-                        </div>
-                        <div
-                            className={`submenu-item ${deliveryType === 'plan' ? 'selected' : ''}`}
-                            onClick={() => toggleDeliveryType('plan')}
-                        >
-                            Add To Delivery
-                        </div>
-                    </div>
+                    <SubMenu
+                        items={[
+                            { label: 'Create Delivery', value: 'create' },
+                            { label: 'Add To Delivery', value: 'plan' }
+                        ]}
+                        selected={deliveryType}
+                        onSelect={toggleDeliveryType}
+                    />
                 )}
                 {delivery ? (
                     <DeliveryDetails delivery={delivery}/>

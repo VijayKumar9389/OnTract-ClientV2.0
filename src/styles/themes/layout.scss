@@ -6,11 +6,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: $spacingLarge;
+  align-items: flex-start;
+  padding: $spacing-medium;
 
-  @media (max-width: $mobileBreakpoint) {
-    padding: $spacingMedium;
+  @media (max-width: $mobile-breakpoint) {
+    padding: $spacing-small;
   }
 }
 
@@ -24,41 +24,39 @@
   height: 100%;
 }
 
-// page spacing
-.page-content {
-  padding: $spacingMedium;
-}
+
 
 // Ui Elements
 .panel {
-  box-shadow: $boxShadow;
-  border-radius: $borderRadius;
-  margin-bottom: $spacingLarge;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  margin-bottom: $spacing-large;
   width: 100%;
-  background-color: $cardBackgroundColor;
+  background-color: $card-background-color;
   overflow: hidden;
   border: 1px solid #ddd;
+  overflow-x: auto;
 
   .panel-header {
-    padding: $spacingMedium $spacingSmall;
+    padding: $spacing-medium $spacing-small;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: $border;
+    background-color: #f7f7f7;
 
     h3 {
-      color: $textColor;
+      color: $text-color;
       margin: 0; // Add margin to reset default browser styles
     }
 
     strong {
-      color: $primaryColor;
+      color: $primary-color;
     }
   }
 
   .panel-content {
-    padding: $spacingSmall;
-    overflow-x: auto;
+    padding: $spacing-small;
   }
 }
 
@@ -67,9 +65,9 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-top: $spacingSmall;
+  margin-top: $spacing-small;
 
-  @media (max-width: $mobileBreakpoint) {
+  @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
     justify-content: flex-start;
   }
@@ -81,50 +79,21 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: $spacingLarge;
+  margin-bottom: $spacing-large;
 
   h3 {
     align-items: center;
     display: flex;
     font-weight: bold;
-    color: $textColorLight;
+    color: $text-color-light;
   }
 
   strong {
-    color: $primaryColor;
-    margin-left: $spacingSmall;
+    color: $primary-color;
+    margin-left: $spacing-small;
   }
 }
 
 // Menu Styles
-.submenu {
-  display: flex;
-  justify-content: flex-start;
-  border: $border;
-  border-radius: $buttonRadius;
-  background-color: #f4f4f4;
-  padding: calc($spacingSmall / 2);
 
-  .submenu-item {
-    padding: $spacingSmall;
-    cursor: pointer;
-    transition: ease-in-out .3s;
-    color: $textColorLight;
-    font-weight: bold;
-    border-radius: $buttonRadius;
-    margin-right: $spacingSmall;
-
-    &:hover {
-      color: $textColor;
-      background-color: #fff;
-      box-shadow: $boxShadow;
-    }
-
-    &.selected {
-      color: $textColor;
-      background-color: #fff;
-      box-shadow: $boxShadow;
-    }
-  }
-}
 

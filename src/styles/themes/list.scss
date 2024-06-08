@@ -3,56 +3,45 @@
 // List of cards
 .card-list {
   width: 100%;
+  box-shadow: $box-shadow-hover;
+  border: $border;
 }
 
 .card {
-  background-color: $cardBackgroundColor;
-  padding: $spacingMedium;
+  background-color: $card-background-color;
+  padding: $spacing-medium;
   cursor: pointer;
   transition: ease-in-out .3s;
   width: 100%;
 
   &:hover {
-    background-color: $cardHoverBackgroundColor;
+    background-color: $card-background-hover-color;
   }
 
-  &:not(:last-child) {
-    border-bottom: $border;
+  &:first-child {
+    border-bottom: 1px solid #ccc;
   }
 }
 
 // List of information
 .info-list {
-  margin-bottom: 1rem;
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: $spacing-medium;
   width: 100%;
-  color: $textColorLight;
-
-  @media (max-width: $mobileBreakpoint) {
-    display: flex;
-    flex-direction: column;
-
-    .separator {
-      display: none;
-    }
-
-    .info-item {
-      margin-bottom: 0.5rem;
-    }
-  }
 
   .info-item {
-    font-size: $textSmall; /* Use text size variable */
     font-weight: bold;
-    color: $primaryColor;
-    text-transform: uppercase;
+    margin-left: 5px;
   }
 
   .separator {
-    margin: 0 $spacingMedium;
+    margin: 0 10px;
+    color: #ccc;
   }
 
-  strong {
-    color: $primaryColor;
+  a {
+    color: $primary-color;
   }
 }
 
@@ -63,16 +52,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   align-items: center;
-  gap: $spacingSmall;
-  margin-bottom: $spacingSmall;
+  gap: $spacing-small;
+  margin-bottom: $spacing-small;
 
   li {
     display: flex;
     align-items: center;
-    margin-bottom: $spacingSmall;
+    margin-bottom: $spacing-small;
 
     span {
-      margin-right: $spacingSmall;
+      margin-right: $spacing-small;
     }
 
     p {

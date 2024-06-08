@@ -5,16 +5,16 @@
   padding: 0;
   margin: 0;
   width: 100%;
-  border-radius: $borderRadius;
+  border-radius: $border-radius;
 
   .tract-form-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: $spacingMedium;
+    gap: $spacing-medium;
     width: 100%;
 
     // Mobile layout
-    @media (max-width: $mobileBreakpoint) {
+    @media (max-width: $mobile-breakpoint) {
       grid-template-columns: 1fr;
     }
 
@@ -23,26 +23,26 @@
       flex-direction: column;
       justify-content: space-between;
       min-height: 500px;
-      border-radius: $buttonRadius;
+      border-radius: $button-radius;
       border: $border;
-      box-shadow: $boxShadow;
-      padding: $spacingMedium; // Increased padding
+      box-shadow: $box-shadow;
+      padding: $spacing-medium; // Increased padding
       overflow: hidden;
 
       h3 {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        margin-bottom: $spacingSmall; // Added spacing
+        margin-bottom: $spacing-small; // Added spacing
       }
 
       ul {
-        margin: $spacingSmall 0;
+        margin: $spacing-small 0;
         display: flex;
         flex-wrap: wrap;
 
         a {
-          margin-right: $spacingSmall;
+          margin-right: $spacing-small;
         }
       }
     }

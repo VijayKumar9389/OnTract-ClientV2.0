@@ -1,69 +1,99 @@
 @import 'src/styles/variables.scss';
 
+// StakeholderStats.scss
 .stats-wrapper {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Display six items in a row */
-  background-color: $cardBackgroundColor;
-  padding: $spacingMedium; /* Increase padding for better spacing */
+  grid-template-columns: repeat(6, 1fr); // Six items in a row
   width: 100%;
-  margin-bottom: $spacingMedium;
-  border-radius: $borderRadius;
-  border: $border;
+  margin-bottom: $spacing-medium;
+  gap: $spacing-small; // Add gap between grid items for better spacing
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr); /* Display four items in a row on larger tablets and laptops */
+    grid-template-columns: repeat(4, 1fr); // Four items in a row on larger tablets and laptops
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 1fr); /* Display three items in a row on smaller tablets */
+    grid-template-columns: repeat(3, 1fr); // Three items in a row on smaller tablets
   }
 
   @media (max-width: 576px) {
-    grid-template-columns: repeat(2, 1fr); /* Display two items in a row on phones */
+    grid-template-columns: repeat(2, 1fr); // Two items in a row on phones
   }
 
   .stat-item {
+    padding: $spacing-medium; // Increase padding for better spacing
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-width: 100px;
-    padding: $spacingMedium; /* Increase padding for better spacing */
+    transition: transform 0.2s, box-shadow 0.2s; // Smooth animations for hover effects
+    background-color: #f4f4f4;
+    border-radius: $button-radius;
+
+    p {
+      color: #333;
+    }
 
     h3 {
-        font-weight: bold;
+      font-size: 24px;
+      font-weight: bold; // Bold text for emphasis
+      color: $primary-color;
+      margin: 0;
     }
   }
 }
 
+// Responsive Design for spacing
+@media (max-width: 576px) {
+  .stat-item {
+    padding: $spacing-small; // Reduce padding on smaller screens
+  }
+}
 
 /* General styles */
 .report-wrapper {
   display: grid;
-  gap: 20px; /* Adjust as needed */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  margin-bottom: 40px; /* Adjust as needed */
+  gap: $spacing-medium; /* Adjust as needed */
   width: 100%;
+  background: #fff;
+  grid-template-columns: repeat(6, 1fr); // Six items in a row
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr); // Four items in a row on larger tablets and laptops
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr); // Three items in a row on smaller tablets
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr); // Two items in a row on phones
+  }
 }
 
-/* Individual report item styles */
 .report-item {
-  background-color: #f9f9f9; /* Lighter background color */
-  padding: 20px; /* Adjust as needed */
-  border-radius: 8px; /* Adjust as needed */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 120px;
+  padding: $spacing-medium;
+  border-radius: $button-radius;
+  text-align: center;
+  background-color: #f4f4f4;
+  align-items: center;
+  justify-content: space-evenly;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  text-align: center;
+}
+
+.report-item label {
+  display: block;
+  font-size: 1rem;
+  color: $text-color;
+  margin-bottom: 8px;
 }
 
 .report-item h3 {
-  font-size: 24px; /* Adjust as needed */
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: bold; // Bold text for emphasis
+  color: $primary-color;
+  margin: 0;
 }
 
-.report-item p {
-}
 

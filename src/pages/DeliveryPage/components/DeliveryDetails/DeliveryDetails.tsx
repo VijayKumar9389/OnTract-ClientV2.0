@@ -40,30 +40,35 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
 
 
     return (
-        <div className="delivery-details">
-            <p className="info-list">
-                Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
-                <span className="separator">|</span>
-                Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/a</a>}</span>
-            </p>
-            <form onSubmit={handleSubmit} className="date-form">
-                <div className="input-wrapper">
-                    <label htmlFor="deliveryDate">Completion Date:</label>
-                    <div className="submit-wrapper">
-                        <input
-                            type="date"
-                            id="deliveryDate"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            className="date-input"
-                        />
-                        <button type="submit" disabled={!isValid}>
-                            <FaCheck/>
-                            Set Completion Date
-                        </button>
+        <div className="panel">
+            <div className="panel-header">
+                <h3>Delivery Status</h3>
+            </div>
+            <div className="panel-content">
+                <p className="info-list">
+                    Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
+                    <span className="separator">|</span>
+                    Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/A</a>}</span>
+                </p>
+                <form onSubmit={handleSubmit} className="date-form">
+                    <div className="input-wrapper">
+                        <label htmlFor="deliveryDate">Completion Date:</label>
+                        <div className="submit-wrapper">
+                            <input
+                                type="date"
+                                id="deliveryDate"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                className="date-input"
+                            />
+                            <button type="submit" disabled={!isValid}>
+                                <FaCheck/>
+                                Set Completion Date
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 

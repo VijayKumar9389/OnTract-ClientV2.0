@@ -1,15 +1,24 @@
 @import 'src/styles/variables.scss';
 
+.form-wrapper {
+  width: 100%;
+  margin-bottom: $spacing-large;
+}
+
 // Form Styles
 .form-row {
   display: flex;
   width: 100%;
-  gap: $spacingSmall;
+  gap: $spacing-small;
 
-  @media (max-width: $mobileBreakpoint) {
+  @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
     gap: 0;
   }
+}
+
+.form-btn {
+  margin-top: $spacing-medium;
 }
 
 .filter-wrapper {
@@ -18,8 +27,8 @@
 
   h3 {
     margin-bottom: 0.5rem;
-    color: $textColor; /* Text color */
-    font-size: $textMedium; /* Use text size variable */
+    color: $text-color; /* Text color */
+    font-size: $text-medium; /* Use text size variable */
   }
 
   .radio-group {
@@ -30,13 +39,13 @@
       display: none;
 
       &:checked + label {
-        background-color: $cardHoverBackgroundColor; /* Background color when checked */
-        color:  $textColor;
+        background-color: $card-background-hover-color; /* Background color when checked */
+        color: $text-color;
       }
 
       &:hover + label {
-        background-color: $cardHoverBackgroundColor; /* Background color on hover */
-        color:  $textColor;
+        background-color: $card-background-hover-color; /* Background color on hover */
+        color: $text-color;
       }
     }
 
@@ -47,7 +56,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
-      color: $textColorLight;
+      color: $text-color-light;
     }
   }
 }
@@ -58,10 +67,10 @@
   .submit-wrapper {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: $spacingSmall;
-    margin-bottom: $spacingMedium;
+    gap: $spacing-small;
+    margin-bottom: $spacing-medium;
 
-    @media (max-width: $mobileBreakpoint) {
+    @media (max-width: $mobile-breakpoint) {
       grid-template-columns: 1fr;
     }
   }
@@ -70,21 +79,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: $textColor; /* Text color */
+    color: $text-color; /* Text color */
 
     button {
-      padding: calc($spacingSmall / 2); /* Padding for the button */
-      margin-left: $spacingSmall; /* Spacing between button and label */
-      background-color: transparent; /* Button background color */
-      color: $primaryColor; /* Button text color */
-      border: none; /* Remove button border */
-      border-radius: $buttonRadius; /* Button border radius */
-      cursor: pointer; /* Change cursor to pointer on hover */
-      transition: ease-in-out .3s; /* Smooth transition on hover */
-      font-size: $textSmall; /* Use text size variable */
+      padding: calc($spacing-small / 2);
+      margin-left: $spacing-small;
+      background-color: transparent;
+      color: $primary-color;
+      border: none;
+      border-radius: $button-radius;
+      cursor: pointer;
+      transition: ease-in-out .3s;
+      font-size: $text-small;
 
       &:hover {
-        background-color: $primaryColor; /* Lighter shade of primary color on hover */
+        background-color: $primary-color; /* Lighter shade of primary color on hover */
         color: #fff; /* Text color on hover */
       }
     }
@@ -92,9 +101,9 @@
 
   label {
     display: block;
-    color: $textColorLight; /* Text color */
-    margin-top: $spacingSmall; /* Spacing between label and input */
-    margin-bottom: calc($spacingSmall / 2); /* Spacing between label and input */
+    color: $text-color-light; /* Text color */
+    margin-top: $spacing-small; /* Spacing between label and input */
+    margin-bottom: calc($spacing-small / 2); /* Spacing between label and input */
   }
 }
 
@@ -102,38 +111,58 @@
 .page-input {
   display: flex;
   align-items: center;
+  margin-bottom: $spacing-medium;
+  width: 100%;
+
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+  }
 
   .input-field {
     flex: 1;
-    padding: $spacingSmall;
-    border-radius: $buttonRadius;
-    margin-right: $spacingSmall;
+    padding: 10px;
+    border-radius: $button-radius;
+    margin-right: $spacing-small;
     outline: none;
-    font-size: $textMedium; /* Use text size variable */
-    background-color: #fff;
+    font-size: $text-small; /* Use text size variable */
+    background-color: $input-background-color; /* Input background color */
 
-    @media (max-width: $mobileBreakpoint) {
-      margin: $spacingSmall 0;
+    @media (max-width: $mobile-breakpoint) {
+      margin: $spacing-small 0;
     }
   }
 
   .filter-button,
   .clear-filter-button {
-    background-color: $primaryColor;
+    background-color: $primary-color;
     color: #fff;
     border: none;
-    border-radius: $buttonRadius;
-    padding: $spacingSmall $spacingMedium;
+    border-radius: $button-radius;
+    padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: $textSmall; /* Use text size variable */
+    font-size: $text-small; /* Use text size variable */
+    min-width: 100px;
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+    }
 
     &:hover {
-      background-color: darken($primaryColor, 10%);
+      background-color: darken($primary-color, 10%);
     }
 
     svg {
-      margin-right: $spacingSmall;
+      margin-right: 5px;
+    }
+  }
+
+  .clear-filter-button {
+    margin-left: $spacing-small;
+
+    @media (max-width: $mobile-breakpoint) {
+      margin-left: 0;
+      margin-top: $spacing-small;
     }
   }
 

@@ -16,7 +16,7 @@ import Projects from "../pages/Projects/Projects.tsx";
 import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 
 const RoutesConfig: React.FC = () => {
-    const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
+    const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
 
     return (
         <Routes>

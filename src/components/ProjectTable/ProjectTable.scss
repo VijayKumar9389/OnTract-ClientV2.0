@@ -1,16 +1,12 @@
 @import 'src/styles/variables.scss';
 
-.project-select {
-  padding: $spacingMedium;
-}
-
 .project-table {
   tbody {
     tr {
       cursor: pointer;
       transition: background-color 0.3s ease;
       &:hover {
-        background-color: $cardHoverBackgroundColor;
+        background-color: $card-background-hover-color;
       }
     }
   }

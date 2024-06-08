@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import PageHeading from "../../components/PageHeading/PageHeading.tsx";
+import SubPageHeading from "../../components/SubPageHeading/SubPageHeading.tsx";
 import { cancelDeliveryById, getDeliveryById } from "../../services/delivery.services.ts";
 import { useEffect, useState } from "react";
 import { Delivery } from "../../models/delivery.models.ts";
@@ -37,10 +37,10 @@ const DeliveryPage = () => {
 
     return (
         <div className="section">
-            <PageHeading heading={delivery.destination} />
+            <SubPageHeading heading={delivery.destination} />
             <div className="page-content">
-                <DeliveryDetails delivery={delivery} />
                 <EditDeliveryForm delivery={delivery} />
+                <DeliveryDetails delivery={delivery} />
                 <PackageTable packages={delivery.packages} />
                 <div className="btn-container">
                     <ConfirmationButton

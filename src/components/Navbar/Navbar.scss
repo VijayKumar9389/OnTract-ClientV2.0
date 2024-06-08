@@ -4,9 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(to right, $primaryColor, $secondaryColor);
-  padding: $spacingMedium;
-  box-shadow: $boxShadow;
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  padding: $spacing-medium;
+  box-shadow: $box-shadow;
   z-index: 1;
   position: sticky;
   top: 0;
@@ -14,7 +14,7 @@
   .btn-menu {
     display: none;
 
-    @media (max-width: $mobileBreakpoint) {
+    @media (max-width: $mobile-breakpoint) {
       display: block;
       color: #fff;
       background: none;
@@ -31,7 +31,7 @@
     border: 2px solid #fff;
     background: none;
     color: #fff;
-    padding: $spacingSmall $spacingLarge;
+    padding: $spacing-small $spacing-large;
     width: 100%;
     font-size: 16px;
     display: flex;
@@ -39,11 +39,11 @@
     align-items: center;
     cursor: pointer;
     transition: $transition;
-    margin-left: $spacingSmall;
+    margin-left: $spacing-small;
 
     &:hover {
       background-color: #fff;
-      color: $primaryColor;
+      color: $primary-color;
     }
   }
 
@@ -53,11 +53,11 @@
     align-items: center;
 
     svg {
-      margin-right: $spacingSmall;
+      margin-right: $spacing-small;
       font-size: 2rem;
     }
 
-    @media (max-width: $mobileBreakpoint) {
+    @media (max-width: $mobile-breakpoint) {
       margin: 0;
     }
   }
@@ -68,12 +68,12 @@
     margin: 0;
     display: flex;
 
-    @media (max-width: $mobileBreakpoint) {
+    @media (max-width: $mobile-breakpoint) {
       display: none;
     }
 
     .sidebar-link {
-      padding: $spacingSmall $spacingMedium;
+      padding: $spacing-small $spacing-medium;
       cursor: pointer;
       color: #fff;
       text-decoration: none;
@@ -81,23 +81,23 @@
       display: flex;
       align-items: center;
       transition: ease-in-out .3s;
-      border-radius: $buttonRadius;
+      border-radius: $button-radius;
 
       svg {
-        margin-right: $spacingSmall;
+        margin-right: $spacing-small;
         font-size: 20px;
       }
 
       &:hover {
         background-color: #fff;
-        color: $primaryColor;
-        box-shadow: $boxShadow;
+        color: $primary-color;
+        box-shadow: $box-shadow;
       }
 
       &.active {
         background-color: #fff;
-        color: $primaryColor;
-        box-shadow: $boxShadow;
+        color: $primary-color;
+        box-shadow: $box-shadow;
       }
     }
   }
@@ -105,47 +105,47 @@
   .popup-links {
     list-style: none;
     padding: 0;
-    margin-bottom: $spacingMedium;
+    margin-bottom: $spacing-medium;
     display: flex;
     flex-direction: column;
 
     .btn-logout {
       margin: 0;
-      border: 2px solid $primaryColor;
+      border: 2px solid $primary-color;
       background: none;
-      color: $primaryColor;
-      padding: $spacingSmall $spacingLarge;
+      color: $primary-color;
+      padding: $spacing-small $spacing-large;
       width: 100%;
 
       &:hover {
         background-color: #fff;
-        color: $primaryColor;
+        color: $primary-color;
       }
     }
 
     li {
-      margin-bottom: $spacingSmall;
+      margin-bottom: $spacing-small;
       text-align: center;
 
-      @media (max-width: $mobileBreakpoint) {
-        margin-bottom: $spacingSmall;
+      @media (max-width: $mobile-breakpoint) {
+        margin-bottom: $spacing-small;
       }
     }
 
     a, button {
       display: block;
-      padding: $spacingSmall $spacingMedium;
-      color: $textColor;
+      padding: $spacing-small $spacing-medium;
+      color: $text-color;
       text-decoration: none;
       font-size: 16px;
       transition: $transition;
 
       &:hover {
-        background-color: lighten($primaryColor, 10%);
+        background-color: lighten($primary-color, 10%);
       }
 
-      @media (max-width: $mobileBreakpoint) {
-        padding: $spacingSmall;
+      @media (max-width: $mobile-breakpoint) {
+        padding: $spacing-small;
       }
     }
   }

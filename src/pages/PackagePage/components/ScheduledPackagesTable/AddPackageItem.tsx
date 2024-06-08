@@ -64,7 +64,7 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
                             <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </select>
-                    <button className="add-button" disabled={!hasSelectedItemId()} onClick={handleAddPackageItem}>
+                    <button disabled={!hasSelectedItemId()} onClick={handleAddPackageItem}>
                         <MdAdd/>
                         Add Item
                     </button>

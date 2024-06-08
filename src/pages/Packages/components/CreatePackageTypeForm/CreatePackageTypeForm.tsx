@@ -40,33 +40,31 @@ const CreatePackageTypeForm: React.FC = () => {
         }));
     };
 
-    const isFormValid = formData.name && formData.notes;
+    const isFormValid: string = formData.name && formData.notes;
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
-                <label htmlFor="name">Name:
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </label>
+                <label htmlFor="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                />
             </div>
 
             <div className="input-wrapper">
-                <label htmlFor="notes">Notes:
-                    <textarea
-                        id="notes"
-                        name="notes"
-                        value={formData.notes}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </label>
+                <label htmlFor="notes">Notes:</label>
+                <textarea
+                    id="notes"
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    required
+                />
             </div>
 
 

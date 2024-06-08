@@ -1,42 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkAdminStatus, verifyRefreshToken } from './services/auth.services';
-import { RootState } from './store';
-import Navbar from './components/Navbar/Navbar';
-import Login from './pages/Login/Login';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+
+import { useInitializeApp } from './hooks/useInitializeApp'; // Import the custom hook
+import { getProjectFromCookie } from './utils/cookieHelper';
+import { RootState } from './store';
+
+import Navbar from './components/Navbar/Navbar';
+import ProjectTable from './components/ProjectTable/ProjectTable';
+import Login from './pages/Login/Login';
+
+import RoutesConfig from './routes/routes';
+
 import './styles/app.scss';
-import RoutesConfig from "./routes/routes";
-import { activateInterceptor } from "./utils/interceptors";
-import { getProjectFromCookie } from "./utils/cookieHelper";
-import ProjectTable from "./components/ProjectTable/ProjectTable";
-import { setAdminStatus, setLogin, setLogout } from "./store/reducers/auth.reducer.ts";
+import {Project} from "./models/stakeholder.models.ts";
 
 const App: React.FC = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-    const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn);
-    const project = getProjectFromCookie();
-    const dispatch = useDispatch();
-
-    useEffect((): void => {
-        const initializeApp = async (): Promise<void> => {
-            try {
-                activateInterceptor(dispatch);
-                const status: {auth: boolean, user: string} = await verifyRefreshToken();
-                dispatch(setLogin(status));
-                const adminStatus: boolean = await checkAdminStatus();
-                dispatch(setAdminStatus(adminStatus));
-            } catch (error) {
-                console.error('Error during initialization:', error);
-                dispatch(setLogout());
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        initializeApp()
-            .then(() => console.log('App initialized'));
-    }, [dispatch]);
+    const loading: boolean = useInitializeApp(); // Use the custom hook
+    const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
+    const project: Project | null = getProjectFromCookie();
 
     if (loading) return <div>Loading...</div>;
     if (!isLoggedIn) return <Login />;

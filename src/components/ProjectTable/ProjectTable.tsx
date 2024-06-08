@@ -1,44 +1,28 @@
-import {useState, useEffect} from "react";
 import React from "react";
-import {Project} from "../../models/stakeholder.models.ts";
+import { Project } from "../../models/stakeholder.models";
+import { setProjectCookie } from "../../utils/cookieHelper";
+import CreateProject from "../../pages/Projects/components/CreateProject/CreateProject";
+import { useFetchProjects} from "../../hooks/project.hooks.ts";
 import './ProjectTable.scss';
-import {setProjectCookie} from "../../utils/cookieHelper.ts";
-import {getProjects} from "../../services/project.services.ts";
-import CreateProject from "../../pages/Projects/components/CreateProject/CreateProject.tsx";
 
-const ProjectTable: React.FC<{ toggleMenu: () => void }> = ({toggleMenu}) => {
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+interface ProjectTableProps {
+    toggleMenu: () => void;
+}
 
-    const fetchData = async (): Promise<void> => {
-        try {
-            const response = await getProjects();
-            setProjects(response);
-        } catch (error) {
-            setError("An error occurred while fetching projects.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect((): void => {
-        fetchData();
-    }, []);
+const ProjectTable: React.FC<ProjectTableProps> = ({ toggleMenu }) => {
+    const { projects, loading, error } = useFetchProjects();
 
     const selectProject = (project: Project): void => {
-        setProjectCookie(project)
+        setProjectCookie(project);
         if (toggleMenu) toggleMenu();
         window.location.reload();
-    }
+    };
 
     return (
         <div className="project-select">
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
-
             {!loading && !error && projects.length === 0 && <CreateProject />}
-
             {!loading && !error && projects.length > 0 && (
                 <table className="project-table">
                     <thead>

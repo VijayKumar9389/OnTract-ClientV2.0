@@ -2,10 +2,10 @@
 
 // Buttons
 button {
-  background-color: $primaryColor;
+  background-color: $primary-color;
   color: #fff;
   border: none;
-  border-radius: $buttonRadius;
+  border-radius: $button-radius;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -14,17 +14,17 @@ button {
   display: flex;
 
   svg {
-    margin-right: $spacingSmall;
+    margin-right: 5px;
     font-size: 1.2rem;
   }
 
   &:hover {
-    background-color: $secondaryColor;
+    background-color: $secondary-color;
   }
 }
 
 button:disabled {
-  background-color: $btnDisabledBackgroundColor;
+  background-color: $btn-background-disabled-color;
   cursor: not-allowed;
 }
 
@@ -41,22 +41,25 @@ button:disabled {
   display: flex;
   height: 100%;
   align-items: flex-end;
-  gap: $spacingSmall;
+  gap: $spacing-small;
   margin: 0;
 
   button:disabled {
-    background-color: $btnDisabledBackgroundColor;
+    background-color: $btn-background-disabled-color;
     cursor: not-allowed;
   }
 
   button {
-    padding: $spacingSmall $spacingMedium;
+    padding: $spacing-small;
     border: none;
-    border-radius: $buttonRadius;
+    border-radius: $button-radius;
     cursor: pointer;
     transition: background-color 0.3s;
-    height: fit-content;
-
+    height: 40px; // Consistent height
+    min-width: 120px; // Consistent width
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .cancel-button {
@@ -68,23 +71,24 @@ button:disabled {
   }
 }
 
+
 // Card Styles
 .card-header {
-  margin-bottom: $spacingSmall;
+  margin-bottom: $spacing-small;
 
   h3 {
-    color: $textColor;
+    color: $text-color;
     line-break: anywhere;
   }
 
   p {
-    color: $textColorLight;
+    color: $text-color-light;
   }
 }
 
 // Chip styles
 .chip {
-  border-radius: $buttonRadius;
+  border-radius: $button-radius;
   font-weight: bold;
   padding: 5px 10px;
 
@@ -109,19 +113,16 @@ button:disabled {
   }
 }
 
-// Form Styles
-.form-btn {
-  margin-top: $spacingMedium;
-}
 
 // No Data Message
 .no-data-message {
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 10px;
   text-align: center;
   font-size: 14px;
   color: #555;
+  width: 100%;
+  background-color: #f4f4f4;
 }
 
 // No Data Message with Icon
@@ -137,90 +138,22 @@ button:disabled {
 textarea,
 input, select {
   width: 100%;
-  padding: $spacingSmall;
+  padding: 10px;
   border: $border;
-  border-radius: $buttonRadius;
+  border-radius: $button-radius;
   font-size: 1rem;
   transition: border-color 0.3s;
   resize: none;
-  background-color: $inputBackgroundColor;
+  background-color: $input-background-color;
 
   &:focus {
     outline: none;
-    border-color: $primaryColor; // Highlight color on focus
+    border-color: $primary-color; // Highlight color on focus
   }
 }
 
 textarea {
-  height: 80px;
-}
-
-// Search Input
-.page-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: $spacingMedium;
-  width: 100%;
-
-  @media (max-width: $mobileBreakpoint) {
-    flex-direction: column;
-
-    .input-field {
-      margin-bottom: $spacingSmall;
-    }
-
-    .filter-button, .clear-filter-button {
-      margin-bottom: $spacingSmall;
-      width: 100%;
-    }
-  }
-
-  .input-field {
-    border: $border;
-    border-radius: $buttonRadius;
-    flex: 1;
-
-    &::placeholder {
-    }
-  }
-
-  .filter-button,
-  .clear-filter-button {
-    border: none;
-    border-radius: $buttonRadius;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: $spacingSmall;
-
-    @media (max-width: $mobileBreakpoint) {
-      margin-left: 0;
-    }
-
-    svg {
-      margin-right: $spacingSmall;
-    }
-  }
-
-  .filter-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: $spacingMedium;
-    width: 100%;
-  }
-
-  .clear-filter-button {
-    background-color: #e74c3c; // Red color for clear filter button
-
-  }
-
-  .filter-button {
-    background-color: $btnBackgroundColor;
-
-    &:hover {
-      background-color: $btnHoverBackgroundColor;
-    }
-  }
+  height: 100px;
 }
 
 .switch-wrapper {
@@ -233,13 +166,13 @@ input[type="checkbox"] {
   appearance: none; /* Remove default checkbox appearance */
   width: 40px; /* Adjust the width of the switch */
   height: 20px; /* Adjust the height of the switch */
-  background-color: $inputBackgroundColor; /* Background color when unchecked */
-  border-radius: $borderRadius; /* Make it round */
+  background-color: $input-background-color; /* Background color when unchecked */
+  border-radius: $border-radius; /* Make it round */
   cursor: pointer; /* Change cursor to pointer */
   border: $border;
 
   &:checked {
-    background-color: $primaryColor; /* Background color when checked */
+    background-color: $primary-color; /* Background color when checked */
   }
 
   &::before {

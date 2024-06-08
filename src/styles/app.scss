@@ -10,9 +10,9 @@
 
 .app-container {
     min-height: 100vh;
-    background-color: $backgroundColor;
+    background-color: $background-color;
 
-    @media (max-width: $tabletBreakpoint) {
+    @media (max-width: $tablet-breakpoint) {
         display: flex;
         flex-direction: column;
     }

@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
-import { deletePackageItem, updatePackageItemQuantity } from "../../../../services/item.services.ts";
-import { Navigation } from "../../../../utils/navigation.ts";
-import { PackageItem } from "../../../../models/item.models.ts";
-import Counter from "../../../../components/Counter/Counter.tsx";
-import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
+import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton";
+import { deletePackageItem, updatePackageItemQuantity } from "../../../../services/item.services";
+import { Navigation } from "../../../../utils/navigation";
+import { PackageItem } from "../../../../models/item.models";
+import Counter from "../../../../components/Counter/Counter";
+import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt";
 
-const PackageItemRow: React.FC<{
-    item: PackageItem;
-    onUpdateQuantity: (newQuantity: number) => void;
-}> = ({ item, onUpdateQuantity }) => {
-
+const PackageItemRow: React.FC<{ item: PackageItem }> = ({ item }) => {
     const { navigateToInventoryItem } = Navigation();
     const [quantity, setQuantity] = useState(item.quantity || 0);
 
@@ -45,18 +41,13 @@ const PackageItemRow: React.FC<{
             <td>
                 <Counter
                     initialValue={quantity}
-                    onUpdateCount={(newCount: number) => {
-                        setQuantity(newCount);
-                        onUpdateQuantity(newCount);
-                    }}
+                    onUpdateCount={setQuantity}
                 />
             </td>
             <td>
                 <div className="action-buttons">
                     <button onClick={handleUpdateClick}>Update</button>
-                    <button onClick={() => navigateToInventoryItem(item.item.id)}>
-                        View Item
-                    </button>
+                    <button onClick={() => navigateToInventoryItem(item.item.id)}>View Item</button>
                     <ConfirmationButton
                         confirmationMessage="Remove Item From Package?"
                         buttonText="Remove Item"

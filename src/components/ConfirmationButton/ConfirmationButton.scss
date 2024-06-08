@@ -13,37 +13,37 @@
    z-index: 1000;
 
    .confirmation-content {
-     background-color: $cardBackgroundColor;
-     padding: $spacingMedium;
-     border-radius: $borderRadius;
-     box-shadow: $boxShadow;
+     background-color: $card-background-color;
+     padding: $spacing-medium;
+     border-radius: $border-radius;
+     box-shadow: $box-shadow;
      width: 80%;
      max-width: 400px;
 
      p {
-       margin-bottom: $spacingMedium;
+       margin-bottom: $spacing-medium;
        text-align: center;
      }
 
      .button-container {
        display: flex;
        justify-content: center;
-       margin-bottom: $spacingMedium;
+       margin-bottom: $spacing-medium;
 
        button {
-         margin: 0 $spacingSmall;
-         padding: $spacingSmall $spacingMedium;
+         margin: 0 $spacing-small;
+         padding: $spacing-small $spacing-medium;
          border: none;
-         border-radius: $buttonRadius;
+         border-radius: $button-radius;
          cursor: pointer;
          transition: background-color 0.3s;
 
          &.cancel-button {
-           background-color: $primaryColor;
+           background-color: $primary-color;
            color: white;
 
            &:hover {
-             background-color: $secondaryColor;
+             background-color: $secondary-color;
            }
          }
 
@@ -61,22 +61,22 @@
 
      .close-button {
        position: absolute;
-       top: $spacingSmall;
-       right: $spacingSmall;
+       top: $spacing-small;
+       right: $spacing-small;
        border: none;
        background: none;
        cursor: pointer;
        font-size: 1.5rem;
-       color: $textColor;
+       color: $text-color;
 
        &:hover {
-         color: $primaryColor;
+         color: $primary-color;
        }
      }
    }
  }
 
- @media screen and (max-width: $mobileBreakpoint) {
+ @media screen and (max-width: $mobile-breakpoint) {
    .confirmation-modal .confirmation-content {
      width: 90%;
    }

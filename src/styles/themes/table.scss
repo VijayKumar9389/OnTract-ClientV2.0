@@ -3,13 +3,12 @@
 .select-table {
   tbody {
     .selected {
-      background-color: $cardHoverBackgroundColor;
+      background-color: $card-background-hover-color;
     }
-
     tr{
       cursor: pointer;
       &:hover {
-        background-color: $cardHoverBackgroundColor;
+        background-color: $card-background-hover-color;
       }
     }
   }
@@ -35,28 +34,31 @@ table {
     svg {
       height: 60px;
       width: 60px;
-      color: $secondaryColor;
+      color: $secondary-color;
     }
   }
 
   th, td {
-    padding: $spacingMedium;
+    padding: $spacing-medium; // Top, right, bottom, left
     text-align: left;
     vertical-align: middle;
-    min-width: 150px; // Set min-width for table cells
+    min-width: 150px;
+  }
+
+  td {
+    color: $text-color-light;
   }
 
   tr {
+    transition: background-color 0.3s ease;
     &:not(:last-child) {
       border-bottom: $border;
     }
-
-    transition: background-color 0.3s ease;
   }
 
   thead {
     //background-color: $backgroundColor;
-    color: $textColorLight;
+    color: $text-color;
     font-weight: bold;
     text-transform: uppercase;
     border-bottom: $border;
@@ -64,33 +66,29 @@ table {
     //th, td {
     //  &:first-child {
     //    border-top-left-radius: $borderRadius;
-    //    border-bottom-left-radius: $borderRadius;
     //  }
     //
     //  &:last-child {
     //    border-top-right-radius: $borderRadius;
-    //    border-bottom-right-radius: $borderRadius;
     //  }
     //}
   }
 }
 
 .table-wrapper {
-  border: $border;
-  border-radius: $buttonRadius;
-  max-height: 500px;
+  border-radius: $button-radius;
   overflow: auto;
 }
 
 // Responsive styles
-@media screen and (max-width: $mobileBreakpoint) {
+@media screen and (max-width: $mobile-breakpoint) {
   th, td {
-    padding: $spacingSmall;
+    padding: $spacing-small;
   }
 
-  .action-buttons {
-    button {
-      padding: $spacingSmall;
-    }
-  }
+  //.action-buttons {
+  //  button {
+  //    padding: $spacing-small;
+  //  }
+  //}
 }

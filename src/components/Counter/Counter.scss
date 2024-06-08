@@ -4,9 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: $backgroundColor;
-  padding: $spacingSmall;
-  border-radius: $buttonRadius;
+  padding: $spacing-small;
+  border-radius: $button-radius;
+  min-width: 150px;
+  background-color: $input-background-color;
 
   button {
     padding: 8px 16px;
@@ -14,7 +15,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: $secondaryColor;
+      background-color: $secondary-color;
     }
   }
 

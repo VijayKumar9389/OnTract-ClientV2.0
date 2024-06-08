@@ -1,0 +1,80 @@
+@import '/src/styles/variables.scss';
+
+.stakeholder-delivery-details {
+  background-color: $background-color;
+
+  .delivery-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: $spacing-medium;
+
+    @media (max-width: $mobile-breakpoint) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .delivery-info {
+      flex: 1;
+
+      h3 {
+        color: $text-color;
+      }
+
+      p {
+        font-size: $text-medium;
+        color: $text-color-light;
+        margin: 0;
+      }
+    }
+
+    .view-delivery {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: $mobile-breakpoint) {
+        margin-top: $spacing-small;
+      }
+
+      button {
+        padding: $spacing-small $spacing-medium;
+        background-color: $btn-background-color;
+        color: white;
+        border: none;
+        border-radius: $button-radius;
+        cursor: pointer;
+        transition: background-color $transition;
+
+        &:hover {
+          background-color: $btn-background-hover-color;
+        }
+      }
+    }
+  }
+
+  .delivery-stats {
+    display: flex;
+    flex-wrap: wrap; // Allow stats to wrap on smaller screens
+    gap: $spacing-medium; // Add gap between stat items
+
+    .stat-item {
+      flex: 1 1 150px; // Flex basis of 200px with flex-grow and flex-shrink
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      p {
+        font-size: $text-small;
+        color: $text-color-light;
+        margin-bottom: 0.2rem;
+      }
+
+      .value {
+        font-size: $text-medium;
+        font-weight: bold;
+        color: $text-color;
+      }
+    }
+  }
+
+}

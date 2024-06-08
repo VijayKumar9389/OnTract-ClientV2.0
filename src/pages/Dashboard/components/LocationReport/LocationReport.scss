@@ -1,50 +1,70 @@
 @import 'src/styles/variables.scss';
 
+// components/LocationReport.scss
 .location-report {
-  width: 100%;
 
   .location-item {
-    padding: $spacingMedium;
-    background-color: $cardBackgroundColor;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
 
-    &:not(:last-child) {
-      border-bottom: $border;
-    }
-  }
 
-  strong {
-    font-weight: bold;
-    color: $primaryColor;
-  }
-
-  h1 {
-    font-size: 24px;
-    margin-bottom: $spacingMedium;
-  }
-
-  .city-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-
-    li {
-      margin-right: $spacingSmall;
+    .location-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      border-radius: $borderRadius;
-      padding: $spacingSmall;
+      margin-bottom: 10px;
 
+      h3 {
+        margin: 0;
+        font-size: 1.2em;
+        color: #333;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1em;
+        color: #777;
+
+        strong {
+          color: #333;
+        }
+      }
     }
-  }
 
-  .city-name {
-    font-weight: bold;
-    margin-right: $spacingSmall;
-  }
+    .city-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
-  .city-count {
-    font-style: italic;
+      .city-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        span {
+          font-size: 1em;
+          color: #555;
+        }
+
+        strong {
+          font-size: 1em;
+          color: #333;
+        }
+      }
+    }
+
+    .no-cities {
+      font-size: 1em;
+      color: #777;
+      padding: 8px 0;
+    }
   }
 }

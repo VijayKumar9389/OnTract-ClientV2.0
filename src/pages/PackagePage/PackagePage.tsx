@@ -1,4 +1,4 @@
-import PageHeading from "../../components/PageHeading/PageHeading.tsx";
+import SubPageHeading from "../../components/SubPageHeading/SubPageHeading.tsx";
 import {useParams} from "react-router-dom";
 import {getPackageTypeById} from "../../services/package.services.ts";
 import {useEffect, useState} from "react";
@@ -9,11 +9,10 @@ import {getPackageByPackageTypeId} from "../../services/package.services.ts";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deletePackageType} from "../../services/package.services.ts";
 import PackageStats from "./components/PackageStats/PackageStats.tsx";
-import PackageItemTable from "./components/PackageItemTable/PackageItemTable.tsx";
+import PackageItemTable from "./components/ScheduledPackagesTable/PackageItemTable.tsx";
 import {showToastError} from "../../utils/toastHelper.ts";
 
 const PackagePage = () => {
-
     const {id} = useParams();
     const [packageType, setPackageType] = useState<PackageType | null>(null);
     const [packages, setPackages] = useState<Package[]>([]);
@@ -48,7 +47,7 @@ const PackagePage = () => {
 
     return (
         <div className="section">
-            <PageHeading heading={packageType?.name}/>
+            <SubPageHeading heading={packageType?.name}/>
             <div className="page-content">
                 <PackageStats packages={packages}/>
                 <EditPackageType packageType={packageType}/>
