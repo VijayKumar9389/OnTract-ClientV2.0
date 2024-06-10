@@ -5,6 +5,7 @@ import Dialog from "../../../../components/Dialog/Dialog.tsx";
 import EditProject from "../EditProject/EditProject.tsx";
 import {useState} from "react";
 import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
+import {deleteProjectCookieAndReload} from "../../../../utils/cookie.utils.ts";
 
 const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
     const {id, name, year, notes, surveyLink} = project;
@@ -18,6 +19,7 @@ const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
     const handleDelete = async () => {
         try {
             await deleteProject(id);
+            deleteProjectCookieAndReload();
             console.log('Project deleted successfully');
         } catch (error) {
             console.error('Error deleting project:', error);

@@ -137,52 +137,47 @@ const CreateProject = () => {
             <div className="create-project-form">
 
                 <div className="input-wrapper">
-                    <label>Project Name:
-                        <input
-                            type="text"
-                            value={projectForm.projectName}
-                            onChange={(e) => setProjectForm({...projectForm, projectName: e.target.value})}
-                        />
-                    </label>
+                    <label>Project Name:</label>
+                    <input
+                        type="text"
+                        value={projectForm.projectName}
+                        onChange={(e) => setProjectForm({...projectForm, projectName: e.target.value})}
+                    />
                 </div>
 
                 <div className="input-wrapper">
-                    <label>Year:
-                        <input
-                            type="number"
-                            value={projectForm.projectYear}
-                            onChange={(e) => setProjectForm({
-                                ...projectForm,
-                                projectYear: parseInt(e.target.value, 10)
-                            })}
-                        />
-                    </label>
+                    <label>Year:</label>
+                    <input
+                        type="number"
+                        value={projectForm.projectYear}
+                        onChange={(e) => setProjectForm({
+                            ...projectForm,
+                            projectYear: parseInt(e.target.value, 10)
+                        })}
+                    />
                 </div>
 
                 <div className="input-wrapper">
-                    <label>Project Notes:
-                        <input
-                            type="text"
-                            value={projectForm.projectNotes}
-                            onChange={(e) => setProjectForm({...projectForm, projectNotes: e.target.value})}
-                        />
-                    </label>
+                    <label>Project Notes:</label>
+                    <input
+                        type="text"
+                        value={projectForm.projectNotes}
+                        onChange={(e) => setProjectForm({...projectForm, projectNotes: e.target.value})}
+                    />
                 </div>
 
                 <div className="input-wrapper">
-                    <label>Survey Link:
-                        <input
-                            type="text"
-                            value={projectForm.projectSurveyLink}
-                            onChange={(e) => setProjectForm({...projectForm, projectSurveyLink: e.target.value})}
-                        />
-                    </label>
+                    <label>Survey Link:</label>
+                    <input
+                        type="text"
+                        value={projectForm.projectSurveyLink}
+                        onChange={(e) => setProjectForm({...projectForm, projectSurveyLink: e.target.value})}
+                    />
                 </div>
 
                 <div className="input-wrapper">
-                    <label>Survey Link:
-                        <input type="file" onChange={handleFileUpload}/>
-                    </label>
+                    <label>Upload File:</label>
+                    <input type="file" onChange={handleFileUpload}/>
                 </div>
 
                 <button className="form-btn" onClick={handleSaveClick}>
@@ -190,7 +185,6 @@ const CreateProject = () => {
                     Create Project
                 </button>
             </div>
-
 
             {jsonData && jsonData.length > 0 && (
                 <div className="overflow-wrapper">

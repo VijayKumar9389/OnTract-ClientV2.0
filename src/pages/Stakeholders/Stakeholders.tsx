@@ -39,7 +39,7 @@ const Stakeholders: React.FC = () => {
                     <>
                         <StakeholderStats/>
                         <StakeholderInput/>
-                        <p>Results: <strong>{filteredStakeholders.length}</strong></p>
+                        <p className="list-stat">Results: <strong>{filteredStakeholders.length}</strong></p>
                         <ul className="card-list">
                             {filteredStakeholders.map(stakeholder => (
                                 <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>

@@ -31,15 +31,27 @@ const EditProject: React.FC<{ project: Project }> = ({ project }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Name:</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} />
-            <label>Year:</label>
-            <input type="number" name="year" value={formData.year} onChange={handleChange} />
-            <label>Notes:</label>
-            <input type="text" name="notes" value={formData.notes} onChange={handleChange} />
-            <label>Survey Link:</label>
-            <input type="text" name="surveyLink" value={formData.surveyLink} onChange={handleChange} />
-            <button type="submit">Save</button>
+            <div className="input-wrapper">
+                <label>Name:</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} />
+            </div>
+
+            <div className="input-wrapper">
+                <label>Year:</label>
+                <input type="number" name="year" value={formData.year} onChange={handleChange} />
+            </div>
+
+            <div className="input-wrapper">
+                <label>Notes:</label>
+                <input type="text" name="notes" value={formData.notes} onChange={handleChange} />
+            </div>
+
+            <div className="input-wrapper">
+                <label>Survey Link:</label>
+                <input type="text" name="surveyLink" value={formData.surveyLink} onChange={handleChange} />
+            </div>
+
+            <button className="form-btn" type="submit">Save</button>
         </form>
     );
 };

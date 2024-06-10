@@ -24,3 +24,11 @@ export const getProjectFromCookie = (): Project | null => {
 
     return null;
 };
+
+// Delete the project cookie and reload the page
+export const deleteProjectCookieAndReload = (): void => {
+    // Set the cookie's expiry date to the past to delete it
+    document.cookie = 'projectData=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    // Reload the page
+    window.location.reload();
+};

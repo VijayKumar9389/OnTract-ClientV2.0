@@ -20,7 +20,7 @@ const Deliveries: React.FC = () => {
                         <>
                             <DeliveryStats/>
                             <DeliveryInput/>
-                            <p>Results: <strong>{deliveries.length}</strong></p>
+                            <p className="list-stat">Results: <strong>{deliveries.length}</strong></p>
                             <ul className="card-list">
                                 {deliveries.map((delivery: Delivery) => (
                                     <DeliveryCard key={delivery.id} delivery={delivery}/>
