@@ -5,8 +5,10 @@
     .selected {
       background-color: $card-background-hover-color;
     }
-    tr{
+
+    tr {
       cursor: pointer;
+
       &:hover {
         background-color: $card-background-hover-color;
       }
@@ -51,6 +53,7 @@ table {
 
   tr {
     transition: background-color 0.3s ease;
+
     &:not(:last-child) {
       border-bottom: $border;
     }

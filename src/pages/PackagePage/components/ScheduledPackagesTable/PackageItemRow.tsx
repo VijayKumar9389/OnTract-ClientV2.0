@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton";
 import { deletePackageItem, updatePackageItemQuantity } from "../../../../services/item.services";
-import { Navigation } from "../../../../utils/navigation";
+import { NavigationUtils } from "../../../../utils/navigation.utils.ts";
 import { PackageItem } from "../../../../models/item.models";
 import Counter from "../../../../components/Counter/Counter";
 import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt";
 
 const PackageItemRow: React.FC<{ item: PackageItem }> = ({ item }) => {
-    const { navigateToInventoryItem } = Navigation();
+    const { navigateToInventoryItem } = NavigationUtils();
     const [quantity, setQuantity] = useState(item.quantity || 0);
 
     const removeItem = async (): Promise<void> => {

@@ -9,6 +9,7 @@ const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
                 <h3>Delivery Packages</h3>
             </div>
             <div className="panel-content">
+                <div className="table-wrapper">
                     <table>
                         <thead>
                         <tr>
@@ -23,6 +24,7 @@ const PackageTable: React.FC<{ packages: Package[] }> = ({packages}) => {
                         ))}
                         </tbody>
                     </table>
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Delivery, DeliveryReportDTO} from "../models/delivery.models.ts";
-import {getProjectFromCookie} from "../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../utils/cookie.utils.ts";
 import {Project} from "../models/stakeholder.models.ts";
 import {getDeliveriesByProjectID, getDeliveryReport} from "../services/delivery.services.ts";
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getProjectFromCookie } from "../../../../utils/cookieHelper.ts";
+import { getProjectFromCookie } from "../../../../utils/cookie.utils.ts";
 import { getItemsByProjectId, createPackageItem } from "../../../../services/item.services.ts";
 import { Item } from "../../../../models/item.models.ts";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 import {MdAdd} from "react-icons/md";
 
 const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) => {
@@ -42,7 +42,7 @@ const AddPackageItem: React.FC<{ packageTypeID: number }> = ({ packageTypeID }) 
             try {
                 // Create package item
                 await createPackageItem(packageItemData);
-                console.log('Package item added successfully');
+                console.log('PackageTypeGrid item added successfully');
                 window.location.reload(); // Reload the page after adding the item
             } catch (error) {
                 console.error('Error adding package item:', error);

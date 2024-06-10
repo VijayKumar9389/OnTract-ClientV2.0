@@ -2,7 +2,7 @@ import {Stakeholder} from "./stakeholder.models.ts";
 import {PackageItem} from "./item.models.ts";
 import {Delivery} from "./delivery.models.ts";
 
-// Package model
+// PackageTypeGrid model
 export interface Package {
     id: number;
     packageType: PackageType;
@@ -24,7 +24,7 @@ export interface NewPackageTypeInput {
     notes: string;
 }
 
-// Package type model
+// PackageTypeGrid type model
 export interface PackageType {
     id: number;
     notes: string;

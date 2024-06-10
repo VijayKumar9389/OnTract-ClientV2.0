@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { getItemsByProjectId } from '../../services/item.services.ts';
 import { Item } from '../../models/item.models.ts';
 import PageHeading from '../../components/PageHeading/PageHeading.tsx';
-import ItemTable from './components/ItemTable/ItemTable.tsx';
 import { MdAdd } from 'react-icons/md';
 import Dialog from '../../components/Dialog/Dialog.tsx';
 import CreateItemForm from './components/CreateItemForm/CreateItemForm.tsx';
-import { getProjectFromCookie } from '../../utils/cookieHelper.ts';
+import { getProjectFromCookie } from '../../utils/cookie.utils.ts';
 import {Project} from "../../models/stakeholder.models.ts";
+import ItemGrid from "./components/ItemGrid/ItemGrid.tsx";
 
 const Inventory = () => {
     const [items, setItems] = useState<Item[]>([]);
@@ -37,13 +37,13 @@ const Inventory = () => {
             <PageHeading heading="Inventory" />
             <Dialog isOpen={isModalOpen} toggle={toggleModal} element={<CreateItemForm />} heading="Create Item" />
             <div className="page-content">
-                <div className="header">
-                    <h3>ITEMS <strong>{items.length}</strong></h3>
+                <div className="sub-header">
                     <button onClick={toggleModal}>
-                        <MdAdd /> Add Item
+                        <MdAdd/> Add Item
                     </button>
+                    <p>Results: <strong>{items.length}</strong></p>
                 </div>
-                <ItemTable items={items} />
+                <ItemGrid items={items}/>
             </div>
         </div>
     );

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Delivery } from '../../../../models/delivery.models';
-import { Navigation } from '../../../../utils/navigation';
-import { isMailout } from '../../../../utils/helpers';
+import { NavigationUtils } from '../../../../utils/navigation.utils.ts';
+import { isMailout } from '../../../../utils/functions.utils.ts';
 import './StakeholderDelivery.scss';
 import {Package} from "../../../../models/package.models.ts";
 
 const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
-    const { navigateToDelivery } = Navigation();
+    const { navigateToDelivery } = NavigationUtils();
 
     return (
         <div className="stakeholder-delivery-details">

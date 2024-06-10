@@ -1,8 +1,10 @@
-import {Stakeholder, UpdateStakeholderInput} from '../../../../models/stakeholder.models.ts';
+import {Project, Stakeholder, UpdateStakeholderInput} from '../../../../models/stakeholder.models.ts';
 import {updateStakeholder} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from 'react';
 import {FaRegSave} from 'react-icons/fa';
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
+import {getProjectFromCookie} from "../../../../utils/cookie.utils.ts";
+import {FcSurvey} from "react-icons/fc";
 
 const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) => {
     const [formData, setFormData] = useState<UpdateStakeholderInput>({
@@ -19,6 +21,8 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         email: stakeholder.email,
         followUp: stakeholder.followUp,
     });
+
+    const project: Project | null = getProjectFromCookie();
 
     // Update the form data when the stakeholder changes
     useEffect((): void => {
@@ -55,6 +59,23 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
             formData.followUp !== stakeholder.followUp
         );
     }
+
+    const goToProjectLink = (): void => {
+        if (!project) {
+            console.error('Project not found');
+            return;
+        }
+
+        // Ensure the URL starts with 'http://' or 'https://'
+        const surveyLink = project.surveyLink.startsWith('http://') || project.surveyLink.startsWith('https://')
+            ? project.surveyLink
+            : `https://${project.surveyLink}`;
+
+        // Open the link in a new tab
+        window.open(surveyLink, '_blank');
+    };
+
+
 
     // Handle form input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
@@ -238,9 +259,14 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
                     />
                 </div>
             </div>
-            <button className="form-btn" disabled={!hasDataChanged()} onClick={(event) => handleSubmit(event)}>
-                <FaRegSave/> Save
-            </button>
+            <div className="btn-wrapper">
+                <button disabled={!hasDataChanged()} onClick={(event) => handleSubmit(event)}>
+                    <FaRegSave/> Save
+                </button>
+                <button type={"button"} onClick={() => goToProjectLink()}>
+                    <FcSurvey/> Survey
+                </button>
+            </div>
         </div>
     );
 };

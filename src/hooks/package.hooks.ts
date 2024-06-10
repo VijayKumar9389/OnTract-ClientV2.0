@@ -1,7 +1,7 @@
 // hooks/useFetchPackageTypes.ts
 import { useState, useEffect } from "react";
 import {PackageType} from "../models/package.models.ts";
-import {getProjectFromCookie} from "../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../utils/cookie.utils.ts";
 import {getPackageTypesByProjectId} from "../services/package.services.ts";
 
 
@@ -27,7 +27,7 @@ export const useFetchPackageTypes = () => {
         };
 
         fetchPackageTypes()
-            .then(() => console.log("Package types fetched successfully"));
+            .then(() => console.log("PackageTypeGrid types fetched successfully"));
     }, []);
 
     return { packageTypes, loading, error };

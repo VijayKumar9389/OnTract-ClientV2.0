@@ -1,7 +1,7 @@
 // navigationUtils.ts
 import { useNavigate } from "react-router-dom";
 
-export const Navigation = () => {
+export const NavigationUtils = () => {
     const navigate = useNavigate();
 
     const navigateToStakeholder = (stakeholderId: number): void => {

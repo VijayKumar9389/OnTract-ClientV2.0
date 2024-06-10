@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {User} from "../../../../models/auth.models.ts";
 import {editUser} from "../../../../services/user.services.ts";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 import {FaSave} from "react-icons/fa";
 
 const EditUser: React.FC<{user: User}> = ({user}) => {

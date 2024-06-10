@@ -1,6 +1,6 @@
 import React from "react";
 import { Project } from "../../models/stakeholder.models";
-import { setProjectCookie } from "../../utils/cookieHelper";
+import { setProjectCookie } from "../../utils/cookie.utils.ts";
 import CreateProject from "../../pages/Projects/components/CreateProject/CreateProject";
 import { useFetchProjects} from "../../hooks/project.hooks.ts";
 import './ProjectTable.scss';

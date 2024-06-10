@@ -23,18 +23,31 @@ const Projects = () => {
     return (
         <div className="section">
             <div className="page-content">
-                <Dialog isOpen={isMenuOpen} toggle={toggleMenu} element={<CreateProject/>} heading={"Create Project"}/>
-                <div className="header">
-                    <h3>PROJECTS <strong>{projects.length}</strong></h3>
+                <div className="sub-header">
                     <button onClick={toggleMenu}>
                         <FaPlus/>
                         Create Project
                     </button>
+                    <p>Results: <strong>{projects.length}</strong></p>
                 </div>
                 <div className="panel">
-                    <ProjectInfoTable projects={projects}/>
+                    <div className="panel-header">
+                        <h3>PROJECTS</h3>
+                    </div>
+                    <div className="panel-content">
+
+                        <div className="table-wrapper">
+                            <ProjectInfoTable projects={projects}/>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <Dialog
+                isOpen={isMenuOpen}
+                toggle={toggleMenu}
+                element={<CreateProject/>}
+                heading={"Create Project"}
+            />
         </div>
     );
 }

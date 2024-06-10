@@ -3,8 +3,8 @@ import {UpdateTrackRecordInput} from "../../../../models/stakeholder.models.ts";
 import {Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {updateTractRecord} from "../../../../services/stakeholder.services.ts";
 import {useParams} from "react-router-dom";
-import {Navigation} from "../../../../utils/navigation.ts";
-import {isStakeholderProfile} from "../../../../utils/helpers.ts";
+import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
+import {isStakeholderProfile} from "../../../../utils/functions.utils.ts";
 
 const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }> = ({stakeholder, tractRecord}) => {
     const [formData, setFormData] = useState<UpdateTrackRecordInput>({
@@ -16,7 +16,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
     });
 
     const {id} = useParams<{ id: string }>();
-    const {navigateToStakeholder} = Navigation();
+    const {navigateToStakeholder} = NavigationUtils();
 
     useEffect((): void => {
         setFormData((prevData) => ({

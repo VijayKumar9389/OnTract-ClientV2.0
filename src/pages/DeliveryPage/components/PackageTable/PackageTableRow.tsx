@@ -2,14 +2,14 @@ import React from "react";
 import {Package} from "../../../../models/package.models.ts";
 import {cancelPackage} from "../../../../services/package.services.ts";
 import ConfirmationButton from "../../../../components/ConfirmationButton/ConfirmationButton.tsx";
-import {Navigation} from "../../../../utils/navigation.ts";
+import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import Dialog from "../../../../components/Dialog/Dialog.tsx";
 import {useState} from "react";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 import ChangePackage from "../ChangePackage/ChangePackage.tsx";
 
 const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackage}) => {
-    const {navigateToStakeholder} = Navigation();
+    const {navigateToStakeholder} = NavigationUtils();
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
     const toggleDialog = (): void => {
@@ -51,7 +51,7 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
             </td>
             <Dialog
                 element={<ChangePackage packageType={deliveryPackage.packageType} packageId={deliveryPackage.id}/>}
-                heading={"Change Package"}
+                heading={"Change PackageTypeGrid"}
                 isOpen={isDialogOpen}
                 toggle={() => toggleDialog()}/>
         </tr>

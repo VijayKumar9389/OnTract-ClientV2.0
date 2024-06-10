@@ -19,7 +19,7 @@ export const cancelPackage = async (packageId: number, stakeholderId: number): P
     }
 }
 
-// Delete Package Type if there are no items associated with it
+// Delete PackageTypeGrid Type if there are no items associated with it
 export const deletePackageType = async (packageTypeId: number): Promise<void> => {
     try {
         const endpoint: string = `${API_BASE_URL}/package/delete/packagetype/${packageTypeId}`;
@@ -65,7 +65,7 @@ export const createPackageForExistingDelivery = async (packageData: NewPackageIn
     }
 }
 
-// Create Package Type
+// Create PackageTypeGrid Type
 export const createPackageType = async (packageTypeData: NewPackageTypeInput, projectId: number): Promise<void> => {
     try {
         const endpoint: string = `${API_BASE_URL}/package/create/packagetype/${projectId}`;
@@ -77,7 +77,7 @@ export const createPackageType = async (packageTypeData: NewPackageTypeInput, pr
     }
 }
 
-// Update Package Type
+// Update PackageTypeGrid Type
 export const updatePackageType = async (packageTypeId: number, packageTypeData: NewPackageTypeInput): Promise<void> => {
     try {
         const endpoint: string = `${API_BASE_URL}/package/update/packagetype/${packageTypeId}`;
@@ -112,7 +112,7 @@ export const getPackageByPackageTypeId = async (packageTypeId: number): Promise<
     }
 }
 
-// Change Package's Package Type
+// Change PackageTypeGrid's PackageTypeGrid Type
 export const changePackagePackageType = async (packageId: number, packageTypeId: number): Promise<void> => {
     try {
         const endpoint: string = `${API_BASE_URL}/package/change/packagepackagetype/${packageId}/${packageTypeId}`;

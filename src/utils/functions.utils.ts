@@ -1,4 +1,4 @@
-// helpers.ts
+// functions.utils.ts
 
 // Checks if a field is blank or not
 export const isAvailable = (value: string): boolean => (value !== "");

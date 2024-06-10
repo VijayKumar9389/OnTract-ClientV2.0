@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {Package} from "../../../../models/package.models.ts";
-import {Navigation} from "../../../../utils/navigation.ts";
+import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 
 const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => {
-    const {navigateToStakeholder, navigateToDelivery} = Navigation();
+    const {navigateToStakeholder, navigateToDelivery} = NavigationUtils();
     const [deliveryStatus, setDeliveryStatus] = useState('All'); // State to track selected delivery status
 
     // Function to toggle delivery status
@@ -37,7 +37,7 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
                     onSelect={toggleDeliveryStatus}
                 />
 
-                {/* Package Table */}
+                {/* PackageTypeGrid Table */}
                 {filteredPackages.length > 0 ? (
                     <div className="table-wrapper">
                         <table>

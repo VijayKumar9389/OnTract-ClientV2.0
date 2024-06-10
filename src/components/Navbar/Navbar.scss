@@ -14,7 +14,7 @@
   .btn-menu {
     display: none;
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (max-width: $tablet-breakpoint) {
       display: block;
       color: #fff;
       background: none;
@@ -57,7 +57,7 @@
       font-size: 2rem;
     }
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (max-width: $tablet-breakpoint) {
       margin: 0;
     }
   }
@@ -68,7 +68,7 @@
     margin: 0;
     display: flex;
 
-    @media (max-width: $mobile-breakpoint) {
+    @media (max-width: $tablet-breakpoint) {
       display: none;
     }
 
@@ -127,7 +127,7 @@
       margin-bottom: $spacing-small;
       text-align: center;
 
-      @media (max-width: $mobile-breakpoint) {
+      @media (max-width: $tablet-breakpoint) {
         margin-bottom: $spacing-small;
       }
     }
@@ -144,7 +144,7 @@
         background-color: lighten($primary-color, 10%);
       }
 
-      @media (max-width: $mobile-breakpoint) {
+      @media (max-width: $tablet-breakpoint) {
         padding: $spacing-small;
       }
     }

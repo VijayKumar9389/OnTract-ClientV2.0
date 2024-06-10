@@ -4,7 +4,7 @@ import { Project, Stakeholder } from '../../../../models/stakeholder.models.ts';
 import { createDelivery } from '../../../../services/delivery.services.ts';
 import { getPackageTypesByProjectId } from '../../../../services/package.services.ts';
 import { NewDeliveryInput } from '../../../../models/delivery.models.ts';
-import { getProjectFromCookie } from '../../../../utils/cookieHelper.ts';
+import { getProjectFromCookie } from '../../../../utils/cookie.utils.ts';
 import { FaTruck } from 'react-icons/fa';
 
 interface CreateDeliveryForm {

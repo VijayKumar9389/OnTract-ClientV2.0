@@ -21,7 +21,8 @@ const Users = () => {
             }
         };
 
-        fetchUsers();
+        fetchUsers()
+            .then(() => console.log('Users fetched'));
     }, []);
 
     const toggleModal = (): void => {
@@ -31,13 +32,18 @@ const Users = () => {
     return (
         <div className="section">
             <div className="page-content">
-                <div className="header">
-                    <h3>USERS <strong>{users.length}</strong></h3>
+                <div className="sub-header">
                     <button onClick={toggleModal}><MdAdd/> Add User</button>
+                    <p>Results: <strong>{users.length}</strong></p>
                 </div>
                 <div className="panel">
-                    <Dialog isOpen={isOpened} toggle={toggleModal} heading="Add User" element={<RegisterUser/>}/>
-                    <UserTable users={users}/>
+                    <div className="panel-header">
+                        <h3>Users</h3>
+                    </div>
+                    <div className="panel-content">
+                        <Dialog isOpen={isOpened} toggle={toggleModal} heading="Add User" element={<RegisterUser/>}/>
+                        <UserTable users={users}/>
+                    </div>
                 </div>
             </div>
         </div>

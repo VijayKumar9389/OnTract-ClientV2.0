@@ -1,6 +1,6 @@
 // utils/filterHelpers.ts
 import { Stakeholder } from "../models/stakeholder.models";
-import { isAvailable, isContacted } from "./helpers";
+import { isAvailable, isContacted } from "./functions.utils.ts";
 
 export const isStakeholderContacted = (stakeholder: Stakeholder, contactFilter: number): boolean => {
     if (contactFilter === 0) return true;

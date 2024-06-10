@@ -10,7 +10,7 @@ import ConfirmationButton from "../../components/ConfirmationButton/Confirmation
 import {deletePackageType} from "../../services/package.services.ts";
 import PackageStats from "./components/PackageStats/PackageStats.tsx";
 import PackageItemTable from "./components/ScheduledPackagesTable/PackageItemTable.tsx";
-import {showToastError} from "../../utils/toastHelper.ts";
+import {showToastError} from "../../utils/toast.utils.ts";
 
 const PackagePage = () => {
     const {id} = useParams();
@@ -33,7 +33,7 @@ const PackagePage = () => {
     const removePackageType = async (packageTypeId: number): Promise<void> => {
         try {
             await deletePackageType(packageTypeId);
-            console.log('Package type deleted successfully');
+            console.log('PackageTypeGrid type deleted successfully');
             history.back();
         } catch (error) {
             console.error('Error deleting package type:', error);

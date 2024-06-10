@@ -1,0 +1,98 @@
+@import 'src/styles/variables.scss';
+
+.grid {
+  width: 100%;
+
+  .grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $spacing-medium;
+    padding: 0;
+    list-style: none;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid-item {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    overflow: hidden;
+    border: $border;
+    outline: none;
+
+    &:hover, &:focus {
+      transform: translateY(-5px);
+      box-shadow: $box-shadow-hover;
+    }
+  }
+
+  .grid-card {
+    background-color: $card-background-color;
+    padding: $spacing-medium;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    label {
+      width: 100%;
+      text-align: right;
+    }
+
+    .card-image,
+    .card-icon {
+      width: 150px;
+      height: 150px;
+      margin-bottom: $spacing-small;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Ensure the image fills the container
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        color: $secondary-color;
+      }
+    }
+
+    .card-content {
+      min-height: 150px;
+      text-align: left;
+      width: 100%;
+
+      h3 {
+        color: $text-color;
+        font-size: 1.2rem;
+      }
+
+      p {
+        color: $text-color-light;
+        font-size: 1rem;
+        margin-bottom: $spacing-small;
+
+        &.card-number {
+          margin-top: $spacing-small;
+        }
+      }
+
+      strong {
+        color: $text-color;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  //.no-data-message {
+  //  text-align: center;
+  //  padding: $spacing-large;
+  //  color: $text-color-light;
+  //  font-size: 1.2rem;
+  //}
+}

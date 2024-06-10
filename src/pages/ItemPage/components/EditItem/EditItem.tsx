@@ -3,7 +3,7 @@ import { FaRegSave } from "react-icons/fa";
 import { Item, UpdateItemInput } from "../../../../models/item.models.ts";
 import { updateItem } from "../../../../services/item.services.ts";
 import "./EditItem.scss";
-import { showToastError } from "../../../../utils/toastHelper.ts";
+import { showToastError } from "../../../../utils/toast.utils.ts";
 import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
 
 interface EditItemFormProps {

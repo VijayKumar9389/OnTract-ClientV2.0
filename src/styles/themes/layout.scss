@@ -70,8 +70,90 @@
   @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
     justify-content: flex-start;
+
   }
 }
+
+.btn-wrapper {
+  margin-top: $spacing-medium;
+  display: flex;
+
+  button {
+    margin-right: $spacing-small;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+
+    button {
+      margin-right: 0;
+      margin-bottom: $spacing-small;
+    }
+  }
+}
+
+.sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+    margin-bottom: $spacing-medium;
+
+  p {
+    color: $text-color;
+
+    strong {
+      font-weight: bold;
+      color: $text-color;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: $button-radius;
+    padding: $spacing-small $spacing-medium;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    svg {
+      margin-right: $spacing-small;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+
+    p {
+      text-align: right;
+      width: 100%;
+      margin-top: $spacing-medium;
+    }
+
+    button {
+      width: 100%;
+      justify-content: center;
+
+      svg {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 
 // Header Styles
 .header {

@@ -1,10 +1,12 @@
 @import 'src/styles/variables.scss';
 
-// List of cards
+// Card Styles
 .card-list {
   width: 100%;
-  box-shadow: $box-shadow-hover;
-  border: $border;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: $box-shadow;
 }
 
 .card {
@@ -18,8 +20,33 @@
     background-color: $card-background-hover-color;
   }
 
-  &:first-child {
+  .card-icon {
+    font-size: 2rem;
+    margin-right: $spacing-small;
+    align-items: center;
+    display: flex;
+  }
+
+  .package-card-wrapper {
+    display: grid;
+    grid-template-columns: auto 5fr 1fr;
+  }
+
+  &:not(:last-child) {
     border-bottom: 1px solid #ccc;
+  }
+}
+
+.card-header {
+  margin-bottom: $spacing-small;
+
+  h3 {
+    color: $text-color;
+    line-break: anywhere;
+  }
+
+  p {
+    color: $text-color-light;
   }
 }
 
@@ -29,6 +56,8 @@
   color: #333;
   margin-bottom: $spacing-medium;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 
   .info-item {
     font-weight: bold;

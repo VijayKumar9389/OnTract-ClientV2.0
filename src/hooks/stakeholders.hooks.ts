@@ -2,7 +2,7 @@
 import {useState, useEffect} from "react";
 import {Project, Stakeholder} from "../models/stakeholder.models";
 import {getStakeholdersByProjectId} from "../services/stakeholder.services";
-import {getProjectFromCookie} from "../utils/cookieHelper";
+import {getProjectFromCookie} from "../utils/cookie.utils.ts";
 import {StakeholderStatsDTO} from "../models/report.model";
 import {getStakeholderReport} from "../services/stakeholder.services";
 

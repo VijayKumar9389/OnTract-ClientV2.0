@@ -4,7 +4,7 @@ import * as XLSX from 'xlsx';
 import {ProjectRecordInput} from "../../../../models/project.models.ts";
 import './CreateProject.scss';
 import {FaList} from "react-icons/fa6";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 
 const CreateProject = () => {
     const [projectForm, setProjectForm] = useState({

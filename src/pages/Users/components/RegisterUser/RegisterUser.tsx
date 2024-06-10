@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {registerUser} from "../../../../services/user.services.ts";
 import {FaUser} from "react-icons/fa";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 
 const RegisterUser = () => {
     const [username, setUsername] = useState('');

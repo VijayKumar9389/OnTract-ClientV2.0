@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkAdminStatus, verifyRefreshToken } from '../services/auth.services';
 import { setAdminStatus, setLogin, setLogout } from '../store/reducers/auth.reducer';
-import { activateInterceptor } from '../utils/interceptors';
+import { activateInterceptor } from '../utils/interceptor.utils.ts';
 import {Dispatch} from "redux";
 
 export const useInitializeApp = () => {

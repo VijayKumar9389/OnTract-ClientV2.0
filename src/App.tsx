@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { useInitializeApp } from './hooks/useInitializeApp'; // Import the custom hook
-import { getProjectFromCookie } from './utils/cookieHelper';
+import { getProjectFromCookie } from './utils/cookie.utils.ts';
 import { RootState } from './store';
 
 import Navbar from './components/Navbar/Navbar';

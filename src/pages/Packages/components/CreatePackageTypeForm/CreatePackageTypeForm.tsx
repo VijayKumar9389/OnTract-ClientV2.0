@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {createPackageType} from "../../../../services/package.services.ts";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookie.utils.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 
 const CreatePackageTypeForm: React.FC = () => {
     // Define state variables to hold form data
@@ -20,7 +20,7 @@ const CreatePackageTypeForm: React.FC = () => {
         try {
             // Call the API to create a package type
             const createdPackageType = await createPackageType(formData, project.id);
-            console.log('Package Type created:', createdPackageType);
+            console.log('PackageTypeGrid Type created:', createdPackageType);
             window.location.reload();
             // Optionally, you can reset the form after a successful submission
             setFormData({name: "", notes: ""});

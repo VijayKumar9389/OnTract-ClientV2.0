@@ -9,7 +9,7 @@ export interface Item {
     quantity: number;
 }
 
-// Package item model
+// PackageTypeGrid item model
 export interface PackageItem {
     quantity: number;
     id: number;

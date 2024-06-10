@@ -66,8 +66,8 @@ const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
                 <td>{surveyLink}</td>
                 <td>
                     <div className="action-buttons">
-                        <button onClick={() => handleDownload(project.id)}>Download</button>
                         <button onClick={() => toggleEdit()}>Edit</button>
+                        <button onClick={() => handleDownload(project.id)}>Download</button>
                         <ConfirmationButton
                             buttonText={"Delete Project"}
                             confirmationMessage={`Are you sure you want to delete ${project.name + ' ' + project.year}?`}

@@ -37,7 +37,7 @@ const EditPackageType: React.FC<{ packageType: PackageType }> = ({packageType}) 
         updatePackageType(packageType.id, packageData)
             .then((response) => {
                 // Handle success response if needed
-                console.log("Package updated successfully:", response);
+                console.log("PackageTypeGrid updated successfully:", response);
                 window.location.reload();
             })
             .catch((error): void => {

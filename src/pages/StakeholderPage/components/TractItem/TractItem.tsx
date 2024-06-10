@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Project, Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
 import {getStakeholdersByTractNo} from "../../../../services/stakeholder.services.ts";
 import TractForm from "./TractForm.tsx";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookie.utils.ts";
 import './TractItem.scss';
 
 const TractItem: React.FC<{tract: TractRecord}> = ({tract}) => {

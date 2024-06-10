@@ -1,12 +1,12 @@
 import {getRelatedStakeholder} from "../../../../services/stakeholder.services.ts";
 import {useEffect, useState} from "react";
 import {RelatedStakeholder} from "../../../../models/stakeholder.models.ts";
-import {Navigation} from "../../../../utils/navigation.ts";
+import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 
 const RelatedStakeholders: React.FC<{ stakeholderId: number }> = ({stakeholderId}) => {
 
     const [relatedStakeholders, setRelatedStakeholders] = useState<RelatedStakeholder[]>([]);
-    const {navigateToStakeholder} = Navigation();
+    const {navigateToStakeholder} = NavigationUtils();
 
     useEffect(() => {
         getRelatedStakeholder(stakeholderId)

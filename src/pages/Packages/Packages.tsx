@@ -1,14 +1,13 @@
-// Packages.tsx
-import { useState } from "react";
+import {useState} from "react";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import Dialog from "../../components/Dialog/Dialog";
 import CreatePackageTypeForm from "./components/CreatePackageTypeForm/CreatePackageTypeForm";
-import { MdAdd } from "react-icons/md";
-import PackageTypeTable from "./components/PackageTypeTable/PackageTypeTable";
-import { useFetchPackageTypes} from "../../hooks/package.hooks.ts";
+import {MdAdd} from "react-icons/md";
+import {useFetchPackageTypes} from "../../hooks/package.hooks.ts";
+import PackageTypeGrid from "./components/PackageTypeGrid/PackageTypeGrid.tsx";
 
 const Packages: React.FC = () => {
-    const { packageTypes, loading, error } = useFetchPackageTypes();
+    const {packageTypes, loading, error} = useFetchPackageTypes();
     const [isOpened, setIsOpened] = useState(false);
 
     const toggleModal = (): void => {
@@ -25,16 +24,22 @@ const Packages: React.FC = () => {
 
     return (
         <div className="section">
-            <PageHeading heading="Packages" />
+            <PageHeading heading="Packages"/>
             <div className="page-content">
-                <Dialog isOpen={isOpened} toggle={toggleModal} heading="Create Package Type" element={<CreatePackageTypeForm />} />
-                <div className="header">
-                    <h3>PACKAGE TYPES <strong>{packageTypes?.length}</strong></h3>
-                    <button className="add-button" onClick={toggleModal}>
-                        <MdAdd /> Add Package
+                <div className="sub-header">
+                    <button onClick={toggleModal}>
+                        <MdAdd/>
+                        Add Package
                     </button>
+                    <p>Results: <strong>{packageTypes?.length}</strong></p>
                 </div>
-                {packageTypes && <PackageTypeTable packageTypes={packageTypes} />}
+                {packageTypes && <PackageTypeGrid packageTypes={packageTypes}/>}
+                <Dialog
+                    isOpen={isOpened}
+                    toggle={toggleModal}
+                    heading="Create Package Type"
+                    element={<CreatePackageTypeForm/>}
+                />
             </div>
         </div>
     );

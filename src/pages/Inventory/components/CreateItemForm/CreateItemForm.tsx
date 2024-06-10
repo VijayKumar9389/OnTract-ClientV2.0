@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {createItem} from "../../../../services/item.services.ts";
 import {NewItemInput} from "../../../../models/item.models.ts";
-import {getProjectFromCookie} from "../../../../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../../../../utils/cookie.utils.ts";
 import {FaBox} from "react-icons/fa";
-import {showToastError} from "../../../../utils/toastHelper.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 
 const CreateItemForm: React.FC = () => {
     const project = getProjectFromCookie();

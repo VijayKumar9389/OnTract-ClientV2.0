@@ -143,6 +143,7 @@
     transition: background-color 0.3s;
     font-size: $text-small; /* Use text size variable */
     min-width: 100px;
+    justify-content: center;
 
     @media (max-width: $mobile-breakpoint) {
       width: 100%;

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {Package} from "../../../../models/package.models.ts";
 import {Item} from "../../../../models/item.models.ts";
-import {Navigation} from "../../../../utils/navigation.ts";
+import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 
 const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packages, item}) => {
-    const {navigateToPackage, navigateToStakeholder, navigateToDelivery} = Navigation();
+    const {navigateToPackage, navigateToStakeholder, navigateToDelivery} = NavigationUtils();
     const [deliveryType, setDeliveryType] = useState('All'); // State to track the selected delivery type
 
     // Function to toggle delivery type

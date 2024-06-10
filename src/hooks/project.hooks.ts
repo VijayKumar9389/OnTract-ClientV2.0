@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Project } from "../models/stakeholder.models";
 import { getProjects } from "../services/project.services";
-import {getProjectFromCookie} from "../utils/cookieHelper.ts";
+import {getProjectFromCookie} from "../utils/cookie.utils.ts";
 import {Location, LocationData} from "../models/report.model.ts";
 import {getLocationReport} from "../services/stakeholder.services.ts";
 

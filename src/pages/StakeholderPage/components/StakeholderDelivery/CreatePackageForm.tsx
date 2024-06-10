@@ -5,7 +5,7 @@ import {getDeliveriesByProjectID} from '../../../../services/delivery.services.t
 import {NewPackageInput, PackageType} from '../../../../models/package.models.ts';
 import {Delivery} from '../../../../models/delivery.models.ts';
 import {Project, Stakeholder} from '../../../../models/stakeholder.models.ts';
-import {getProjectFromCookie} from '../../../../utils/cookieHelper.ts';
+import {getProjectFromCookie} from '../../../../utils/cookie.utils.ts';
 import {FaBoxesPacking} from "react-icons/fa6";
 
 interface PackageFormProps {
@@ -56,7 +56,7 @@ const PackageForm: React.FC<PackageFormProps> = ({stakeholder}) => {
 
         try {
             await createPackageForExistingDelivery(newPackageData);
-            console.log('Package created successfully');
+            console.log('PackageTypeGrid created successfully');
             window.location.reload();
         } catch (error) {
             console.error('Error creating package:', error);

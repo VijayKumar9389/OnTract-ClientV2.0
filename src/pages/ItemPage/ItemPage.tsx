@@ -10,7 +10,7 @@ import PackageItemTable from "./components/ScheduledItemsTable/PackageItemTable.
 import ItemStats from "./components/ItemStats/ItemStats.tsx";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deleteItem} from "../../services/item.services.ts";
-import {showToastError} from "../../utils/toastHelper.ts";
+import {showToastError} from "../../utils/toast.utils.ts";
 
 const ItemPage = () => {
     const {id} = useParams();
