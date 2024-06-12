@@ -6,7 +6,7 @@ import { MdEmergencyShare } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram } from 'react-icons/fa';
 import { FiPackage } from "react-icons/fi";
-import Dialog from "../Dialog/Dialog";
+import Sidebar from "../Sidebar/Sidebar";
 import { RootState } from "../../store";
 import "./Navbar.scss";
 
@@ -19,11 +19,11 @@ interface NavbarLink {
 const Navbar = () => {
     const dispatch = useDispatch();
     const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const location = useLocation();
 
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
-    const closeModal = () => setIsModalOpen(false);
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+    const closeModal = () => setIsSidebarOpen(false);
     const handleLogout = () => dispatch(setLogout());
 
     const navbarLinks: NavbarLink[] = [
@@ -48,69 +48,55 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="nav-container">
-            <h1><MdEmergencyShare /> OnTract</h1>
-            <ul className="navbar-links">
-                {navbarLinks.map((link, index) => (
-                    <li key={index}>
-                        <Link
-                            to={link.to}
-                            className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`}
-                            onClick={closeModal}
-                        >
-                            {link.icon}
-                            {link.text}
-                        </Link>
-                    </li>
-                ))}
-                {isAdmin && adminLinks.map((link, index) => (
-                    <li key={index}>
-                        <Link
-                            to={link.to}
-                            className={`sidebar-link ${isActiveLink(link.to) ? 'active' : ''}`}
-                            onClick={closeModal}
-                        >
-                            {link.icon}
-                            {link.text}
-                        </Link>
-                    </li>
-                ))}
-                <li>
-                    <button className="btn-logout" onClick={handleLogout}>
-                        <FaSignOutAlt /> Logout
-                    </button>
-                </li>
-            </ul>
-
-            <button className="btn-menu" onClick={toggleModal}>
-                <GiHamburgerMenu />
-            </button>
-
-            <Dialog
-                isOpen={isModalOpen}
-                toggle={toggleModal}
-                heading="Select Page"
-                element={
-                    <ul className="popup-links">
-                        {navbarLinks.map((link, index) => (
-                            <li key={index}>
-                                <Link to={link.to} onClick={closeModal}>{link.text}</Link>
-                            </li>
-                        ))}
-                        {isAdmin && adminLinks.map((link, index) => (
-                            <li key={index}>
-                                <Link to={link.to} onClick={closeModal}>{link.text}</Link>
-                            </li>
-                        ))}
-                        <li>
-                            <button className="btn-logout" onClick={handleLogout}>
-                                <FaSignOutAlt /> Logout
-                            </button>
+        <>
+            <nav className="nav-container">
+                <h1><MdEmergencyShare /> OnTract</h1>
+                <ul className="navbar-links">
+                    {navbarLinks.map((link, index) => (
+                        <li key={index}>
+                            <Link
+                                to={link.to}
+                                className={`navbar-link ${isActiveLink(link.to) ? 'active' : ''}`}
+                                onClick={closeModal}
+                            >
+                                {link.icon}
+                                {link.text}
+                            </Link>
                         </li>
-                    </ul>
-                }
+                    ))}
+                    {isAdmin && adminLinks.map((link, index) => (
+                        <li key={index}>
+                            <Link
+                                to={link.to}
+                                className={`navbar-link ${isActiveLink(link.to) ? 'active' : ''}`}
+                                onClick={closeModal}
+                            >
+                                {link.icon}
+                                {link.text}
+                            </Link>
+                        </li>
+                    ))}
+                    <li>
+                        <button className="btn-logout" onClick={handleLogout}>
+                            <FaSignOutAlt /> Logout
+                        </button>
+                    </li>
+                </ul>
+
+                <button className="btn-menu" onClick={toggleSidebar}>
+                    <GiHamburgerMenu />
+                </button>
+            </nav>
+            <Sidebar
+                isOpen={isSidebarOpen}
+                toggle={toggleSidebar}
+                navbarLinks={navbarLinks}
+                adminLinks={adminLinks}
+                isAdmin={isAdmin}
+                closeModal={closeModal}
+                handleLogout={handleLogout}
             />
-        </nav>
+        </>
     );
 }
 

@@ -23,6 +23,25 @@ button {
   }
 }
 
+.close-btn {
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px; /* Adjust the size as needed */
+  height: 30px; /* Equal to the width */
+  padding: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+
+  svg {
+    margin: 0;
+  }
+}
+
 button:disabled {
   background-color: $btn-background-disabled-color;
   cursor: not-allowed;

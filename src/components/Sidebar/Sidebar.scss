@@ -1,0 +1,124 @@
+@import 'src/styles/variables.scss';
+
+// Keyframes for sliding in and out
+@keyframes slideIn {
+  from {
+    right: -300px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -300px;
+  }
+}
+
+// Sidebar container
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Initially hidden */
+  width: 300px;
+  height: 100%;
+  background-color: $card-background-color;
+  color: $text-color-light;
+  box-shadow: $box-shadow-hover;
+  display: none;
+  flex-direction: column;
+  z-index: 1000; /* Ensure it is above other elements */
+  border-bottom-left-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+  overflow: hidden;
+
+  &.open {
+    display: flex;
+    animation: slideIn 0.3s forwards;
+  }
+
+  &.close {
+    animation: slideOut 0.3s forwards;
+  }
+}
+
+// Sidebar header
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: $spacing-medium;
+
+  h3 {
+    margin: 0;
+    color: $background-color;
+  }
+}
+
+// Sidebar content
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-medium;
+}
+
+// Sidebar links
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .sidebar-link-item {
+    margin-bottom: $spacing-medium;
+
+    .sidebar-link {
+      text-decoration: none;
+      color: $text-color-light;
+      display: flex;
+      align-items: center;
+      padding: $spacing-medium;
+      transition: ease-in-out 0.3s;
+      border-radius: $button-radius;
+
+      svg {
+        margin-right: $spacing-small;
+        font-size: 20px;
+      }
+
+      &:hover {
+        color: $text-color;
+        background-color: $card-background-hover-color;
+      }
+    }
+  }
+}
+
+// Logout button container
+.sidebar-logout-container {
+  margin-top: auto;
+  padding: $spacing-small;
+}
+
+// Logout button
+.sidebar-logout-btn {
+  background: $primary-color;
+  border: none;
+  color: #fff;
+  font-size: $text-small;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: $spacing-small;
+  border-radius: $button-radius;
+  transition: ease-in-out 0.3s;
+
+  &:hover {
+    background: $btn-background-hover-color;
+  }
+}

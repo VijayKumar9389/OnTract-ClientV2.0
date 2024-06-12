@@ -54,6 +54,7 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({packag
                                 <tr key={deliveryPackage.id} className="package-item">
                                     <td><span>{item.name}</span></td>
                                     <td><span>{deliveryPackage.packageType.name}</span></td>
+                                    <td><span>{deliveryPackage.packageType.name}</span></td>
                                     <td><span className="delivery-list-name">{deliveryPackage.stakeholder.name}</span>
                                     </td>
                                     <td>

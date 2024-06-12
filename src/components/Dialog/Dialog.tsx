@@ -17,7 +17,7 @@ const Dialog: React.FC<DialogProps> = ({ isOpen, toggle, element, heading }) => 
                 <div className="popup-menu" onClick={(e) => e.stopPropagation()}>
                     <div className="popup-header">
                         <h3>{heading}</h3>
-                        <button onClick={toggle}><MdClose /></button>
+                        <button className="close-btn" onClick={toggle}><MdClose /></button>
                     </div>
                     <div className="popup-content">
                         {element}

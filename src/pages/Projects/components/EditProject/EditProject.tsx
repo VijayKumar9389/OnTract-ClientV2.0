@@ -24,6 +24,7 @@ const EditProject: React.FC<{ project: Project }> = ({ project }) => {
         try {
             await editProject(project.id, formData);
             console.log("Project updated successfully");
+            window.location.reload();
         } catch (error) {
             console.error("Error updating project:", error);
         }

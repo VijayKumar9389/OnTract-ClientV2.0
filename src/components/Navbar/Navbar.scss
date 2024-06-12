@@ -14,7 +14,7 @@
   .btn-menu {
     display: none;
 
-    @media (max-width: $tablet-breakpoint) {
+    @media (max-width: $desktop-breakpoint) {
       display: block;
       color: #fff;
       background: none;
@@ -57,7 +57,7 @@
       font-size: 2rem;
     }
 
-    @media (max-width: $tablet-breakpoint) {
+    @media (max-width: $desktop-breakpoint) {
       margin: 0;
     }
   }
@@ -68,11 +68,11 @@
     margin: 0;
     display: flex;
 
-    @media (max-width: $tablet-breakpoint) {
+    @media (max-width: $desktop-breakpoint) {
       display: none;
     }
 
-    .sidebar-link {
+    .navbar-link {
       padding: $spacing-small $spacing-medium;
       cursor: pointer;
       color: #fff;
@@ -127,7 +127,7 @@
       margin-bottom: $spacing-small;
       text-align: center;
 
-      @media (max-width: $tablet-breakpoint) {
+      @media (max-width: $desktop-breakpoint) {
         margin-bottom: $spacing-small;
       }
     }
@@ -144,7 +144,7 @@
         background-color: lighten($primary-color, 10%);
       }
 
-      @media (max-width: $tablet-breakpoint) {
+      @media (max-width: $desktop-breakpoint) {
         padding: $spacing-small;
       }
     }
