@@ -27,24 +27,24 @@ const RegisterUser = () => {
         <div className="register-user">
             <form onSubmit={handleRegister}>
                 <div className="input-wrapper">
-                    <label htmlFor="username">Username:
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </label>
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                    />
                 </div>
                 <div className="input-wrapper">
-                    <label htmlFor="password">Password:
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                    />
                 </div>
                 <button type="submit" className="form-btn" disabled={!isFormValid()}>
                     <FaUser />

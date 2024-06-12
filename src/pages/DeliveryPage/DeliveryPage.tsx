@@ -1,26 +1,16 @@
 import { useParams } from "react-router-dom";
 import SubPageHeading from "../../components/SubPageHeading/SubPageHeading.tsx";
-import { cancelDeliveryById, getDeliveryById } from "../../services/delivery.services.ts";
-import { useEffect, useState } from "react";
-import { Delivery } from "../../models/delivery.models.ts";
+import { cancelDeliveryById } from "../../services/delivery.services.ts";
 import EditDeliveryForm from "./components/EditDeliveryForm/EditDeliveryForm.tsx";
 import PackageTable from "./components/PackageTable/PackageTable.tsx";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import DeliveryDetails from "./components/DeliveryDetails/DeliveryDetails.tsx";
+import {useGetDelivery} from "../../hooks/delivery.hooks.ts";
 
 const DeliveryPage = () => {
     const { id } = useParams();
-    const [delivery, setDelivery] = useState<Delivery | null>(null);
-
-    useEffect((): void => {
-        if (id) {
-            const deliveryId: number = parseInt(id);
-            getDeliveryById(deliveryId)
-                .then((response: Delivery): void => {
-                    setDelivery(response);
-                });
-        }
-    }, [id]);
+    const deliveryId = id ? parseInt(id) : null;
+    const { delivery, loading, error } = useGetDelivery(deliveryId);
 
     const handleCancelDelivery = (): void => {
         if (delivery) {
@@ -31,6 +21,13 @@ const DeliveryPage = () => {
         }
     };
 
+    // Loading and error handling
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
     if (!delivery) {
         return <div>Loading...</div>
     }

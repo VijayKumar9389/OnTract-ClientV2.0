@@ -1,44 +1,28 @@
 import React from 'react';
-import { Delivery } from '../../../../models/delivery.models';
-import { NavigationUtils } from '../../../../utils/navigation.utils.ts';
-import { isMailout } from '../../../../utils/functions.utils.ts';
+import {Delivery} from '../../../../models/delivery.models';
+import {NavigationUtils} from '../../../../utils/navigation.utils.ts';
+import {isMailout} from '../../../../utils/functions.utils.ts';
 import './StakeholderDelivery.scss';
 import {Package} from "../../../../models/package.models.ts";
 
-const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
-    const { navigateToDelivery } = NavigationUtils();
+const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
+    const {navigateToDelivery} = NavigationUtils();
 
     return (
         <div className="stakeholder-delivery-details">
-            <div className="delivery-header">
-                <div className="delivery-info">
-                    <h3>{delivery.destination}</h3>
-                    <p>{delivery.notes}</p>
-                </div>
-                <div className="view-delivery">
-                    <button onClick={() => navigateToDelivery(delivery.id)}>
-                        View Delivery
-                    </button>
-                </div>
+
+            <div className="card-header">
+                <h3>{delivery.destination}</h3>
+                <p>{delivery.notes}</p>
             </div>
-
-            <ul className="delivery-stats">
-                <li className="stat-item">
-                    <p>Type:</p>
-                    <span className="value">{isMailout(delivery.delivery_method) ? 'Mail Out' : 'In Person'}</span>
-                </li>
-                <li className="stat-item">
-                    <p>Stakeholders:</p>
-                    <span className="value">{delivery.packages.length}</span>
-                </li>
-                <li className="stat-item">
-                    <p>Status:</p>
-                    <span className={`chip ${delivery.completed ? 'green' : 'red'}`}>
-                        {delivery.completed ? 'Completed' : 'Pending'}
-                    </span>
-                </li>
-            </ul>
-
+            <p className="info-list">
+                Type: <span
+                className="info-item">{isMailout(delivery.delivery_method) ? 'Mail Out' : 'In Person'}</span>
+                <span className="separator">|</span>
+                Stakeholders: <span className="info-item">{delivery.packages.length}</span>
+                <span className="separator">|</span>
+                Status: <span className="info-item">{delivery.completed ? 'Completed' : 'Pending'}</span>
+            </p>
             <table className="delivery-table">
                 <thead>
                 <tr>
@@ -55,6 +39,11 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
                 ))}
                 </tbody>
             </table>
+            <div className="btn-container">
+                <button onClick={() => navigateToDelivery(delivery.id)}>
+                    View Delivery
+                </button>
+            </div>
         </div>
     );
 };

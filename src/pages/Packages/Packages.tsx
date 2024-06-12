@@ -3,11 +3,11 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import Dialog from "../../components/Dialog/Dialog";
 import CreatePackageTypeForm from "./components/CreatePackageTypeForm/CreatePackageTypeForm";
 import {MdAdd} from "react-icons/md";
-import {useFetchPackageTypes} from "../../hooks/package.hooks.ts";
+import {useGetPackageTypesByProjectID} from "../../hooks/package.hooks.ts";
 import PackageTypeGrid from "./components/PackageTypeGrid/PackageTypeGrid.tsx";
 
 const Packages: React.FC = () => {
-    const {packageTypes, loading, error} = useFetchPackageTypes();
+    const {packageTypes, loading, error} = useGetPackageTypesByProjectID();
     const [isOpened, setIsOpened] = useState(false);
 
     const toggleModal = (): void => {

@@ -7,10 +7,10 @@ export const isContacted = (contacted: string): boolean => contacted === "YES";
 
 // Get the number of attempts
 export const getAttemptNo = (attempts: string): number => {
-    const cleanedAttempts = attempts.trim();
+    const cleanedAttempts: string = attempts.trim();
 
     if (cleanedAttempts !== "") {
-        const splitAttempts = cleanedAttempts.split(",");
+        const splitAttempts: string[] = cleanedAttempts.split(",");
         return splitAttempts.length;
     } else {
         return 0;
@@ -22,7 +22,7 @@ export const isNotNull = (value: number | null): boolean => value !== null;
 
 // Get the location from the street address
 export const getLocation = (streetAddress: string): string => {
-    const location = streetAddress.split(",");
+    const location: string[] = streetAddress.split(",");
 
     if (location.length >= 3) {
         return `${location[location.length - 3].trim()}, ${location[location.length - 2].trim()}`;

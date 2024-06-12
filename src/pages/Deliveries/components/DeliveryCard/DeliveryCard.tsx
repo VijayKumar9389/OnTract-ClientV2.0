@@ -21,7 +21,7 @@ const DeliveryCard: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
             <ul className="detail-list">
                 <DeliveryTypeItem deliveryMethod={delivery.delivery_method} isMailout={isMailout} />
                 <NumberItem icon={<IoPerson />} label="Stakeholders" number={delivery.packages.length} />
-                <StatusItem icon={<FaInfoCircle />} label="Status" isAvailable={isMailout(delivery.delivery_method)} availableText={"Mail-Out"} unavailableText={"In-Person"}/>
+                <StatusItem icon={<FaInfoCircle />} label="Status" isAvailable={delivery.completed} availableText={"Completed"} unavailableText={"Pending"}/>
             </ul>
         </div>
     );

@@ -35,23 +35,25 @@ export const filterStakeholders = (
     attemptedFilter: number,
     deliveryFilter: number
 ) => {
-    const filteredBySearch = searchText
+    const filteredBySearch: Stakeholder[] = searchText
         ? stakeholders.filter(stakeholder => {
             if (searchType === 1) {
-                const sanitizedSearchText = searchText.replace(/\D/g, '');
-                const sanitizedPhoneNumber = stakeholder.phoneNumber.replace(/\D/g, '');
+                const sanitizedSearchText: string = searchText.replace(/\D/g, '');
+                const sanitizedPhoneNumber: string = stakeholder.phoneNumber.replace(/\D/g, '');
                 return sanitizedPhoneNumber.includes(sanitizedSearchText);
             } else if (searchType === 0) {
                 return stakeholder.name.toLowerCase().includes(searchText.toLowerCase());
             } else if (searchType === 3) {
-                const sanitizedSearchText = searchText.toLowerCase().trim();
-                const mailingAddress = stakeholder.mailingAddress.toLowerCase();
-                const streetAddress = stakeholder.streetAddress.toLowerCase();
+                const sanitizedSearchText: string = searchText.toLowerCase().trim();
+                const mailingAddress: string = stakeholder.mailingAddress.toLowerCase();
+                const streetAddress: string = stakeholder.streetAddress.toLowerCase();
                 return mailingAddress.includes(sanitizedSearchText) || streetAddress.includes(sanitizedSearchText);
             } else if (searchType === 2) {
-                const sanitizedSearchText = searchText.trim();
+                const sanitizedSearchText: string = searchText.trim().toLowerCase();
+                const searchTextAsNumber: number = parseInt(sanitizedSearchText, 10); // Convert searchText to number
+
                 return stakeholder.tractRecords.some(tract =>
-                    tract.tract.toString().toLowerCase().includes(sanitizedSearchText.toLowerCase())
+                    tract.tract === searchTextAsNumber // Convert tract to number for comparison
                 );
             }
             return false;

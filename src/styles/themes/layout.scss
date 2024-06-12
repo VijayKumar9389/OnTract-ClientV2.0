@@ -158,29 +158,3 @@
     }
   }
 }
-
-
-// Header Styles
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: $spacing-large;
-
-  h3 {
-    align-items: center;
-    display: flex;
-    font-weight: bold;
-    color: $text-color-light;
-  }
-
-  strong {
-    color: $primary-color;
-    margin-left: $spacing-small;
-  }
-}
-
-// Menu Styles
-
-

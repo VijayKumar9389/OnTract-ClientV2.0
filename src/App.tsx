@@ -1,17 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-
-import { useInitializeApp } from './hooks/useInitializeApp'; // Import the custom hook
+import { useInitializeApp } from './hooks/useInitializeApp';
 import { getProjectFromCookie } from './utils/cookie.utils.ts';
 import { RootState } from './store';
-
 import Navbar from './components/Navbar/Navbar';
 import ProjectTable from './components/ProjectTable/ProjectTable';
 import Login from './pages/Login/Login';
-
 import RoutesConfig from './routes/routes';
-
 import './styles/app.scss';
 import {Project} from "./models/stakeholder.models.ts";
 

@@ -3,11 +3,11 @@ import PageHeading from '../../components/PageHeading/PageHeading.tsx';
 import DeliveryCard from './components/DeliveryCard/DeliveryCard';
 import DeliveryInput from './components/DeliveryInput/DeliveryInput';
 import DeliveryStats from "./components/DeliveryStats/DeliveryStats";
-import {useGetDeliveries} from "../../hooks/delivery.hooks.ts";
+import {useGetDeliveriesByProjectID} from "../../hooks/delivery.hooks.ts";
 import {Delivery} from "../../models/delivery.models.ts";
 
 const Deliveries: React.FC = () => {
-    const {deliveries, loading, error} = useGetDeliveries();
+    const {deliveries, loading, error} = useGetDeliveriesByProjectID();
 
     return (
         <div className="section">

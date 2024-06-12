@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { PackageType } from '../../../../models/package.models.ts';
+import React, { useState } from 'react';
 import { Project, Stakeholder } from '../../../../models/stakeholder.models.ts';
 import { createDelivery } from '../../../../services/delivery.services.ts';
-import { getPackageTypesByProjectId } from '../../../../services/package.services.ts';
 import { NewDeliveryInput } from '../../../../models/delivery.models.ts';
 import { getProjectFromCookie } from '../../../../utils/cookie.utils.ts';
 import { FaTruck } from 'react-icons/fa';
+import {useGetPackageTypesByProjectID} from "../../../../hooks/package.hooks.ts";
 
 interface CreateDeliveryForm {
     delivery_method: string;
@@ -26,21 +25,9 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
 
     const [destinationOptions, setDestinationOptions] = useState<number>(0);
     const [createDeliveryForm, setCreateDeliveryForm] = useState<CreateDeliveryForm>(initialState);
-    const [packageTypeOptions, setPackageTypeOptions] = useState<PackageType[]>([]);
     const project: Project | null = getProjectFromCookie();
+    const { packageTypes, loading, error } = useGetPackageTypesByProjectID();
 
-    useEffect(() => {
-        if (!project) return;
-        const fetchPackageTypes = async (): Promise<void> => {
-            try {
-                const packageTypes = await getPackageTypesByProjectId(project.id);
-                setPackageTypeOptions(packageTypes);
-            } catch (error) {
-                console.error('Error fetching package types:', error);
-            }
-        };
-        fetchPackageTypes();
-    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -53,10 +40,6 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
             (stakeholder.streetAddress && createDeliveryForm.delivery_method === 'person')
         );
     };
-    //
-    // const isFormValid = () => {
-    //     return createDeliveryForm.packageTypeId !== 0 && createDeliveryForm.delivery_method !== ''  && createDeliveryForm.destination !== '';
-    // }
 
     const handleDeliveryMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
@@ -98,6 +81,10 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
         }
     };
 
+    if (loading) return <div className="loading-message">Loading package types...</div>;
+    if (error) return <div className="error-message">{error}</div>;
+    if (!packageTypes) return <div className="error-message">No package types found</div>;
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
@@ -109,7 +96,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
                     onChange={handleInputChange}
                 >
                     <option value={0}>Select Package Type</option>
-                    {packageTypeOptions.map((option) => (
+                    {packageTypes.map((option) => (
                         <option key={option.id} value={option.id}>
                             {option.name}
                         </option>

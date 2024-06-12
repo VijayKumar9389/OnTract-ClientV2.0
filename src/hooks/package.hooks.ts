@@ -4,14 +4,14 @@ import {PackageType} from "../models/package.models.ts";
 import {getProjectFromCookie} from "../utils/cookie.utils.ts";
 import {getPackageTypesByProjectId} from "../services/package.services.ts";
 
-
-export const useFetchPackageTypes = () => {
+// Get all package types for a project
+export const useGetPackageTypesByProjectID = () => {
     const [packageTypes, setPackageTypes] = useState<PackageType[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const project = getProjectFromCookie();
 
-    useEffect(() => {
+    useEffect((): void => {
         if (!project) return;
 
         const fetchPackageTypes = async () => {
@@ -32,3 +32,5 @@ export const useFetchPackageTypes = () => {
 
     return { packageTypes, loading, error };
 };
+
+

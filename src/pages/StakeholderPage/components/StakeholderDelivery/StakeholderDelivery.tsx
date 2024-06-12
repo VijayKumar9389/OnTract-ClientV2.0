@@ -1,30 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import {getDeliveryByPackageId} from '../../../../services/delivery.services.ts';
-import {Delivery} from '../../../../models/delivery.models.ts';
+import React, { useState } from 'react';
+import { useGetDeliveryByPackageID } from '../../../../hooks/delivery.hooks.ts';
 import CreateDeliveryForm from './CreateDeliveryForm.tsx';
-import CreatePackageForm from './CreatePackageForm.tsx';
+import CreatePackageForm from './CreatePackageForm/CreatePackageForm.tsx';
 import DeliveryDetails from './DeliveryDetails.tsx';
-import {Stakeholder} from "../../../../models/stakeholder.models.ts";
-import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
+import { Stakeholder } from '../../../../models/stakeholder.models.ts';
+import SubMenu from '../../../../components/SubMenu/SubMenu.tsx';
 
-const StakeholderDelivery: React.FC<{ packageId: number; stakeholder: Stakeholder }> = ({packageId, stakeholder}) => {
-    const [delivery, setDelivery] = useState<Delivery | null>(null);
+interface StakeholderDeliveryProps {
+    packageId: number;
+    stakeholder: Stakeholder;
+}
+
+const StakeholderDelivery: React.FC<StakeholderDeliveryProps> = ({ packageId, stakeholder }) => {
+    const { delivery, error, loading } = useGetDeliveryByPackageID(packageId);
     const [deliveryType, setDeliveryType] = useState<string>('create');
 
-    const toggleDeliveryType = (type: string): void => {
+    const handleSelect = (type: string): void => {
         setDeliveryType(type);
     };
 
-    useEffect((): void => {
-        if (!packageId) return;
-        getDeliveryByPackageId(packageId)
-            .then((response: Delivery): void => {
-                setDelivery(response);
-            })
-            .catch((error): void => {
-                console.error('Error fetching delivery:', error);
-            });
-    }, [packageId]);
+    if (error) {
+        return <div className="error-message">{error}</div>;
+    }
+
+    if (loading) {
+        return <div className="loading-message">Loading...</div>;
+    }
 
     return (
         <div className="panel">
@@ -32,26 +33,24 @@ const StakeholderDelivery: React.FC<{ packageId: number; stakeholder: Stakeholde
                 <h3 className="panel-heading">Delivery Details</h3>
             </div>
             <div className="panel-content">
-                {!delivery && (
-                    <SubMenu
-                        items={[
-                            { label: 'Create Delivery', value: 'create' },
-                            { label: 'Add To Delivery', value: 'plan' }
-                        ]}
-                        selected={deliveryType}
-                        onSelect={toggleDeliveryType}
-                    />
-                )}
-                {delivery ? (
-                    <DeliveryDetails delivery={delivery}/>
-                ) : (
+                {!delivery ? (
                     <>
-                        {deliveryType !== 'create' ? (
-                            <CreatePackageForm stakeholder={stakeholder}/>
+                        <SubMenu
+                            items={[
+                                { label: 'Create Delivery', value: 'create' },
+                                { label: 'Add To Delivery', value: 'plan' }
+                            ]}
+                            selected={deliveryType}
+                            onSelect={handleSelect}
+                        />
+                        {deliveryType === 'create' ? (
+                            <CreateDeliveryForm stakeholder={stakeholder} />
                         ) : (
-                            <CreateDeliveryForm stakeholder={stakeholder}/>
+                            <CreatePackageForm stakeholder={stakeholder} />
                         )}
                     </>
+                ) : (
+                    <DeliveryDetails delivery={delivery} />
                 )}
             </div>
         </div>

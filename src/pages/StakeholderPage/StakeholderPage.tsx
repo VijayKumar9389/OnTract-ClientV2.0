@@ -1,34 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getStakeholderById } from "../../services/stakeholder.services";
-import {Stakeholder, TractRecord} from "../../models/stakeholder.models.ts";
 import StakeholderForm from "./components/StakeholderForm/StakeholderForm.tsx";
 import SubPageHeading from "../../components/SubPageHeading/SubPageHeading.tsx";
 import StakeholderDelivery from "./components/StakeholderDelivery/StakeholderDelivery.tsx";
-import RelatedStakeholders from "./components/RelatedStakeholders/RelatedStakeholders.tsx";
+import RelatedStakeholdersTable from "./components/RelatedStakeholdersTable/RelatedStakeholdersTable.tsx";
 import TractItem from "./components/TractItem/TractItem.tsx";
+import {useGetStakeholder} from "../../hooks/stakeholders.hooks.ts";
+import {TractRecord} from "../../models/stakeholder.models.ts";
 
 const StakeholderPage = () => {
     const { id } = useParams<{ id: string }>();
-    const [stakeholder, setStakeholder] = useState<Stakeholder | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect((): void => {
-        if (!id) return;
-        setLoading(true);
-        getStakeholderById(parseInt(id))
-            .then((response: Stakeholder): void => {
-                console.log(response);
-                setStakeholder(response);
-            })
-            .catch((): void => {
-                setError("Failed to fetch stakeholder");
-            })
-            .finally((): void => {
-                setLoading(false);
-            });
-    }, [id]);
+    const { stakeholder, loading, error } = useGetStakeholder(id);
 
     // Different returns based on different conditions or states
     if (loading) {
@@ -41,19 +22,19 @@ const StakeholderPage = () => {
         return <p>No stakeholder found</p>;
     }
 
-    if (stakeholder) return (
+    return (
         <div className="section">
             <SubPageHeading heading={stakeholder.name} />
-                <div className="page-content">
-                    <StakeholderForm stakeholder={stakeholder}/>
-                    <StakeholderDelivery packageId={stakeholder.packageId} stakeholder={stakeholder}/>
-                    <RelatedStakeholders stakeholderId={stakeholder.id}/>
-                    <ul className="tract-list">
-                        {stakeholder.tractRecords.map((tract: TractRecord, index: number) => {
-                            return <TractItem key={index} tract={tract}/>
-                        })}
-                    </ul>
-                </div>
+            <div className="page-content">
+                <StakeholderForm stakeholder={stakeholder} />
+                <StakeholderDelivery packageId={stakeholder.packageId} stakeholder={stakeholder} />
+                <RelatedStakeholdersTable stakeholderId={stakeholder.id} />
+                <ul className="tract-list">
+                    {stakeholder.tractRecords.map((tract: TractRecord, index: number) => (
+                        <TractItem key={index} tract={tract} />
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

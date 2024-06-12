@@ -40,10 +40,6 @@ const ItemStats: React.FC<{ item: Item; packages: Package[] | null }> = ({ item,
                 <p>Pending Deliveries:</p>
                 <h3>{totalQuantityPending}</h3>
             </div>
-            <div className="stat-item">
-                <p>Total Quantity:</p>
-                <h3>{totalQuantity}</h3>
-            </div>
         </div>
     );
 };

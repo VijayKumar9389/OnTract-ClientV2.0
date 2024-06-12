@@ -38,7 +38,6 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
     // Disable the button if no date is selected or if the selected date is the same as the current delivery date
     const isValid: boolean = selectedDate !== "" && selectedDate !== delivery.date;
 
-
     return (
         <div className="panel">
             <div className="panel-header">
@@ -46,9 +45,9 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
             </div>
             <div className="panel-content">
                 <p className="info-list">
-                    Status: <span className="info-item">{delivery.completed ? <a>Completed</a> : <a>Pending</a>}</span>
+                    Status: <span className="info-item">{delivery.completed ? "Completed" : "Pending" }</span>
                     <span className="separator">|</span>
-                    Completion Date: <span className="info-item">{delivery.date ? delivery.date : <a>N/A</a>}</span>
+                    Completion Date: <span className="info-item">{delivery.date ? delivery.date : "Pending"}</span>
                 </p>
                 <form onSubmit={handleSubmit} className="date-form">
                     <div className="input-wrapper">

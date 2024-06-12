@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from "react";
-import {Project, Stakeholder, TractRecord} from "../../../../models/stakeholder.models.ts";
-import {getStakeholdersByTractNo} from "../../../../services/stakeholder.services.ts";
-import TractForm from "./TractForm.tsx";
-import {getProjectFromCookie} from "../../../../utils/cookie.utils.ts";
+// components/TractItem.tsx
+import React from 'react';
+import { TractRecord } from '../../../../models/stakeholder.models.ts';
+import {useStakeholdersByTractNo} from "../../../../hooks/stakeholders.hooks.ts";
+import TractForm from './TractForm.tsx';
 import './TractItem.scss';
 
-const TractItem: React.FC<{tract: TractRecord}> = ({tract}) => {
+interface TractItemProps {
+    tract: TractRecord;
+}
 
-    const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
-    const project: Project | null = getProjectFromCookie()
-
-    useEffect((): void => {
-        if (!project) return;
-        getStakeholdersByTractNo(project.id, tract.tract).then((response: Stakeholder[]): void => {
-            console.log(response)
-            setStakeholders(response);
-        });
-    }, [tract.tract]);
+const TractItem: React.FC<TractItemProps> = ({ tract }) => {
+    const { stakeholders, loading, error } = useStakeholdersByTractNo(tract.tract);
 
     return (
         <li className="panel">
             <div className="panel-header">
-                <h3 className="panel-heading">TRACT <strong>{tract.tract}</strong></h3>
+                <h3>Tract <strong>{tract.tract}</strong></h3>
             </div>
             <div className="page-content">
                 <p className="info-list">
@@ -31,16 +25,18 @@ const TractItem: React.FC<{tract: TractRecord}> = ({tract}) => {
                     <span className="separator">|</span>
                     Pin: <span className="info-item">{tract.pin}</span>
                 </p>
-                <ul className="tract-form-list">
-                    {stakeholders.map((stakeholder: Stakeholder, index: number) => {
-                        const tractRecord: TractRecord = stakeholder.tractRecords[0];
-                        return <TractForm key={index} stakeholder={stakeholder} tractRecord={tractRecord}/>
-                    })}
-                </ul>
+                {loading && <div>Loading...</div>}
+                {error && <div className="error-message">{error}</div>}
+                {!loading && !error && (
+                    <ul className="tract-form-list">
+                        {stakeholders.map((stakeholder, index) => (
+                            <TractForm key={index} stakeholder={stakeholder} tractRecord={stakeholder.tractRecords[0]} />
+                        ))}
+                    </ul>
+                )}
             </div>
         </li>
-    )
-
-}
+    );
+};
 
 export default TractItem;

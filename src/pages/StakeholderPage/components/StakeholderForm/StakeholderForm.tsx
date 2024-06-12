@@ -66,6 +66,11 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
             return;
         }
 
+        if (project.surveyLink === '') {
+            showToastError('Survey Link not found')
+            return;
+        }
+
         // Ensure the URL starts with 'http://' or 'https://'
         const surveyLink = project.surveyLink.startsWith('http://') || project.surveyLink.startsWith('https://')
             ? project.surveyLink
@@ -74,8 +79,6 @@ const StakeholderForm: React.FC<{ stakeholder: Stakeholder }> = ({stakeholder}) 
         // Open the link in a new tab
         window.open(surveyLink, '_blank');
     };
-
-
 
     // Handle form input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {

@@ -51,7 +51,7 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
             </td>
             <Dialog
                 element={<ChangePackage packageType={deliveryPackage.packageType} packageId={deliveryPackage.id}/>}
-                heading={"Change PackageTypeGrid"}
+                heading={"Edit Package Type"}
                 isOpen={isDialogOpen}
                 toggle={() => toggleDialog()}/>
         </tr>

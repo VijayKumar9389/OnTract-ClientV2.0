@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {useFetchStakeholders} from "../../hooks/stakeholders.hooks.ts";
+import {useGetStakeholderByProjectID} from "../../hooks/stakeholders.hooks.ts";
 import {filterStakeholders} from "../../utils/filter.utils.ts";
 import StakeholderStats from "./components/StakeholderStats/StakeholderStats.tsx";
 import StakeholderInput from "./components/StakeholderInput/StakeholderInput.tsx";
@@ -10,7 +10,7 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {Stakeholder} from "../../models/stakeholder.models.ts";
 
 const Stakeholders: React.FC = () => {
-    const {stakeholders, loading, error} = useFetchStakeholders();
+    const {stakeholders, loading, error} = useGetStakeholderByProjectID();
 
     const searchText: string = useSelector((state: RootState) => state.stakeholder.searchText);
     const searchType: number = useSelector((state: RootState) => state.stakeholder.searchType);

@@ -29,8 +29,9 @@
     }
 
     &:hover {
-      background-color: $card-background-hover-color;
-      color: $text-color;
+      background-color: $primary-color;
+      color: #fff;
+      border: 1px solid $secondary-color;
     }
   }
 

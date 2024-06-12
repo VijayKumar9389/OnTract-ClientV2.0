@@ -32,24 +32,24 @@ const EditUser: React.FC<{user: User}> = ({user}) => {
         <div className="register-user">
             <form onSubmit={handleRegister}>
                 <div className="input-wrapper">
-                    <label htmlFor="username">Enter New Username:
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </label>
+                    <label htmlFor="username">Enter New Username:</label>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        id="username"
+                        value={username}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                    />
                 </div>
                 <div className="input-wrapper">
-                    <label htmlFor="password">Enter New Password:
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
+                    <label htmlFor="password">Enter New Password:</label>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        id="password"
+                        value={password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                    />
                 </div>
 
                 <button type="submit" className="form-btn" disabled={!isFormValid()}>

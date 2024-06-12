@@ -41,7 +41,6 @@
 
 .card-header {
   margin-bottom: $spacing-small;
-
   h3 {
     color: $text-color;
     line-break: anywhere;
@@ -60,6 +59,18 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .info-item {
+      margin: 0;
+    }
+
+    .separator {
+      display: none;
+    }
+  }
 
   .info-item {
     font-weight: bold;

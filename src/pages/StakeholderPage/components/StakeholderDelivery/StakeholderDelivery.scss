@@ -51,30 +51,4 @@
       }
     }
   }
-
-  .delivery-stats {
-    display: flex;
-    flex-wrap: wrap; // Allow stats to wrap on smaller screens
-    gap: $spacing-medium; // Add gap between stat items
-
-    .stat-item {
-      flex: 1 1 150px; // Flex basis of 200px with flex-grow and flex-shrink
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      p {
-        font-size: $text-small;
-        color: $text-color-light;
-        margin-bottom: 0.2rem;
-      }
-
-      .value {
-        font-size: $text-medium;
-        font-weight: bold;
-        color: $text-color;
-      }
-    }
-  }
-
 }
