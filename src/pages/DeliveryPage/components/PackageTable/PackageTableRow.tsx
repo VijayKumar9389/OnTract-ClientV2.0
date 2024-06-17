@@ -7,10 +7,12 @@ import Dialog from "../../../../components/Dialog/Dialog.tsx";
 import {useState} from "react";
 import {showToastError} from "../../../../utils/toast.utils.ts";
 import ChangePackage from "../ChangePackage/ChangePackage.tsx";
+import {useDispatch} from "react-redux";
 
 const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackage}) => {
     const {navigateToStakeholder} = NavigationUtils();
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const toggleDialog = (): void => {
         setIsDialogOpen(!isDialogOpen);
@@ -39,7 +41,7 @@ const PackageTableRow: React.FC<{ deliveryPackage: Package }> = ({deliveryPackag
                     <button onClick={() => toggleDialog()}>
                         Edit Package
                     </button>
-                    <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>
+                    <button onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id, dispatch)}>
                         View Stakeholder
                     </button>
                     <ConfirmationButton
