@@ -91,6 +91,41 @@ button:disabled {
 }
 
 
+// For Active filter components
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+
+  .filter-heading {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+      color: $text-color
+    }
+
+    strong {
+
+    }
+  }
+
+  .no-filters-message {
+    font-size: 16px;
+    color: #666;
+    font-style: italic;
+  }
+
+  .filter-count {
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    text-align: right;
+  }
+}
+
 
 
 // Chip styles
@@ -115,30 +150,8 @@ button:disabled {
   }
 
   &.number {
-    color: #007bff;
     font-weight: bold;
   }
-}
-
-
-// No Data Message
-.no-data-message {
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  width: 100%;
-  background-color: #f4f4f4;
-}
-
-// No Data Message with Icon
-.no-data-message::before {
-  content: "!";
-  display: block;
-  font-size: 24px;
-  color: #ff0000;
-  margin-bottom: 5px;
 }
 
 // Inputs

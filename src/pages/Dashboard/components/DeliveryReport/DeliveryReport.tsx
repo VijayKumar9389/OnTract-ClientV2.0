@@ -40,13 +40,17 @@ const DeliveryReport: React.FC = () => {
         <div className="delivery-report">
             <div className="report-wrapper">
                 {renderReportItem('Total Deliveries', deliveryReport.count)}
+                {renderReportItem('Mail-Out Deliveries', deliveryReport.mailCount)}
+                {renderReportItem('In-Person Deliveries', deliveryReport.streetCount)}
                 {renderReportItem('Total Stakeholders Planned', deliveryReport.stakeholderCount)}
                 {renderReportItem('Pending Delivery', deliveryReport.pendingDeliveryCount)}
                 {renderReportItem('Delivery Completed', deliveryReport.completedDeliveryCount)}
+                {renderReportItem('No Routes Planned', deliveryReport.noRouteCount)}
             </div>
             <div className="table-container">
-                {renderTable('Planned Packages', deliveryReport.packageTypeCountMap)}
-                {renderTable('Planned Routes', deliveryReport.deliveryRouteCountMap)}
+
+                <div className="table-style">{renderTable('Planned Packages', deliveryReport.packageTypeCountMap)}</div>
+                <div className="table-style">{renderTable('Planned Routes', deliveryReport.deliveryRouteCountMap)}</div>
             </div>
         </div>
     );

@@ -1,11 +1,15 @@
 // navigationUtils.ts
 import { useNavigate } from "react-router-dom";
+import {Dispatch} from "redux";
+import {setLastViewedStakeholder} from "../store/reducers/stakeholder.reducer.ts";
+import {setLastViewedDelivery} from "../store/reducers/delivery.reducer.ts";
 
 export const NavigationUtils = () => {
     const navigate = useNavigate();
 
-    const navigateToStakeholder = (stakeholderId: number): void => {
+    const navigateToStakeholder = (stakeholderId: number, dispatch: Dispatch): void => {
         navigate(`/stakeholders/${stakeholderId}`);
+        dispatch(setLastViewedStakeholder(stakeholderId));
     };
 
     const navigateToInventoryItem = (itemId: number): void => {
@@ -16,8 +20,9 @@ export const NavigationUtils = () => {
         navigate(`/packages/${id}`);
     };
 
-    const navigateToDelivery = (id: number): void => {
+    const navigateToDelivery = (id: number, dispatch: Dispatch): void => {
         navigate(`/deliveries/${id}`);
+        dispatch(setLastViewedDelivery(id));
     }
 
     return {

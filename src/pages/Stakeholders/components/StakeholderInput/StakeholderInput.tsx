@@ -12,14 +12,17 @@ const StakeholderInput: React.FC = () => {
 
     const searchText: string = useSelector((state: RootState) => state.stakeholder.searchText);
 
+    // Toggle the modal open and closed filter menu
     const toggleModal = (): void => {
         setIsModalOpen(!isModalOpen);
     };
 
+    // Update the search text in the store
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setStakeholderSearch(event.target.value));
     };
 
+    // Clear the filter state
     const clearFilter = (): void => {
         dispatch(clearStakeholderState());
     };

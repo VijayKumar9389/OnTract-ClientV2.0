@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../store/reducers/auth.reducer";
-import { MdEmergencyShare } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHome, FaTruck, FaBoxes, FaUser, FaSignOutAlt, FaUsers, FaProjectDiagram } from 'react-icons/fa';
 import { FiPackage } from "react-icons/fi";
 import Sidebar from "../Sidebar/Sidebar";
 import { RootState } from "../../store";
 import "./Navbar.scss";
+import {AiFillSafetyCertificate} from "react-icons/ai";
 
 interface NavbarLink {
     to: string;
@@ -40,7 +40,7 @@ const Navbar = () => {
     ];
 
     // Function to determine if a link is active
-    const isActiveLink = (linkTo: string) => {
+    const isActiveLink = (linkTo: string): boolean => {
         if (linkTo === "/") {
             return location.pathname === linkTo;
         }
@@ -50,9 +50,12 @@ const Navbar = () => {
     return (
         <>
             <nav className="nav-container">
-                <h1><MdEmergencyShare /> OnTract</h1>
+                <div className="nav-logo">
+                    <AiFillSafetyCertificate />
+                    <h1>OnTract</h1>
+                </div>
                 <ul className="navbar-links">
-                    {navbarLinks.map((link, index) => (
+                    {navbarLinks.map((link: NavbarLink, index: number) => (
                         <li key={index}>
                             <Link
                                 to={link.to}
@@ -78,13 +81,13 @@ const Navbar = () => {
                     ))}
                     <li>
                         <button className="btn-logout" onClick={handleLogout}>
-                            <FaSignOutAlt /> Logout
+                            <FaSignOutAlt/> Logout
                         </button>
                     </li>
                 </ul>
 
                 <button className="btn-menu" onClick={toggleSidebar}>
-                    <GiHamburgerMenu />
+                    <GiHamburgerMenu/>
                 </button>
             </nav>
             <Sidebar

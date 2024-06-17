@@ -48,7 +48,7 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({ buttonText, confirmat
 
     return (
         <>
-            <button className="btn-danger" onClick={handleConfirm}>{buttonText}</button>
+            <button className="btn-danger" type="button" onClick={handleConfirm}>{buttonText}</button>
             {isConfirming && (
                 <div className="confirmation-modal">
                     <div className="confirmation-content">

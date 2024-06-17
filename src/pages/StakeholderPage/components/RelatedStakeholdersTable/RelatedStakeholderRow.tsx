@@ -2,6 +2,7 @@
 import React from 'react';
 import { RelatedStakeholder } from '../../../../models/stakeholder.models.ts';
 import { NavigationUtils } from '../../../../utils/navigation.utils.ts';
+import {useDispatch} from "react-redux";
 
 interface RelatedStakeholderRowProps {
     relatedStakeholder: RelatedStakeholder;
@@ -9,11 +10,12 @@ interface RelatedStakeholderRowProps {
 
 const RelatedStakeholderRow: React.FC<RelatedStakeholderRowProps> = ({ relatedStakeholder }) => {
     const { navigateToStakeholder } = NavigationUtils();
+    const dispatch = useDispatch();
 
     return (
         <tr
             className="stakeholder-item"
-            onClick={() => navigateToStakeholder(relatedStakeholder.stakeholder.id)}
+            onClick={() => navigateToStakeholder(relatedStakeholder.stakeholder.id, dispatch)}
         >
             <td>
                 <span>{relatedStakeholder.stakeholder.name}</span>

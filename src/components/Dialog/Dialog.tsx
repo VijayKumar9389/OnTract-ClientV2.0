@@ -10,7 +10,6 @@ interface DialogProps {
 }
 
 const Dialog: React.FC<DialogProps> = ({ isOpen, toggle, element, heading }) => {
-
     if (isOpen) {
         return (
             <div className="popup-overlay" onClick={toggle}>

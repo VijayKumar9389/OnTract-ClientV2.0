@@ -1,35 +1,34 @@
 @import 'src/styles/variables.scss';
 
-// components/LocationReport.scss
 .location-report {
+  display: flex;
+  flex-direction: column;
 
   .location-item {
-    padding: 15px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-
+    background: #fff;
+    padding: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-bottom: $border;
 
     .location-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
 
       h3 {
         margin: 0;
-        font-size: 1.2em;
+        font-size: 1.5rem;
         color: #333;
-        font-weight: bold;
       }
 
       p {
         margin: 0;
-        font-size: 1em;
-        color: #777;
+        font-size: 1rem;
+        color: #666;
 
         strong {
-          color: #333;
+          color: #000;
         }
       }
     }
@@ -38,33 +37,70 @@
       list-style: none;
       padding: 0;
       margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); // Adjust min-width as needed
+      gap: 12px;
+
 
       .city-item {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #eee;
-
-        &:last-child {
-          border-bottom: none;
-        }
+        padding: 8px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background: #f9f9f9;
 
         span {
-          font-size: 1em;
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
           color: #555;
         }
 
-        strong {
-          font-size: 1em;
-          color: #333;
+        strong span {
+          font-size: 1rem;
+          color: #000;
         }
       }
     }
 
     .no-cities {
-      font-size: 1em;
-      color: #777;
-      padding: 8px 0;
+      margin-top: 8px;
+      font-size: 1rem;
+      color: #757575;
+    }
+  }
+}
+
+// Mobile responsive design
+@media (max-width: 600px) {
+  .location-report {
+    padding: 8px;
+
+    .location-item {
+      padding: 12px;
+
+      .location-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        h3 {
+          margin-bottom: 4px;
+          font-size: 1.25rem;
+        }
+      }
+
+      .city-list {
+        grid-template-columns: 1fr;
+
+        .city-item {
+          padding: 6px;
+        }
+      }
+
+      .no-cities {
+        font-size: 0.9rem;
+      }
     }
   }
 }

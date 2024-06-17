@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr); // Six items in a row
   width: 100%;
-  margin-bottom: $spacing-medium;
   gap: $spacing-small; // Add gap between grid items for better spacing
 
   @media (max-width: 1024px) {

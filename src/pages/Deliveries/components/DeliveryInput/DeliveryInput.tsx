@@ -1,10 +1,10 @@
 import {MdFilterAlt, MdFilterAltOff} from "react-icons/md";
-import {useState} from 'react';
+import React, {useState} from 'react';
 import Dialog from "../../../../components/Dialog/Dialog.tsx";
 import DeliveryFilter from "../DeliveryFilter/DeliveryFilter.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
-import {setDeliverySearch} from "../../../../store/reducers/delivery.reducer.ts";
+import {clearDeliveryState, setDeliverySearch} from "../../../../store/reducers/delivery.reducer.ts";
 
 const DeliveryInput = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +17,10 @@ const DeliveryInput = () => {
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         dispatch(setDeliverySearch(event.target.value));
+    }
+
+    const clearFilter = (): void => {
+        dispatch(clearDeliveryState());
     }
 
     return (
@@ -39,7 +43,7 @@ const DeliveryInput = () => {
                 <MdFilterAlt/>
                 Filter
             </button>
-            <button className="clear-filter-button">
+            <button className="clear-filter-button" onClick={clearFilter}>
                 <MdFilterAltOff/>
                 Clear Filter
             </button>

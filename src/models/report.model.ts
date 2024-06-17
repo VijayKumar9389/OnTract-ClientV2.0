@@ -1,5 +1,8 @@
 // Stakeholder Stats for Project
 export interface StakeholderStatsDTO {
+    totalTractCount: number;
+    herMajestyTractCount: number;
+    herMajestyCount: number;
     totalCount: number;
     oneTractCount: number;
     moreThanOneTractCount: number;

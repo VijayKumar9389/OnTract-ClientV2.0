@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f8f9fa; /* Light grey background */
+  color: #6c757d; /* Muted text color */
+  font-family: 'Arial', sans-serif; /* Clean, modern font */
+  padding: 20px;
+  width: 100%;
+}
+
+.warning-icon {
+  font-size: 3rem; /* Larger icon */
+  color: #ffc107; /* Warning yellow color */
+  margin-bottom: $spacing-small;
+}
+
+.no-data-message p {
+  margin: 0;
+  color: $text-color;
+  text-transform: uppercase;
+}

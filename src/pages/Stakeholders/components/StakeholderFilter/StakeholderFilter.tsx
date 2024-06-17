@@ -5,7 +5,7 @@ import {
     setDelivery,
     setContacted,
     setConsulted,
-    setSearchType
+    setSearchType, setMissing
 } from "../../../../store/reducers/stakeholder.reducer";
 import {RootState} from "../../../../store";
 import './StakeholderFilter.scss';
@@ -18,6 +18,7 @@ const StakeholderFilter: React.FC = () => {
     const consulted: number = useSelector((state: RootState) => state.stakeholder.consulted);
     const delivery: number = useSelector((state: RootState) => state.stakeholder.delivery);
     const searchType: number = useSelector((state: RootState) => state.stakeholder.searchType);
+    const missing: number = useSelector((state: RootState) => state.stakeholder.missing);
 
     const handleSetContacted = (value: number): void => {
         dispatch(setContacted(value));
@@ -35,19 +36,23 @@ const StakeholderFilter: React.FC = () => {
         dispatch(setDelivery(value));
     }
 
+    const handleSetMissing = (value: number): void => {
+        dispatch(setMissing(value));
+    }
+
     const handleSetSearchType = (event: ChangeEvent<HTMLSelectElement>): void => {
         const value: number = parseInt(event.target.value, 10);
         dispatch(setSearchType(value));
     }
 
     return (
-        <div className="stakeholder-filter">
+        <div className="filter-container">
             <div className="input-wrapper">
                 <label htmlFor="search">Search By:</label>
                 <select id="search" className="select-dropdown" onChange={handleSetSearchType} value={searchType}>
-                    <option value={0}>Stakeholder</option>
-                    <option value={1}>Phone No.</option>
-                    <option value={2}>Tract No.</option>
+                    <option value={0}>Stakeholder Name</option>
+                    <option value={1}>Phone Number.</option>
+                    <option value={2}>Tract Number</option>
                     <option value={3}>Location</option>
                 </select>
             </div>
@@ -165,6 +170,43 @@ const StakeholderFilter: React.FC = () => {
                             checked={delivery === 2}
                             onChange={handleSetDelivery}
                             labelText="No"
+                        />
+                    </div>
+                </div>
+                <div className="filter-wrapper">
+                    <h3>Missing</h3>
+                    <div className="radio-group">
+                        <RadioButton
+                            id="missing-none"
+                            name="missing"
+                            value={0}
+                            checked={missing === 0}
+                            onChange={handleSetMissing}
+                            labelText="No Filter"
+                        />
+                        <RadioButton
+                            id="missing-phone"
+                            name="missing"
+                            value={1}
+                            checked={missing === 1}
+                            onChange={handleSetMissing}
+                            labelText="Phone"
+                        />
+                        <RadioButton
+                            id="missing-street"
+                            name="missing"
+                            value={2}
+                            checked={missing === 2}
+                            onChange={handleSetMissing}
+                            labelText="Street Address"
+                        />
+                        <RadioButton
+                            id="missing-mailing"
+                            name="missing"
+                            value={3}
+                            checked={missing === 3}
+                            onChange={handleSetMissing}
+                            labelText="Mailing Address"
                         />
                     </div>
                 </div>

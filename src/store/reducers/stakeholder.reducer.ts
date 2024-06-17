@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 interface StakeholderState {
     searchType: number;
@@ -7,7 +7,9 @@ interface StakeholderState {
     consulted: number;
     attempted: number;
     delivery: number;
+    missing: number;
     status: string;
+    lastViewedStakeholder: number;
 }
 
 const initialState: StakeholderState = {
@@ -17,7 +19,9 @@ const initialState: StakeholderState = {
     consulted: 0,
     attempted: 0,
     delivery: 0,
+    missing: 0,
     status: "",
+    lastViewedStakeholder: 0
 };
 
 const stakeholderSlice = createSlice({
@@ -45,13 +49,30 @@ const stakeholderSlice = createSlice({
         setDelivery(state, action): void {
             state.delivery = action.payload
         },
+        setMissing(state, action): void {
+            state.missing = action.payload
+        },
+        setLastViewedStakeholder(state, action): void {
+            state.lastViewedStakeholder = action.payload;
+        },
         clearStakeholderState(state): void {
             Object.assign(state, initialState); // Directly assign initialState to state
         },
     },
 });
 
-export const { setStakeholderSearch, clearStakeholderState,setSearchType , setStakeholderStatus, setAttempted, setDelivery, setContacted, setConsulted } = stakeholderSlice.actions;
+export const {
+    setStakeholderSearch,
+    clearStakeholderState,
+    setSearchType,
+    setStakeholderStatus,
+    setMissing,
+    setAttempted,
+    setDelivery,
+    setLastViewedStakeholder,
+    setContacted,
+    setConsulted
+} = stakeholderSlice.actions;
 
 export default stakeholderSlice.reducer;
 

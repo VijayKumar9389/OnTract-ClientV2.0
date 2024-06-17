@@ -99,8 +99,12 @@
 
 // Logout button container
 .sidebar-logout-container {
-  margin-top: auto;
-  padding: $spacing-small;
+  position: fixed;
+  bottom: 0;
+  padding: $spacing-small 0;
+  width: 100%;
+
+  display: flex;
 }
 
 // Logout button
@@ -113,9 +117,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   padding: $spacing-small;
   border-radius: $button-radius;
+  min-width: 150px;
   transition: ease-in-out 0.3s;
 
   &:hover {

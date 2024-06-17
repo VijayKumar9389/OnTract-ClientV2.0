@@ -19,7 +19,7 @@ const StakeholderStats: React.FC = () => {
         { label: 'Attempted', value: stakeholderStats.attemptedContactCount },
         { label: 'No Attempts', value: stakeholderStats.notAttemptedContactCount },
         { label: 'Delivery Planned', value: stakeholderStats.deliveryPlannedCount },
-        { label: 'No Delivery', value: stakeholderStats.deliveryNotPlannedCount }
+        { label: 'No Delivery', value: stakeholderStats.deliveryNotPlannedCount },
     ];
 
     return (

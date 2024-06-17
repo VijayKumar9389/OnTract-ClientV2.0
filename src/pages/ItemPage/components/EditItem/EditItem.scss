@@ -6,6 +6,21 @@
   gap: 1rem;
   align-items: center;
 
+  .form-icon {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px 0 0 8px;
+    height: 100%;
+
+    svg {
+      font-size: 5rem;
+      color: #e0e0e0;
+    }
+  }
+
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
   }

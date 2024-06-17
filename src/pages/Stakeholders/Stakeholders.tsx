@@ -2,12 +2,14 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {useGetStakeholderByProjectID} from "../../hooks/stakeholders.hooks.ts";
-import {filterStakeholders} from "../../utils/filter.utils.ts";
+import {filterStakeholders} from "../../utils/stakeholder.filter.utils.ts";
 import StakeholderStats from "./components/StakeholderStats/StakeholderStats.tsx";
 import StakeholderInput from "./components/StakeholderInput/StakeholderInput.tsx";
-import StakeholderCard from "./components/StakeholderCard/StakeholderCard.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import {Stakeholder} from "../../models/stakeholder.models.ts";
+import StakeholderList from "./components/StakeholderList/StakeholderList.tsx";
+import LastViewedStakeholder from "./components/LastViewedStakeholder/LastViewedStakeholder.tsx";
+import ActiveStakeholderFilters from "./components/ActiveStakeholderFilters/ActiveStakeholderFilters.tsx";
 
 const Stakeholders: React.FC = () => {
     const {stakeholders, loading, error} = useGetStakeholderByProjectID();
@@ -18,6 +20,7 @@ const Stakeholders: React.FC = () => {
     const consultedFilter: number = useSelector((state: RootState) => state.stakeholder.consulted);
     const attemptedFilter: number = useSelector((state: RootState) => state.stakeholder.attempted);
     const deliveryFilter: number = useSelector((state: RootState) => state.stakeholder.delivery);
+    const missingFilter: number = useSelector((state: RootState) => state.stakeholder.missing);
 
     const filteredStakeholders: Stakeholder[] = filterStakeholders(
         stakeholders,
@@ -26,7 +29,8 @@ const Stakeholders: React.FC = () => {
         contactFilter,
         consultedFilter,
         attemptedFilter,
-        deliveryFilter
+        deliveryFilter,
+        missingFilter
     );
 
     return (
@@ -37,14 +41,11 @@ const Stakeholders: React.FC = () => {
                 {error && <p className="error-message">{error}</p>}
                 {!loading && !error && (
                     <>
+                        <LastViewedStakeholder />
                         <StakeholderStats/>
                         <StakeholderInput/>
-                        <p className="list-stat">Results: <strong>{filteredStakeholders.length}</strong></p>
-                        <ul className="card-list">
-                            {filteredStakeholders.map(stakeholder => (
-                                <StakeholderCard key={stakeholder.id} stakeholder={stakeholder}/>
-                            ))}
-                        </ul>
+                        <ActiveStakeholderFilters count={filteredStakeholders.length} />
+                        <StakeholderList stakeholders={filteredStakeholders} />
                     </>
                 )}
             </div>

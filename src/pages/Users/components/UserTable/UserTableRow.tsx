@@ -34,11 +34,13 @@ const UserTableRow = ({user}: { user: User }) => {
                 <td>
                     <div className="action-buttons">
                         <button onClick={() => toggleModal()}>Edit</button>
-                        <ConfirmationButton
-                            buttonText={"Remove User"}
-                            confirmationMessage={`Are you sure you want to remove ${user.username} from the system?`}
-                            onConfirm={() => removeUser()}
-                        />
+                        {!user.isAdmin && (
+                            <ConfirmationButton
+                                buttonText={"Remove User"}
+                                confirmationMessage={`Are you sure you want to remove ${user.username} from the system?`}
+                                onConfirm={() => removeUser()}
+                            />
+                        )}
                     </div>
                 </td>
             </tr>

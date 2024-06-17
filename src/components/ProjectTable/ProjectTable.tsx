@@ -4,6 +4,9 @@ import { setProjectCookie } from "../../utils/cookie.utils.ts";
 import CreateProject from "../../pages/Projects/components/CreateProject/CreateProject";
 import { useFetchProjects} from "../../hooks/project.hooks.ts";
 import './ProjectTable.scss';
+import {clearStakeholderState} from "../../store/reducers/stakeholder.reducer.ts";
+import {clearDeliveryState} from "../../store/reducers/delivery.reducer.ts";
+import {useDispatch} from "react-redux";
 
 interface ProjectTableProps {
     toggleMenu: () => void;
@@ -11,10 +14,18 @@ interface ProjectTableProps {
 
 const ProjectTable: React.FC<ProjectTableProps> = ({ toggleMenu }) => {
     const { projects, loading, error } = useFetchProjects();
+    const dispatch = useDispatch();
+
+    // Clear the filter state
+    const clearFilter = (): void => {
+        dispatch(clearStakeholderState());
+        dispatch(clearDeliveryState());
+    };
 
     const selectProject = (project: Project): void => {
         setProjectCookie(project);
         if (toggleMenu) toggleMenu();
+        clearFilter();
         window.location.reload();
     };
 

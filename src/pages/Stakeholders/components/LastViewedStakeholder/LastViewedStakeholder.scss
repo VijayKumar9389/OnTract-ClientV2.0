@@ -1,0 +1,11 @@
+@import "../../../../styles/variables.scss";
+
+.last-viewed {
+  width: 100%;
+
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: $text-color;
+  }
+}

@@ -8,11 +8,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import { isAvailable, getAttemptNo, isNotNull, getLocation, getStatus, isContacted } from "../../../../utils/functions.utils.ts";
 import {StatusItem} from "../../../../components/Stat/StatusStat.tsx";
 import {NumberItem} from "../../../../components/Stat/NumberStat.tsx";
+import {useDispatch} from "react-redux";
 
 const StakeholderCard: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholder }) => {
     const { navigateToStakeholder } = NavigationUtils();
+    const dispatch = useDispatch();
     return (
-        <div className="card" onClick={() => navigateToStakeholder(stakeholder.id)}>
+        <div className="card" onClick={() => navigateToStakeholder(stakeholder.id, dispatch)}>
             <div className="card-header">
                 <h3>{stakeholder.name}</h3>
                 <p>{getLocation(stakeholder.streetAddress)}</p>

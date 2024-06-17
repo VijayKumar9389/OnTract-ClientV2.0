@@ -1,11 +1,11 @@
 // components/LocationReport.tsx
 import React from 'react';
 import './LocationReport.scss';
-import { useLocationReport} from "../../../../hooks/project.hooks.ts";
+import {useLocationReport} from "../../../../hooks/project.hooks.ts";
 import {City, Location} from "../../../../models/report.model.ts";
 
 const LocationReport: React.FC = () => {
-    const { locations, loading, error } = useLocationReport();
+    const {locations, loading, error} = useLocationReport();
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
@@ -29,7 +29,7 @@ const LocationReport: React.FC = () => {
                             ))}
                         </ul>
                     ) : (
-                        <p className="no-cities">No cities listed</p>
+                        index !== 0 && (<p className="no-cities">No cities listed</p>)
                     )}
                 </div>
             ))}

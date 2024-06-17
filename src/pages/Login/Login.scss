@@ -9,53 +9,80 @@
 }
 
 .login-wrapper {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  max-width: 400px;
-  width: 90%;
+  /* Responsive layout adjustments */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px; /* Consistent padding for all screen sizes */
+  gap: $spacing-medium; /* Adjust spacing between elements */
+  justify-content: space-between;
+  min-width: 400px; /* Adjust minimum width as needed */
+  max-width: 800px; /* Adjust maximum width as needed */
 }
 
 .login-title {
-  color: $primary-color;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $spacing-medium;
+
+  svg {
+    font-size: 5rem;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 1.8rem; /* Adjust as needed for mobile */
+    color: #fff;
+    text-align: center; /* Centered text for mobile */
+  }
+}
+
+.login-content {
+  width: 100%;
+  max-width: 400px; /* Consistent max-width */
+  padding: 20px; /* Adjust padding for better touch targets on mobile */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-}
 
-.login-label {
-  color: $primary-color;
-  margin-bottom: 5px;
-  display: block;
-}
+  .input-wrapper {
+    margin-bottom: $spacing-small;
 
-.login-input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-}
+    .login-label {
+      color: $primary-color;
+      margin-bottom: 5px;
+      display: block;
+    }
 
-.login-btn {
-  background-color: $primary-color;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: $spacing-large;
-}
+    .login-input {
+      padding: 12px; /* Increase padding for better touch targets on mobile */
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+  }
 
-.login-btn:hover {
-  background-color: darken($primary-color, 10%);
+  .login-btn {
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: $spacing-large;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
 }

@@ -32,10 +32,9 @@ const Projects = () => {
                 </div>
                 <div className="panel">
                     <div className="panel-header">
-                        <h3>PROJECTS</h3>
+                        <h3>Projects</h3>
                     </div>
                     <div className="panel-content">
-
                         <div className="table-wrapper">
                             <ProjectInfoTable projects={projects}/>
                         </div>

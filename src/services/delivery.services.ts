@@ -92,6 +92,30 @@ export const setDeliveryCompleted = async (deliveryId: number, date: string): Pr
     }
 }
 
+// Get all unique routes for a project
+export const getDeliveryRoutes = async (projectId: number): Promise<string[]> => {
+    try {
+        const endpoint: string = `${API_BASE_URL}/delivery/routes/${projectId}`;
+        const response: AxiosResponse<string[]> = await axios.get(endpoint, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting delivery routes:', error);
+        throw error;
+    }
+}
+
+// Undo delivery completion
+export const undoDeliveryCompleted = async (deliveryId: number): Promise<Delivery> => {
+    try {
+        const endpoint: string = `${API_BASE_URL}/delivery/undo/${deliveryId}`;
+        const response: AxiosResponse<Delivery> = await axios.put(endpoint, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Error undoing delivery completion:', error);
+        throw error;
+    }
+}
+
 // Cancel delivery by ID
 export const cancelDeliveryById = async (deliveryId: number): Promise<void> => {
     try {

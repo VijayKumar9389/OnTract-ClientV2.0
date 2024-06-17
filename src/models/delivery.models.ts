@@ -34,6 +34,7 @@ export interface UpdateDeliveryInput {
 // Delivery statistics for a selected project
 export interface DeliveryReportDTO {
     count: number;
+    noRouteCount: number;
     stakeholderCount: number;
     packageTypeCountMap: {
         [key: string]: number;
@@ -44,6 +45,7 @@ export interface DeliveryReportDTO {
     pendingDeliveryCount: number;
     completedDeliveryCount: number;
     mailCount: number;
+    streetCount: number;
     deliveryCount: number;
 }
 

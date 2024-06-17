@@ -2,6 +2,7 @@ import { Item } from "../../../../models/item.models.ts";
 import { NavigationUtils } from "../../../../utils/navigation.utils.ts";
 import React from "react";
 import ImageWithAlt from "../../../../components/ImageWithAlt/ImageWithAlt.tsx";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 
 const ItemGrid: React.FC<{ items: Item[] }> = ({ items }) => {
     const { navigateToInventoryItem } = NavigationUtils();
@@ -26,9 +27,7 @@ const ItemGrid: React.FC<{ items: Item[] }> = ({ items }) => {
                     ))}
                 </ul>
             ) : (
-                <div className="no-data-message">
-                    <span>No Items Created.</span>
-                </div>
+                <NoDataMessage message="No items added."/>
             )}
         </div>
     );

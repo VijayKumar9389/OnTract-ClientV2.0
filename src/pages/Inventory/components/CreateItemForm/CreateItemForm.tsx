@@ -15,7 +15,6 @@ const CreateItemForm: React.FC = () => {
         projectId: null
     });
 
-    // Set the project ID in the form data
     useEffect((): void => {
         if (project) {
             setFormData(prevState => ({
@@ -23,9 +22,8 @@ const CreateItemForm: React.FC = () => {
                 projectId: project.id
             }));
         }
-    }, []);
+    }, [project]);
 
-    // Handle form input change
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>): void => {
         const {name, value} = e.target;
         setFormData(prevState => ({
@@ -34,16 +32,23 @@ const CreateItemForm: React.FC = () => {
         }));
     };
 
-    // Handle file change
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const file = e.target.files ? e.target.files[0] : null;
-        setFormData(prevState => ({
-            ...prevState,
-            image: file
-        }));
+
+        if (file && file.type.startsWith('image/')) {
+            setFormData(prevState => ({
+                ...prevState,
+                image: file
+            }));
+        } else {
+            showToastError('Invalid file type');
+            setFormData(prevState => ({
+                ...prevState,
+                image: null
+            }));
+        }
     };
 
-    // Check if the form is valid
     const isFormValid = (): boolean => {
         return formData.name !== '' && formData.description !== '' && formData.image !== null && formData.quantity > 0;
     }
@@ -57,45 +62,53 @@ const CreateItemForm: React.FC = () => {
         try {
             await createItem(formData);
             window.location.reload();
-            // Handle success, redirect, or show a message
         } catch (error) {
             console.error('Error creating item:', error);
             showToastError('Failed to create item');
-            // Handle error
         }
     };
 
     return (
-        <div className="create-item-form">
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className="input-wrapper">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+        <div className="form-wrapper">
+            <div className="form-controls">
+                <div className="form-icon">
+                    {formData.image ? (
+                        <img src={URL.createObjectURL(formData.image)} alt="Uploaded" className="uploaded-image"/>
+                    ) : (
+                        <FaBox />
+                    )}
                 </div>
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="form-fields">
+                    <div className="input-wrapper">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+                    </div>
 
-                <div className="input-wrapper">
-                    <label htmlFor="description">Description</label>
-                    <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
-                </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="description">Description</label>
+                        <textarea id="description" name="description" value={formData.description}
+                                  onChange={handleChange}></textarea>
+                    </div>
 
-                <div className="input-wrapper">
-                    <label htmlFor="image">Image</label>
-                    <input type="file" id="image" name="image" onChange={handleFileChange}/>
-                </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="image">Image</label>
+                        <input type="file" id="image" name="image" onChange={handleFileChange}/>
+                    </div>
 
-                <div className="input-wrapper">
-                    <label htmlFor="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange}/>
-                </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" value={formData.quantity}
+                               onChange={handleChange}/>
+                    </div>
 
-                <button type="submit" disabled={!isFormValid()} className="form-btn">
-                    <FaBox />
-                    Create Item
-                </button>
-            </form>
+                    <button type="submit" disabled={!isFormValid()} className="form-btn">
+                        <FaBox/>
+                        Create Item
+                    </button>
+                </form>
+            </div>
         </div>
     );
-
 };
 
 export default CreateItemForm;

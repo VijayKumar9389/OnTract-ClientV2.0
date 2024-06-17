@@ -4,9 +4,11 @@ import {NavigationUtils} from '../../../../utils/navigation.utils.ts';
 import {isMailout} from '../../../../utils/functions.utils.ts';
 import './StakeholderDelivery.scss';
 import {Package} from "../../../../models/package.models.ts";
+import {useDispatch} from "react-redux";
 
 const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
     const {navigateToDelivery} = NavigationUtils();
+    const dispatch = useDispatch();
 
     return (
         <div className="stakeholder-delivery-details">
@@ -40,7 +42,7 @@ const DeliveryDetails: React.FC<{ delivery: Delivery }> = ({delivery}) => {
                 </tbody>
             </table>
             <div className="btn-container">
-                <button onClick={() => navigateToDelivery(delivery.id)}>
+                <button onClick={() => navigateToDelivery(delivery.id, dispatch)}>
                     View Delivery
                 </button>
             </div>

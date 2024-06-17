@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <div className="sidebar-content">
                 <ul className="sidebar-links">
-                    {navbarLinks.map((link, index) => (
+                    {navbarLinks.map((link: NavbarLink, index: number) => (
                         <li key={index} className="sidebar-link-item">
                             <Link to={link.to} onClick={closeModal} className="sidebar-link">
                                 {link.icon}
@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </Link>
                         </li>
                     ))}
-                    {isAdmin && adminLinks.map((link, index) => (
+                    {isAdmin && adminLinks.map((link: NavbarLink, index: number) => (
                         <li key={index} className="sidebar-link-item">
                             <Link to={link.to} onClick={closeModal} className="sidebar-link">
                                 {link.icon}

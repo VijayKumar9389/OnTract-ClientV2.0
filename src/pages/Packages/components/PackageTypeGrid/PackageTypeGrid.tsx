@@ -2,6 +2,7 @@ import { PackageType } from "../../../../models/package.models.ts";
 import { FiPackage } from 'react-icons/fi';
 import React from "react";
 import { NavigationUtils } from "../../../../utils/navigation.utils.ts";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 
 const PackageTypeGrid: React.FC<{ packageTypes: PackageType[] }> = ({ packageTypes }) => {
     const { navigateToPackage } = NavigationUtils();
@@ -26,9 +27,7 @@ const PackageTypeGrid: React.FC<{ packageTypes: PackageType[] }> = ({ packageTyp
                     ))}
                 </ul>
             ) : (
-                <div className="no-data-message">
-                    <span>No Packages Created.</span>
-                </div>
+                <NoDataMessage message="No package types added."/>
             )}
         </div>
     );

@@ -12,6 +12,7 @@ const StakeholderReport: React.FC = () => {
 
     const stats: Stat[] = [
         { label: 'Total Stakeholders', value: stakeholderStats.totalCount },
+        { label: 'Tracts Tracts', value: stakeholderStats.totalTractCount },
         { label: 'Stakeholders with One Tract', value: stakeholderStats.oneTractCount },
         { label: 'Stakeholders with More Than One Tract', value: stakeholderStats.moreThanOneTractCount },
         { label: 'Attempted Contact Count', value: stakeholderStats.attemptedContactCount },
@@ -22,7 +23,9 @@ const StakeholderReport: React.FC = () => {
         { label: 'Delivery Not Planned Count', value: stakeholderStats.deliveryNotPlannedCount },
         { label: 'Missing Phone Numbers', value: stakeholderStats.missingPhoneNumbers },
         { label: 'Contacted Yes Count', value: stakeholderStats.contactedYesCount },
-        { label: 'Contacted No Count', value: stakeholderStats.contactedNoCount }
+        { label: 'Contacted No Count', value: stakeholderStats.contactedNoCount },
+        { label: 'Her Majesty Stakeholders', value: stakeholderStats.herMajestyCount },
+        { label: 'Her Majesty Tracts', value: stakeholderStats.herMajestyTractCount },
     ];
 
     return (

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: $spacing-medium;
   padding: $spacing-medium;
 
   @media (max-width: $mobile-breakpoint) {
@@ -25,12 +26,10 @@
 }
 
 
-
 // Ui Elements
 .panel {
   box-shadow: $box-shadow;
   border-radius: $border-radius;
-  margin-bottom: $spacing-large;
   width: 100%;
   background-color: $card-background-color;
   overflow: hidden;
@@ -66,6 +65,8 @@
   justify-content: flex-end;
   width: 100%;
   margin-top: $spacing-small;
+  gap: $spacing-small;
+  gap: $spacing-small;
 
   @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
@@ -102,7 +103,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-    margin-bottom: $spacing-medium;
+  margin-bottom: $spacing-medium;
 
   p {
     color: $text-color;
@@ -152,10 +153,6 @@
     button {
       width: 100%;
       justify-content: center;
-
-      svg {
-        margin-right: 0;
-      }
     }
   }
 }

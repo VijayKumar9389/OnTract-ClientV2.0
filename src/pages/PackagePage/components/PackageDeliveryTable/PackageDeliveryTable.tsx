@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import {Package} from "../../../../models/package.models.ts";
 import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
+import {useDispatch} from "react-redux";
 
 const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => {
     const {navigateToStakeholder, navigateToDelivery} = NavigationUtils();
+    const dispatch = useDispatch();
     const [deliveryStatus, setDeliveryStatus] = useState('All'); // State to track selected delivery status
 
     // Function to toggle delivery status
@@ -65,11 +67,11 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
                                     </td>
                                     <td>
                                         <div className="action-buttons">
-                                            <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId)}>View
+                                            <button onClick={() => navigateToDelivery(deliveryPackage.deliveryId, dispatch)}>View
                                                 Delivery
                                             </button>
                                             <button
-                                                onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id)}>View
+                                                onClick={() => navigateToStakeholder(deliveryPackage.stakeholder.id, dispatch)}>View
                                                 Stakeholder
                                             </button>
                                         </div>

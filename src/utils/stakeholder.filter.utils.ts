@@ -26,6 +26,21 @@ export const isStakeholderAttempted = (stakeholder: Stakeholder, attemptedFilter
     return attemptedFilter === 1 ? attempted : !attempted;
 };
 
+export const isStakeholderMissing = (stakeholder: Stakeholder, missingFilter: number): boolean => {
+    switch (missingFilter) {
+        case 0:
+            return true;
+        case 1:
+            return !isAvailable(stakeholder.phoneNumber);
+        case 2:
+            return !isAvailable(stakeholder.mailingAddress);
+        case 3:
+            return !isAvailable(stakeholder.streetAddress);
+        default:
+            return true;
+    }
+}
+
 export const filterStakeholders = (
     stakeholders: Stakeholder[],
     searchText: string,
@@ -33,7 +48,8 @@ export const filterStakeholders = (
     contactFilter: number,
     consultedFilter: number,
     attemptedFilter: number,
-    deliveryFilter: number
+    deliveryFilter: number,
+    missingFilter: number
 ) => {
     const filteredBySearch: Stakeholder[] = searchText
         ? stakeholders.filter(stakeholder => {
@@ -51,7 +67,6 @@ export const filterStakeholders = (
             } else if (searchType === 2) {
                 const sanitizedSearchText: string = searchText.trim().toLowerCase();
                 const searchTextAsNumber: number = parseInt(sanitizedSearchText, 10); // Convert searchText to number
-
                 return stakeholder.tractRecords.some(tract =>
                     tract.tract === searchTextAsNumber // Convert tract to number for comparison
                 );
@@ -64,5 +79,6 @@ export const filterStakeholders = (
         .filter(stakeholder => isStakeholderContacted(stakeholder, contactFilter))
         .filter(stakeholder => isStakeholderConsulted(stakeholder, consultedFilter))
         .filter(stakeholder => isStakeholderAttempted(stakeholder, attemptedFilter))
-        .filter(stakeholder => isStakeholderDeliveryPlanned(stakeholder, deliveryFilter));
+        .filter(stakeholder => isStakeholderDeliveryPlanned(stakeholder, deliveryFilter))
+        .filter(stakeholder => isStakeholderMissing(stakeholder, missingFilter));
 };

@@ -5,6 +5,7 @@ import {updateTractRecord} from "../../../../services/stakeholder.services.ts";
 import {useParams} from "react-router-dom";
 import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import {isStakeholderProfile} from "../../../../utils/functions.utils.ts";
+import {useDispatch} from "react-redux";
 
 const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }> = ({stakeholder, tractRecord}) => {
     const [formData, setFormData] = useState<UpdateTrackRecordInput>({
@@ -17,6 +18,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
 
     const {id} = useParams<{ id: string }>();
     const {navigateToStakeholder} = NavigationUtils();
+    const dispatch = useDispatch();
 
     useEffect((): void => {
         setFormData((prevData) => ({
@@ -99,7 +101,7 @@ const TractForm: React.FC<{ stakeholder: Stakeholder; tractRecord: TractRecord }
                 <button type="submit" disabled={!hasDataChanged()}>Submit</button>
                 {isStakeholderProfile(stakeholder.id, id) && (
                     <button type="button" className="form-btn"
-                            onClick={() => navigateToStakeholder(stakeholder.id)}>
+                            onClick={() => navigateToStakeholder(stakeholder.id, dispatch)}>
                         View Stakeholder
                     </button>
                 )}

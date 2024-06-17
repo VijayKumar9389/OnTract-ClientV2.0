@@ -7,13 +7,15 @@ import { isMailout } from "../../../../utils/functions.utils.ts";
 import {StatusItem} from "../../../../components/Stat/StatusStat.tsx";
 import {DeliveryTypeItem} from "../../../../components/Stat/DeliveryTypeStat.tsx";
 import {NumberItem} from "../../../../components/Stat/NumberStat.tsx";
+import {useDispatch} from "react-redux";
 
 
 const DeliveryCard: React.FC<{ delivery: Delivery }> = ({ delivery }) => {
     const { navigateToDelivery } = NavigationUtils();
+    const dispatch = useDispatch();
 
     return (
-        <div className="card" onClick={() => navigateToDelivery(delivery.id)}>
+        <div className="card" onClick={() => navigateToDelivery(delivery.id, dispatch)}>
             <div className="card-header">
                 <h3>{delivery.destination}</h3>
                 <p>{delivery.route}</p>

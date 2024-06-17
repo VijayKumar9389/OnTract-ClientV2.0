@@ -12,6 +12,7 @@ interface EditItemFormProps {
 
 const EditItem: React.FC<EditItemFormProps> = ({ item }) => {
     const [file, setFile] = useState<File | null>(null);
+    const [filePreview, setFilePreview] = useState<string | null>(null);
     const [editedItem, setEditedItem] = useState<UpdateItemInput>({
         id: item.id,
         name: item.name,
@@ -45,8 +46,16 @@ const EditItem: React.FC<EditItemFormProps> = ({ item }) => {
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
-        setFile(selectedFile || null);
-        setEditedItem({ ...editedItem, image: selectedFile });
+        if (selectedFile && selectedFile.type.startsWith('image/')) {
+            setFile(selectedFile);
+            setEditedItem({ ...editedItem, image: selectedFile });
+            setFilePreview(URL.createObjectURL(selectedFile));
+        } else {
+            showToastError('Invalid file type');
+            setFile(null);
+            setEditedItem({ ...editedItem, image: null });
+            setFilePreview(null);
+        }
     };
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,7 +66,11 @@ const EditItem: React.FC<EditItemFormProps> = ({ item }) => {
     return (
         <form className="form-wrapper" onSubmit={handleSubmit}>
             <div className="form-controls">
-                <ImageWithAlt imageName={item.image} />
+                {filePreview ? (
+                    <img src={filePreview} alt="Preview" className="image-preview" />
+                ) : (
+                    <ImageWithAlt imageName={item.image} />
+                )}
                 <div>
                     <div className="input-wrapper">
                         <label htmlFor="fileInput" className="form-label">File:</label>
