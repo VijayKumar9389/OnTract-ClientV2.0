@@ -6,7 +6,7 @@ import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 import {useDispatch} from "react-redux";
 
-const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({ packages, item }) => {
+const ItemDeliveryTable: React.FC<{ packages: Package[], item: Item }> = ({ packages, item }) => {
     const { navigateToPackage, navigateToStakeholder, navigateToDelivery } = NavigationUtils();
     const dispatch = useDispatch();
     const [deliveryType, setDeliveryType] = useState('All'); // State to track the selected delivery type
@@ -22,8 +22,6 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({ packa
         deliveryType === 'Pending' ?
             packages.filter((deliveryPackage: Package) => !deliveryPackage.delivery.completed) :
             packages;
-
-    console.log(filteredPackages[0].packageType.items)
 
     return (
         <div className="panel">
@@ -97,4 +95,4 @@ const PackageItemTable: React.FC<{ packages: Package[], item: Item }> = ({ packa
     );
 }
 
-export default PackageItemTable;
+export default ItemDeliveryTable;

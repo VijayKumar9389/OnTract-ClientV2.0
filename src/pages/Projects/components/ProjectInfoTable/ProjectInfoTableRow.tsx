@@ -70,11 +70,13 @@ const ProjectInfoTableRow: React.FC<{ project: Project }> = ({project}) => {
                     <div className="action-buttons">
                         <button onClick={() => toggleEdit()}>Edit</button>
                         <button onClick={() => handleDownload(project.id)}>Download</button>
-                        <ConfirmationButton
-                            buttonText={"Delete Project"}
-                            confirmationMessage={`Are you sure you want to delete ${project.name + ' ' + project.year}?`}
-                            onConfirm={handleDelete}
-                        />
+                        {false && (
+                            <ConfirmationButton
+                                buttonText={"Delete Project"}
+                                confirmationMessage={`Are you sure you want to delete ${project.name + ' ' + project.year}?`}
+                                onConfirm={handleDelete}
+                            />
+                        )}
                     </div>
                 </td>
             </tr>

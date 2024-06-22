@@ -1,7 +1,8 @@
-import React from 'react';
 import {useRelatedStakeholders} from "../../../../hooks/stakeholders.hooks.ts";
 import RelatedStakeholderRow from "./RelatedStakeholderRow.tsx";
 import {RelatedStakeholder} from "../../../../models/stakeholder.models.ts";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
+import React from "react";
 
 const RelatedStakeholdersTable: React.FC<{ stakeholderId: number }> = ({ stakeholderId }) => {
     const { relatedStakeholders, loading, error } = useRelatedStakeholders(stakeholderId);
@@ -12,9 +13,13 @@ const RelatedStakeholdersTable: React.FC<{ stakeholderId: number }> = ({ stakeho
                 <h3>Related Stakeholders</h3>
             </div>
             <div className="panel-content">
-                {loading && <div className="loading-message">Loading...</div>}
-                {error && <div className="error-message">{error}</div>}
-                {!loading && !error && relatedStakeholders.length > 0 ? (
+                {loading ? (
+                    <div className="loading-message">Loading...</div>
+                ) : error ? (
+                    <div className="error-message">{error}</div>
+                ) : relatedStakeholders.length === 0 ? (
+                    <NoDataMessage message="No Related Stakeholders" />
+                ) : (
                     <div className="table-wrapper">
                         <table className="select-table">
                             <thead>
@@ -32,8 +37,6 @@ const RelatedStakeholdersTable: React.FC<{ stakeholderId: number }> = ({ stakeho
                             </tbody>
                         </table>
                     </div>
-                ) : (
-                    !loading && <div className="no-data-message"><span>No Related Stakeholders.</span></div>
                 )}
             </div>
         </div>
@@ -41,3 +44,4 @@ const RelatedStakeholdersTable: React.FC<{ stakeholderId: number }> = ({ stakeho
 };
 
 export default RelatedStakeholdersTable;
+

@@ -1,7 +1,8 @@
 // components/DeliveryReport.tsx
 import React from 'react';
 import './DeliveryReport.scss';
-import { useDeliveryReport} from "../../../../hooks/delivery.hooks.ts";
+import { useDeliveryReport } from "../../../../hooks/delivery.hooks.ts";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 
 const DeliveryReport: React.FC = () => {
     const { deliveryReport, loading, error } = useDeliveryReport();
@@ -11,13 +12,18 @@ const DeliveryReport: React.FC = () => {
     if (!deliveryReport) return <p>Error</p>;
 
     const renderReportItem = (label: string, value: number) => (
-        <div className="report-item">
+        <div className="report-item" key={label}>
             <label>{label}</label>
             <h2>{value}</h2>
         </div>
     );
 
-    const renderTable = (title: string, data: Record<string, number>) => (
+    const renderTable = (title: string, data: Record<string, number>, errorMessage: string) => {
+        if (!data || Object.keys(data).length === 0) {
+            return <NoDataMessage message={errorMessage} />;
+        }
+
+        return (
             <table>
                 <thead>
                 <tr>
@@ -34,7 +40,8 @@ const DeliveryReport: React.FC = () => {
                 ))}
                 </tbody>
             </table>
-    );
+        );
+    };
 
     return (
         <div className="delivery-report">
@@ -48,9 +55,8 @@ const DeliveryReport: React.FC = () => {
                 {renderReportItem('No Routes Planned', deliveryReport.noRouteCount)}
             </div>
             <div className="table-container">
-
-                <div className="table-style">{renderTable('Planned Packages', deliveryReport.packageTypeCountMap)}</div>
-                <div className="table-style">{renderTable('Planned Routes', deliveryReport.deliveryRouteCountMap)}</div>
+                <div className="table-style">{renderTable('Planned Packages', deliveryReport.packageTypeCountMap, "No Packages Planned")}</div>
+                <div className="table-style">{renderTable('Planned Routes', deliveryReport.deliveryRouteCountMap, "No Routes Assigned")}</div>
             </div>
         </div>
     );

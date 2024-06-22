@@ -41,8 +41,8 @@ const Stakeholders: React.FC = () => {
                 {error && <p className="error-message">{error}</p>}
                 {!loading && !error && (
                     <>
-                        <LastViewedStakeholder />
                         <StakeholderStats/>
+                        <LastViewedStakeholder />
                         <StakeholderInput/>
                         <ActiveStakeholderFilters count={filteredStakeholders.length} />
                         <StakeholderList stakeholders={filteredStakeholders} />

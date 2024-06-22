@@ -65,8 +65,8 @@ const Deliveries: React.FC = () => {
                 {!loading && !error && (
                     deliveries.length > 0 ? (
                         <>
-                            <LastViewedDelivery />
                             <DeliveryStats/>
+                            <LastViewedDelivery />
                             <DeliveryInput/>
                             <ActiveDeliveryFilters count={routeDeliveries.length}/>
                             <DeliveryList deliveries={routeDeliveries}/>

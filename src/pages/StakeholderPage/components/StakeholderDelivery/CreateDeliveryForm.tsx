@@ -5,6 +5,7 @@ import { NewDeliveryInput } from '../../../../models/delivery.models.ts';
 import { getProjectFromCookie } from '../../../../utils/cookie.utils.ts';
 import { FaTruck } from 'react-icons/fa';
 import {useGetPackageTypesByProjectID} from "../../../../hooks/package.hooks.ts";
+import {showToastError} from "../../../../utils/toast.utils.ts";
 
 interface CreateDeliveryForm {
     delivery_method: string;
@@ -77,6 +78,7 @@ const CreateDeliveryForm: React.FC<{ stakeholder: Stakeholder }> = ({ stakeholde
                 window.location.reload();
             } catch (error) {
                 console.error('Error submitting form:', error);
+                showToastError('Error creating delivery')
             }
         }
     };

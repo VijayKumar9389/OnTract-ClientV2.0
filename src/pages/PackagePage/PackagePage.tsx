@@ -9,7 +9,7 @@ import {getPackageByPackageTypeId} from "../../services/package.services.ts";
 import ConfirmationButton from "../../components/ConfirmationButton/ConfirmationButton.tsx";
 import {deletePackageType} from "../../services/package.services.ts";
 import PackageStats from "./components/PackageStats/PackageStats.tsx";
-import PackageItemTable from "./components/ScheduledPackagesTable/PackageItemTable.tsx";
+import PackageItemTable from "./components/PackageItemTable.tsx/PackageItemTable.tsx";
 import {showToastError} from "../../utils/toast.utils.ts";
 
 const PackagePage = () => {

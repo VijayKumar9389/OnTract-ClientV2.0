@@ -3,6 +3,7 @@ import {Package} from "../../../../models/package.models.ts";
 import {NavigationUtils} from "../../../../utils/navigation.utils.ts";
 import SubMenu from "../../../../components/SubMenu/SubMenu.tsx";
 import {useDispatch} from "react-redux";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 
 const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => {
     const {navigateToStakeholder, navigateToDelivery} = NavigationUtils();
@@ -83,9 +84,7 @@ const PackageDeliveryTable: React.FC<{ packages: Package[] }> = ({packages}) => 
 
                     </div>
                 ) : (
-                    <div className="no-data-message">
-                        <span>No Packages Scheduled.</span>
-                    </div>
+                    <NoDataMessage message="No Packages Found"/>
                 )}
             </div>
         </div>

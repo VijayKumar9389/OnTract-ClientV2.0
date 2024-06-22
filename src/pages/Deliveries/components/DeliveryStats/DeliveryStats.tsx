@@ -14,8 +14,8 @@ const DeliveryStats: React.FC = () => {
         { label: 'Total Stakeholders', value: deliveryReport.stakeholderCount },
         { label: 'Delivery Pending', value: deliveryReport.pendingDeliveryCount },
         { label: 'Delivered', value: deliveryReport.completedDeliveryCount },
-        { label: 'In Person', value: deliveryReport.deliveryCount },
-        { label: 'Mailouts', value: deliveryReport.mailCount }
+        { label: 'In-Person', value: deliveryReport.streetCount },
+        { label: 'Mail-Outs', value: deliveryReport.mailCount }
     ];
 
     return (

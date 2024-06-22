@@ -3,6 +3,7 @@ import {PackageItem} from "../../../../models/item.models.ts";
 import PackageItemRow from "./PackageItemRow.tsx";
 import "./PackageItemTable.scss";
 import AddPackageItem from "./AddPackageItem.tsx";
+import NoDataMessage from "../../../../components/NoDataMessage/NoDataMessage.tsx";
 
 const PackageItemTable: React.FC<{
     packageItems: PackageItem[];
@@ -38,9 +39,7 @@ const PackageItemTable: React.FC<{
                         </table>
                     </div>
                 ) : (
-                    <div className="no-data-message">
-                        <span>No Items in Package</span>
-                    </div>
+                    <NoDataMessage message="No Items Associated with package"/>
                 )}
             </div>
         </div>
