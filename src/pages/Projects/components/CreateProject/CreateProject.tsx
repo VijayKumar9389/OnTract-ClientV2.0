@@ -56,6 +56,8 @@ const CreateProject = () => {
                 stakeholderComments: '',
             }));
 
+            console.log(projectRecords);
+
             setJsonData(projectRecords);
         };
         reader.readAsArrayBuffer(file);
