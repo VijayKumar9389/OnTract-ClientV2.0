@@ -4,26 +4,30 @@
 .submenu {
   display: flex;
   justify-content: space-around;
-  background-color: #f8f8f8;
-  padding: $spacing-small;
+  background-color: $input-background-color;
   border-radius: $button-radius;
   margin-bottom: $spacing-medium;
+  border: 1px solid #ddd;
+  overflow: hidden;
 
   .submenu-item {
     flex: 1;
     text-align: center;
     padding: 10px;
-    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 
+    &:not(:last-child) {
+      border-right: 1px solid #ddd;
+    }
+
     &:hover {
-      background-color: #e0e0e0;
+      background-color: #fff;
     }
 
     &.selected {
-      background-color: $primary-color;
-      color: white;
+      background-color: #fff;
+      color: $text-color;
       font-weight: bold;
     }
   }
@@ -35,7 +39,11 @@
     align-items: stretch;
 
     .submenu-item {
-      margin-bottom: 10px;
+      border-right: none;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+      }
 
       &:last-child {
         margin-bottom: 0;

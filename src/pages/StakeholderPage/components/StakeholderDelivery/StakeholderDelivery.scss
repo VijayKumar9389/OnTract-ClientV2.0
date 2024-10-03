@@ -2,52 +2,82 @@
 
 .stakeholder-delivery-details {
   background-color: $background-color;
+  padding: $spacing-medium;
+  transition: box-shadow $transition;
 
-  .delivery-header {
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+
+  .card-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    flex-direction: column;
     margin-bottom: $spacing-medium;
 
-    @media (max-width: $mobile-breakpoint) {
-      flex-direction: column;
-      align-items: flex-start;
+    h3 {
+      color: $text-color;
+      margin-bottom: $spacing-small;
     }
 
-    .delivery-info {
-      flex: 1;
+    .notes {
+      font-size: $text-medium;
+      color: $text-color-light;
+      margin: 0;
+    }
+  }
 
-      h3 {
-        color: $text-color;
-      }
+  .info-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: $spacing-medium;
+    font-size: $text-small;
 
-      p {
-        font-size: $text-medium;
-        color: $text-color-light;
-        margin: 0;
-      }
+    .info-item {
+      font-weight: bold;
     }
 
-    .view-delivery {
-      display: flex;
-      align-items: center;
+    .separator {
+      margin: 0 $spacing-small;
+      color: $text-color-light;
+    }
+  }
 
-      @media (max-width: $mobile-breakpoint) {
-        margin-top: $spacing-small;
-      }
+  .delivery-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: $spacing-medium;
 
-      button {
-        padding: $spacing-small $spacing-medium;
-        background-color: $btn-background-color;
-        color: white;
-        border: none;
-        border-radius: $button-radius;
-        cursor: pointer;
-        transition: background-color $transition;
+    th, td {
+      padding: $spacing-small;
+      text-align: left;
+    }
 
-        &:hover {
-          background-color: $btn-background-hover-color;
-        }
+    th {
+      background-color: #f7f7f7;
+      color: #666;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .btn-container {
+    text-align: right;
+
+    button {
+      padding: $spacing-small $spacing-medium;
+      background-color: $btn-background-color;
+      color: white;
+      border: none;
+      border-radius: $button-radius;
+      cursor: pointer;
+      transition: background-color $transition, transform $transition;
+
+      &:hover {
+        background-color: $btn-background-hover-color;
+        transform: translateY(-2px);
       }
     }
   }

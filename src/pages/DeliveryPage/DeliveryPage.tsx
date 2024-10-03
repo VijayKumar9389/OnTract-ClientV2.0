@@ -52,8 +52,8 @@ const DeliveryPage = () => {
             <SubPageHeading heading={delivery.destination}/>
             <div className="page-content">
                 <EditDeliveryForm delivery={delivery}/>
-                <DeliveryDetails delivery={delivery}/>
                 <PackageTable packages={delivery.packages}/>
+                <DeliveryDetails delivery={delivery}/>
                 <div className="btn-container">
                     {delivery.completed && (
                         <ConfirmationButton

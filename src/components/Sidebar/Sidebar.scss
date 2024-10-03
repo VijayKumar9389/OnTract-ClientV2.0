@@ -29,7 +29,7 @@
   background-color: $card-background-color;
   color: $text-color-light;
   box-shadow: $box-shadow-hover;
-  display: none;
+  display: flex;
   flex-direction: column;
   z-index: 1000; /* Ensure it is above other elements */
   border-bottom-left-radius: $border-radius;
@@ -37,12 +37,13 @@
   overflow: hidden;
 
   &.open {
-    display: flex;
     animation: slideIn 0.3s forwards;
+    right: 0;
   }
 
   &.close {
     animation: slideOut 0.3s forwards;
+    right: -300px;
   }
 }
 
@@ -51,7 +52,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: $spacing-medium;
+  padding: $spacing-small;
 
   h3 {
     margin: 0;
@@ -99,12 +100,13 @@
 
 // Logout button container
 .sidebar-logout-container {
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  padding: $spacing-small 0;
+  left: 0;
+  margin: 0;
   width: 100%;
-
-  display: flex;
+  text-align: center;
+  padding: $spacing-medium;
 }
 
 // Logout button
@@ -119,7 +121,7 @@
   justify-content: center;
   padding: $spacing-small;
   border-radius: $button-radius;
-  min-width: 150px;
+  width: 100%;
   transition: ease-in-out 0.3s;
 
   &:hover {

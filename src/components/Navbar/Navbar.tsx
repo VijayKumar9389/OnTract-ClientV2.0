@@ -18,7 +18,7 @@ interface NavbarLink {
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
+    const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const location = useLocation();
 
@@ -67,7 +67,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                     ))}
-                    {isAdmin && adminLinks.map((link, index) => (
+                    {isAdmin && adminLinks.map((link: NavbarLink, index: number) => (
                         <li key={index}>
                             <Link
                                 to={link.to}

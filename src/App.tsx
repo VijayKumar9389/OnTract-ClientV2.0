@@ -12,7 +12,7 @@ import './styles/app.scss';
 import {Project} from "./models/stakeholder.models.ts";
 
 const App: React.FC = () => {
-    const loading: boolean = useInitializeApp(); // Use the custom hook
+    const loading: boolean = useInitializeApp();
     const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.loggedIn);
     const project: Project | null = getProjectFromCookie();
 
