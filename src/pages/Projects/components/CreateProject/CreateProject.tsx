@@ -14,6 +14,7 @@ const CreateProject = () => {
         projectSurveyLink: '',
         fileInput: null
     });
+
     const [jsonData, setJsonData] = useState<ProjectRecordInput[] | null>(null);
 
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -47,9 +48,9 @@ const CreateProject = () => {
                 consultation: row[13] || '',
                 followUp: row[14] || '',
                 tractComments: row[15] || '',
-                email: row[16] || '',
-                pageNo: row[17] || '',
-                keepDelete: row[18] || '',
+                pageNo: row[16] || '',
+                keepDelete: row[17] || '',
+                email: row[18] || '',
                 Commodity: row[19] || '',
                 pipelineStatus: row[20] || '',
                 isPerson: '',

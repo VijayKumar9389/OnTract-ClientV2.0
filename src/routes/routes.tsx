@@ -17,7 +17,6 @@ import Dashboard from "../pages/Dashboard/Dashboard.tsx";
 
 const RoutesConfig: React.FC = () => {
     const isAdmin: boolean = useSelector((state: RootState) => state.auth.isAdmin);
-
     return (
         <Routes>
             <Route path="/" element={<Dashboard />} />
